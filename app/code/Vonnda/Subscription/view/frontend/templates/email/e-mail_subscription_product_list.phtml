@@ -1,0 +1,10 @@
+<?php 
+    $subscriptionPlan = $block->getSubscriptionPlan();
+    foreach($block->getSubscriptionProductsData($subscriptionPlan) as $subscriptionProduct){?>
+    <div style="margin-top:-12px;">
+        <?php echo $subscriptionProduct['name'];?>
+    </div>
+<?php } ?>
+
+
+

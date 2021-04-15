@@ -1,0 +1,23 @@
+<?php 
+    $order = $block->getOrder();
+    if($order) {
+        $orderIsAutoRefill = $order->getParentOrderId();
+        $paymentMethod = $order->getPayment()->getMethod();
+        $templateVars = [];
+        $blockId;
+        if( $orderIsAutoRefill ){
+            $blockId = "email_order_confirm_autorefill_footer";
+        } else {
+            if ( $paymentMethod == 'affirm_gateway' ){
+                $blockId = "email_order_confirm_footer_affirm";
+            } else {
+                if($order->getGiftOrder()){
+                    $blockId = "gift_email_order_confirm_footer";
+                } else {
+                    $blockId = "email_order_confirm_footer";
+                }
+            }
+        }
+        
+        echo $block->getCMSBlockHtml($blockId, $templateVars);
+    }

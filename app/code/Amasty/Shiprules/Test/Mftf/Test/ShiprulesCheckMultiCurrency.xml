@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesCheckMultiCurrency">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check MultiCurrency"/>
+            <description value="Check MultiCurrency"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-24"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesCheckMultiCurrency"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+            <actionGroup ref="ChooseCurrencyInConfigurations" stepKey="settingMultiCurrency">
+                <argument name="currenciesConfigurations" value="_CurrencySetOne"/>
+            </actionGroup>
+            <actionGroup ref="InputRateUSDAndEUR" stepKey="inputRate">
+                <argument name="cartRule" value="shiprulesCheckMultiCurrency.rateUSDAndEUR"/>
+            </actionGroup>
+        </before>
+
+        <after>
+            <!--Delete Shipping Rules -->
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesCheckMultiCurrency"/>
+            </actionGroup>
+            <actionGroup ref="ChooseDefaultCurrencyInConfigurations" stepKey="returnDefaultSettingCurrency"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create new Shipping Rule-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateShippingRule">
+            <argument name="shippingRule" value="shiprulesCheckMultiCurrency"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesCheckMultiCurrency"/>
+        </actionGroup>
+
+        <!-- Choose euro currency-->
+        <actionGroup ref="ChooseCurrency" stepKey="ChooseCurrencyEuro">
+            <argument name="currencies" value="_Euro"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices With Oty One-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate1">
+            <argument name="shippingPrices" value="shiprulesCheckMultiCurrency.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay1">
+            <argument name="shippingPrices" value="shiprulesCheckMultiCurrency.priceBestWayOne"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!--Add second product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddSecondProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices With Qty Two-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate2">
+            <argument name="shippingPrices" value="shiprulesCheckMultiCurrency.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay2">
+            <argument name="shippingPrices" value="shiprulesCheckMultiCurrency.priceBestWayTwo"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!--Change Qty First Product In Cart To Three-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyFirstProductToThree">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+            <argument name="addProductQty" value="_enterQty3"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices With Qty Four-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate3">
+            <argument name="shippingPrices" value="shiprulesCheckMultiCurrency.priceFlatRateThree"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay3">
+            <argument name="shippingPrices" value="shiprulesCheckMultiCurrency.priceBestWayThree"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+    </test>
+</tests>

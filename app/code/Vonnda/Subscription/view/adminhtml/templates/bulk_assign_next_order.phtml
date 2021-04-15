@@ -1,0 +1,93 @@
+<?php
+/**
+ * @copyright: Copyright © 2019 Vonnda, LLC. All rights reserved.
+ * @author   : Vonnda Digital Agency <hello@vonnda.com>
+ */
+$viewModel = $block->getViewModel();
+
+?>
+<div class="page-main-actions">
+    <div class="page-actions">
+        <div class="page-actions-buttons">
+            <div class="page-actions" data-ui-id="page-actions-toolbar-content-header">
+                <div class="page-actions-inner" data-title="Import">
+                    <div class="page-actions-buttons">
+                        <button id="back" title="Back" type="button" class="action-scalable back">
+                            <span><?= /* @noEscape */ __('Back') ?></span>
+                        </button>
+
+                        <button id="bulk-operation" title="<?= $block->escapeHtmlAttr(__($block->getData('button_title'))) ?>" type="button" class="action-default scalable save primary">
+                            <span><?= $block->escapeHtml(__($block->getData('button_title'))) ?></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="entry-edit form-inline">
+    <form action="<?= /* @noEscape */ $block->getUrl($block->getData('submit_url')) ?>" id="bulk-operation-form" method="post" enctype="multipart/form-data">
+        <div>
+            <input name="form_key" type="hidden" value="<?= /* @noEscape */ $block->getFormKey() ?>">
+        </div>
+
+        <?= $block->getChildHtml('notice') ?>
+
+        <fieldset class="fieldset admin__fieldset" id="base_fieldset">
+            <legend class="admin__legend legend">
+                <span><?= /* @noEscape */ __('Bulk Operation') ?></span>
+            </legend>
+
+            <div class="admin__field field field-entity">
+                <div class="admin__field-control control">
+                    <div class="admin__field">
+                        <?= /* @noEscape */ __('You selected <strong>%count</strong> subscriptions for this bulk operation.', [
+                            'count' => $viewModel->getSubscriptionCount()
+                        ]) ?><br />
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin__field field field-entity">
+                <div class="admin__field-label" style="width:inherit">
+                    <label for="next-order">
+                        <span>Next Order Date</span>
+                    </label>
+                </div>
+                <div class="admin__field-control control">
+                    <input type="text" class="admin__control-text hasDatepicker" id="next-order" name="next-order" aria-required="true" />
+                    <button type="button" class="ui-datepicker-trigger v-middle">
+                        <span>Select Date</span>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'mage/mage',
+        'mage/calendar'
+    ], function($) {
+        $('#back').click(function() {
+            self.location.href = '<?= /* @noEscape */ $block->getUrl('vonnda_subscription/subscriptioncustomer/index') ?>';
+        });
+
+        $('#bulk-operation').click(function() {
+            $('#bulk-operation-form').submit();
+        });
+
+        $('#next-order').datepicker({
+            dateFormat: 'm/d/yy',
+            changeMonth: true,
+            changeYear: true
+        });
+
+        $('.ui-datepicker-trigger').click(function() {
+            $("#next-order").datepicker("show");
+        })
+    })
+</script>

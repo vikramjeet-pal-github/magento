@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Vonnda\CheckoutSurvey\Api\CheckoutSurveyRepositoryInterface" type="Vonnda\CheckoutSurvey\Model\CheckoutSurveyRepository"/>
+	<preference for="Vonnda\CheckoutSurvey\Api\Data\CheckoutSurveyInterface" type="Vonnda\CheckoutSurvey\Model\Data\CheckoutSurvey"/>
+	<preference for="Vonnda\CheckoutSurvey\Api\Data\CheckoutSurveySearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Vonnda\CheckoutSurvey\Model\ResourceModel\CheckoutSurvey\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">vonnda_checkoutsurvey_result</argument>
+			<argument name="resourceModel" xsi:type="string">Vonnda\CheckoutSurvey\Model\ResourceModel\CheckoutSurvey\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="vonnda_checkoutsurvey_listing_data_source" xsi:type="string">Vonnda\CheckoutSurvey\Model\ResourceModel\CheckoutSurvey\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

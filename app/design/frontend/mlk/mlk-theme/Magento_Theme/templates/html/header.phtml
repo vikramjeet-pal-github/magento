@@ -1,0 +1,50 @@
+<?php
+/** @var \Magento\Theme\Block\Html\Header $block */
+$welcomeMessage = $block->getWelcome();
+switch ($block->getShowPart()) {
+    case 'welcome': ?>
+        <li class="greet welcome" data-bind="scope: 'customer'" data-mage-init='{"dropdown":{}}'>
+            <!-- ko if: customer().websiteId -->
+            <!-- ko if: customer().fullname -->
+            <span class="action toggle" data-toggle="dropdown" aria-haspopup="true">
+                <span data-bind="text: new String('<?= $block->escapeHtml(__('Welcome, %1', '%1')) ?>').replace('%1', customer().fullname)"></span>
+            </span>
+            <!-- /ko -->
+            <!-- ko ifnot: customer().fullname -->
+            <span class="action toggle" data-toggle="dropdown" aria-haspopup="true">
+                <span><?= $block->escapeHtml(__('Welcome')) ?></span>
+            </span>
+            <!-- /ko -->
+            <!-- /ko -->
+        </li>
+        <div data-target="dropdown">
+            <ul class="dropdown">
+                <li>
+                    <a class="item" href="<?= $this->getUrl('customer/account/edit/') ?>">Profile</a>
+                </li>
+                <li>
+                    <a class="item" href="https://help.molekule.com/hc/en-us">Help</a>
+                </li>
+                <li class="visible-on-checkout">
+                    <a class="item" href="<?= $this->getUrl('customer/account/logout') ?>">Log out</a>
+                </li>
+            </ul>
+        </div>
+        <script type="text/x-magento-init">
+            {
+                "*": {
+                    "Magento_Ui/js/core/app": {
+                        "components": {
+                            "customer": {
+                                "component": "Magento_Customer/js/view/customer"
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+        <?php break; ?>
+    <?php case 'other':
+        echo $block->getChildHtml();
+        break;
+} ?>

@@ -1,0 +1,36 @@
+<div class="subscription-customer-customer-chooser__toolbar">
+    <h3 style="border-bottom:1px solid #cccccc">Customer Chooser</h3>
+    <button 
+        style="display:none"
+        class="js-subscription-customer-customer-chooser__show-button">
+            Show Customer Chooser
+    </button>
+
+    <button 
+        style="display:none"
+        class="js-subscription-customer-customer-chooser__hide-button">
+            Hide Customer Chooser
+    </button>
+
+    <button 
+        style="display:none"
+        class="js-subscription-customer-customer-chooser__reset-button">
+            Reset Fields
+    </button>
+
+    <h4 class="js-subscription-customer-customer-chooser__current-customer-box" style="display:inline-block">
+        Current Customer ID: <span class="js-subscription-customer-customer-chooser__current-customer-id"></span>
+    </h4>
+
+    <h4 class="js-subscription-customer-customer-chooser__message-box"></h4>
+</div>
+
+<script type="text/x-magento-init">
+    {"*": {"Vonnda_Subscription/js/subscription-customer-customer-chooser": {}}}
+</script>
+
+<style>
+    .subscription-customer-customer-chooser__toolbar {
+        margin:20px 0px;
+    }
+</style>

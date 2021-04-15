@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/stripe/payments/me/customer" method="GET">
+        <service class="Vonnda\StripePayments\Api\ServiceInterface" method="getCustomer"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/stripe/payments/me/customer" method="PUT">
+        <service class="Vonnda\StripePayments\Api\ServiceInterface" method="updateCustomer"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/stripe/payments/me/cards" method="GET">
+        <service class="Vonnda\StripePayments\Api\ServiceInterface" method="getPaymentOptions"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/stripe/payments/me/card-info" method="GET">
+        <service class="Vonnda\StripePayments\Api\ServiceInterface" method="getCustomerCards"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <!--  The routes above have been updated to use the same path as the stripe extension endpoints.
+      Keeping the routes below for now for compatibility, if they are even used.  -->
+    <route url="/V1/cryozonic/stripepayments/me/customer" method="GET">
+        <service class="Vonnda\StripePayments\Api\ServiceInterface" method="getCustomer"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/cryozonic/stripepayments/me/customer" method="PUT">
+        <service class="Vonnda\StripePayments\Api\ServiceInterface" method="updateCustomer"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/cryozonic/stripepayments/me/cards" method="GET">
+        <service class="Vonnda\StripePayments\Api\ServiceInterface" method="getPaymentOptions"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/cryozonic/stripepayments/me/card-info" method="GET">
+        <service class="Vonnda\StripePayments\Api\ServiceInterface" method="getCustomerCards"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+</routes>

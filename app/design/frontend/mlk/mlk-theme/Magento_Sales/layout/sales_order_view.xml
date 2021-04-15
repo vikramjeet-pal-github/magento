@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <update handle="sales_order_item_renderers"/>
+    <update handle="sales_order_item_price"/>
+    <update handle="sales_order_info_links"/>
+
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">My account</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <container name="top.main.order" htmlTag="div" htmlClass="top-main-order" before="-">
+                <container name="top.order" htmlTag="div" htmlClass="top-order" before="-">
+                    <container name="top.order.left" htmlTag="div" htmlClass="top-order_left">
+                        <block class="Magento\Sales\Block\Order\Info" name="order.name" template="Magento_Theme::order_name.phtml" before="-" />
+                    </container>
+                </container>
+            </container>
+        </referenceContainer>
+
+        <referenceBlock name="order_totals">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::order_totals.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <referenceBlock name="tax">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::order_tax.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <move element="sales.order.view" destination="top.main.order" after="top.order" />
+        <move element="order.actions.container" destination="top.order" after="-" />
+        <referenceBlock name="order.status" remove="true" />
+        <move element="order.date" destination="top.order.left" after="order.name" />
+
+    </body>
+</page>

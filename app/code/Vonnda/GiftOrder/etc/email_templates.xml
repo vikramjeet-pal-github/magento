@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <!-- Gift Shipment -->
+    <template id="sales_email_gift_shipment_template" label="Gift Receipt" file="gift_shipment.html" type="html" module="Vonnda_GiftOrder" area="frontend"/>
+</config>

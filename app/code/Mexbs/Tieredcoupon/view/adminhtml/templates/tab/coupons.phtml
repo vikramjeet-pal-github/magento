@@ -1,0 +1,7 @@
+<div id="sales-rule-form-tab-coupons">
+<?php if($block->getIsTieredCouponNew()): ?>
+    <div class="message message-notice notice"><div data-ui-id="messages-message-notice">You should save the tiered coupon at least once, before auto-generating codes.</div></div>
+<?php endif; ?>
+    <?php echo $block->getChildHtml('tieredcoupon_edit_tab_coupons_form') ?>
+    <?php echo $block->getChildHtml('tieredcoupon_edit_tab_coupons_grid') ?>
+</div>

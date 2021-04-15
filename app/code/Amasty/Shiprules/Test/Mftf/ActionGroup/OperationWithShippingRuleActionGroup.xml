@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+
+    <actionGroup name="CreateShippingRuleBase">
+        <arguments>
+            <argument name="shippingRule"/>
+            <argument name="calculationType"/>
+            <argument name="rates"/>
+        </arguments>
+        <amOnPage url="{{AdminShippingRuleGridPage.url}}" stepKey="navigateShippingRulesPage1"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <conditionalClick stepKey="clearAllFilters" selector="{{AdminShippingRulesGridSection.FiltersClearAll}}"
+                          dependentSelector="{{AdminShippingRulesGridSection.FiltersClearAll}}" visible="true"/>
+        <click selector="{{AdminShippingRulesGridSection.AddNewRuleButton}}" stepKey="clickOnAddNewRule"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad2"/>
+        <fillField selector="{{AdminShippingRuleSection.Name}}" userInput="{{shippingRule.name}}" stepKey="enterRuleName"/>
+        <conditionalClick stepKey="activateRule"
+                          selector="{{AdminShippingRuleSection.RuleStatus}}"
+                          dependentSelector="{{AdminShippingRuleSection.RuleStatusEnable}}"
+                          visible="false"/>
+        <conditionalClick stepKey="openProductsTab"
+                          selector="{{AdminShippingRuleSection.ProductsTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.ProductsTabOpen}}"
+                          visible="false"/>
+        <conditionalClick stepKey="activateIgnoreFreeShippingPromo"
+                          selector="{{AdminShippingRuleSection.IgnoreFreeShippingPromo}}"
+                          dependentSelector="{{AdminShippingRuleSection.IgnoreFreeShippingPromoEnable}}"
+                          visible="false"/>
+        <conditionalClick stepKey="openRatesTab"
+                          selector="{{AdminShippingRuleSection.RatesTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.RatesTabOpen}}"
+                          visible="false"/>
+        <selectOption selector="{{AdminShippingRuleSection.Calculate}}"
+                      userInput="{{calculationType.type}}"
+                      stepKey="selectCalculationType"/>
+        <fillField selector="{{AdminShippingRuleSection.BaseRate}}" userInput="{{rates.baseRate}}" stepKey="inputBaseRate"/>
+        <fillField selector="{{AdminShippingRuleSection.FixedRatePerProduct}}" userInput="{{rates.fixedRate}}" stepKey="inputFixedRatePerProduct"/>
+        <fillField selector="{{AdminShippingRuleSection.RatePerUnitOfWeight}}" userInput="{{rates.ratePerWeight}}" stepKey="inputRatePerUnitOfWeight"/>
+        <fillField selector="{{AdminShippingRuleSection.PercentagePerProduct}}" userInput="{{rates.percentagePerProduct}}" stepKey="inputPercentagePerProduct"/>
+        <fillField selector="{{AdminShippingRuleSection.HandlingPercentage}}" userInput="{{rates.handlingPercentage}}" stepKey="inputHandlingPercentage"/>
+        <fillField selector="{{AdminShippingRuleSection.RateChangeMin}}" userInput="{{rates.rateChangeMin}}" stepKey="inputRateChangeMin"/>
+        <fillField selector="{{AdminShippingRuleSection.RateChangeMax}}" userInput="{{rates.rateChangeMax}}" stepKey="inputRateChangeMax"/>
+        <fillField selector="{{AdminShippingRuleSection.TotalRateMin}}" userInput="{{rates.totalRateMin}}" stepKey="inputTotalRateMin"/>
+        <fillField selector="{{AdminShippingRuleSection.TotalRateMax}}" userInput="{{rates.totalRateMax}}" stepKey="inputTotalRateMax"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSaveAndContinue"/>
+        <waitForPageLoad time="300" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+
+    <actionGroup name="CreateShippingRuleWithFlatRate" extends="CreateShippingRuleBase">
+        <click selector="{{AdminShippingRuleSection.MethodSelectForClick}}" stepKey="OpenMethodsMultiSelect"/>
+        <fillField selector="{{AdminShippingRuleSection.MethodInputInSelectForSearch}}"
+                   userInput="Fixed" stepKey="enterMethodName"/>
+        <wait time="2" stepKey="wait"/>
+        <click selector="{{AdminShippingRuleSection.MethodFoundInSelect}}" stepKey="chooseFoundMethod"/>
+        <click selector="{{AdminShippingRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="CreateShippingRuleWithBestWay" extends="CreateShippingRuleBase">
+        <click selector="{{AdminShippingRuleSection.MethodSelectForClick}}" stepKey="OpenMethodsMultiSelect"/>
+        <fillField selector="{{AdminShippingRuleSection.MethodInputInSelectForSearch}}"
+                   userInput="Best Way" stepKey="enterMethodName"/>
+        <wait time="2" stepKey="wait"/>
+        <click selector="{{AdminShippingRuleSection.MethodFoundInSelect}}" stepKey="chooseFoundMethod"/>
+        <click selector="{{AdminShippingRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="CreateShippingRuleWithFlatRateAndBestWay" extends="CreateShippingRuleBase">
+        <click selector="{{AdminShippingRuleSection.MethodSelectForClick}}" stepKey="OpenMethodsMultiSelect"/>
+        <fillField selector="{{AdminShippingRuleSection.MethodInputInSelectForSearch}}"
+                   userInput="Fixed" stepKey="enterMethodFlatRate"/>
+        <wait time="2" stepKey="wait1"/>
+        <click selector="{{AdminShippingRuleSection.MethodFoundInSelect}}" stepKey="chooseFlatRate"/>
+        <fillField selector="{{AdminShippingRuleSection.MethodInputInSelectForSearch}}"
+                   userInput="Best Way" stepKey="enterMethodBestWay"/>
+        <wait time="2" stepKey="wait2"/>
+        <click selector="{{AdminShippingRuleSection.MethodFoundInSelect}}" stepKey="chooseBestWay"/>
+        <click selector="{{AdminShippingRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="AdminDeleteShippingRule">
+        <arguments>
+            <argument name="shippingRule"/>
+        </arguments>
+        <amOnPage url="{{AdminShippingRuleGridPage.url}}" stepKey="navigateToPaymentRestrictionGridPage1"/>
+        <waitForPageLoad stepKey="waitForGridLoad"/>
+        <conditionalClick stepKey="openFiltersBlockIfClose" selector="{{AdminShippingRulesGridSection.FiltersButton}}"
+                          dependentSelector="{{AdminShippingRulesGridSection.FiltersNameInput}}" visible="false"/>
+        <fillField selector="{{AdminShippingRulesGridSection.FiltersNameInput}}"
+                   userInput="{{shippingRule.name}}" stepKey="enterNameOfRule"/>
+        <click selector="{{AdminShippingRulesGridSection.FiltersApplyButton}}" stepKey="clickButtonAppleFilter"/>
+        <click selector="{{AdminShippingRulesGridSection.TableRowOne}}" stepKey="openFirstFoundRule"/>
+        <waitForPageLoad stepKey="waitForPageOpenRuleLoad"/>
+        <click selector="{{AdminShippingRuleSection.Delete}}" stepKey="clickToDeleteRule"/>
+        <waitForPageLoad stepKey="waitForLoadConfirmMessage"/>
+        <click selector="{{AdminShippingRuleSection.ModalAcceptButton}}" stepKey="clickToConfirmMessage"/>
+        <waitForPageLoad stepKey="waitForLoadPageAfterDelete"/>
+        <seeElement selector="{{AdminShippingRulesGridSection.SuccessMessageDeletedRule}}"
+                    stepKey="assertShowMessageAboutDeleted"/>
+        <conditionalClick stepKey="clearAllFilters" selector="{{AdminShippingRulesGridSection.FiltersClearAll}}"
+                          dependentSelector="{{AdminShippingRulesGridSection.FiltersClearAll}}" visible="true"/>
+        <waitForPageLoad stepKey="waitForLoadPageAfterClearFields"/>
+        <waitForAjaxLoad stepKey="waitForAjaxPageAfterClearFields"/>
+    </actionGroup>
+
+
+    <actionGroup name="OpenShippingRuleForEdit">
+        <arguments>
+            <argument name="shippingRule"/>
+        </arguments>
+        <amOnPage url="{{AdminShippingRuleGridPage.url}}" stepKey="navigateToShippingRulesGridPage1"/>
+        <waitForPageLoad stepKey="waitForGridLoad"/>
+        <conditionalClick stepKey="clearAllFilters" selector="{{AdminShippingRulesGridSection.FiltersClearAll}}"
+                          dependentSelector="{{AdminShippingRulesGridSection.FiltersClearAll}}" visible="true"/>
+        <conditionalClick stepKey="openFiltersBlockIfClose" selector="{{AdminShippingRulesGridSection.FiltersButton}}"
+                          dependentSelector="{{AdminShippingRulesGridSection.FiltersNameInput}}" visible="false"/>
+        <fillField selector="{{AdminShippingRulesGridSection.FiltersNameInput}}"
+                   userInput="{{shippingRule.name}}" stepKey="enterNameOfRule"/>
+        <click selector="{{AdminShippingRulesGridSection.FiltersApplyButton}}" stepKey="clickButtonAppleFilter"/>
+        <click selector="{{AdminShippingRulesGridSection.TableRowOne}}" stepKey="openFirstFoundRule"/>
+        <waitForPageLoad stepKey="waitForPageOpenRuleLoad"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditShippingRuleDisableRule" extends="OpenShippingRuleForEdit">
+        <conditionalClick stepKey="DisableRule"
+                          selector="{{AdminShippingRuleSection.RuleStatus}}"
+                          dependentSelector="{{AdminShippingRuleSection.RuleStatusDisable}}"
+                          visible="false"/>
+        <click selector="{{AdminShippingRuleSection.Save}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditShippingRuleAddProductsSetting" extends="OpenShippingRuleForEdit">
+        <arguments>
+            <argument name="shippingProductsSetting"/>
+        </arguments>
+        <conditionalClick stepKey="openProductsTab"
+                          selector="{{AdminShippingRuleSection.ProductsTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.ProductsTabOpen}}"
+                          visible="false"/>
+        <fillField selector="{{AdminShippingRuleSection.WeightFrom}}" userInput="{{shippingProductsSetting.weightFrom}}" stepKey="inputWeightFrom"/>
+        <fillField selector="{{AdminShippingRuleSection.WeightTo}}" userInput="{{shippingProductsSetting.weightTo}}" stepKey="inputWeightTo"/>
+        <fillField selector="{{AdminShippingRuleSection.QtyFrom}}" userInput="{{shippingProductsSetting.QtyFrom}}" stepKey="inputQtyFrom"/>
+        <fillField selector="{{AdminShippingRuleSection.QtyTo}}" userInput="{{shippingProductsSetting.QtyTo}}" stepKey="inputQtyTo"/>
+        <fillField selector="{{AdminShippingRuleSection.PriceFrom}}" userInput="{{shippingProductsSetting.PriceFrom}}" stepKey="inputPriceFrom"/>
+        <fillField selector="{{AdminShippingRuleSection.PriceTo}}" userInput="{{shippingProductsSetting.PriceTo}}" stepKey="inputPriceTo"/>
+        <click selector="{{AdminShippingRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditShippingRuleWithIgnoreFreeShippingPromoYes" extends="OpenShippingRuleForEdit">
+        <conditionalClick stepKey="openProductsTab"
+                          selector="{{AdminShippingRuleSection.ProductsTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.ProductsTabOpen}}"
+                          visible="false"/>
+        <conditionalClick stepKey="activateIgnoreFreeShippingPromo"
+                          selector="{{AdminShippingRuleSection.IgnoreFreeShippingPromo}}"
+                          dependentSelector="{{AdminShippingRuleSection.IgnoreFreeShippingPromoDisable}}"
+                          visible="false"/>
+        <click selector="{{AdminShippingRuleSection.Save}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditShippingRuleAddGlobalConditions" extends="OpenShippingRuleForEdit">
+        <arguments>
+            <argument name="actionsShippingConditionsOptions"/>
+            <argument name="actionsConditionsOptionsParamIs"/>
+            <argument name="conditionsData"/>
+        </arguments>
+        <conditionalClick stepKey="openConditionsTab"
+                          selector="{{AdminShippingRuleSection.ConditionsTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.ConditionsTabOpen}}"
+                          visible="false"/>
+        <scrollTo selector="{{AdminShippingRuleSection.ConditionsText}}" stepKey="GoToConditions"/>
+        <click selector="{{AdminShippingRuleSection.ButtonGlobalConditions}}" stepKey="clickButtonGlobalCondition"/>
+        <waitForElementVisible selector="//div[@data-index='conditions']//select[@id='conditions__1__new_child']//option[text()='{{actionsShippingConditionsOptions.optionsText}}']"
+                               stepKey="waitForElementVisible1"/>
+        <click selector="//div[@data-index='conditions']//select[@id='conditions__1__new_child']//option[text()='{{actionsShippingConditionsOptions.optionsText}}']"
+               stepKey="selectConditionOptions"/>
+        <waitForElementVisible selector="//input[@value='{{actionsShippingConditionsOptions.optionsValue}}']/following::span[@class='rule-param']/a[text()='is']"
+                               stepKey="waitForElementVisible2"/>
+        <click selector="//input[@value='{{actionsShippingConditionsOptions.optionsValue}}']/following::span[@class='rule-param']/a[text()='is']"
+               stepKey="clickChooseParamData"/>
+        <waitForElementVisible selector="//div[@data-index='conditions']//input[@value='{{actionsShippingConditionsOptions.optionsValue}}']/following::span[@class='rule-param rule-param-edit']//option[@value='{{actionsConditionsOptionsParamIs.optionsValue}}']"
+                               stepKey="waitForElementVisible3"/>
+        <click selector="//div[@data-index='conditions']//input[@value='{{actionsShippingConditionsOptions.optionsValue}}']/following::span[@class='rule-param rule-param-edit']//option[@value='{{actionsConditionsOptionsParamIs.optionsValue}}']"
+               stepKey="chooseFirstParam"/>
+        <waitForElementVisible selector="//div[@data-index='conditions']//input[@value='{{actionsShippingConditionsOptions.optionsValue}}']/following::span[@class='rule-param']/a[text()='...']"
+                               stepKey="waitForElementVisible4"/>
+        <click selector="//div[@data-index='conditions']//input[@value='{{actionsShippingConditionsOptions.optionsValue}}']/following::span[@class='rule-param']/a[text()='...']"
+               stepKey="clickForInputData"/>
+        <waitForElementVisible selector="//div[@data-index='conditions']//input[@value='{{actionsShippingConditionsOptions.optionsValue}}']/following::span[@class='rule-param rule-param-edit']//input"
+                               stepKey="waitForElementVisible5"/>
+        <fillField selector="//div[@data-index='conditions']//input[@value='{{actionsShippingConditionsOptions.optionsValue}}']/following::span[@class='rule-param rule-param-edit']//input"
+                   userInput="{{conditionsData}}" stepKey="enterConditions"/>
+        <waitForPageLoad time="5" stepKey="waitForPageLoad3"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditShippingRuleAddConditionsShippingArea" extends="OpenShippingRuleForEdit">
+        <arguments>
+            <argument name="shippingArea"/>
+        </arguments>
+        <conditionalClick stepKey="openConditionsTab"
+                          selector="{{AdminShippingRuleSection.ConditionsTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.ConditionsTabOpen}}"
+                          visible="false"/>
+        <scrollTo selector="{{AdminShippingRuleSection.ConditionsText}}" stepKey="GoToConditions"/>
+        <click selector="{{AdminShippingRuleSection.ButtonGlobalConditions}}" stepKey="clickButtonGlobalCondition"/>
+        <waitForElementVisible selector="//div[@data-index='conditions']//select[@id='conditions__1__new_child']//option[text()='Shipping Areas']"
+                               stepKey="waitForElementVisible1"/>
+        <click selector="//div[@data-index='conditions']//select[@id='conditions__1__new_child']//option[text()='Shipping Areas']"
+               stepKey="selectConditionOptions"/>
+        <waitForElementVisible selector="//input[@data-form-part='amasty_shiprules_form']/following::span[@class='rule-param']/a[text()='is']"
+                               stepKey="waitForElementVisible2"/>
+        <click selector="//div[@data-index='conditions']//input[@data-form-part='amasty_shiprules_form']/following::span[@class='rule-param']/a[text()='...']"
+               stepKey="clickForSelectShippingAreas"/>
+        <wait time="1" stepKey="waitSelectElement"/>
+        <click selector="//div[@data-index='conditions']//input[@data-form-part='amasty_shiprules_form']/following::span[@class='rule-param rule-param-edit']//option[text()='{{shippingArea.name}}']" stepKey="selectShippingArea"/>
+        <waitForPageLoad time="5" stepKey="waitForPageLoad3"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditShippingRuleAddProductConditions" extends="OpenShippingRuleForEdit">
+        <arguments>
+            <argument name="actionsConditionsOptions"/>
+            <argument name="conditionsData"/>
+        </arguments>
+        <conditionalClick stepKey="openProductTab"
+                          selector="{{AdminShippingRuleSection.ProductsTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.ProductsTabOpen}}"
+                          visible="false"/>
+        <scrollTo selector="{{AdminShippingRuleSection.RuleStatus}}" stepKey="GoToProductConditions"/>
+        <click selector="{{AdminShippingRuleSection.ProductButtonConditions}}" stepKey="clickProductButtonConditions"/>
+        <waitForElementVisible selector="//div[@data-index='products']//select[@id='actions__1__new_child']//option[text()='{{actionsConditionsOptions.optionsText}}']"
+                               stepKey="waitForElementVisible1"/>
+        <click selector="//div[@data-index='products']//select[@id='actions__1__new_child']//option[text()='{{actionsConditionsOptions.optionsText}}']"
+               stepKey="selectConditionOptions"/>
+        <waitForElementVisible selector="//input[@value='{{actionsConditionsOptions.optionsValue}}']/following::span[@class='rule-param']/a[text()='is']"
+                               stepKey="waitForElementVisible2"/>
+        <click selector="//div[@data-index='products']//input[@value='{{actionsConditionsOptions.optionsValue}}']/following::span[@class='rule-param']/a[text()='...']"
+               stepKey="clickForInputData"/>
+        <waitForElementVisible selector="//div[@data-index='products']//input[@value='{{actionsConditionsOptions.optionsValue}}']/following::span[@class='rule-param rule-param-edit']//input"
+                               stepKey="waitForElementVisible5"/>
+        <fillField selector="//div[@data-index='products']//input[@value='{{actionsConditionsOptions.optionsValue}}']/following::span[@class='rule-param rule-param-edit']//input"
+                   userInput="{{conditionsData}}" stepKey="enterConditions"/>
+        <waitForPageLoad time="5" stepKey="waitForPageLoad3"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditShippingRuleAddApplyRulesCouponCode" extends="OpenShippingRuleForEdit">
+        <arguments>
+            <argument name="couponCode"/>
+        </arguments>
+        <conditionalClick stepKey="openCouponsAndDiscountsTab"
+                          selector="{{AdminShippingRuleSection.CouponsAndDiscountsTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.CouponsAndDiscountsTabOpen}}"
+                          visible="false"/>
+        <fillField selector="{{AdminShippingRuleSection.ApplyCouponCode}}" userInput="{{couponCode}}" stepKey="inputCouponCode"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditShippingRuleAddApplyRulesShoppingCartRule" extends="OpenShippingRuleForEdit">
+        <arguments>
+            <argument name="ruleName"/>
+        </arguments>
+        <conditionalClick stepKey="openCouponsAndDiscountsTab"
+                          selector="{{AdminShippingRuleSection.CouponsAndDiscountsTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.CouponsAndDiscountsTabOpen}}"
+                          visible="false"/>
+        <selectOption selector="{{AdminShippingRuleSection.ApplyShoppingCartRule}}"
+                      userInput="{{ruleName}}"
+                      stepKey="selectShoppingCartRule"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditShippingRuleDontAddApplyRulesCouponCode" extends="OpenShippingRuleForEdit">
+        <arguments>
+            <argument name="couponCode"/>
+        </arguments>
+        <conditionalClick stepKey="openCouponsAndDiscountsTab"
+                          selector="{{AdminShippingRuleSection.CouponsAndDiscountsTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.CouponsAndDiscountsTabOpen}}"
+                          visible="false"/>
+        <fillField selector="{{AdminShippingRuleSection.DontApplyCouponCode}}" userInput="{{couponCode}}" stepKey="inputCouponCode"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="EditShippingRuleAddDontApplyRulesShoppingCartRule" extends="OpenShippingRuleForEdit">
+        <arguments>
+            <argument name="ruleName"/>
+        </arguments>
+        <conditionalClick stepKey="openCouponsAndDiscountsTab"
+                          selector="{{AdminShippingRuleSection.CouponsAndDiscountsTab}}"
+                          dependentSelector="{{AdminShippingRuleSection.CouponsAndDiscountsTabOpen}}"
+                          visible="false"/>
+        <selectOption selector="{{AdminShippingRuleSection.DontApplyShoppingCartRule}}"
+                      userInput="{{ruleName}}"
+                      stepKey="selectShoppingCartRule"/>
+        <click selector="{{AdminActionsCartPriceRuleSection.SaveAndContinueEdit}}" stepKey="clickOnSave"/>
+        <waitForPageLoad time="10" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+</actionGroups>

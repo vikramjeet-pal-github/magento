@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesIncludeTaxInSubtotal">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Rule Setting Include Tax In Subtotal"/>
+            <description value="Check Rule Setting Include Tax In Subtotal"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-26"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesIncludeTaxInSubtotal"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="EditGeneralSettingShiprules" stepKey="chooseConfigShippingRule">
+                <argument name="settingIncludeTaxInSubtotal" value="includeTaxInSubtotal.yes"/>
+                <argument name="settingUseSubtotalAfterDiscount" value="useSubtotalAfterDiscount.default"/>
+            </actionGroup>
+        </before>
+
+        <after>
+            <!--Delete Rules -->
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesIncludeTaxInSubtotal"/>
+            </actionGroup>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create shipping rule with conditions-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateShippingRule">
+            <argument name="shippingRule" value="shiprulesIncludeTaxInSubtotal"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesIncludeTaxInSubtotal"/>
+        </actionGroup>
+        <actionGroup ref="EditShippingRuleAddGlobalConditions" stepKey="AddConditionsInRule">
+            <argument name="shippingRule" value="shiprulesIncludeTaxInSubtotal"/>
+            <argument name="actionsShippingConditionsOptions" value="shiprulesSubtotal"/>
+            <argument name="actionsConditionsOptionsParamIs" value="_equalsOrGreaterThan"/>
+            <argument name="conditionsData" value="shiprulesIncludeTaxInSubtotal.conditions"/>
+        </actionGroup>
+
+        <!--Add first product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFirstProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagOvernightDuffle"/>
+        </actionGroup>
+
+        <!--Add second product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddSecondProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagWayfarerMessenger"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices with default shipping setting-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate1">
+            <argument name="shippingPrices" value="shiprulesIncludeTaxInSubtotal.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+
+        <!--Check Shipping Price with US, Michigan and Zip-->
+        <actionGroup ref="CheckPriceShippingWithCountryStateZip" stepKey="checkFlatRateWithAddress1">
+            <argument name="shippingPrices" value="shiprulesIncludeTaxInSubtotal.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+            <argument name="country" value="shiprulesIncludeTaxInSubtotal.countryShipping"/>
+            <argument name="state" value="shiprulesIncludeTaxInSubtotal.stateShipping"/>
+            <argument name="zip" value="shiprulesIncludeTaxInSubtotal.zipShipping"/>
+        </actionGroup>
+
+
+    </test>
+</tests>

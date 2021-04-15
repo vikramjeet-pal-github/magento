@@ -1,0 +1,24 @@
+<?php
+/** @var Vonnda\NarvarShipment\Block\Shipment\Track $block */
+
+/** @var Magento\Sales\Model\Order\Shipment $shipment */
+$shipment = $block->getShipment();
+/* @var Magento\Sales\Model\Order $order */
+$order = $block->getOrder();
+if ($shipment && $order) {
+    if($order->getShippingMethod() == 'tablerate_same-day-delivery'){
+        echo "Your shipment is on its way, and your order will be delivered by 8pm tonight.";
+    } else {
+        $trackCollection = $order->getTracksCollection();
+        if ($trackCollection) {
+            $trackingLinks = [];
+            foreach ($trackCollection as $tracking) {
+                if ($tracking->getParentId() == $shipment->getId()) {
+                    $trackingLink = $block->getTrackingLink($order, $tracking);
+                    $trackingLinks[] = '<a href="'.$trackingLink.'" class="link">'.$tracking->getTrackNumber().'</a>';
+                }
+            }
+            echo "Your shipment is on its way and you can see your detailed shipping status updates here: " . implode(', ', $trackingLinks) . ".";
+        }
+    }
+}

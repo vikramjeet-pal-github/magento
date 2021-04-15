@@ -1,0 +1,7 @@
+"MLK Core","MLK Core"
+"Allowed Pages","Allowed Pages"
+"Enabled Redirect from Unallowed Pages","Enabled Redirect from Unallowed Pages"
+"Allowed Patterns","Allowed Patterns"
+"A comma-separated list of keywords, (e.g. 'checkout', 'account')","A comma-separated list of keywords, (e.g. 'checkout', 'account')"
+"Redirect URL","Redirect URL"
+"The URL (internal or extenal) where the user will be redirected.","The URL (internal or extenal) where the user will be redirected."

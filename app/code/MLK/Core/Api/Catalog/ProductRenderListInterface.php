@@ -1,0 +1,24 @@
+<?php
+
+namespace MLK\Core\Api\Catalog;
+
+/**
+ * Interface which provides product renders information for products
+ * @api
+ * @since 102.0.0
+ */
+interface ProductRenderListInterface
+{
+    /**
+     * Collect and retrieve the list of product render info
+     * This info contains raw prices and formated prices, product name, stock status, store_id, etc
+     * @see \Magento\Catalog\Api\Data\ProductRenderInfoDtoInterface
+     *
+     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param int $storeId
+     * @param string $currencyCode
+     * @return \MLK\Core\Api\Catalog\Data\ProductRenderSearchResultsInterface
+     * @since 102.0.0
+     */
+    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria, $storeId, $currencyCode);
+}

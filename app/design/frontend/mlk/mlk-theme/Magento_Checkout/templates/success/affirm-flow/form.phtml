@@ -1,0 +1,77 @@
+<?php
+/**
+ * Credit card and billing form
+ * @var $block \Vonnda\Checkout\Block\Onepage\Success
+ */
+?>
+<?php
+$helperTealiumTags = $this->helper('Vonnda\TealiumTags\Helper\Data');
+?>
+<div class="refills-form-wrapper">
+    <?php if ($block->getAffirmDesignFlow() === 1): ?>
+        <div class="single-item">
+            <h1><?= __('Refills let you destroy year round. Sign up for auto-delivery and save.') ?></h1>
+
+            <?php $items = $block->getAffirmFlowItems() ?>
+            <?php foreach ($items as $item): ?>
+                <div class="details">
+                    <?php if (!empty($item['info'])): ?>
+                        <p><?= __('Box contains') . ' ' . $item['info'] ?></p>
+                    <?php endif; ?>
+                    <?php if (!empty($item['price']) && !empty($item['frequency'])): ?>
+                        <p><?= $item['price'] . ' ' . __('per device every') . ' ' . $item['frequency'] ?> <span
+                                    class="minus">-</span> <?= __('Next refill') . ':' . $item['next_refill'] ?></p>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php elseif ($block->getAffirmDesignFlow() === 2): ?>
+        <div class="multi-items">
+            <h1><?= __('Almost done. Last step: filter refills.') ?></h1>
+            <p><?= __('Refills let you destroy year round.  Sign up for auto-delivery and save.') ?></p>
+        </div>
+    <?php endif; ?>
+
+    <div class="stripe-cc-form-wrapper">
+        <?php echo $block->getChildHtml("checkout.success.affirm.flow.add.card"); ?>
+    </div>
+
+    <div class="info-block" data-bind="mageInit: {'js/popupcancel': {}}">
+        <div class="subscription-flow-fine-print">
+            <p>
+                <?= __('Filter Auto-Refills: Filters automatically renew at the end of each term. At renewal, you will be charged the same amount and for the same duration. You can <a class="cancel-anytime-link" href="%1">cancel</a> at any time.', 'javascript:void(0);') ?>
+            </p>
+        </div>
+    </div>
+
+    <div class="action-wrapper">
+        <a class="js-cancel-activate-subscription-new cancel-link"
+           href="javascript:void(0);"><?= __('I’ll do this later') ?></a>
+        <button class="action primary js-activate-subscription" disabled><?= __('Activate auto-refills') ?></button>
+    </div>
+</div>
+
+<script>
+    window.googleAutocompleteApiKey = "<?= $block->getAutoCompleteApiKey();?>";
+</script>
+
+<script type="text/x-magento-init">
+    {
+        ".refills-form-wrapper": {
+            "successPageForm": {
+                "orderId": "<?= $block->getOrder()->getId() ?>",
+                "shippingAddress": <?= json_encode($block->getOrderShippingAddress()->getData()) ?>,
+                "billingAddress": <?= json_encode($block->getOrderBillingAddress()->getData()) ?>,
+                "isResidential": "<?= $block->getOrderShippingAddress()->getExtensionAttributes()->getIsResidential() ? 'true' : 'false' ?>",
+                "getCustomerFieldsFromSession": <?= json_encode($helperTealiumTags->getCustomerFieldsFromSession()) ?>,
+                "getAffirmFlowItems": <?= json_encode($block->getAffirmFlowItems()) ?>
+            }
+        }
+    }
+</script>
+
+
+<?= '<div class="hide"><div id="cancel-popup-content">'
+. $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('cancel-popup-content')->toHtml()
+. '</div></div>';
+?>

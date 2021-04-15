@@ -1,0 +1,6 @@
+/**
+ * style.css
+ */
+.residential-checkbox > label {
+  display: none !important;
+}

@@ -1,0 +1,21 @@
+<?php
+/** @var Vonnda\NarvarShipment\Block\Shipment\Track $block */
+
+/* @var Magento\Sales\Model\Order $order */
+$order = $block->getOrder();
+$isOrderView = $block->getIsOrderView();
+if ($order) {
+    $trackCollection = $order->getTracksCollection();
+    if ($trackCollection) {
+        $trackingLinks = [];
+        foreach ($trackCollection as $tracking) {
+            $trackingLink = $block->getTrackingLink($order, $tracking);
+            if ($isOrderView) {
+                $trackingLinks[] = '<a href="'.$trackingLink.'" class="action button button_white track" target="_blank"><span>'.__('Tracking Info').'</span></a>';
+            } else {
+                $trackingLinks[] = '<a href="'.$trackingLink.'" class="action button reverse track" target="_blank"><span>'.__('Track').'</span></a>';
+            }
+        }
+        echo implode(', ', $trackingLinks);
+    }
+}

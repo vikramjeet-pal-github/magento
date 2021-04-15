@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * module.xml
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Vonnda_ShippingRestrictions" setup_version="1.0.0">
+        <sequence>
+            <module name="Vonnda_Checkout"/>
+            <module name="Magento_Checkout"/>
+            <module name="Aheadworks_OneStepCheckout"/>
+        </sequence>
+    </module>
+</config>

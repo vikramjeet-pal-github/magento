@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright: Copyright © 2019 Vonnda, LLC. All rights reserved.
+ * @author   : Vonnda Digital Agency <hello@vonnda.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block name="subscriptions-bulk-assign-next-order"
+                   template="Vonnda_Subscription::bulk_assign_next_order.phtml">
+                <arguments>
+                    <argument name="view_model"
+                        xsi:type="object">Vonnda\Subscription\ViewModel\BulkAssignNextOrder</argument>
+                    <argument name="button_title" xsi:type="string">Assign Next Order Date</argument>
+                    <argument name="submit_url" xsi:type="string">vonnda_subscription/subscriptioncustomer/bulkassignnextorderpost</argument>
+                </arguments>
+
+                <block name="subscriptions-bulk-assign-next-order-notice"
+                       as="notice"
+                       template="Vonnda_Subscription::assign_next_order_notice.phtml" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>

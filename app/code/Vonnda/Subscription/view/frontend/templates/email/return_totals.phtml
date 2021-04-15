@@ -1,0 +1,10 @@
+<?php foreach ($block->getReturnTotals() as $_code => $_total): ?>
+    <tr class="<?= /* @escapeNotVerified */ $_code ?>">
+        <th>
+            <?= /* @escapeNotVerified */ $_code ?>
+        </th>
+        <td>
+            <?= /* @escapeNotVerified */ $_total ?>
+        </td>
+    </tr>
+<?php endforeach?>

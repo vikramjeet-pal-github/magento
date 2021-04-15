@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="vonnda_netsuite" translate="label" sortOrder="15">
+            <label>Vonnda Netsuite</label>
+        </tab>
+
+        <!-- Auth Config -->
+        <section id="vonnda_netsuite_auth" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>OAuth</label>
+            <tab>vonnda_netsuite</tab>
+            <resource>Vonnda_Netsuite::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Authorization</label>
+                <field id="consumer_key" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Netsuite Consumer Key</label>
+                </field>
+                <field id="consumer_secret" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Netsuite Consumer Secret</label>
+                </field>
+                <field id="token_id" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Netsuite Token Id</label>
+                </field>
+                <field id="token_secret" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Netsuite Token Secret</label>
+                </field>
+                <field id="comp_id" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Netsuite Comp Id</label>
+                </field>
+            </group>
+        </section>
+
+        <!-- End Points -->
+        <section id="vonnda_netsuite_endpoints" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Netsuite EndPoints</label>
+            <tab>vonnda_netsuite</tab>
+            <resource>Vonnda_Netsuite::config</resource>
+            <group id="serial_verification" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Serial Number Verification</label>
+                <field id="url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Verification Url</label>
+                </field>
+                <field id="deploy_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Deploy Id</label>
+                </field>
+                <field id="script_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Script Id</label>
+                </field>
+                <field id="comp_id" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Comp Id</label>
+                </field>
+                <field id="h_field" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>"H" Field</label>
+                </field>
+            </group>
+
+            <group id="update_customer" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Update Customer</label>
+                <field id="url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Url</label>
+                </field>
+                <field id="deploy_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Deploy Id</label>
+                </field>
+                <field id="script_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Script Id</label>
+                </field>
+                <field id="realm" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Realm</label>
+                </field>
+            </group>
+        </section>
+
+    </system>
+</config>

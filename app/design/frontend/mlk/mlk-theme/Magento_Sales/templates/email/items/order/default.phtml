@@ -1,0 +1,173 @@
+<?php
+/** @var $block \Magento\Bundle\Block\Sales\Order\Items\Renderer */
+$_item = $block->getItem();
+$product = $_item->getProduct();
+$_order = $block->getOrder();
+$_store = $_order->getStore();
+
+$_imageHelper = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Catalog\Helper\Image');
+$_baseImageUrl = 'https://molekule.com/go/media/catalog/product' . $product->getData('image');
+?>
+<table align="center" class="container float-center" style="Margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;margin:0 auto;padding:0;text-align:center;vertical-align:top;width:600px">
+    <tbody>
+    <tr style="padding:0;text-align:left;vertical-align:top">
+        <td bgcolor="white" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;hyphens:none;line-height:1.3;margin:0;padding:0 20px;background-color:white;text-align:left;vertical-align:top;word-break:normal!important">
+            <table class="wrapper" align="center" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                <tbody>
+                <tr style="padding:0;text-align:left;vertical-align:top">
+                    <td class="wrapper-inner" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;hyphens:none;line-height:1.3;margin:0;padding:0;text-align:left;vertical-align:top;word-break:normal!important">
+                        <table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+                            <tbody>
+                            <tr style="padding:0;text-align:left;vertical-align:top">
+                                <th class="small-12 large-6 columns first" style="Margin:0 auto;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0 auto;padding:0;padding-bottom:0;padding-left:0px;padding-right:10px;text-align:left;vertical-align:middle;width:260px" valign="middle">
+                                    <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                                        <tbody>
+                                        <tr style="padding:0;text-align:left;vertical-align:top">
+                                            <th style="Margin:0;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0;padding:0;text-align:left">
+                                                <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                                                    <tbody>
+                                                    <tr style="padding:0;text-align:left;vertical-align:top">
+                                                        <td height="10px" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:10px;font-weight:lighter;hyphens:none;line-height:10px;margin:0;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-break:normal!important"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <center data-parsed="" style="min-width:240px;width:100%">
+                                                    <div ap:edit="" align="center" class="float-center"><img alt="<?= $block->escapeHtml($_item->getName()) ?>" style="-ms-interpolation-mode:bicubic;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto" src="<?= $_baseImageUrl; ?>" /></div>
+                                                </center>
+
+                                                <table class="spacer show-for-large" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                                                    <tbody>
+                                                    <tr style="padding:0;text-align:left;vertical-align:top">
+                                                        <td height="10px" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:10px;font-weight:lighter;hyphens:none;line-height:10px;margin:0;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-break:normal!important"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </th>
+                                <th class="small-12 large-6 columns last" style="Margin:0 auto;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0 auto;padding:0;padding-bottom:0;padding-left:10px;padding-right:0px;text-align:left;vertical-align:middle;width:260px" valign="middle">
+                                    <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                                        <tbody>
+                                        <tr style="padding:0;text-align:left;vertical-align:top">
+                                            <th style="Margin:0;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0;padding:0;text-align:left">
+                                                <table class="spacer show-for-large" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                                                    <tbody>
+                                                    <tr style="padding:0;text-align:left;vertical-align:top">
+                                                        <td height="25px" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:25px;font-weight:lighter;hyphens:none;line-height:25px;margin:0;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-break:normal!important"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                                <div ap:edit="">
+                                                    <p class="small-text-center toofus" style="-moz-hyphens:none!important;-ms-hyphens:none!important;-webkit-hyphens:none!important;Margin:0;Margin-bottom:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;hyphens:none!important;line-height:1.45;margin:0;margin-bottom:0;padding:0;text-align:left;white-space:no-wrap!important;word-break:keep-all!important;word-wrap:normal!important"><strong style="-moz-hyphens:none!important;-ms-hyphens:none!important;-webkit-hyphens:none!important;hyphens:none!important;white-space:no-wrap!important;word-break:keep-all!important;word-wrap:normal!important"><?= $block->escapeHtml($_item->getName()) ?></strong></p>
+                                                </div>
+
+                                                <div ap:edit="">
+                                                    <p class="small-text-center" style="-moz-hyphens:none!important;-ms-hyphens:none!important;-webkit-hyphens:none!important;Margin:0;Margin-bottom:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;hyphens:none!important;line-height:1.45;margin:0;margin-bottom:0;padding:0;text-align:left;white-space:no-wrap!important;word-break:keep-all!important;word-wrap:normal!important"><?= strip_tags($product->getShortDescription()) ?></p>
+                                                </div>
+
+                                                <div ap:edit="">
+                                                    <p class="small-text-center" style="-moz-hyphens:none!important;-ms-hyphens:none!important;-webkit-hyphens:none!important;Margin:0;Margin-bottom:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;hyphens:none!important;line-height:1.45;margin:0;margin-bottom:0;padding:0;text-align:left;white-space:no-wrap!important;word-break:keep-all!important;word-wrap:normal!important">Qty: <?= /* @escapeNotVerified */  $_item->getQtyOrdered() * 1 ?></p>
+                                                </div>
+
+                                                <div ap:edit="">
+                                                    <p class="small-text-center" style="-moz-hyphens:none!important;-ms-hyphens:none!important;-webkit-hyphens:none!important;Margin:0;Margin-bottom:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;hyphens:none!important;line-height:1.45;margin:0;margin-bottom:0;padding:0;text-align:left;white-space:no-wrap!important;word-break:keep-all!important;word-wrap:normal!important">Price: <?= /* @escapeNotVerified */  $block->getItemPrice($_item) ?></p>
+                                                </div>
+
+                                                <?php if($_order->getGiftOrder()): ?>
+                                                    <div ap:edit=""><p class="small-text-center" style="-moz-hyphens:none!important;-ms-hyphens:none!important;-webkit-hyphens:none!important;Margin:0;Margin-bottom:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:300;hyphens:none!important;line-height:1.45;margin:0;margin-bottom:0;padding:0;text-align:left;white-space:no-wrap!important;word-break:keep-all!important;word-wrap:normal!important"><br>This is a gift <img src="https://molekule.com/go/media/gift-icon2x.png" style="-ms-interpolation-mode:bicubic;clear:both;display:inline-block;max-width:19px;outline:0;text-decoration:none;width:19px;height:19px;margin-left:15px;vertical-align: -2px;"></p></div>
+                                                <?php endif; ?>
+
+                                            </th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table align="center" class="container float-center" style="Margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;margin:0 auto;padding:0;text-align:center;vertical-align:top;">
+                <tbody>
+                <tr style="padding:0;text-align:left;vertical-align:top">
+                    <td style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;hyphens:none;line-height:1.3;margin:0;padding:0;text-align:left;vertical-align:top;word-break:normal!important">
+                        <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                            <tbody>
+                            <tr style="padding:0;text-align:left;vertical-align:top">
+                                <td height="20px" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:lighter;hyphens:none;line-height:20px;margin:0;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-break:normal!important">
+                                    <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                                        <tbody>
+                                            <tr style="padding:0;text-align:left;vertical-align:top">
+                                                <td height="30px" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#535354;font-family:akkurat-light, Helvetica, Arial, Ubuntu, sans-serif;font-size:30px;font-weight:lighter;hyphens:none;line-height:30px;margin:0;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-break:normal!important"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="wrapper" align="center" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                <tbody>
+                    <tr style="padding:0;text-align:left;vertical-align:top">
+                        <td class="wrapper-inner" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#535354;font-family:akkurat-light, Helvetica, Arial, Ubuntu, sans-serif;font-size:16px;font-weight:lighter;hyphens:none;line-height:1.3;margin:0;padding:0;text-align:left;vertical-align:top;word-break:normal!important">
+                        <table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
+                            <tbody>
+                                <tr style="padding:0;text-align:left;vertical-align:top">
+                                    <th class="small-12 large-12 columns first last" style="Margin:0 auto;color:#535354;font-family:akkurat-light, Helvetica, Arial, Ubuntu, sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0 auto;padding:0;padding-bottom:0;padding-left:20px;padding-right:20px;text-align:left;width:580px">
+                                    <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                                        <tbody>
+                                            <tr style="padding:0;text-align:left;vertical-align:top">
+                                                <th style="Margin:0;color:#535354;font-family:akkurat-light, Helvetica, Arial, Ubuntu, sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0;padding:0;text-align:left">
+                                                <p width="100%" class="hr-custom" style="-moz-hyphens:none!important;-ms-hyphens:none!important;-webkit-hyphens:none!important;Margin:0;Margin-bottom:0;border-collapse:collapse!important;border-top:1px solid #d0d0d0;color:#fff;font-family:akkurat-light, Helvetica, Arial, Ubuntu, sans-serif;font-size:1px;font-weight:lighter;height:1px!important;hyphens:none!important;line-height:1.45;margin:0;margin-bottom:0!important;min-height:1px!important;padding:0;padding-bottom:0!important;text-align:left;white-space:no-wrap!important;width:100%;word-break:keep-all!important;word-wrap:normal!important"><span style="-moz-hyphens:none!important;-ms-hyphens:none!important;-webkit-hyphens:none!important;color:#fff;font-size:1px;hyphens:none!important;visibility:hidden!important;white-space:no-wrap!important;word-break:keep-all!important;word-wrap:normal!important"><font color="white">&nbsp;</font></span></p>
+                                                </th>
+                                                <th class="expander" style="Margin:0;color:#535354;font-family:akkurat-light, Helvetica, Arial, Ubuntu, sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0"></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table align="center" class="container float-center" style="Margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;margin:0 auto;padding:0;text-align:center;vertical-align:top;">
+                <tbody>
+                <tr style="padding:0;text-align:left;vertical-align:top">
+                    <td style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;hyphens:none;line-height:1.3;margin:0;padding:0;text-align:left;vertical-align:top;word-break:normal!important">
+                        <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                            <tbody>
+                            <tr style="padding:0;text-align:left;vertical-align:top">
+                                <td height="20px" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:20px;font-weight:lighter;hyphens:none;line-height:20px;margin:0;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-break:normal!important">
+                                    <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                                        <tbody>
+                                            <tr style="padding:0;text-align:left;vertical-align:top">
+                                                <td height="30px" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#535354;font-family:akkurat-light, Helvetica, Arial, Ubuntu, sans-serif;font-size:30px;font-weight:lighter;hyphens:none;line-height:30px;margin:0;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-break:normal!important"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </td>
+    </tr>
+    </tbody>
+</table>

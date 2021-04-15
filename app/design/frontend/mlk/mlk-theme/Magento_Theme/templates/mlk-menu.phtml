@@ -1,0 +1,15 @@
+<div class="mlk-menu">
+    <?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('nav-block')->toHtml(); ?>
+    <ul class="mobile-sub-nav">
+        <li><a href="/about">About</a></li>
+        <li><a href="<?php echo $this->getUrl('customer/account');?>">Account</a></li>
+    </ul>
+</div>
+
+<div class="mlk-account-link">
+    <?php if(!('customer' === $block->getRequest()->getModuleName() && 'login' === $block->getRequest()->getActionName())) : ?>
+        <ul>
+            <li><a href="<?php echo $this->getUrl('customer/account');?>">Account</a></li>
+        </ul>
+    <?php endif; ?>
+</div>

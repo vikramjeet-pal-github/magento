@@ -1,0 +1,29 @@
+<script>
+
+    Clyde.init({
+        key: 'ck_live_ZD9d44cCYjEyEzsm',
+        skipGeoIp: true
+        }, function() {
+            
+            var productSku = 'AirTest';
+            Clyde.appendToSelectorWithSku(productSku, '#instant-purchase', function(){
+                if(Clyde.getSelectedContract()!=null){
+                    var clydeSku = Clyde.getSelectedContract().sku;
+                    var productQuantity = 1; //get product selected product quantity
+                    console.log(clydeSku);
+                    jQuery('#product-addtocart-button').click();
+                    jQuery.ajax({
+                        type: "GET",
+                        url: 'http://127.0.0.1/molekule/index.php/warranty_product/Index/Addtocart/?sku='+clydeSku,
+                        success: function(response){
+                            if(response.success){
+                                
+                            }
+                        }
+                    });
+                    
+                }
+            });
+            
+    });
+        </script>

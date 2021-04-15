@@ -1,0 +1,24 @@
+{
+	"name": "grazitti/maginate",
+	"description": "Maginate is a Magento and Marketo connector, helps you to sync your Magento Customer, Order, Product, and Abondent Cart data in marketo to engage with your customer.",
+	"version": "2.0.1",
+	"type": "magento2-module",
+	"keywords": ["Integrating Magento with Marketo","Magento Marketo Integration","Magento and Marketo Integration Connector","Magento 2 and Marketo integration Connector","Magento Marketo connector","marketo integration with magento","magento integration with marketo"],
+	"homepage": "https://www.grazitti.com/maginate/",
+	"license": "proprietary",
+	"authors": [
+		{
+		"name": "Grazitti Interactive",
+		"email": "info@grazitti.com",
+		"homepage": "https://www.grazitti.com/",
+		"role": "Developer"
+		}
+	],
+	"support": {
+        "email": "maginate@grazitti.com"
+    },
+	"autoload": {
+		"psr-4": { "Grazitti\\Maginate\\": "" },
+		"files": [ "registration.php" ]
+	}
+}

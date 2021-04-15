@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesCheckConditions">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Rule Conditions"/>
+            <description value="Check Rule Conditions"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-08"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesCheckConditions"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+        </before>
+
+        <after>
+            <!--Delete Rules -->
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesCheckConditions"/>
+            </actionGroup>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create shipping rule with conditions-->
+        <actionGroup ref="CreateShippingRuleWithFlatRateAndBestWay" stepKey="CreateShippingRule">
+            <argument name="shippingRule" value="shiprulesCheckConditions"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesCheckConditions"/>
+        </actionGroup>
+        <actionGroup ref="EditShippingRuleAddGlobalConditions" stepKey="AddConditionsInRule">
+            <argument name="shippingRule" value="shiprulesCheckConditions"/>
+            <argument name="actionsShippingConditionsOptions" value="shiprulesSubtotal"/>
+            <argument name="actionsConditionsOptionsParamIs" value="_equalsOrGreaterThan"/>
+            <argument name="conditionsData" value="shiprulesCheckConditions.conditions"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFirstProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate1">
+            <argument name="shippingPrices" value="shiprulesCheckConditions.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay1">
+            <argument name="shippingPrices" value="shiprulesCheckConditions.priceBestWayOne"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddSecondProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagWayfarerMessenger"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate2">
+            <argument name="shippingPrices" value="shiprulesCheckConditions.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay2">
+            <argument name="shippingPrices" value="shiprulesCheckConditions.priceBestWayTwo"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!-- Change Qty First Product-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyFirstProductToTwo">
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate3">
+            <argument name="shippingPrices" value="shiprulesCheckConditions.priceFlatRateThree"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay3">
+            <argument name="shippingPrices" value="shiprulesCheckConditions.priceBestWayThree"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!-- Change Qty Second Product-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtySecondProductToTwo">
+            <argument name="products" value="_theBagWayfarerMessenger"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate4">
+            <argument name="shippingPrices" value="shiprulesCheckConditions.priceFlatRateFor"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay4">
+            <argument name="shippingPrices" value="shiprulesCheckConditions.priceBestWayFor"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+    </test>
+</tests>

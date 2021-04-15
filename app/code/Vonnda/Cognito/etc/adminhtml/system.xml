@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="customer_cognito" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Cognito</label>
+            <tab>customer</tab>
+            <resource>Vonnda_Cognito::cognito</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="app_client_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Client ID</label>
+                </field>
+                <field id="app_client_secret" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>App Client Secret</label>
+                </field>
+                <!-- Removing to be set by the User Pool ID, since the region value is included in it. Leaving this commented out in case it is needed in the future
+                <field id="user_pool_region" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>User Pool Region</label>
+                    <source_model>Vonnda\Cognito\Model\Config\Source\UserPoolRegions</source_model>
+                    <comment>This is included in the user pool id</comment>
+                </field>
+                -->
+                <field id="user_pool_id" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>User Pool ID</label>
+                    <backend_model>Vonnda\Cognito\Model\Config\Backend\JSONWebKey</backend_model>
+                </field>
+            </group>
+            <group id="developer" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Developer Credentials</label>
+                <field id="access_key_id" translate="label" type="password" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AWS Access Key ID</label>
+                </field>
+                <field id="access_key_secret" translate="label" type="password" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AWS Secret Access Key</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

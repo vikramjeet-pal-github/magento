@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Subscriptions -->
+    <!-- Get all active subscription plans -->
+    <route method="GET" url="/V1/vonnda/subscription/admin">
+        <service class="Vonnda\Subscription\Api\SubscriptionServiceInterface" method="getSubscriptionPlans"/>
+        <resources>
+            <resource ref="Vonnda_Subscription::admin_api"/>
+        </resources>
+    </route>
+
+    <route method="GET" url="/V1/vonnda/subscription">
+        <service class="Vonnda\Subscription\Api\SubscriptionServiceInterface" method="getSubscriptionPlans"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+
+    <!-- Get subscription customer for user -->
+    <route method="GET" url="/V1/vonnda/subscription/me/customer">
+        <service class="Vonnda\Subscription\Api\SubscriptionServiceInterface" method="getSubscriptionCustomer"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Get subscription customer for current user by device serial number -->
+    <route method="GET" url="/V1/vonnda/subscription/me/customer/:serialNumber">
+        <service class="Vonnda\Subscription\Api\SubscriptionServiceInterface" method="getSubscriptionCustomerBySerialNumber"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Get a subscriptioon customer based on id -->
+    <route method="GET" url="/V1/vonnda/subscription/:customerId/customer">
+        <service class="Vonnda\Subscription\Api\SubscriptionServiceInterface" method="getSubscriptionCustomerById"/>
+        <resources>
+            <resource ref="Vonnda_Subscription::admin_api"/>
+        </resources>
+    </route>
+
+    <!-- List subscription customers based on search criteria -->
+    <route method="GET" url="/V1/vonnda/subscription/customer">
+        <service class="Vonnda\Subscription\Api\SubscriptionServiceInterface" method="listSubscriptionCustomer"/>
+        <resources>
+            <resource ref="Vonnda_Subscription::admin_api"/>
+        </resources>
+    </route>
+
+    <!-- Create a new subscription for customer -->
+    <route method="POST" url="/V1/vonnda/subscription/me/customer">
+        <service class="Vonnda\Subscription\Api\SubscriptionServiceInterface" method="createSubscriptionCustomer"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Update a subscription -->
+    <route method="PUT" url="/V1/vonnda/subscription/me/customer">
+        <service class="Vonnda\Subscription\Api\SubscriptionServiceInterface" method="updateSubscriptionCustomer"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Update a subscription renewal date -->
+    <route method="PUT" url="/V1/vonnda/subscription/me/customer/renewal">
+        <service class="Vonnda\Subscription\Api\SubscriptionServiceInterface" method="updateSubscriptionCustomerRenewal"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+    <!-- Get subscription shipping estimate -->
+    <route method="POST" url="/V1/vonnda/subscription/me/customer/estimate">
+        <service class="Vonnda\Subscription\Api\SubscriptionServiceInterface" method="getSubscriptionCustomerEstimate"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+    </route>
+
+</routes>

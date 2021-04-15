@@ -1,0 +1,12 @@
+<!--@subject {{trans "%subject" subject=$subject |raw}}@-->
+<h1>Turn Off AutoRenew</h1>
+
+{{trans
+    '<p><strong><span>Subscription Customer ID:</span></strong>%sub_id</p>'
+    sub_id=$subscriptionCustomer.getId() 
+|raw}}
+
+{{trans
+    '<p><strong><span>Current Date: </span></strong>%now</p>'
+    now=$now
+|raw}}

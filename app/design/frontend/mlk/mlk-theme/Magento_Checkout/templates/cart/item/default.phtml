@@ -1,0 +1,204 @@
+<?php
+//  @codingStandardsIgnoreFile
+/** @var \Vonnda\Checkout\Block\Cart\Item\Renderer $block */
+$_item = $block->getItem();
+$product = $_item->getProduct();
+/** @var \Magento\Msrp\Helper\Data $helper */
+$helper = $this->helper('Magento\Msrp\Helper\Data');
+$cart_helper = $this->helper('Magento\Checkout\Helper\Cart');
+$quote = $cart_helper->getQuote();
+$isGift = $quote->getGiftOrder();
+$canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinimalPriceLessMsrp($product);
+$websiteId = $_item->getStore()->getWebsiteId();
+$maxQty = 0;
+$_imagehelper = $this->helper('Magento\Catalog\Helper\Image');
+$productImage = $_imagehelper->init($product, 'category_page_list', array('height' => '104' , 'width'=> '104'))->getUrl();
+if ($_item->getProductType() == 'bundle') {
+    $productsArray = [];
+    $children = $_item->getChildren();
+    $selectionCollection = $product->getTypeInstance(true)->getSelectionsCollection($product->getTypeInstance(true)->getOptionsIds($product), $product);
+    foreach ($selectionCollection as $proselection) {
+        $productsArray[$proselection->getOptionId()][] = $proselection->getProductId();
+    }
+    $optionsCollection = $product->getTypeInstance(true)->getOptionsCollection($product);
+    foreach ($optionsCollection as $options) {
+        if (isset($productsArray[$options->getOptionId()])) {
+            foreach ($children as $child) {
+                if (in_array($child->getProductId(), $productsArray[$options->getOptionId()])) {
+                    $stock = $block->getStockItem($child->getProduct()->getEntityId(), $websiteId);
+                    if (!$stock->getUseConfigMaxSaleQty() && ($maxQty == 0 || $stock->getMaxSaleQty() < $maxQty)) {
+                        $maxQty = $stock->getMaxSaleQty();
+                    }
+                }
+            }
+        }
+    }
+} elseif ($_item->getProductType() == 'simple') {
+    $stock = $block->getStockItem($product->getEntityId(), $websiteId);
+    if (!$stock->getUseConfigMaxSaleQty()) {
+        $maxQty = $stock->getMaxSaleQty();
+    }
+} ?>
+<tbody class="cart item">
+    <tr class="item-info">
+        <td data-th="<?= $block->escapeHtml(__('Item')); ?>" class="col item">
+            <span class="product-item-photo">
+                <span class="product-image-container" style="width:104px;">
+                    <span class="product-image-wrapper" style="padding-bottom: 100%;">
+                        <img class="product-image-photo" src="<?= $productImage; ?>" max-width="104" max-height="104" alt="<?= $product->getName(); ?>"></span>
+                </span>
+            </span>
+            <div class="product-item-details">
+                <strong class="product-item-name">
+                    <?= $block->escapeHtml($block->getProductName()); ?>
+                </strong>
+                <?php if ($product->getData('short_description')) { ?>
+                    <div class="product-item-description">
+                        <?php echo $_item->getProduct()->getProductSku();?>
+                        <?php echo $product->getData('short_description'); ?>
+                    </div>
+                <?php } ?>
+                <?php if(($product->getSku() === 'MH1_Device_US' || $product->getSku() === 'MH1_Device_CA' || $product->getSku() === 'MinimoB_US' || $product->getSku() === 'MinimoP_US' || $product->getSku() === 'MinimoP_CA' || $product->getSku() === 'airpro-us') && !$isGift): ?>
+                    <div class="features-line">
+                        Features auto-refills
+                        <span class="features-tooltip">
+                            <span class="tooltip-content">
+                                <?php if($product->getSku() === 'MH1_Device_US'): ?>
+                                    <strong>Air: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    & 4 Pre-Filters<br>
+                                    <strong>$130/year</strong>
+                                <?php elseif($product->getSku() === 'MH1_Device_CA'): ?>
+                                    <strong>Air: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    & 4 Pre-Filters<br>
+                                    <strong>$190/year</strong>
+                                <?php elseif($product->getSku() === 'MinimoB_US'): ?>
+                                    <strong>Mini: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    <strong>$99/year</strong>
+                                <?php elseif($product->getSku() === 'MinimoP_US'): ?>
+                                    <strong>Mini+: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    <strong>$99/year</strong>
+                                <?php elseif($product->getSku() === 'MinimoP_CA'): ?>
+                                    <strong>Mini+: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    <strong>$145/year</strong>
+                                <?php elseif($product->getSku() === 'airpro-us'): ?>
+                                    <strong>Air Pro: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    <strong>$198/year</strong>
+                                <?php endif; ?>
+                            </span>
+                        </span>
+                    </div>
+                <?php endif; ?>
+                <div class="hide">
+                    <?php if ($_options = $block->getOptionList()) { ?>
+                        <dl class="item-options">
+                            
+                        </dl>
+                    <?php } ?>
+                </div>
+            </div>
+        </td>
+        <?php if ($canApplyMsrp) { ?>
+            <td class="col msrp" data-th="<?= $block->escapeHtml(__('Price')); ?>">
+                <span class="pricing msrp">
+                    <span class="msrp notice"><?= /* @escapeNotVerified */ __('See price before order confirmation.'); ?></span>
+                    <?php $helpLinkId = 'cart-msrp-help-' . $_item->getId(); ?>
+                    <a href="#" class="action help map" id="<?= /* @escapeNotVerified */ $helpLinkId; ?>" data-mage-init='{"addToCart":{"helpLinkId": "#<?= /* @escapeNotVerified */ $helpLinkId; ?>","productName": "<?= /* @escapeNotVerified */ $product->getName(); ?>","showAddToCart": false}}'>
+                        <span><?= /* @escapeNotVerified */ __("What's this?"); ?></span>
+                    </a>
+                </span>
+            </td>
+        <?php } else { ?>
+            <td  class="col price" data-th="<?= $block->escapeHtml(__('Price')); ?>">
+                    <?= $block->getUnitPriceHtml($_item); ?>
+            </td>
+        <?php } ?>
+        <td class="col qty" data-th="<?= $block->escapeHtml(__('Qty')); ?>">
+            <div class="field qty">
+                <label class="label" for="cart-<?= /* @escapeNotVerified */ $_item->getId(); ?>-qty">
+                    <span><?= /* @escapeNotVerified */ __('Qty'); ?></span>
+                </label>
+                <div class="control qty mlk-qty">
+                    <input id="cart-<?= /* @escapeNotVerified */ $_item->getId(); ?>-qty"
+                           name="cart[<?= /* @escapeNotVerified */ $_item->getId(); ?>][qty]"
+                           data-cart-item-id="<?= $block->escapeHtml($_item->getSku()); ?>"
+                           value="<?= /* @escapeNotVerified */ $block->getQty(); ?>"
+                           type="number"
+                           size="4"
+                           title="<?= $block->escapeHtml(__('Qty')); ?>"
+                           class="input-text qty mlk-qty__input"
+                           <?php if ($maxQty > 0) echo 'data-maxqty="'.$maxQty.'"'; ?>
+                           data-validate="{required:true}"
+                           data-role="cart-item-qty"
+                           data-bind="mageInit: {'js/cartqty': {}}"
+                           readonly />
+
+                </div>
+            </div>
+        </td>
+        <td class="col subtotal" data-th="<?= $block->escapeHtml(__('Subtotal')); ?>">
+            <?php if ($canApplyMsrp) { ?>
+                <span class="cart msrp subtotal">--</span>
+            <?php } else { ?>
+                <?= $block->getRowTotalHtml($_item); ?>
+            <?php } ?>
+            <div class="actions-toolbar">
+                <?= /* @escapeNotVerified */ $block->getActions($_item) ?>
+            </div>
+        </td>
+    </tr>
+    <?php if ($children = $_item->getChildren()) {
+        $selectionCollection = $product->getTypeInstance(true)->getSelectionsCollection($product->getTypeInstance(true)->getOptionsIds($product), $product);
+        foreach ($selectionCollection as $proselection) {
+            $productsArray[$proselection->getOptionId()][] = $proselection->getProductId();
+        }
+        $optionsCollection = $product->getTypeInstance(true)->getOptionsCollection($product);
+        foreach ($optionsCollection as $options) {
+            if ($options->getDefaultTitle() == 'Subscription' && isset($productsArray[$options->getOptionId()])) {
+                foreach ($children as $child) {
+                    if (in_array($child->getProductId(), $productsArray[$options->getOptionId()])) {
+                        $product = $child->getProduct(); ?>
+                        <tr class="item-info hide">
+                            <td data-th="<?= $block->escapeHtml(__('Item')); ?>" class="col item">
+                                <span class="product-item-photo">
+                                    <?= $block->getImage($product, 'cart_page_product_thumbnail')->toHtml(); ?>
+                                </span>
+                                <div class="product-item-details">
+                                    <strong class="product-item-name">
+                                        Filter Auto-Refills
+                                    </strong>
+                                    <?php if ($product->getData('short_description')) { ?>
+                                        <div class="product-item-description">
+                                            <?php //echo $product->getData('short_description'); ?>
+                                            Next refill <?php date_default_timezone_set('America/Los_Angeles'); echo date("m/d/y", strtotime("+6 months")); ?>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </td>
+                            <td class="col price" data-th="<?= $block->escapeHtml(__('Price')); ?>"></td>
+                            <td class="col qty fixed-qty" data-th="<?= $block->escapeHtml(__('Qty')); ?>">
+                                <div class="field qty">
+                                    <label class="label" for="cart-<?= /* @escapeNotVerified */ $child->getId(); ?>-qty">
+                                        <span><?= /* @escapeNotVerified */ __('Qty'); ?></span>
+                                    </label>
+                                    <div class="control qty">
+                                        <?= /* @escapeNotVerified */ $block->getQty(); ?>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col subtotal" data-th="<?= $block->escapeHtml(__('Subtotal')); ?>"></td>
+                        </tr>
+                    <?php }
+                }
+            }
+        }
+    } ?>
+</tbody>
+
+
+

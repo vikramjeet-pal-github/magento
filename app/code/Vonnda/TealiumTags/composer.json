@@ -1,0 +1,22 @@
+{
+    "name": "vonnda/module-tealiumtags",
+    "description": "",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Mage2Gen",
+            "email": "info@mage2gen.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Vonnda\\TealiumTags\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

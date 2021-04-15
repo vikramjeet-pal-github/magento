@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/orders/:id" method="GET">
+        <service class="MLK\Core\Api\Sales\OrderRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Magento_Sales::sales" />
+        </resources>
+    </route>
+
+    <route url="/V1/orders" method="GET">
+        <service class="MLK\Core\Api\Sales\OrderRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Magento_Sales::actions_view" />
+        </resources>
+    </route>
+
+    <route url="/V1/order/:orderId/ship" method="POST">
+        <service class="MLK\Core\Api\Sales\ShipOrderInterface" method="execute"/>
+        <resources>
+            <resource ref="Magento_Sales::sales" />
+        </resources>
+    </route>
+
+    <route url="/V1/products-render-info" method="GET">
+        <service class="MLK\Core\Api\Catalog\ProductRenderListInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+</routes>

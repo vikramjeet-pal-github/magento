@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <sales_email>
+            <gift_shipment>
+                <enabled>1</enabled>
+                <template>sales_email_gift_shipment_template</template>
+                <identity>sales</identity>
+            </gift_shipment>
+        </sales_email>
+    </default>
+</config>

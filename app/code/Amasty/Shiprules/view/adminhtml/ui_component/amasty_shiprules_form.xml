@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">amasty_shiprules_form.data_source</item>
+            <item name="deps" xsi:type="string">amasty_shiprules_form.data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Shipping Rule</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">amasty_shiprules_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">*/*/</item>
+            </item>
+            <item name="delete" xsi:type="string">Amasty\CommonRules\Block\Adminhtml\Rule\Edit\DeleteButton</item>
+            <item name="reset" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Reset</item>
+                <item name="class" xsi:type="string">reset</item>
+                <item name="on_click" xsi:type="string">location.reload();</item>
+            </item>
+            <item name="save" xsi:type="array">
+                <item name="name" xsi:type="string">save</item>
+                <item name="label" xsi:type="string" translate="true">Save</item>
+                <item name="class" xsi:type="string">save primary</item>
+                <item name="url" xsi:type="string">*/*/save</item>
+            </item>
+            <item name="save_and_continue" xsi:type="array">
+                <item name="name" xsi:type="string">save_and_continue</item>
+                <item name="label" xsi:type="string" translate="true">Save and Continue Edit</item>
+                <item name="class" xsi:type="string">save</item>
+                <item name="url" xsi:type="string">*/*/save</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Amasty\Shiprules\Ui\FormDataProvider</argument>
+            <argument name="name" xsi:type="string">data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">rule_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="amasty_shiprules/rule/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <container name="info">
+        <argument name="data" xsi:type="array">
+            <item name="sortOrder" xsi:type="number">0</item>
+        </argument>
+        <htmlContent name="html_content">
+            <argument name="block" xsi:type="object">Amasty\Shiprules\Block\Adminhtml\System\Config\Information</argument>
+        </htmlContent>
+    </container>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Shipping Methods</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">10</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Rule Name</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Rule Status</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">is_active</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="toggleLabels" xsi:type="array">
+                        <item name="on" xsi:type="string" translate="true">Active</item>
+                        <item name="off" xsi:type="string" translate="true">Inactive</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </field>
+        <field name="methods">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Shipping Carriers and Methods</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">methods</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="component" xsi:type="string">Amasty_CommonRules/js/form/element/tree</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="chipsEnabled" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="lastSelectable" xsi:type="boolean">false</item>
+                    <item name="levelsVisibility" xsi:type="string">0</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Select Shipping Carriers and Methods to which the rule will be applied. When the shipping carrier is selected all its shipping methods will be also captured. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-02#shipping_rule_settings">user guide</a>.</span>]]></item>
+                </item>
+                <item name="options" xsi:type="object">Amasty\CommonRules\Model\OptionProvider\Provider\CarriersMethodsOptions</item>
+            </argument>
+        </field>
+        <field name="pos">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Rule Priority</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Define the importance of the rule. The lower the rule priority is, the earlier the rule will be applied in comparison with other rules. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-03#shipping_rule_settings">user guide</a>.</span>]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">pos</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="products">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Products</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+            </item>
+        </argument>
+        <container name="actions_apply_to">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Amasty\Shiprules\Block\Adminhtml\Rule\Edit\Tab\Actions</argument>
+            </htmlContent>
+        </container>
+        <field name="ignore_promo">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Ignore Free Shipping Promo</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Enable if you want the rule to be applied to all products, including free shipping promo items. Disable if the rule should be applied only for items with non-free shipping. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-05#products">user guide</a>.</span>]]></item>
+                    <item name="tooltipTpl" xsi:type="string">Amasty_CommonRules/ui/element/helper/tooltip</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">ignore_promo</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="toggleLabels" xsi:type="array">
+                        <item name="on" xsi:type="string" translate="true">Yes</item>
+                        <item name="off" xsi:type="string" translate="true">No</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </field>
+        <container name="groped_weight">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="template" xsi:type="string">Amasty_CommonRules/ui/element/group</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+            <field name="weight_from">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Weight</item>
+                        <item name="addbefore" xsi:type="string" translate="true">from</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">weight_from</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="weight_to">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">to</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">weight_to</item>
+                        <item name="tooltip" xsi:type="array">
+                            <item name="description" xsi:type="string"><![CDATA[Set condition if you want the rule to be applied after the total weight, quantity or price of selected products reaches the specified value.<br>Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-06#products">user guide</a>.]]></item>
+                        </item>
+                        <item name="tooltipTpl" xsi:type="string">Amasty_CommonRules/ui/element/helper/tooltip</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+        <container name="groped_qty">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="template" xsi:type="string">Amasty_CommonRules/ui/element/group</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+            <field name="qty_from">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Qty</item>
+                        <item name="addbefore" xsi:type="string" translate="true">from</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">qty_from</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="qty_to">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">to</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                            <item name="cut" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">qty_to</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+        <container name="groped_price">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="template" xsi:type="string">Amasty_CommonRules/ui/element/group</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+            <field name="price_from">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Price</item>
+                        <item name="addbefore" xsi:type="string" translate="true">from</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">price_from</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="price_to">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">to</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                            <item name="cut" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">price_to</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+    </fieldset>
+    <fieldset name="rates">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Rates</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">30</item>
+            </item>
+        </argument>
+        <field name="calc">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="listens" xsi:type="array">
+                        <item name="amasty_shiprules_form.amasty_shiprules_form.rates.calc:value" xsi:type="string">clearValues</item>
+                    </item>
+                    <item name="component" xsi:type="string">Amasty_Shiprules/js/form/shiprules/calculation</item>
+                    <item name="label" xsi:type="string" translate="true">Calculation</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">calc</item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string"><![CDATA[
+                        <ul>
+                            <li>Set to Replace if you want the original shipping rate to be changed to another value;</li>
+                            <li>Set to Surcharge to add the calculated value to the present shipping rate;</li>
+                            <li>Set to Discount if you want to deduct the calculated value from the present shipping rate.</li>
+                            <li>Set to Partial Replace if you want the original shipping rate to be changed to another value by additional product conditions (mixed cart);</li>
+                        </ul>
+                        <br>Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-07#rates">user guide</a>.]]></item>
+                    </item>
+                    <item name="tooltipTpl" xsi:type="string">Amasty_CommonRules/ui/element/helper/tooltip</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="switcherConfig" xsi:type="array">
+                        <item name="enabled" xsi:type="boolean">true</item>
+                        <item name="rules" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="value" xsi:type="number">0</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.actions_apply_to.html_content</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_weight</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                    <item name="2" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_qty</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                    <item name="3" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_price</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">false</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="1" xsi:type="array">
+                                <item name="value" xsi:type="number">1</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.actions_apply_to.html_content</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_weight</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="2" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_qty</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="3" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_price</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="2" xsi:type="array">
+                                <item name="value" xsi:type="number">2</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.actions_apply_to.html_content</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_weight</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="2" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_qty</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="3" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_price</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                            <item name="3" xsi:type="array">
+                                <item name="value" xsi:type="number">3</item>
+                                <item name="actions" xsi:type="array">
+                                    <item name="0" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.actions_apply_to.html_content</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="1" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_weight</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="2" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_qty</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                    <item name="3" xsi:type="array">
+                                        <item name="target" xsi:type="string">amasty_shiprules_form.amasty_shiprules_form.products.groped_price</item>
+                                        <item name="callback" xsi:type="string">visible</item>
+                                        <item name="params" xsi:type="array">
+                                            <item name="0" xsi:type="boolean">true</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+                <item name="options" xsi:type="object">Amasty\CommonRules\Model\OptionProvider\Provider\CalculationOptionProvider</item>
+            </argument>
+        </field>
+        <field name="rate_base">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Base Rate for the Order</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Specify the total rate per order. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-08#rates">user guide</a>.</span>]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">rate_base</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+        </field>
+        <field name="rate_fixed">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Fixed Rate per Product</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Specify a fixed rate for each product in the cart. The rate for the whole order will be formed by multiplying the mentioned fixed rate by the number of products in the cart. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-09#rates">user guide</a>.</span>]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">rate_fixed</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+            </argument>
+        </field>
+        <field name="weight_fixed">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Rate per unit of weight</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Enter the surcharge or discount amount that will be automatically multiplied by the products’ weight to calculate a shipping rate. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-10#rates">user guide</a>.</span>]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">weight_fixed</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </field>
+        <field name="rate_percent">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Percentage per Product</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Determine the rate as a percentage of the original cost of products in the cart (the costs are taken without any discounts that might have been applied). Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-11#rates">user guide</a>.</span>]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">rate_percent</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+        </field>
+        <field name="handling">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Handling Percentage</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Specify the percentage that will be automatically added or deducted from the shipping rate. The percentage will be calculated on the original shipping rates basis. If it is 10% and UPS Ground is $25, the total shipping cost will be $27.5. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-12#rates">user guide</a>.</span>]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">handling</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                </item>
+            </argument>
+        </field>
+        <container name="groped_change">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="template" xsi:type="string">Amasty_CommonRules/ui/element/group</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Set boundary (minimal or maximal) values, for which the original rate can be changed. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-13#rates">user guide</a>.</span>]]></item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                </item>
+            </argument>
+            <field name="rate_min">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Rate Change</item>
+                        <item name="addbefore" xsi:type="string" translate="true">min.</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">rate_min</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="rate_max">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">max.</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">rate_max</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+        <container name="groped_total">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="template" xsi:type="string">Amasty_CommonRules/ui/element/group</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Determine boundary (minimal or maximal) values of a shipping rate which can be set after the rule application. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-14#rates">user guide</a>.</span>]]></item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                </item>
+            </argument>
+            <field name="ship_min">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Total Rate</item>
+                        <item name="addbefore" xsi:type="string" translate="true">min.</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">ship_min</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="ship_max">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">max.</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">ship_max</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                    </item>
+                </argument>
+            </field>
+        </container>
+    </fieldset>
+    <fieldset name="conditions">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Conditions</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">40</item>
+            </item>
+        </argument>
+        <container name="conditions_apply_to">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Amasty\Shiprules\Block\Adminhtml\Rule\Edit\Tab\Conditions</argument>
+            </htmlContent>
+        </container>
+        <fieldset name="advanced">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Backorders</item>
+                    <item name="collapsible" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+            <field name="out_of_stock">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Apply the rule to</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">select</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">out_of_stock</item>
+                        <item name="tooltip" xsi:type="array">
+                            <item name="description" xsi:type="string"><![CDATA[The option determines how the rule will work if there are Backorder items in the cart. When it's set to <b>Backorders only</b>, the rule is applied when there are only Backorder items in the cart. With <b>Non backorders</b>, the rule works when there are no Backorder items in the cart. If set to <b>All orders</b>, the rule works regardless of whether there are Backorder items in the cart or not.
+                            <br>Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-16#conditions">user guide</a>.]]></item>
+                        </item>
+                        <item name="tooltipTpl" xsi:type="string">Amasty_CommonRules/ui/element/helper/tooltip</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                    </item>
+                    <item name="options" xsi:type="object">Amasty\CommonRules\Model\OptionProvider\Provider\BackorderOptionProvider</item>
+                </argument>
+            </field>
+        </fieldset>
+    </fieldset>
+    <fieldset name="store_groups">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Stores &amp; Customer Groups</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">50</item>
+            </item>
+        </argument>
+        <field name="for_admin">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Admin Area</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Enable or disable the rule in the admin area. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-17#stores_customer_groups">user guide</a>.</span>]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">for_admin</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="toggleLabels" xsi:type="array">
+                        <item name="on" xsi:type="string" translate="true">On</item>
+                        <item name="off" xsi:type="string" translate="true">Off</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </field>
+        <field name="stores">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Stores</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Specify the stores where the rule will be applied. Leave empty or select all to apply the rule to any store. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-18#stores_customer_groups">user guide</a>.</span>]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">stores</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+                <item name="options" xsi:type="object">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</item>
+            </argument>
+        </field>
+        <field name="cust_groups">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Customer Groups</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<span class="admin__field-note">Specify customer groups to which the rule should be applied. Leave empty or select all to apply the rule to any group. Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-19#stores_customer_groups">user guide</a>.</span>]]></item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">cust_groups</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+                <item name="options" xsi:type="object">Amasty\CommonRules\Model\OptionProvider\Provider\CustomerGroupOptionProvider</item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="days_time">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Days and Time</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">60</item>
+            </item>
+        </argument>
+        <field name="days">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Days of the Week</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">int</item>
+                    <item name="formElement" xsi:type="string">multiselect</item>
+                    <item name="source" xsi:type="string">ship_rule</item>
+                    <item name="dataScope" xsi:type="string">days</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="tooltipTpl" xsi:type="string">Amasty_CommonRules/ui/element/helper/tooltip</item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string"><![CDATA[Choose certain days of the week and time if you don’t want the rule to be applied 24 hours throughout the week. Leave empty or select all to apply the rule every day.
+                            <br/>Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-20#days_time">user guide</a>.]]></item>
+                    </item>
+                </item>
+                <item name="options" xsi:type="object">Amasty\CommonRules\Model\OptionProvider\Provider\DaysOptionProvider</item>
+            </argument>
+        </field>
+        <container name="groped_time">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/components/group</item>
+                    <item name="template" xsi:type="string">Amasty_CommonRules/ui/element/group</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                </item>
+            </argument>
+            <field name="time_from">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Time</item>
+                        <item name="addbefore" xsi:type="string" translate="true">from</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">select</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">time_from</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                    </item>
+                    <item name="options" xsi:type="object">Amasty\CommonRules\Model\OptionProvider\Provider\TimesOptionProvider</item>
+                </argument>
+            </field>
+            <field name="time_to">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="addbefore" xsi:type="string" translate="true">to</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">select</item>
+                        <item name="additionalClasses" xsi:type="array">
+                            <item name="admin__field-medium" xsi:type="boolean">true</item>
+                        </item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">time_to</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                    </item>
+                    <item name="options" xsi:type="object">Amasty\CommonRules\Model\OptionProvider\Provider\TimesOptionProvider</item>
+                </argument>
+            </field>
+        </container>
+    </fieldset>
+    <fieldset name="sales_rules">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Coupons and discounts</item>
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="sortOrder" xsi:type="number">70</item>
+            </item>
+        </argument>
+        <fieldset name="apply_rule">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Apply Rules Only With</item>
+                    <item name="collapsible" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+            <field name="coupon">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Coupon Codes</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">coupon</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <item name="tooltipTpl" xsi:type="string">Amasty_CommonRules/ui/element/helper/tooltip</item>
+                        <item name="tooltip" xsi:type="array">
+                            <item name="description" xsi:type="string"><![CDATA[If you specify comma separated coupons here, the rule will be activated only when these coupons are entered. For this you need to create a coupon in <a target="_blank" title="Cart Price Rules Grid" href="${$.notice_url}"><span>Marketing / Cart Price Rules</span></a> area first.
+                            <br/>Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-21#coupons">user guide</a>.]]></item>
+                        </item>
+                        <item name="notice_url" xsi:type="url" path="sales_rule/promo_quote" />
+                    </item>
+                </argument>
+            </field>
+            <field name="discount_id">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Shopping Cart Rule (discount)</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">int</item>
+                        <item name="formElement" xsi:type="string">multiselect</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">discount_id</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                        <item name="tooltipTpl" xsi:type="string">Amasty_CommonRules/ui/element/helper/tooltip</item>
+                        <item name="tooltip" xsi:type="array">
+                            <item name="description" xsi:type="string"><![CDATA[Works the same as the setting above, but uses the list of coupons in the selected rules instead of a single coupon. You can apply this rule with ANY specified discount rules. Create rule in <a target="_blank" title="Cart Price Rules Grid" href="${$.notice_url}"><span>Marketing / Cart Price Rules</span></a> area first. Useful when you have MULTIPLE coupons in one rule.
+                            <br/>Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-22#coupons">user guide</a>.]]></item>
+                        </item>
+                        <item name="notice_url" xsi:type="url" path="sales_rule/promo_quote" />
+                    </item>
+                    <item name="options" xsi:type="object">Amasty\CommonRules\Model\OptionProvider\Provider\RulesOptionProvider</item>
+                </argument>
+            </field>
+        </fieldset>
+        <fieldset name="not_apply_rule">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Do NOT Apply Rules With</item>
+                    <item name="collapsible" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+            </argument>
+            <field name="coupon_disable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Coupon Codes</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">input</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">coupon_disable</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <item name="tooltipTpl" xsi:type="string">Amasty_CommonRules/ui/element/helper/tooltip</item>
+                        <item name="tooltip" xsi:type="array">
+                            <item name="description" xsi:type="string"><![CDATA[If you specify a comma separated coupons here, the rule will NOT work when these coupons are entered. For this you need to create a coupon in <a target="_blank" title="Cart Price Rules Grid" href="${$.notice_url}"><span>Marketing / Cart Price Rules</span></a>.
+                            <br/>Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-23#coupons">user guide</a>.]]></item>
+                        </item>
+                        <item name="notice_url" xsi:type="url" path="sales_rule/promo_quote" />
+                    </item>
+                </argument>
+            </field>
+            <field name="discount_id_disable">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Shopping Cart Rule (discount)</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="dataType" xsi:type="string">int</item>
+                        <item name="formElement" xsi:type="string">multiselect</item>
+                        <item name="source" xsi:type="string">ship_rule</item>
+                        <item name="dataScope" xsi:type="string">discount_id_disable</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                        <item name="tooltipTpl" xsi:type="string">Amasty_CommonRules/ui/element/helper/tooltip</item>
+                        <item name="tooltip" xsi:type="array">
+                            <item name="description" xsi:type="string"><![CDATA[Works the same as the setting above, but uses the list of coupons in the selected rules instead of a single coupon. You can set NOT to apply this rule with ANY specified discount rules. Create rule in <a target="_blank" title="Cart Price Rules Grid" href="${$.notice_url}"><span>Marketing / Cart Price Rules</span></a> area first. Useful when you have MULTIPLE coupons in one rule.
+                            <br/>Learn more from the <a target="_blank" title="User Guide" href="https://amasty.com/docs/doku.php?id=magento_2:shipping-rules&utm_source=extension&utm_medium=hint&utm_campaign=shrules-m2-24#coupons">user guide</a>.]]></item>
+                        </item>
+                        <item name="notice_url" xsi:type="url" path="sales_rule/promo_quote" />
+                    </item>
+                    <item name="options" xsi:type="object">Amasty\CommonRules\Model\OptionProvider\Provider\RulesOptionProvider</item>
+                </argument>
+            </field>
+        </fieldset>
+    </fieldset>
+</form>

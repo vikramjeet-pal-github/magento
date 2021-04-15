@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<pages xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/PageObject.xsd">
+
+    <page name="AdminShiprulesConfigurationPage" url="/admin/system_config/edit/section/amshiprules/" area="admin" module="Magento_Shiprules">
+        <section name="AdminConfigurationsShiprulesSection"/>
+    </page>
+
+    <page name="AdminShippingRuleGridPage" url="/amasty_shiprules/rule/index" area="admin" module="Magento_Shiprules">
+        <section name="AdminShippingRulesGridSection"/>
+    </page>
+
+</pages>

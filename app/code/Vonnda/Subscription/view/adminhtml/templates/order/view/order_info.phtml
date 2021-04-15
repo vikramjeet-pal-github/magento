@@ -1,0 +1,30 @@
+<?php
+$deviceSerialMap = $block->getDeviceSerialMap();
+if ($deviceSerialMap) { ?>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title"><?= $block->escapeHtml(__('Subscription Information')) ?></span>
+        </div>
+        <div class="admin__page-section-content">
+            <div class="admin__page-section-item device-information order-information">
+                <div class="admin__page-section-item-title">
+                    <span class="title">
+                        Serial Numbers
+                    </span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <table class="admin__table-secondary device-information-table order-information-table">
+                        <tbody>
+                            <?php foreach ($deviceSerialMap as $skuAndSerial) { ?>
+                                <tr>
+                                    <th><?php echo $skuAndSerial['sku'] ?></th>
+                                    <td><?php echo $skuAndSerial['serial_number'] ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php } ?>

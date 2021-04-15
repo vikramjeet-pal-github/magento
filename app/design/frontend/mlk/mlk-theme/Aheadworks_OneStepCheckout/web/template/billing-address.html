@@ -1,0 +1,45 @@
+<!-- ko if: isShown -->
+<div class="onestep-billing-address">
+    <div class="field choice" data-bind="visible: canUseShippingAddress()">
+        <input id="billing-address-same-as-shipping"
+            type="checkbox" name="billing-address-same-as-shipping"
+            data-bind="checked: isAddressSameAsShipping, click: onUseShippingAddress"/>
+        <label for="billing-address-same-as-shipping" class="label">
+            <span data-bind="i18n: 'My billing and shipping address are the same'"></span>
+        </label>
+        <div class="billing-address-text">
+            <!-- ko if: isCompleteAddress(currentBillingAddress()) -->
+            <!-- ko text: currentBillingAddress().street --><!-- /ko -->,
+            <!-- ko text: currentBillingAddress().city --><!-- /ko -->,
+            <!-- ko text: getCurrentRegion() --><!-- /ko -->,
+            <!-- ko text: currentBillingAddress().postcode --><!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- ko ifnot: isFormInline -->
+        <!-- ko if: showAddressList -->
+            <!-- ko template: 'Aheadworks_OneStepCheckout/billing-address/list' --><!-- /ko -->
+        <!--/ko-->
+    <!--/ko-->
+    <!-- ko if: showForm -->
+        <!-- ko template: 'Aheadworks_OneStepCheckout/billing-address/form' --><!-- /ko -->
+    <!--/ko-->
+    <!-- ko if: showToolbar -->
+    <div class="action-toolbar">
+        <button class="action inactive primary" data-bind="mageInit: {'js/saveBillingBtnValidation': {}}, click: onUpdateAddressClick">
+            <span data-bind="i18n: 'Save'"></span>
+        </button>
+        <button class="action hide" data-bind="click: onCancelClick">
+            <span data-bind="i18n: 'Cancel'"></span>
+        </button>
+    </div>
+    <!--/ko-->
+    <!-- ko ifnot: isFormInline -->
+        <!-- ko if: errorValidationMessage().length > 0 -->
+        <div class="message notice">
+            <span><!-- ko text: errorValidationMessage()--><!-- /ko --></span>
+        </div>
+        <!-- /ko -->
+    <!--/ko-->
+</div>
+<!--/ko-->

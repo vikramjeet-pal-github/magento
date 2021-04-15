@@ -1,0 +1,42 @@
+<?php
+/**
+ * Footer Block
+ * @var $block \Vonnda\Checkout\Block\Onepage\Success
+ */
+?>
+
+<?php if ($block->wasPaymentAffirm()): ?>
+    <div class="affirm-flow-footer" style="display: none">
+        <div class="footer content">
+            <ul class="footer-items">
+                <li class="item">
+                    <div class="img-icon">
+                        <img src="<?= $this->getViewFileUrl('Magento_Checkout::images/latest-tech.svg') ?>" alt="<?= __('Latest tech') ?>" title="<?= __('Latest tech') ?>"/>
+                    </div>
+                    <div class="info-wrapper">
+                        <h4><?= __('Latest tech') ?></h4>
+                        <p><?= __('We’re always refining our science, so you get the freshest filter technology in each box.') ?></p>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="img-icon">
+                        <img src="<?= $this->getViewFileUrl('Magento_Checkout::images/save-big.svg') ?>" alt="<?= __('Save big') ?>" title="<?= __('Save big') ?>"/>
+                    </div>
+                    <div class="info-wrapper">
+                        <h4><?= __('Save big') ?></h4>
+                        <p><?= __('Auto-refills cost less than paying per filter. And shipping is free.') ?></p>
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="img-icon">
+                        <img src="<?= $this->getViewFileUrl('Magento_Checkout::images/convenient.svg') ?>" alt="<?= __('Convenient') ?>" title="<?= __('Convenient') ?>"/>
+                    </div>
+                    <div class="info-wrapper">
+                        <h4><?= __('Convenient') ?></h4>
+                        <p><?= __('Filter refills ship to you automatically, on a regular cadence.') ?></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+<?php endif; ?>

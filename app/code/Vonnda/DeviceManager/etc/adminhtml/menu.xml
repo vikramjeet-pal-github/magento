@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+            id="Vonnda_DeviceManager::vonnda_devicemanager_devicemanager"
+            title="Device"
+            module="Vonnda_DeviceManager"
+            sortOrder="20"
+            action="vonnda_devicemanager/devicemanager/index"
+            resource="Vonnda_DeviceManager::manage_devices"
+            parent="Vonnda_Subscription::main"
+        />
+    </menu>
+</config>

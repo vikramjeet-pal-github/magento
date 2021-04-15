@@ -1,0 +1,19 @@
+<?php 
+    $order = $block->getOrder();
+    if($order) {
+        $orderIsAutoRefill = $order->getParentOrderId();
+        $orderIsGift = $order->getGiftOrder();
+        $customerName = $order->getCustomerFirstname()
+            ? $order->getCustomerFirstname()
+            : $order->getBillingAddress()->getFirstname();
+        $templateVars = ["customerName" => $customerName];
+        $blockId = "email_order_confirm_header";
+        if ($orderIsAutoRefill) {
+            $blockId = "email_order_confirm_autorefill_header";
+        }
+        if ($orderIsGift) {
+            $blockId = "email_order_confirm_gift_header";
+            $templateVars["recipientName"] = $order->getShippingAddress()->getFirstname();
+        }
+        echo $block->getCMSBlockHtml($blockId, $templateVars);
+    }

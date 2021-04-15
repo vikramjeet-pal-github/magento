@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesCheckPartialReplaceAndSurcharge">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Calculation Partial Replace and Surcharge"/>
+            <description value="Check Calculation Partial Replace and Surcharge"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-34"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesCheckPartialReplaceAndSurcharge"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+        </before>
+
+        <after>
+            <!--Delete Shipping And Cart Price Rules -->
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteFirstCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesCheckPartialReplaceAndSurcharge1"/>
+            </actionGroup>
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteSecondCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesCheckPartialReplaceAndSurcharge2"/>
+            </actionGroup>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create first shipping rule-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateShippingRuleFirst">
+            <argument name="shippingRule" value="shiprulesCheckPartialReplaceAndSurcharge1"/>
+            <argument name="calculationType" value="calculationPartialReplace"/>
+            <argument name="rates" value="rateShiprulesCheckPartialReplaceAndSurcharge1"/>
+        </actionGroup>
+        <actionGroup ref="EditShippingRuleAddProductConditions" stepKey="AddConditionsInRuleFirst">
+            <argument name="shippingRule" value="shiprulesCheckPartialReplaceAndSurcharge1"/>
+            <argument name="actionsConditionsOptions" value="_SKU"/>
+            <argument name="conditionsData" value="shiprulesCheckPartialReplaceAndSurcharge1.conditions"/>
+        </actionGroup>
+
+        <!--Create second shipping rule-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateShippingRuleSecond">
+            <argument name="shippingRule" value="shiprulesCheckPartialReplaceAndSurcharge2"/>
+            <argument name="calculationType" value="calculationSurcharge"/>
+            <argument name="rates" value="rateShiprulesCheckPartialReplaceAndSurcharge2"/>
+        </actionGroup>
+        <actionGroup ref="EditShippingRuleAddProductConditions" stepKey="AddConditionsInRuleSecond">
+            <argument name="shippingRule" value="shiprulesCheckPartialReplaceAndSurcharge2"/>
+            <argument name="actionsConditionsOptions" value="_SKU"/>
+            <argument name="conditionsData" value="shiprulesCheckPartialReplaceAndSurcharge2.conditions"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddProductToCart1">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theWatchClamberData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate1">
+            <argument name="shippingPrices" value="shiprulesCheckPartialReplaceAndSurcharge1.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddProductToCart2">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate2">
+            <argument name="shippingPrices" value="shiprulesCheckPartialReplaceAndSurcharge1.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddProductToCart3">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate3">
+            <argument name="shippingPrices" value="shiprulesCheckPartialReplaceAndSurcharge1.priceFlatRateThree"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+
+        <!-- Change Qty Product-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyProductTwo">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate4">
+            <argument name="shippingPrices" value="shiprulesCheckPartialReplaceAndSurcharge1.priceFlatRateFour"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+
+    </test>
+</tests>

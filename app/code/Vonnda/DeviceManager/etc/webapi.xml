@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<route method="POST" url="/V1/vonnda-devicemanager/devicemanager">
+		<service class="Vonnda\DeviceManager\Api\DeviceManagerRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Vonnda_DeviceManager::admin_api"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/vonnda-devicemanager/devicemanager/search">
+		<service class="Vonnda\DeviceManager\Api\DeviceManagerRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Vonnda_DeviceManager::admin_api"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/vonnda-devicemanager/devicemanager/:devicemanagerId">
+		<service class="Vonnda\DeviceManager\Api\DeviceManagerRepositoryInterface" method="getById"/>
+		<resources>
+			<resource ref="Vonnda_DeviceManager::admin_api"/>
+		</resources>
+	</route>
+	<route method="PUT" url="/V1/vonnda-devicemanager/devicemanager/:devicemanagerId">
+		<service class="Vonnda\DeviceManager\Api\DeviceManagerRepositoryInterface" method="save"/>
+		<resources>
+			<resource ref="Vonnda_DeviceManager::admin_api"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/vonnda-devicemanager/devicemanager/:devicemanagerId">
+		<service class="Vonnda\DeviceManager\Api\DeviceManagerRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Vonnda_DeviceManager::admin_api"/>
+		</resources>
+	</route>
+</routes>

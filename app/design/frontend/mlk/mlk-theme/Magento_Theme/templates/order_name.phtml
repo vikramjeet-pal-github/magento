@@ -1,0 +1,8 @@
+<?php
+$_orderId = $block->getOrder()->getRealOrderId();
+$_isGiftOrder = $block->getOrder()->getGiftOrder();
+?>
+
+<div class="block-title order">
+    <strong><?= __('Order # %1', $_orderId) . ($_isGiftOrder ? "" : ""); ?></strong>
+</div>

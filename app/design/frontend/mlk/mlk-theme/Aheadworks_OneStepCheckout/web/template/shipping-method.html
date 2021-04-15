@@ -1,0 +1,78 @@
+<!-- ko if: isShown -->
+<li id="step-shipping-method" class="aw-onestep-groups_item shipping-method">
+    <div class="group-title">
+        <h2>
+            <span class="mark"></span><span data-bind="i18n: 'Shipping method'"></span>
+            <a class="checkout-edit-step" href="javascript:void(0);" data-bind="mageInit: {'js/editstep': {}}">Edit</a>
+            <a class="checkout-edit-step-cancel" href="javascript:void(0);" data-bind="mageInit: {'js/editstep': {}}">Cancel</a>
+        </h2>
+    </div>
+    <div class="group-content">
+        <div class="onestep-shipping-method" data-bind="blockLoader: isLoading">
+            <div data-bind="html: shippingWarningBlock"></div>
+            <!-- ko if: rates().length  -->
+            <form class="form" novalidate="novalidate">
+                <!-- ko if: errorValidationMessage().length > 0 -->
+                <div class="message notice">
+                    <span><!-- ko text: errorValidationMessage()--><!-- /ko --></span>
+                </div>
+                <!-- /ko -->
+                <div id="checkout-shipping-method-load">
+                    <div class="onestep-shipping-method-list">
+                        <!-- ko foreach: { data: rates(), as: 'method'} -->
+                        <div class="shipping-method-card field choice">
+                            <div class="shipping-method-title" data-bind="mageInit: {'js/mlkfedex': {}}">
+                                <!-- ko ifnot: method.error_message -->
+                                <input class="radio" type="radio" data-bind="
+                                    value: method.carrier_code + '_' + method.method_code,
+                                    checked: $parent.isSelected,
+                                    attr: {
+                                        'id': 's_method_' + method.carrier_code + '_' + method.method_code,
+                                        'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code,
+                                        'disabled': $parent.isLoading
+                                    },
+                                    click: $parent.selectShippingMethod"/>
+                                <!-- /ko -->
+                                <!-- ko if: method.error_message -->
+                                <div class="clearfix"></div>
+                                <!-- /ko -->
+                                <label class="label" data-bind="
+                                    attr: { 'id': 'label_method_' + method.method_code + '_' + method.carrier_code, 'for': 's_method_' + method.carrier_code + '_' + method.method_code}"><!-- ko text: method.carrier_title --><!-- /ko --></label>
+                                <!-- ko if: method.method_code != 'same-day-delivery' -->
+                                    <div class="shipping-method-subtitle" data-bind="
+                                        text: method.method_title,
+                                        attr: {'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code}"></div>
+                                <!-- /ko -->    
+                            </div>
+                            <div class="shipping-method-price">
+                                <!-- ko if: method.method_code == 'same-day-delivery' -->
+                                    <span class="price"><span class="price"><strong>FREE</strong></span></span>
+                                <!-- /ko -->
+                                <!-- ko if: method.method_code != 'same-day-delivery' -->
+                                    <!-- ko foreach: $parent.getRegion('price') -->
+                                        <!-- ko template: getTemplate() --><!-- /ko -->
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </form>
+            <!-- /ko -->
+            <!-- ko ifnot: rates().length > 0 -->
+            <div class="no-quotes-block"></div>
+            <!-- /ko -->
+        </div>
+        <!-- ko foreach: getRegion('delivery-date') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko foreach: getRegion('afterShippingMethods') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+
+        <div class="steps"><a class="checkout-next-step inactive" href="javascript:void(0);" data-bind="mageInit: {'js/nextstep': {}}">Next</a></div>
+    </div>
+</li>
+<!-- /ko -->

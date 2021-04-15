@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--/**
+ * Copyright © 2020 Grazitti . All rights reserved.
+ */-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_save_after">
+    	<observer name="salesordersaveafter" instance="Grazitti\Maginate\Observer\SalesOrderSaveAfter" shared="false" />
+	</event>
+	<event name="admin_system_config_changed_section_grazz_auth">
+    	<observer name="sytemconfigsave" instance="Grazitti\Maginate\Observer\Authentication" shared="false" />
+	</event> 
+	<event name="layout_load_before">
+        <observer name="custom_config_layout_load_before" instance="Grazitti\Maginate\Observer\Adminhtml\LayoutHandler" />
+    </event> 
+	<event name="adminhtml_customer_save_after">
+       <observer name="customerlogin" instance="Grazitti\Maginate\Observer\AfterRegistrationAtObserver" shared="false" />
+    </event> 
+	<event name="customer_register_success">
+		<observer name="customer_register_success" instance="Grazitti\Maginate\Observer\AfterRegistrationAtObserver" />
+	</event>
+	<event name="customer_login">
+        <observer name="customer_login_observer" instance="Grazitti\Maginate\Observer\CustomerLogin" />
+    </event>
+	<event name="checkout_submit_all_after">
+        <observer name="guestregistration_controller_success_action" instance="Grazitti\Maginate\Observer\GuestCheckout"/>
+    </event>
+</config>

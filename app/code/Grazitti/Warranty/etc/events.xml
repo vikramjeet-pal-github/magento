@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="sales_quote_item_set_product">
+        <observer name="set_item_product_sku" instance="Grazitti\Warranty\Observer\SetItemDropdownAttribute" />
+    </event>
+    <event name="checkout_cart_update_items_after">
+        <observer name="update_item_before" instance="Grazitti\Warranty\Observer\CheckoutCart\UpdateCart" />
+    </event>
+    <event name="sales_order_save_before">
+        <observer name="salesordersaveafter" instance="Grazitti\Warranty\Observer\SetOrderAttribute"/>
+    </event>
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="grazitti_warranty_sales_model_service_quote_submit_before" instance="Grazitti\Warranty\Observer\SaveOrderBeforeSalesModelQuoteObserver" />
+    </event>
+</config>

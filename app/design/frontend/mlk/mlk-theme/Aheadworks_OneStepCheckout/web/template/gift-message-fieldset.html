@@ -1,0 +1,16 @@
+<!-- ko if: window.checkoutConfig.quoteData.gift_order == 1 -->
+<div class="aw-onestep-gift-message gift-message-fieldset">
+    <div class="gift-message-form item-options">
+        <fieldset class="fieldset">
+            <!-- ko foreach: {data: elems, as: 'element'} -->
+            <!-- ko if: hasTemplate() -->
+            <!-- ko template: getTemplate() -->
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+            <strong>They'll receive a gift receipt with tracking once the order ships.</strong>
+        </fieldset>
+        
+    </div>
+</div>
+<!-- /ko -->

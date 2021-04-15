@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesIgnoreFreeShippingPromoNo">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Disable Ignore Free Shipping Promo"/>
+            <description value="Check Disable Ignore Free Shipping Promo"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-21"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesIgnoreFreeShippingPromoNo"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+        </before>
+
+        <after>
+            <!--Delete Shipping And Cart Price Rules -->
+            <actionGroup ref="DeleteCartPriceRuleByName" stepKey="deleteCreatedCartPriceRule">
+                <argument name="ruleName" value="{{shiprulesDefaultCartPriceRule.name}}"/>
+            </actionGroup>
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesIgnoreFreeShippingPromoNo"/>
+            </actionGroup>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create Default Cart Price Rule-->
+        <actionGroup ref="AdminCreateCartPriceRuleActionGroup" stepKey="CreateCartPriceRule">
+            <argument name="ruleName" value="shiprulesDefaultCartPriceRule"/>
+        </actionGroup>
+        <actionGroup ref="EditCartPriceRuleFreeShipping" stepKey="AddFreeShippindForCartPriceRule">
+            <argument name="cartRuleName" value="shiprulesDefaultCartPriceRule.name"/>
+        </actionGroup>
+
+        <!--Create shipping rule-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateShippingRule">
+            <argument name="shippingRule" value="shiprulesIgnoreFreeShippingPromoNo"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesIgnoreFreeShippingPromoNo"/>
+        </actionGroup>
+        <actionGroup ref="EditShippingRuleWithIgnoreFreeShippingPromoYes" stepKey="EditIgnoreFreeShippingPromoYes">
+            <argument name="shippingRule" value="shiprulesIgnoreFreeShippingPromoNo"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate1">
+            <argument name="shippingPrices" value="shiprulesIgnoreFreeShippingPromoNo.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay1">
+            <argument name="shippingPrices" value="shiprulesIgnoreFreeShippingPromoNo.priceBestWayOne"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!-- Change Qty Product-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyProductToThree">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+            <argument name="addProductQty" value="_enterQty3"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate2">
+            <argument name="shippingPrices" value="shiprulesIgnoreFreeShippingPromoNo.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay2">
+            <argument name="shippingPrices" value="shiprulesIgnoreFreeShippingPromoNo.priceBestWayTwo"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+    </test>
+</tests>

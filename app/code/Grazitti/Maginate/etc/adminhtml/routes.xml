@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 Grazitti. All rights reserved.
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+    <router id="admin">
+        <route id="maginate" frontName="maginate">
+            <module name="Grazitti_Maginate" before="Magento_Backend" />
+        </route>
+		<route id="grazitti_maginate" frontName="grazitti_maginate">
+            <module name="Grazitti_Maginate"/>
+        </route>
+    </router>
+</config>

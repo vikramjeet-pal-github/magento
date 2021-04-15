@@ -1,0 +1,79 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Login $block */
+?>
+<div class="block block-customer-login">
+    <div class="block-header">
+    <h2>
+        <?= __('Account sign-in'); ?>
+    </h2>
+    <p class="welcome-text"><?= __('Welcome back.'); ?></p>
+    </div>
+    <div class="block-content" aria-labelledby="block-customer-login-heading">
+
+        <form class="form form-login"
+              action="<?= $block->escapeUrl($block->getPostActionUrl()) ?>"
+              method="post"
+              id="login-form"
+              autocomplete="off"
+              data-mage-init='{"validation":{}}'>
+            <?= $block->getBlockHtml('formkey') ?>
+            <fieldset class="fieldset login" data-hasrequired="<?= $block->escapeHtml(__('* Required Fields')) ?>" data-mage-init='{"awOscFloatLabel": {}}'>
+
+                <div class="field email required fl-label fl-label-state">
+                    <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                    <div class="control">
+                        <input name="login[username]" value="<?= $block->escapeHtmlAttr($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()): ?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" data-mage-init='{"mage/trim-input":{}}' data-validate="{required:true, 'validate-email':true}">
+                    </div>
+                </div>
+                <div class="field password required fl-label fl-label-state">
+                    <label for="pass" class="label"><span><?= $block->escapeHtml(__('Password')) ?></span></label>
+                    <div class="control">
+                        <input name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()): ?> autocomplete="off"<?php endif; ?> class="input-text" id="pass" title="<?= $block->escapeHtmlAttr(__('Password')) ?>" data-validate="{required:true}">
+                    </div>
+                </div>
+                <?= $block->getChildHtml('form_additional_info') ?>
+                <div class="actions-toolbar">
+                    <div class="primary"><button type="submit" class="action login primary" name="send" id="send2"><span><?= $block->escapeHtml(__('Sign in')) ?></span></button></div>
+                    <div class="secondary"><a class="action remind" href="<?= $block->escapeUrl($block->getForgotPasswordUrl()) ?>"><span><?= $block->escapeHtml(__('I forgot my password')) ?></span></a></div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="content-register-device">
+        Didn't buy from Molekule.com? <a href="<?php echo $this->getUrl('register'); ?>">Register your device.</a>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {"*": {"Vonnda_TealiumTags/js/login":{}}}
+</script>
+
+<script>
+    require([
+        "jquery"
+    ], function($) {
+        $("body").on('DOMSubtreeModified', ".page.messages", function() {
+            if($('.message-success.success.message').length > 0) {
+                $(this).hide();
+                if($('.message-success.success.message > div').html() === 'You updated your password.') {
+                    $('.customer-account-login p.welcome-text').html('Welcome back. Your password has been reset.');
+                } else if($('.message-success.success.message > div').html() === 'If email is tied to an account, you\'ll get an email to reset your password.') {
+                    $('.customer-account-login p.welcome-text').html('An email will be sent if an account is associated with this email address.');
+                }
+
+            } else if (($('.message-error.error.message').length > 0) && ($('.mlk-login-error').length < 1)) {
+                $(document).trigger('tealiumLoginFailure');
+                $(this).hide();
+                $('.block-customer-login .block-content').prepend('<div class="mlk-login-error">Invalid login or password.</div>');
+            }
+        });
+    });
+</script>
+

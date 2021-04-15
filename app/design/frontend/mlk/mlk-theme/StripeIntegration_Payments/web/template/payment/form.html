@@ -1,0 +1,195 @@
+<div class="payment-method stripe-payments" data-bind="css: {'_active': (getCode() == isChecked()), 'logged-in': (showSavedCardsSection), 'has-cards': (config().savedCards.length > 0)}">
+    <div class="payment-method-title field choice">
+        <input type="radio" name="payment[method]" class="radio" data-bind="attr: { 'id': getCode() }, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()" />
+        <label class="label" data-bind="attr: {'for': getCode()}">
+            <span data-bind="text: getTitle()"></span>
+        </label>
+    </div>
+    <div class="payment-method-content_error" data-bind="if: stripePaymentsError()">
+        <p class="message message-error error">
+            <!-- ko i18n: stripePaymentsError() --><!-- /ko -->
+        </p>
+    </div>
+    <div class="payment-method-content card-field" data-bind="if: !stripePaymentsError()">
+        <div class="payment-method-billing-address">
+            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="stripe-payments-billing-address-warning" data-bind="if: !isBillingAddressSet()">
+            <!-- ko i18n: 'Please update your billing address to proceed.'--><!-- /ko -->
+        </div>
+        <div data-bind="if: displayAtThisLocation, css: {selected: showNewCardSection}" class="new-card-toggle">
+            <div class="new-card-label" data-bind="if: config().savedCards.length">
+                <input data-bind="checked: stripePaymentsSelectedCard" type="radio" name="payment[cc_saved]" value="new_card" class="select" id="new_card" />
+                <label for="new_card">
+                    <span><!-- ko i18n: 'Use a new card'--><!-- /ko --></span>
+                </label>
+            </div>
+            <div class="fieldset ccard" data-bind="visible: showNewCardSection">
+                <div data-bind="if: (securityMethod == 2)">
+                    <div class="stripe-payments-elements card-field-wrapper no-wrap" id="card-wrapper">
+                        <div class="card-field field-cc">
+                            <div id="stripe-payments-card-number" class="stripe-elements-field inline-div">
+                                <!-- a Stripe Element will be inserted here. -->
+                            </div>
+                            <label for="stripe-payments-card-number" class="label">Card number</label>
+                        </div>
+                        <div class="card-field field-exp">
+                            <div id="stripe-payments-card-expiry" class="stripe-elements-field inline-div">
+                                <!-- a Stripe Element will be inserted here. -->
+                            </div>
+                            <label for="stripe-payments-card-expiry" class="label">MM/YY</label>
+                        </div>
+                        <div class="card-field field-cvc">
+                            <div id="stripe-payments-card-cvc" class="stripe-elements-field inline-div">
+                                <!-- a Stripe Element will be inserted here. -->
+                            </div>
+                            <label for="stripe-payments-card-cvc" class="label">CVV</label>
+                        </div>
+                    </div>
+                    <div class="stripe-payments-brand"><i class="pf pf-credit-card" id="stripe-payments-brand-icon"></i></div>
+                    <div id="stripe-payments-card-errors"></div>
+                </div>
+                <div class="hide">
+                    <div data-bind="if: (securityMethod <= 1), attr: {id: getCode() + '_cc_owner_div'}" class="field required">
+                        <label data-bind="attr: {for: getCode() + '_cc_owner'}" class="label">
+                            <span><!-- ko i18n: 'Name on Card'--><!-- /ko --></span>
+                        </label>
+                        <div class="control">
+                            <input type="text" class="input-text" value="" data-bind="
+                                attr: {autocomplete: off, id: getCode() + '_cc_owner', title: $t('Name on Card'), 'data-container': getCode() + '-cc-owner', 'data-validate': JSON.stringify({'required':true})},
+                                enable: isActive($parents),
+                                value: stripePaymentsCardName,
+                                valueUpdate: 'keyup'" />
+                        </div>
+                    </div>
+                    <div data-bind="if: (securityMethod <= 1), attr: {id: getCode() + '_cc_number_div'}" class="field number required">
+                        <label data-bind="attr: {for: getCode() + '_cc_number'}" class="label">
+                            <span><!-- ko i18n: 'Card Number'--><!-- /ko --></span>
+                        </label>
+                        <div class="control">
+                            <input type="number" class="input-text" value="" data-bind="
+                                attr: {autocomplete: off, id: getCode() + '_cc_number', title: $t('Card Number'), 'data-container': getCode() + '-cc-number', 'data-validate': JSON.stringify({'required-number':true, 'validate-card-number':'#' + getCode() + '_cc_number'})},
+                                enable: isActive($parents),
+                                value: stripePaymentsCardNumber,
+                                valueUpdate: 'keyup'" />
+                        </div>
+                    </div>
+                    <div data-bind="if: (securityMethod <= 1), attr: {id: getCode() + '_cc_expiration_div'}" class="field date required">
+                        <label data-bind="attr: {for: getCode() + '_expiration_mo'}" class="label">
+                            <span><!-- ko i18n: 'Expiration Date'--><!-- /ko --></span>
+                        </label>
+                        <div class="control">
+                            <div class="fields group group-2">
+                                <div class="field no-label month">
+                                    <div class="control">
+                                        <select class="select select-month" data-bind="
+                                            attr: {id: getCode() + '_expiration_mo','data-container': getCode() + '-cc-month','data-validate': JSON.stringify({required:true})},
+                                            enable: isActive($parents),
+                                            options: getCcMonthsValues(),
+                                            optionsValue: 'value',
+                                            optionsText: 'month',
+                                            optionsCaption: $t('Month'),
+                                            value: stripePaymentsCardExpMonth">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="field no-label year">
+                                    <div class="control">
+                                        <select class="select select-year" data-bind="
+                                            attr: {id: getCode() + '_expiration_yr', 'data-container': getCode() + '-cc-year', 'data-validate': JSON.stringify({required:true})},
+                                            enable: isActive($parents),
+                                            options: getCcYearsValues(),
+                                            optionsValue: 'value',
+                                            optionsText: 'year',
+                                            optionsCaption: $t('Year'),
+                                            value: stripePaymentsCardExpYear">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="if: (securityMethod <= 1),attr: {id: getCode() + '_cc_cid_div'}" class="field cvv required">
+                        <label data-bind="attr: {for: getCode() + '_cc_cid'}" class="label">
+                            <span><!-- ko i18n: 'Card Verification Number'--><!-- /ko --></span>
+                        </label>
+                        <div class="control _with-tooltip">
+                            <input type="number" autocomplete="off" class="input-text cvv" value="" data-bind="
+                                attr: {id: getCode() + '_cc_cid', title: $t('Card Verification Number'), 'data-container': getCode() + '-cc-cvv', 'data-validate': JSON.stringify({'required-number':true, 'validate-card-cvv':'#' + getCode() + '_cc_type'})},
+                                enable: isActive($parents),
+                                value: stripePaymentsCardVerificationNumber"/>
+                            <div class="field-tooltip toggle">
+                                <span class="field-tooltip-action action-cvv" tabindex="0" data-toggle="dropdown" data-bind="attr: {title: $t('What is this?')}, mageInit: {'dropdown':{'activeClass': '_active'}}">
+                                    <span><!-- ko i18n: 'What is this?'--><!-- /ko --></span>
+                                </span>
+                                <div class="field-tooltip-content" data-target="dropdown" data-bind="html: getCvvImageHtml()"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-bind="style: { 'margin-bottom': config().savedCards.length > 0 ? '44px' : '0' }"></div>
+            </div>
+            <div class="stripe-payments stripe-payments-apple-pay-section" data-bind="visible: showApplePaySection(), if: displayAtThisLocation()">
+                <label data-bind="visible: showApplePayButton()"><!-- ko i18n: 'Buy now with Apple Pay'--><!-- /ko --></label>
+                <button id="apple-pay-button" data-bind="visible: showApplePayButton(), click: beginApplePay"></button>
+                <div id="payment-request-button" data-bind=""></div>
+            </div>
+            <div data-bind="attr: {id: getCode() + '_apple_pay_div'}, if: stripePaymentsApplePayToken, visible: stripePaymentsApplePayToken()" class="stripe-payments stripe-payments-apple-pay-result">
+                <label><!-- ko i18n: 'Selected Card'--><!-- /ko --></label>
+                <div>
+                    <span id="apple-pay-result-brand" data-bind="html: stripePaymentsApplePayToken().card.brand, attr: { class: stripePaymentsApplePayToken().card.brand + ' type'}"></span>
+                    **** <span id="apple-pay-result-last4" data-bind="html: stripePaymentsApplePayToken().card.last4"></span>
+                </div>
+                <button type="button" class="action" title="<!-- ko i18n: 'Reset'--><!-- /ko -->" name="reset" data-bind="click: resetApplePay">
+                    <span><!-- ko i18n: 'Reset'--><!-- /ko --></span>
+                </button>
+            </div>
+        </div>
+        <div data-bind="attr: {id: getCode() + '_saved_cards_div'}, if: showSavedCardsSection, visible: showSavedCardsSection" class="stripe-payments stripe-payments-saved-cards-section">
+            <div data-bind="foreach: config().savedCards">
+                <div class="stripe-payments-saved-card">
+                    <input type="radio" name="payment[cc_saved]" data-bind="checked: $parent.stripePaymentsSelectedCard, attr: {id: id}, value: (id + ':' + brand + ':' + last4)" />
+                    <label class="saved-card-label" data-bind="attr: { for: id }">
+                        <span class="saved-card-left">
+                            <span data-bind="attr: { class: brand + ' type' }, text: brand"></span>
+                            <span data-bind="text: last4" class="last4 stripe-payments-fade"></span>
+                        </span>
+                        <span class="exp stripe-payments-fade">
+                            <!-- ko i18n: 'exp.'--><!-- /ko -->
+                            <span data-bind="text: exp_month"></span>/<span data-bind="text: exp_year"></span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div data-bind="afterRender: onCheckoutFormRendered"></div>
+        <div data-bind="attr: {id: getCode() + '_cc_save_div'}, if: showSaveCardOption, visible: !config().alwaysSaveCard">
+            <div class="input-box">
+                <label data-bind="attr: {id: getCode() + '_cc_save'}">
+                    <input type="checkbox" data-bind="attr: {title: $t('Save card for future purchases'), id: getCode() + '_cc_save'}, checked: stripePaymentsCardSave" class="input-checkbox stripe-input" name="payment[cc_save]" checked="checked" />
+                    <label data-bind="attr: {for: getCode() + '_cc_save'}" class="label">
+                        <span><!-- ko i18n: 'Save card for future purchases'--><!-- /ko --></span>
+                    </label>
+                </label>
+            </div>
+        </div>
+        <input type="hidden" class="input-text" name="payment[cc_stripejs_token]" value="" data-bind="attr: {id: getCode() + '_cc_stripejs_token'}, enable: config().isStripeJsEnabled, value: stripePaymentsStripeJsToken" />
+        <div class="checkout-agreements-block">
+            <!-- ko foreach: $parent.getRegion('before-place-order') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="actions-toolbar" id="actions-toolbar">
+            <div class="primary">
+                <button class="action primary checkout" type="submit" data-bind="click: placeOrder,enable: isPlaceOrderEnabled(),attr: {title: $t('Place Order')}">
+                    <span data-bind="i18n: 'Place Order'"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

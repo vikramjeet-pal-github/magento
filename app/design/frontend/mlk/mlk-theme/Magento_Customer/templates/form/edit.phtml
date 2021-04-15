@@ -1,0 +1,186 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var \Magento\Customer\Block\Form\Edit $block */
+?>
+
+
+
+<div class="profile-info">
+    <h2><span><?= __('Profile'); ?></span><a class="edit-profile" href="javascript:void(0);"></a></h2>
+    <div class="profile-info-row">
+        <span class="profile-label"><?= __('Name'); ?></span>
+        <span class="profile-value name"><?= $block->escapeHtmlAttr($block->getCustomer()->getFirstname()).' '.$block->escapeHtmlAttr($block->getCustomer()->getLastname()); ?></span>
+    </div>
+    <div class="profile-info-row">
+        <span class="profile-label"><?= __('Email'); ?></span>
+        <span class="profile-value email"><?= $block->escapeHtmlAttr($block->getCustomer()->getEmail()); ?></span>
+    </div>
+    <div class="profile-info-row">
+        <span class="profile-label"><?= __('Password'); ?></span>
+        <span class="profile-value pass">••••••••</span>
+    </div>
+</div>
+
+
+<form class="form hide form-edit-account" action="<?= $block->escapeUrl($block->getUrl('customer/account/editPost')) ?>" method="post" id="form-validate" enctype="multipart/form-data" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>" autocomplete="off" data-bind="mageInit: {'js/netsuiteValidation': {}}">
+    <fieldset class="fieldset info" data-mage-init='{"awOscFloatLabel": {}}'>
+        <?= $block->getBlockHtml('formkey') ?>
+        <h2><span><?= __('Edit profile') ;?></span></h2>
+        <?= $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Name')->setObject($block->getCustomer())->toHtml() ?>
+
+        <?php $_dob = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Dob') ?>
+        <?php $_taxvat = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Taxvat') ?>
+        <?php $_gender = $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Gender') ?>
+        <?php if ($_dob->isEnabled()): ?>
+            <?= $_dob->setDate($block->getCustomer()->getDob())->toHtml() ?>
+        <?php endif ?>
+        <?php if ($_taxvat->isEnabled()): ?>
+            <?= $_taxvat->setTaxvat($block->getCustomer()->getTaxvat())->toHtml() ?>
+        <?php endif ?>
+        <?php if ($_gender->isEnabled()): ?>
+            <?= $_gender->setGender($block->getCustomer()->getGender())->toHtml() ?>
+        <?php endif ?>
+        <div class="edit-choice">
+            <div class="field choice">
+                <input type="checkbox" name="change_email" id="change-email" data-role="change-email" value="1" title="<?= $block->escapeHtmlAttr(__('Change Email')) ?>" class="checkbox" />
+                <label class="label" for="change-email"><span><?= $block->escapeHtml(__('Change email')) ?></span></label>
+            </div>
+            <div class="field choice">
+                <input type="checkbox" name="change_password" id="change-password" data-role="change-password" value="1" title="<?= $block->escapeHtmlAttr(__('Change Password')) ?>"<?php if ($block->getChangePassword()): ?> checked="checked"<?php endif; ?> class="checkbox" />
+                <label class="label" for="change-password"><span><?= $block->escapeHtml(__('Change password')) ?></span></label>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="fieldset password" data-container="change-email-password" data-mage-init='{"awOscFloatLabel": {}}'>
+        <div class="field email required" data-container="change-email">
+            <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+            <div class="control">
+                <input type="email" name="email" id="email" autocomplete="email" data-input="change-email" value="<?= $block->escapeHtmlAttr($block->getCustomer()->getEmail()) ?>" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" class="input-text" data-validate="{required:true, 'validate-email':true}" />
+            </div>
+        </div>
+        <div class="field password current required">
+            <label class="label" for="current-password"><span><?= $block->escapeHtml(__('Current password')) ?></span></label>
+            <div class="control">
+                <input type="password" class="input-text" name="current_password" id="current-password" data-input="current-password" autocomplete="off" />
+            </div>
+            <a class="action remind" href="<?= $this->getUrl('customer/account/forgotpassword/') ?>"><span><?= $block->escapeHtml(__('I forgot my password')) ?></span></a>
+        </div>
+        <div class="field new password required" data-container="new-password">
+            <label class="label" for="password"><span><?= $block->escapeHtml(__('Create new password')) ?></span></label>
+            <div class="control">
+                <input type="password" class="input-text" name="password" id="password"
+                       data-password-min-length="<?= $block->escapeHtml($block->getMinimumPasswordLength()) ?>"
+                       data-password-min-character-sets="<?= $block->escapeHtml($block->getRequiredCharacterClassesNumber()) ?>"
+                       data-input="new-password"
+                       data-validate="{required:true, passwordStrength:true}"
+                       autocomplete="off" />
+                <span class="tooltip">
+                    <span class="tooltip-content">
+                        8 character min.<br />
+                        1 lowercase letter<br />
+                        1 uppercase letter<br />
+                        1 number<br />
+                        1 special character<br />
+                    </span>
+                </span>
+                <div id="password-strength-meter-container" class="password-none" data-role="password-strength-meter" aria-live="polite">
+                    <div id="password-strength-meter" class="password-strength-meter">
+                        <?= $block->escapeHtml(__('Password Strength')) ?>:
+                        <span id="password-strength-meter-label" data-role="password-strength-meter-label">
+                            <?= $block->escapeHtml(__('No Password')) ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="field confirm password required" data-container="confirm-password">
+            <label class="label" for="password-confirmation"><span><?= $block->escapeHtml(__('Confirm new password')) ?></span></label>
+            <div class="control">
+                <input type="password" class="input-text" name="password_confirmation" id="password-confirmation" data-input="confirm-password" autocomplete="off" />
+            </div>
+        </div>
+    </fieldset>
+    <?= $block->getChildHtml('form_additional_info') ?>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" class="action save primary" title="<?= $block->escapeHtmlAttr(__('Save')) ?>"><span><?= $block->escapeHtml(__('Save')) ?></span></button>
+            <a class="cancel-edit" href="javascript:void(0);"><?= __('Cancel'); ?></a>
+        </div>
+        <div class="secondary">
+            <a class="action back" href="<?= $block->escapeUrl($block->getBackUrl()) ?>"><span><?= $block->escapeHtml(__('Go back')) ?></span></a>
+        </div>
+    </div>
+</form>
+<script>
+    require([
+        "jquery",
+        "mage/mage"
+    ], function($){
+        var dataForm = $('#form-validate');
+        var ignore = <?= /* @noEscape */ $_dob->isEnabled() ? '\'input[id$="full"]\'' : 'null' ?>;
+
+        dataForm.mage('validation', {
+            <?php if ($_dob->isEnabled()): ?>
+            errorPlacement: function(error, element) {
+                if (element.prop('id').search('full') !== -1) {
+                    var dobElement = $(element).parents('.customer-dob'),
+                        errorClass = error.prop('class');
+                    error.insertAfter(element.parent());
+                    dobElement.find('.validate-custom').addClass(errorClass)
+                        .after('<div class="' + errorClass + '"></div>');
+                }
+                else {
+                    error.insertAfter(element);
+                }
+            },
+            ignore: ':hidden:not(' + ignore + ')'
+            <?php else: ?>
+            ignore: ignore ? ':hidden:not(' + ignore + ')' : ':hidden'
+            <?php endif ?>
+        });
+
+        // $('.profile-value.name').html($('input#firstname').val() + ' ' +  $('input#lastname').val());
+        // $('.profile-value.email').html($('input#email').val());
+
+        $('.profile-info .edit-profile, .cancel-edit').on('click', function(){
+            $('.form-edit-account, .profile-info').toggleClass('hide');
+        });
+
+        $('input#password').on('blur', function(){
+            $(this).closest('.control').find('#password-strength-meter').show();
+        });
+
+        $('.form-edit-account .actions-toolbar .action.save').on('click', function() {
+        	$('body').trigger('processStart');
+        	setTimeout(function() {
+				$('body').trigger('processStop');
+            }, 10000) // if request is not complete after 10 seconds, then stop the loader
+        });
+    });
+</script>
+<script type="text/x-magento-init">
+    {
+        "[data-role=change-email], [data-role=change-password]": {
+            "changeEmailPassword": {
+                "titleChangeEmail": "<?= $block->escapeJs($block->escapeHtml(__('Change Email'))) ?>",
+                "titleChangePassword": "<?= $block->escapeJs($block->escapeHtml(__('Change Password'))) ?>",
+                "titleChangeEmailAndPassword": "<?= $block->escapeJs($block->escapeHtml(__('Change Email and Password'))) ?>"
+            }
+        },
+        "[data-container=new-password]": {
+            "passwordStrengthIndicator": {
+                "formSelector": "form.form-edit-account"
+            }
+        }
+    }
+</script>
+
+<script type="text/x-magento-init">
+    {"*": {"Vonnda_TealiumTags/js/profile":{}}}
+</script>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="aw_osc">
+            <group id="general">
+                <field id="require_password" translate="label" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Require Password for New Customers at Checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="require_login" translate="label" type="select" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Require Existing Customers Login at Checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="auto_logout" translate="label" type="select" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Automaticallly logout customers after checkout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+        <section id="payment">
+            <group id="stripe_payments">
+                <group id="cards">
+                    <field id="decline_message" translate="label" type="textarea" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Declined Payment Message</label>
+                        <config_path>payment/stripe_payments/decline_message</config_path>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

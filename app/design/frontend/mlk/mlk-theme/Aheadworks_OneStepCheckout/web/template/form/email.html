@@ -1,0 +1,229 @@
+<!-- ko if: isCustomerLoggedIn() -->
+<li class="aw-onestep-groups_item account done">
+    <div class="group-title">
+        <h2>
+            <span class="mark"></span>
+            <span class="step-title-close">Account</span>
+            <a class="checkout-edit-step" data-bind="attr: { href: BASE_URL + 'customer/account/logout/' }">Sign out</a>
+        </h2>
+    </div>
+    <div class="group-preview">
+        <!-- ko foreach: getRegion('is-gift') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+        <span data-bind="text: customerEmail"></span><br />
+        <span class="pass">••••••••</span>
+    </div>
+</li>
+<!-- /ko -->
+<!-- ko ifnot: isCustomerLoggedIn() -->
+<li class="aw-onestep-groups_item account active" data-bind="mageInit: {'js/activateAccountbtn':{}}">
+    <div class="group-title">
+        <h2>
+            <span class="mark"></span>
+            <!-- ko if: (showSignInFields()) -->
+            <span class="step-title-open device">
+                <span class="step-1-tab tab-create" data-bind="event: {click: showCreateAccount}, css: {active: isRegisterTabVisible()}, i18n: 'Enter email'"></span>
+                <span class="step-1-tab tab-sign-in">
+                    <!-- ko ifnot: isLoginTabVisible() -->
+                    <span class="show-for-desktop-inline u-fw-300">Have an account? </span><span data-bind="event: {click: showLogin}">Sign in</span>
+                    <!-- /ko -->
+                    <!-- ko if: isLoginTabVisible() -->
+                    <span class="show-for-desktop-inline u-fw-300">New customer? </span><span data-bind="event: {click: showCreateAccount}"><span class="show-for-desktop-inline">Check out</span><span class="show-for-mobile-inline">New customer?</span></span>
+                    <!-- /ko -->
+                </span>
+            </span>
+            <!-- /ko -->
+            <!-- ko ifnot: (showSignInFields()) -->
+            <span class="step-title-open">
+                <span class="step-1-tab tab-create" data-bind="event: {click: showCreateAccount}, css: {active: isRegisterTabVisible()}, i18n: 'Guest'"></span>
+                <span class="sep-line">|</span>
+                <span class="step-1-tab tab-sign-in" data-bind="event: {click: showLogin}, css: {active: isLoginTabVisible()}, i18n: 'Sign in'"></span>
+            </span>
+            <!-- /ko -->
+            <span class="step-title-close">Account</span>
+            <a class="checkout-edit-step" href="javascript:void(0);" data-bind="mageInit: {'js/editstep': {}}">Edit</a>
+            <a class="checkout-edit-step-cancel hide" href="javascript:void(0);" data-bind="mageInit: {'js/editstep': {}}">Cancel</a>
+        </h2>
+    </div>
+    <!-- ko if: isRegisterTabVisible() -->
+    <div class="group-content">
+        <!-- ko foreach: getRegion('is-gift') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: requireLogin -->
+            <!-- ko if: (showSignInFields()) -->
+                <p class="create-intro">Creating an account makes managing your filter auto-refills easier.</p>
+            <!-- /ko -->
+            <!-- ko ifnot: (showSignInFields()) -->
+                <p class="create-intro">Please enter your email.</p>
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko ifnot: requireLogin -->
+            <!-- ko if: userExists() -->
+                <p class="user-intro"><span class="text-link" data-bind="event: {click: showLogin}, i18n: 'Sign in'"></span> for easy checkout, or click next to purchase without signing in.</p>
+            <!-- /ko -->
+            <!-- ko ifnot: userExists() -->
+                <!-- ko if: (showSignInFields()) -->
+                    <p class="create-intro">Creating an account makes managing your filter auto-refills easier.</p>
+                <!-- /ko -->
+                <!-- ko ifnot: (showSignInFields()) -->
+                    <p class="create-intro">Please enter your email.</p>
+                <!-- /ko -->
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <!-- ko foreach: getRegion('before-login-form') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+        <form class="form" data-role="email-with-possible-login" data-bind="submit: login" method="post">
+            <fieldset id="customer-email-fieldset" class="fieldset" data-bind="blockLoader: isLoading">
+                <div class="field field-email required" data-bind="mageInit: {'awOscFloatLabel': {}}">
+                    <div class="control">
+                        <label class="label" for="customer-email">
+                            <span data-bind="i18n: 'Email'"></span>
+                        </label>
+                        <input class="input-text is_unique"
+                            type="email"
+                            data-bind="textInput: email, hasFocus: emailFocused, css: {is_unique: isEmailUnique()}"
+                            name="username"
+                            data-validate="{required:true, 'validate-email':true}"
+                            id="customer-email" />
+                        <!-- ko if: requireLogin -->
+                        <div class="mage-error" generated="true" data-bind="fadeVisible: isSignInMessageVisable()"><!-- ko i18n: 'Email already associated with an account. Please sign in.'--><!-- /ko --></div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </fieldset>
+            <!-- ko if: isPasswordVisible -->
+            <fieldset id="customer-password-fieldset" class="fieldset">
+                <div class="field required" data-container="password" data-bind="mageInit: {'awOscFloatLabel': {}}">
+                    <div class="control">
+                        <label class="label" for="password">
+                            <span data-bind="i18n: 'Create password'"></span>
+                        </label>
+                        <input class="input-text"
+                            type="password"
+                            data-bind="textInput: password, hasFocus: passwordFocused"
+                            name="customer-password"
+                            id="customer-password"
+                            data-password-min-length="8"
+                            data-password-min-character-sets="3"
+                            data-validate="{required:true}"
+                            autocomplete="off"
+                        />
+                        <span class="tooltip">
+                            <span class="tooltip-content">
+                                8 character min.<br />
+                                1 lowercase letter<br />
+                                1 uppercase letter<br />
+                                1 number<br />
+                                1 special character<br />
+                            </span>
+                        </span>
+                    </div>
+                    <div id="password-strength-meter-container" data-role="password-strength-meter" aria-live="polite" class="password-none">
+                        <div id="password-strength-meter" class="password-strength-meter">
+                            Password Strength
+                            <span id="password-strength-meter-label" data-role="password-strength-meter-label">
+                                No Password
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="field required" data-bind="mageInit: {'awOscFloatLabel': {}}">
+                    <div class="control">
+                        <label class="label" for="confirm-customer-password">
+                            <span data-bind="i18n: 'Confirm password'"></span>
+                        </label>
+                        <input class="input-text"
+                            type="password"
+                            data-bind="textInput: confirmPassword, hasFocus: confirmPasswordFocused"
+                            name="confirm-customer-password"
+                            id="confirm-customer-password"
+                            data-validate="{required:true, equalTo:'#customer-password'}"
+                            autocomplete="off"
+                        />
+                    </div>
+                </div>
+            </fieldset>
+            <!--/ko-->
+        </form>
+        <!-- ko foreach: getRegion('agreements') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <div class="aw-onestep-sidebar-block aw-sidebar-before-place-order">
+            <div class="aw-onestep-sidebar-block_title"></div>
+            <div class="aw-onestep-sidebar-block_content">
+                <!-- ko foreach: getRegion('before-place-order') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!--/ko-->
+            </div>
+        </div>
+
+        <div class="steps">
+            <a class="checkout-next-step inactive" href="javascript:void(0);" data-bind="event: {click: validateAccountStep}">Next</a>
+        </div>
+    </div>
+    <!-- /ko -->
+    <div class="group-content">
+        <div class="login-intro" data-bind="fadeVisible: (!isSignInMessageVisable()) && isLoginTabVisible()"><!-- ko i18n: 'Welcome back.'--><!-- /ko --></div>
+        <!-- ko if: isLoginTabVisible() -->
+        <!-- ko ifnot: isCustomerLoggedIn -->
+        <!-- ko foreach: getRegion('before') -->
+        <!-- ko template: getTemplate() -->
+        <!-- /ko -->
+        <!-- /ko -->
+        <div class="block block-customer-login" data-bind="attr: {'data-label': $t('or')}">
+            <!-- ko foreach: getRegion('messages') -->
+            <!-- ko template: getTemplate() -->
+            <!-- /ko -->
+            <!--/ko-->
+            <div class="block-content" aria-labelledby="block-customer-login-heading" data-bind="mageInit: {'js/activateLoginBtn':{}}">
+                <form data-role="email-with-possible-login" data-bind="submit:login" method="post" autocomplete="off">
+                    <div class="fieldset"
+                         data-bind="attr: {'data-hasrequired': $t('* Required Fields')}, mageInit: {'awOscFloatLabel': {}}">
+                        <div class="field field-email required">
+                            <label class="label" for="login-email"><span data-bind="i18n: 'Email'"></span></label>
+                            <div class="control">
+                                <input type="email" class="input-text" id="login-email" name="username"
+                                       data-bind="textInput: email, attr: {autocomplete: autocomplete}"
+                                       data-validate="{required:true, 'validate-email':true}"/>
+                            </div>
+                        </div>
+                        <div class="field field-password required">
+                            <label for="login-password" class="label"><span data-bind="i18n: 'Password'"></span></label>
+                            <div class="control">
+                                <input type="password" class="input-text" id="login-password" name="password"
+                                       data-bind="attr: {autocomplete: autocomplete}" data-validate="{required:true}"
+                                       autocomplete="off"/>
+                            </div>
+                        </div>
+                        <!-- ko foreach: getRegion('additional-login-form-fields') -->
+                        <!-- ko template: getTemplate() -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                    <div class="actions-toolbar">
+                        <input name="context" type="hidden" value="checkout"/>
+                        <div class="primary">
+                            <button type="submit" class="action action-login inactive primary">
+                                <span data-bind="i18n: 'Next'"></span>
+                            </button>
+                        </div>
+                        <div class="secondary">
+                            <a class="action action-remind" data-bind="attr: { href: forgotPasswordUrl }">
+                                <span data-bind="i18n: 'I forgot my password'"></span>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+    </div>
+    <div class="group-preview"></div>
+</li>
+<!-- /ko -->

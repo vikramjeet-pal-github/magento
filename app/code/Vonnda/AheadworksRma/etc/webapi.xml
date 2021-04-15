@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Managing RMA Request -->
+    <route url="/V1/awRmaRequest/:requestId" method="GET">
+        <service class="Vonnda\AheadworksRma\Api\RequestRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+    <route url="/V1/awRmaRequest/search" method="GET">
+        <service class="Vonnda\AheadworksRma\Api\RequestRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Aheadworks_Rma::manage_rma"/>
+        </resources>
+    </route>
+</routes>

@@ -1,0 +1,147 @@
+<?php
+/**
+ * Copyright © 2020 Grazitti. All rights reserved.
+ */
+ 
+$viewModel = $block->getViewModel();
+
+$stop_dos = 0;
+$customerSession = $viewModel->getScopeHelper()->getcustomerFactory();
+
+$timeUnit = $viewModel->getConfigValue('grazitti_maginate/dos_prevention/time_unit');
+$time = $viewModel->getConfigValue('grazitti_maginate/dos_prevention/time');
+$ban_time = $viewModel->getConfigValue('grazitti_maginate/dos_prevention/ban_time');
+$unit_ban_time = $viewModel->getConfigValue('grazitti_maginate/dos_prevention/ban_time_unit');
+$enable_dos = $viewModel->getConfigValue('grazitti_maginate/dos_prevention/enable_dos');
+$allowedTime = "";
+$banElapseTime = "";
+if ($time == "min") {
+    $allowedTime = $timeUnit*60;
+} else {
+    $allowedTime = $timeUnit;
+}
+$banElapseTime = $unit_ban_time*60*60;
+if ($customerSession->getFirstHitTime() && !$customerSession->getBanVisitor()) {
+    $requestTimeInterval =  time() - $customerSession->getFirstHitTime();
+    if ($requestTimeInterval > $allowedTime) { //Too Frequent hits
+        $customerSession->unsBanVisitor();
+        $customerSession->unsBanVisitorTime();
+        $customerSession->unsHitCount();
+        $customerSession->unsFirstHitTime();
+    }
+}
+if ($customerSession->getBanVisitor() && $customerSession->getBanVisitor() == true) {
+     
+    $currentTime = time();
+    $banElapsedTime = time() - $customerSession->getBanVisitorTime();
+    if ($banElapsedTime > $banElapseTime) {
+        $customerSession->unsBanVisitor();
+        $customerSession->unsBanVisitorTime();
+        $customerSession->unsHitCount();
+        $customerSession->unsFirstHitTime();
+    } else {
+        $stop_dos = 1 ;
+    }
+}
+if (!$customerSession->getBanVisitor() || $enable_dos == 0) {
+    //fetch admin configuration of progressive profiling,form autoffilling
+    $autofill = $viewModel->getConfigValue('grazitti_maginate/autofill/maginate_autofill_configuration');
+    $nofields = $viewModel->getConfigValue('grazitti_maginate/progressive_profiling/profiling_fields');
+    $restrictFields= $viewModel->getConfigValue('grazitti_maginate/autofill/maginate_autofill_restrict');
+    $restrictFieldsArray = explode(",", trim(str_replace(' ', '', strtolower($restrictFields))));
+    $nofieldstoshowarray =" ";
+    $nofieldstoshow=explode(" ", $nofieldstoshowarray);
+    $url=$block->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+    $storeManager = $viewModel->getScopeHelper()->getStoreManager();
+    $baseUrl = $storeManager->getStore()->getBaseUrl();
+    ?>
+<script>
+require(['jquery', 'jquery/ui'], function($){ 
+    jQuery(document).ready(function()  //delete cookie function
+    {
+        jQuery(document).on('click', '.notemail', function() {
+            document.cookie = '_mkto_trk=; expires=Thu, 01 Jan 1970 00:00:00 UTC; domain='+getMainDomain()+'; path=/;';
+            window.location.replace('<?=  /* @noEscape */ $url; ?>');
+        });
+        if(typeof MktoForms2 != "undefined"){ 
+        MktoForms2.whenReady( function(form) {  
+             var suceesid = form.getId();    //set user defined cookie
+            form.onSuccess(function(values, followUpUrl) {            
+                var useremail = values.Email; 
+                var cookieexpiry = new Date();
+                cookieexpiry.setFullYear(cookieexpiry.getFullYear() + 2);
+                //set cookie
+                document.cookie="_mkto_trk_="+useremail+"; expires="+cookieexpiry+"; path=/";
+                document.cookie="formid="+suceesid+"; expires="+cookieexpiry+"; path=/";
+            });
+            var formfields2 = form.vals();
+            var fieldtoshow = <?php  /* @noEscape */ if (!$nofields) { echo  $nofields=1;
+                              } else { echo   $nofields; }?>;
+            console.log('fieldtoshow',fieldtoshow);
+            var ccookie=  document.cookie.replace(/(?:(?:^|.*;\s*)_mkto_email\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+            var mcookie=  document.cookie.replace(/(?:(?:^|.*;\s*)_mkto_trk\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+            if(!ccookie && !mcookie){ // if cookie is not set
+             } else{  //if cookie  is set
+                var formfields = form.vals();                
+                var data = {fieldname : formfields};
+                console.log(data);
+                jQuery.post('<?=  /* @noEscape */ $baseUrl; ?>maginate/index/data', data, function(response){  
+                    //sending request and getting response
+                    maginateoresponse = jQuery.parseJSON(response);    //if token is not null
+                    if(maginateoresponse.success == false)    {      //if response is false
+                        console.log(maginateoresponse.message);
+                    }else{
+                    var maginateoLeadFields = maginateoresponse.result[0]; //if rersponse is not null
+                    if(maginateoresponse.result.length > 0) {        //if rersponse is not null
+                    <?php if ($autofill ==1) { ?>
+                    var formfields = form.vals();
+                    var  result1 = {}; 
+                    jQuery.each(maginateoLeadFields, function(elem1, value1){
+                        if(value1 != null && value1 != 'undefined'){
+                            var keys = elem1.toLowerCase(); 
+                            result1[keys] =value1;
+                        }
+                    });
+                    var restrictArray = <?=  /* @noEscape */ json_encode($restrictFieldsArray); ?>;
+                    var finalvaluestofill = {};
+                    jQuery.each(formfields, function(elem, value){
+                        var keys = elem.toLowerCase();
+                        if(keys in result1)    {
+                            if (jQuery.inArray(keys, restrictArray) == -1){
+                                finalvaluestofill[elem] =result1[keys];
+                            }
+                        }                                                
+                    });    
+                    form.vals(finalvaluestofill); 
+                    if (jQuery.inArray("email", restrictArray) == -1){
+                        jQuery('#mktoForm_'+form.getId()+' input[name="Email"]').attr('disabled', 'disabled');
+                    }
+                    var email2=finalvaluestofill.Email;                            
+                    if(email2) {
+                        if(jQuery('#mktoForm_'+form.getId()+' input[name="Email"]').siblings('.notemail').length == 0) {
+                            var txt = '<div class="notemail"><a href="javascript:void(0)">Not '+email2+'?</a></div>';
+                            jQuery('#mktoForm_'+form.getId()+' input[name="Email"]').after(txt);
+                        }
+                        
+                    }
+                            <?php } ?>
+                                }
+                            } 
+                    });  
+                }
+            });    
+        }        
+    }); 
+function getMainDomain() {
+   var i=0,currentdomain=document.domain,p=currentdomain.split('.'),s='_gd'+(new Date()).getTime();
+   while(i<(p.length-1) && document.cookie.indexOf(s+'='+s)==-1){
+      currentdomain = p.slice(-1-(++i)).join('.');
+      document.cookie = s+"="+s+";domain="+currentdomain+";";
+   }
+   document.cookie = s+"=;expires=Thu, 01 Jan 1970 00:00:01 GMT;domain="+currentdomain+";";
+   return currentdomain;
+}
+});
+</script>    
+<?php } ?>
+<!-- GI5d0a22e8897bd295929827aa9accb0e3 -->

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\Grid\Container" name="adminhtml.block.tieredcoupon.grid.container">
+                <block class="Magento\Backend\Block\Widget\Grid" name="adminhtml.block.tieredcoupon.grid" as="grid">
+                    <arguments>
+                        <argument name="id" xsi:type="string">tieredcoupon_grid</argument>
+                        <argument name="dataSource" xsi:type="object">Mexbs\Tieredcoupon\Model\ResourceModel\Tieredcoupon\Collection\Grid</argument>
+                        <argument name="default_sort" xsi:type="string">sort_order</argument>
+                        <argument name="default_dir" xsi:type="string">ASC</argument>
+                        <argument name="save_parameters_in_session" xsi:type="string">1</argument>
+                    </arguments>
+                    <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" as="grid.columnSet" name="adminhtml.rule.grid.columnSet">
+                        <arguments>
+                            <argument name="rowUrl" xsi:type="array">
+                                <item name="path" xsi:type="string">tieredcoupon/coupon/edit</item>
+                                <item name="extraParamsTemplate" xsi:type="array">
+                                    <item name="id" xsi:type="string">getMainTieredcouponId</item>
+                                </item>
+                            </argument>
+                        </arguments>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="tieredcoupon_id">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">ID</argument>
+                                <argument name="index" xsi:type="string">main_tieredcoupon_id</argument>
+                                <argument name="filter_index" xsi:type="string">main_table.tieredcoupon_id</argument>
+                                <argument name="column_css_class" xsi:type="string">col-id</argument>
+                                <argument name="header_css_class" xsi:type="string">col-id</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="name">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Name</argument>
+                                <argument name="index" xsi:type="string">name</argument>
+                                <argument name="filter_index" xsi:type="string">main_table.name</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="code">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Code</argument>
+                                <argument name="index" xsi:type="string">code</argument>
+                                <argument name="filter_index" xsi:type="string">main_table.code</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="sub_coupon_codes">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Sub Coupon Codes</argument>
+                                <argument name="index" xsi:type="string">sub_coupon_codes</argument>
+                                <argument name="filter" xsi:type="boolean">0</argument>
+                            </arguments>
+                        </block>
+                        <block class="Magento\Backend\Block\Widget\Grid\Column" as="is_active">
+                            <arguments>
+                                <argument name="header" xsi:type="string" translate="true">Status</argument>
+                                <argument name="index" xsi:type="string">is_active</argument>
+                                <argument name="type" xsi:type="string">options</argument>
+                                <argument name="filter_index" xsi:type="string">main_table.is_active</argument>
+                                <argument name="options" xsi:type="array">
+                                    <item name="active" xsi:type="array">
+                                        <item name="value" xsi:type="string">1</item>
+                                        <item name="label" xsi:type="string" translate="true">Active</item>
+                                    </item>
+                                    <item name="inactive" xsi:type="array">
+                                        <item name="value" xsi:type="string">0</item>
+                                        <item name="label" xsi:type="string" translate="true">Inactive</item>
+                                    </item>
+                                </argument>
+                            </arguments>
+                        </block>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

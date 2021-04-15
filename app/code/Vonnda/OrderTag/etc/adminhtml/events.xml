@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="save_tag_unique_frontend_default">
+        <observer name="check_unique" instance="Vonnda\OrderTag\Observer\CheckUniqueFrontendDefault" />
+    </event>
+</config>

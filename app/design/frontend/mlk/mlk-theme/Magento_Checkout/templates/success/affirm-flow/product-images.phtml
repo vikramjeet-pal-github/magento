@@ -1,0 +1,55 @@
+<?php
+/**
+ * Showing product details
+ * @var $block \Vonnda\Checkout\Block\Onepage\Success
+ */
+?>
+<?php
+$items = $block->getAffirmFlowItems()
+?>
+<?php if ($block->getAffirmDesignFlow() === 1): ?>
+    <div class="single-item">
+        <h1><?= __('Almost done.') ?> <span><?= __('Last step: filter refills.') ?></span></h1>
+        <div class="product-image">
+            <?php foreach ($items as $item): ?>
+                <span id="next-refill-date"  class="hide" data-next-refill="<?= $block->escapeHtml($item['next_refill']) ?>"></span>
+                <?php if (!empty($item['item_image'])): ?>
+                    <img src="<?= $item['item_image']?>" alt="<?= $item['name'] ?>" title="<?= $item['name'] ?>">
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php elseif ($block->getAffirmDesignFlow() === 2):?>
+    <div class="multi-items">
+        <h1><?= __('Almost done.') ?> <span><?= __('Last step: filter refills.') ?></span></h1>
+        <div class="product-items-wrapper">
+            <?php foreach ($items as $item): ?>
+                <span id="next-refill-date"  class="hide" data-next-refill="<?= $block->escapeHtml($item['next_refill']) ?>"></span>
+                <div class="item">
+                    <?php if (!empty($item['item_image'])): ?>
+                        <div class="img">
+                            <img src="<?= $item['item_image']?>" alt="<?= $item['name'] ?>" title="<?= $item['name'] ?>">
+                        </div>
+                    <?php endif; ?>
+                    <div class="product-details">
+                        <?php if (!empty($item['name'])): ?>
+                            <h3><?= $item['name'] ?></h3>
+                        <?php endif; ?>
+
+                        <div class="details">
+                            <?php if (!empty($item['info'])): ?>
+                                <p><?= __('Box contains') . ' ' . $item['info'] ?></p>
+                            <?php endif; ?>
+                            <?php if (!empty($item['price']) && !empty($item['frequency'])): ?>
+                                <p><?= $item['price'] . ' ' . __('per device every') . ' ' . $item['frequency'] ?></p>
+                            <?php endif; ?>
+                            <?php if (!empty($item['next_refill'])): ?>
+                                <p><?= __('Next refill') . ':' . $item['next_refill'] ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>

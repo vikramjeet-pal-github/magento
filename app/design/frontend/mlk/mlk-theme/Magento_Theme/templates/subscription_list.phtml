@@ -1,0 +1,239 @@
+<script>
+
+    require(['jquery', 'loader'], function ($) {
+        'use strict';
+
+        $('body').loader({
+            icon: '<?= /* @noEscape */ $block->getViewFileUrl('images/loader-2.gif') ?>'
+        });
+        $("body").loader('show');
+
+        if (navigator.userAgent.indexOf("Firefox") > 0) {
+            setTimeout(function(){
+                $("body").trigger("processStop");
+            }, 2000);
+        } else {
+            window.addEventListener("load", function() {
+                setTimeout(function() {
+                    $("body").trigger("processStop");
+                }, 600);
+            });
+        }
+
+    });
+
+</script>
+
+<?php
+$debug = false;
+$subscriptionList = $block->getCustomerSubscriptions();
+$numOfSubsDisplayed = $debug ? 10 : 3;
+
+$subscriptions = $block->getSubscriptionCustomersForDashboard($subscriptionList, $numOfSubsDisplayed);
+$allSubscriptions = $block->sortSubscriptionCustomers($subscriptionList);
+$customerId = $block->getCurrentCustomerId();
+
+$firstSubToUpdateId = $block->getFirstSubToUpdate($allSubscriptions);
+$fstNearExpiredSub = $block->firstNearExpiredSubscription($allSubscriptions);
+$fstErrorSub = $block->firstErrorSubscription($allSubscriptions);
+$fstExpiredSub = $block->firstExpiredSubscription($allSubscriptions);
+$fstActivateEligibleSub = $block->firstActivateEligibleSubscription($allSubscriptions);
+?>
+
+<?php if($fstErrorSub){ ?>
+    <div class="subscription-list__message warning js-dashboard-card-processing-error-msg">
+        <strong>There was an issue processing your payment.</strong> Please update payment info.
+        <a class="msg-button" href="<?= /* @escapeNotVerified */ $block->getUrl('/') ?>subscription/customer/autorefill?subscription=<?php echo $fstErrorSub->getId();?>">
+            <span><strong><?= /* @escapeNotVerified */ __('Update') ?></strong></span>
+        </a>
+    </div>
+<?php } ?>
+
+<?php if($block->customerHasExpiredCards($customerId)){ ?>
+    <div class="subscription-list__message subscription-list__expire-soon-message js-dashboard-card-expire-soon-msg">
+        <strong>Heads up.</strong> Your card expires soon.
+        <a class="msg-button"
+           href="<?= /* @escapeNotVerified */ $block->getUrl('/') ?>subscription/customer/autorefill?subscription=<?= $firstSubToUpdateId; ?>">
+            <span><strong><?= /* @escapeNotVerified */ __('Update') ?></strong></span>
+        </a>
+    </div>
+<?php } ?>
+
+<?php if($fstActivateEligibleSub){ ?>
+    <div class="subscription-list__message js-dashboard-activate-eligible-msg">
+        Don't miss out on free filters. Activate auto-refills.
+        <a class="msg-button" href="<?= /* @escapeNotVerified */ $block->getUrl('/') ?>subscription/customer/autorefill?subscription=<?php echo $fstActivateEligibleSub->getId();?>">
+            <span><strong><?= /* @escapeNotVerified */ __('Activate') ?></strong></span>
+        </a>
+    </div>
+<?php } ?>
+
+<?php if($fstExpiredSub){ ?>
+    <div class="subscription-list__message subscription-list__expired-message js-dashboard-expired-msg">
+        <strong>Expired.</strong> Activate auto-refills now to get fresh replacement filters.
+        <a class="msg-button" href="<?= /* @escapeNotVerified */ $block->getUrl('/') ?>subscription/customer/autorefill/">
+            <span><strong><?= /* @escapeNotVerified */ __('Activate') ?></strong></span>
+        </a>
+    </div>
+<?php } ?>
+
+<?php if($fstNearExpiredSub){?>
+    <div class="subscription-list__message subscription-list__expire-soon-message js-dashboard-will-expire-soon-msg">
+        It's almost time to get new filters. Activate auto-refills.
+        <a class="msg-button" href="<?= /* @escapeNotVerified */ $block->getUrl('/') ?>subscription/customer/autorefill?subscription=<?php echo $fstNearExpiredSub->getId();?>">
+            <span><strong><?= /* @escapeNotVerified */ __('Activate') ?></strong></span>
+        </a>
+    </div>
+<?php } ?>
+
+<div class="js-dashboard-thankyou-message hide subscription-list__message subscription-list__thank-you-message"></div>
+
+<div class="block block-dashboard-subscriptions">
+    <div class="block-title order">
+        <strong><?= /* @escapeNotVerified */ __('Auto-refills') ?></strong>
+
+            <a class="action view" href="<?= /* @escapeNotVerified */ $block->getUrl('/') ?>subscription/customer/autorefill/">
+                <span><?= /* @escapeNotVerified */ __('View All') ?></span>
+            </a>
+    </div>
+
+    <div class="block-content">
+        <div class="table-wrapper orders-recent">
+            <table class="data table table-order-items recent" id="my-subscriptions-table">
+                <caption class="table-caption"><?= /* @escapeNotVerified */ __('Auto-refills') ?></caption>
+                <thead>
+                    <tr>
+                        <th scope="col" class="col name">
+                            <?php if(count($subscriptions) > 0){
+                                echo /* @escapeNotVerified */ __('Device name');
+                            } else {
+                                echo /* @escapeNotVerified */ __('No Subscriptions');
+                            }?>
+                        </th>
+                        <th scope="col" class="col type">
+                            <?php if(count($subscriptions) > 0){
+                                echo /* @escapeNotVerified */ __('Device type');
+                            } else {
+                                //echo /* @escapeNotVerified */ __('No Subscriptions');
+                            }?>
+                        </th>
+                        <th scope="col" class="col actions"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php foreach($subscriptions as $subscription):
+                        $subscriptionPlan = $subscription->getSubscriptionPlan();
+                        $isAutoRenewOff = $block->isAutorenewOff($subscription);
+                        $isActivateEligible = $block->isActivateEligible($subscription);
+                        $isExpired = $block->isSubscriptionExpired($subscription, $subscriptionPlan);
+                        $hasPaymentError = $block->subscriptionHasPaymentError($subscription);
+                        $shouldShowActivateButton = $block->shouldShowActivationButton($subscription);
+                        $shouldShowUpdatePayment = ($block->cardWillExpireSoon($subscription) || $hasPaymentError) && !($shouldShowActivateButton);
+                        ?>
+                    <tr class="<?php echo ($isExpired || $block->cardWillExpireSoon($subscription)) ? "focus" : "";?>">
+                        <td data-th="<?= $block->escapeHtml(__('Device name')) ?>" class="col name">
+                            <span class="subscription-img">
+                                <?php echo $block->getAssociatedDeviceImage($subscription);?>
+                            </span>
+                            <span class="value-holder"><?php echo $block->getSerialOrDeviceName($subscription);?></span>
+                        </td>
+
+                        <td data-th="<?= $block->escapeHtml(__('Device type')) ?>" class="col type">
+                            <span class="value-holder"><?php echo $block->getAssociatedDevice($subscription);?></span>
+                        </td>
+
+                        <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                            <?php if ($shouldShowActivateButton) : ?>
+                                <a href="javascript:void(0);" 
+                                   class="action activate js-activate-subscription"
+                                   data-subscriptionid="<?php echo $subscription->getId(); ?>"
+                                   >
+                                    <span><?= /* @escapeNotVerified */ __('Activate') ?></span>
+                                </a>
+                            <?php endif ?>
+
+                            <?php if($shouldShowUpdatePayment): ?>
+                                <a href="javascript:void(0);" 
+                                   data-devicename="<?php echo $block->getAssociatedDevice($subscription);?>"
+                                   data-subscriptionid="<?php echo $subscription->getId();?>"
+                                   class="action order update js-payment-edit-existing">
+                                    <span><?= /* @escapeNotVerified */ __('Update') ?></span>
+                                </a>
+                            <?php endif; ?>
+
+                            <a href="javascript:void(0);" 
+                               data-subscriptionid="<?php echo $subscription->getId();?>"   
+                               class="action view js-view-subscription">
+                                <span><?= /* @escapeNotVerified */ __('View') ?></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    //window.storeCountryCode = "<?php //echo $block->getStoreCountryCode();?>//";
+    window.googleAutocompleteApiKey = "<?php echo $block->getAutoCompleteApiKey();?>";
+</script>
+
+<?php echo $block->getChildHtml("activate_flow"); ?>    
+
+<script>
+    require([
+        "jquery"
+    ], function($) {
+        //TODO - refactor address buttons to use internal functions, and not go off the auto-refill js/classes
+        //Alias
+    function dQS(query)
+    {
+        return document.querySelector(query);
+    }
+
+    function dQSA(query)
+    {
+        return document.querySelectorAll(query);
+    }
+
+    initButtons();
+
+    function initButtons()
+    {        
+        var shippingAddressOptions = dQSA(".subscription-list__shipping-address-edit-list-item");
+        for(var i = 0; i < shippingAddressOptions.length; i++){
+            shippingAddressOptions[i].onclick = function(){
+                clearShippingAddressChooser();
+            }
+        }
+
+        $('.js-activate-subscription, .js-payment-edit-existing').on('click', function(){
+                $('.subscription-list__message').addClass('hide');
+                $('.block-dashboard-orders, .block-dashboard-subscriptions').addClass('hide');
+                $('.dashboard-promo').toggle();
+        });
+
+        $('.js-view-subscription').on('click', function(){
+            var subscriptionId = $(this).attr('data-subscriptionid');
+            window.location.href = window.baseUrl + 'subscription/customer/autorefill?subscription=' + subscriptionId;
+        });
+    }
+
+    function clearShippingAddressChooser()
+    {
+        var shippingAddressOptions = dQSA(".subscription-list__shipping-address-edit-list-item");
+        for(var i = 0; i < shippingAddressOptions.length; i++){
+            shippingAddressOptions[i].style.border = '';
+        }
+    }
+
+    });
+</script>
+
+<script type="text/x-magento-init">
+    {"*": {"Vonnda_TealiumTags/js/accountPortal":{}}}
+</script>
+

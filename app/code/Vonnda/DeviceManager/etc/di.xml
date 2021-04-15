@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Vonnda\DeviceManager\Api\DeviceManagerRepositoryInterface" type="Vonnda\DeviceManager\Model\DeviceManagerRepository"/>
+	<preference for="Vonnda\DeviceManager\Api\Data\DeviceManagerInterface" type="Vonnda\DeviceManager\Model\Data\DeviceManager"/>
+	<preference for="Vonnda\DeviceManager\Api\Data\DeviceManagerSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Vonnda\DeviceManager\Model\ResourceModel\DeviceManager\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">vonnda_devicemanagment_device</argument>
+			<argument name="resourceModel" xsi:type="string">Vonnda\DeviceManager\Model\ResourceModel\DeviceManager\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="vonnda_devicemanager_devicemanager_listing_data_source" xsi:type="string">Vonnda\DeviceManager\Model\ResourceModel\DeviceManager\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

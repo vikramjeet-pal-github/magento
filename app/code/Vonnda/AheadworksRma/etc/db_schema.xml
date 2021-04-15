@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="aw_rma_request_packages" resource="default" engine="innodb">
+        <column xsi:type="int" name="package_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Package ID" />
+        <column xsi:type="int" name="request_id" padding="11" unsigned="true" nullable="false" comment="Request ID" />
+        <column xsi:type="int" name="order_id" padding="11" unsigned="true" nullable="false" comment="Order ID" />
+        <column xsi:type="int" name="item_id" padding="11" unsigned="true" nullable="false" comment="Item ID" />
+        <column xsi:type="varchar" length="32" name="item_sku" nullable="false" comment="Item SKU" />
+        <column xsi:type="varchar" length="256" name="item_name" nullable="false" comment="Item Name" />
+        <column xsi:type="int" name="item_qty" padding="11" unsigned="true" nullable="false" comment="Item Qty" />
+        <column xsi:type="varchar" length="32" name="location" nullable="false" comment="Location" />
+        <column xsi:type="text" name="track_number" nullable="true" comment="Track Number" />
+        <column xsi:type="mediumblob" name="shipping_label" nullable="true" comment="Shipping Label" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="package_id"/>
+        </constraint>
+    </table>
+</schema>

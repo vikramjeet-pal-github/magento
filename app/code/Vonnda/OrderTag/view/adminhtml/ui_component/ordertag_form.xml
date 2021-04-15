@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ordertag_form.ordertag_form_data_source</item>
+            <item name="deps" xsi:type="string">ordertag_form.ordertag_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Add new Order Tag</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+        </item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Vonnda\OrderTag\Block\Adminhtml\Edit\BackButton</item>
+            <item name="reset" xsi:type="string">Vonnda\OrderTag\Block\Adminhtml\Edit\ResetButton</item>
+            <item name="save" xsi:type="string">Vonnda\OrderTag\Block\Adminhtml\Edit\SaveButton</item>
+        </item>
+    </argument>
+
+    <dataSource name="ordertag_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Vonnda\OrderTag\Model\DataProvider</argument>
+            <argument name="name" xsi:type="string">ordertag_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="ordertag/index/save"/>
+        </settings>
+    </dataSource>
+
+    <fieldset name="ordertag">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Tag Information</item>
+            </item>
+        </argument>
+
+        <!-- This field represents form id and is hidden -->
+        <field name="ordertag_form_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">ordertag</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="label" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">ordertag</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Label</label>
+            </settings>
+        </field>
+
+        <field name="visible" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="uniqueProp" xsi:type="string">value</item>
+                    <item name="source" xsi:type="array">
+                        <item name="target" xsi:type="string">ordertag</item>
+                        <item name="targetField" xsi:type="string">visible</item>
+                        <item name="referencedField" xsi:type="string">entity_id</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/checkbox</elementTmpl>
+                <dataType>boolean</dataType>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <description translate="true">Visible</description>
+                        <valueMap>
+                            <map name="false" xsi:type="string">0</map>
+                            <map name="true" xsi:type="string">1</map>
+                        </valueMap>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+        <field name="frontend_default" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="uniqueProp" xsi:type="string">value</item>
+                    <item name="source" xsi:type="array">
+                        <item name="target" xsi:type="string">ordertag</item>
+                        <item name="targetField" xsi:type="string">frontend_default</item>
+                        <item name="referencedField" xsi:type="string">entity_id</item>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/checkbox</elementTmpl>
+                <dataType>boolean</dataType>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <description translate="true">Frontend Default</description>
+                        <valueMap>
+                            <map name="false" xsi:type="string">0</map>
+                            <map name="true" xsi:type="string">1</map>
+                        </valueMap>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+
+    </fieldset>
+</form>

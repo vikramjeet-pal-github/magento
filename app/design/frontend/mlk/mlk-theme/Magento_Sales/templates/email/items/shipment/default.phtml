@@ -1,0 +1,11 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $_item \Magento\Sales\Model\Order\Item */
+$_item = $block->getItem() ?>
+<?= $block->escapeHtml($_item->getName()) ?> - Qty: <?= /* @escapeNotVerified */  $_item->getQty() * 1 ?>

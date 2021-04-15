@@ -1,0 +1,8 @@
+<?php
+$specificInfo = $block->getSpecificInformation();
+$title = $block->escapeHtml($block->getMethod()->getTitle());
+?>
+<dl class="payment-method">
+    <dt class="title" style="margin-top: 5px; color: #000; font-weight: 300"><?= /* @noEscape */ $title ?></dt>
+</dl>
+<?= $block->getChildHtml() ?>

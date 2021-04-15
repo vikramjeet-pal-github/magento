@@ -1,0 +1,95 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_creditmemo = $block->getCreditmemo() ?>
+<?php $_order      = $block->getOrder() ?>
+
+<?PHP //TODO - REMOVE THIS - CREDITMEMO/ORDER CAN BE MOCKED IN PREVIEW BELOW ?>
+<?php //$_creditmemo = \Magento\Framework\App\ObjectManager::getInstance()->get(\Magento\Sales\Api\CreditmemoRepositoryInterface::class)->get(1);?>
+<?php //$_order      = \Magento\Framework\App\ObjectManager::getInstance()->get(\Magento\Sales\Api\OrderRepositoryInterface::class)->get(42);?>
+
+<?php if ($_creditmemo && $_order): ?>
+<table align="center" class="container float-center" style="Margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;margin:0 auto;padding:0;text-align:center;vertical-align:top;width:600px">
+    <tbody>
+        <tr style="padding:0;text-align:left;vertical-align:top">
+            <td bgcolor="white" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;hyphens:none;line-height:1.3;margin:0;padding:0;background-color:white;text-align:left;vertical-align:top;word-break:normal!important">
+                <table class="wrapper" align="center" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                    <tbody>
+                        <tr style="padding:0;text-align:left;vertical-align:top">
+                            <td class="wrapper-inner" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;hyphens:none;line-height:1.3;margin:0;padding:0;text-align:left;vertical-align:top;word-break:normal!important">
+                                <?php foreach ($_creditmemo->getAllItems() as $_item): ?>
+                                    <?php if (!$_item->getOrderItem()->getParentItem())  : 
+                                        $_item->setOrder($_order);?>
+                                        <?= $block->getItemHtml($_item) ?>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    <tbody>
+</table>
+    <?php $payment = $_order->getPayment(); ?>
+    <?php if($payment->getMethod() == 'affirm_gateway'): ?>
+        <table align="center" class="container float-center" style="Margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;margin:0 auto;padding:0;text-align:center;vertical-align:top;width:600px">
+            <tbody>
+                <tr style="padding:0;text-align:left;vertical-align:top">
+                    <td bgcolor="white" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;hyphens:none;line-height:1.3;margin:0;padding:0 20px;background-color:white;text-align:left;vertical-align:top;word-break:normal!important">
+                        <table class="wrapper" align="center" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                            <tbody>
+                                <tr style="padding:0;text-align:left;vertical-align:top">
+                                    <td class="wrapper-inner" style="-moz-hyphens:none;-webkit-hyphens:none;Margin:0;border-collapse:collapse!important;color:#000000;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;hyphens:none;line-height:1.3;margin:0;padding:0;text-align:left;vertical-align:top;word-break:normal!important;">
+                                        <div style="background:#f4f2f2;border-radius:4px;padding: 24px;">
+                                            <p style="-moz-hyphens: none!important; -ms-hyphens: none!important; -webkit-hyphens: none!important; margin: 0; margin-bottom: 0; border-collapse: collapse!important; color: #000000; font-family: Helvetica,Arial,sans-serif; font-size: 16px; font-weight: 300; hyphens: none!important; line-height: 1.5; padding: 0; text-align: left; white-space: no-wrap!important; word-break: keep-all!important; word-wrap: normal!important;"><strong>Please note:</strong> You will receive an email from <img src="https://cdn-assets.affirm.com/images/all_black_logo-transparent_bg.png" width="55px" height="22px" alt="Affirm Logo" /> confirming your refund amount.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <table align="center" class="container float-center" style="Margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;margin:0 auto;padding:0;text-align:center;vertical-align:top;width:600px">
+            <tbody>
+                <tr style="padding:0;text-align:left;vertical-align:top">
+                    <th class="small-12 large-6 columns first" style="Margin:0 auto;color:#535354;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0 auto;padding:0;padding-bottom:0;padding-left:20px;padding-right:10px;text-align:left;width:260px">
+                        <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                            <tbody>
+                            <tr style="padding:0;text-align:left;vertical-align:top">
+                                <th style="Margin:0;color:#535354;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0;padding:0;text-align:left"></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </th>
+                    <th class="small-12 large-6 columns last" style="Margin:0 auto;color:#535354;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0 auto;padding:0;padding-bottom:0;padding-left:10px;padding-right:20px;text-align:left;width:280px">
+                        <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                            <tbody>
+                            <tr style="padding:0;text-align:left;vertical-align:top">
+                                <th style="Margin:0;color:#535354;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:lighter;line-height:1.3;margin:0;padding:0;text-align:left">
+                                    <table cellspacing="0" cellpadding="0" border="0" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
+                                        <tbody>
+                                <?= $block->getChildHtml('creditmemo_totals') ?>
+                                </tbody>
+                                    </table>
+                                </th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    <?php endif; ?>
+<?php endif; ?>
+
+

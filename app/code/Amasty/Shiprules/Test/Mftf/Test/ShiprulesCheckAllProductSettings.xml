@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesCheckAllProductSettings">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check All Product Settings"/>
+            <description value="Check All Product Settings"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-19"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesCheckAllProductSettings"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+        </before>
+
+        <after>
+            <!--Delete Shipping Rules -->
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesCheckAllProductSettings"/>
+            </actionGroup>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create new Shipping Rule-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateShippingRule">
+            <argument name="shippingRule" value="shiprulesCheckAllProductSettings"/>
+            <argument name="calculationType" value="calculationSurcharge"/>
+            <argument name="rates" value="rateShiprulesCheckAllProductSettings"/>
+        </actionGroup>
+        <actionGroup ref="EditShippingRuleAddProductsSetting" stepKey="AddProductSettingInRule">
+            <argument name="shippingRule" value="shiprulesCheckAllProductSettings"/>
+            <argument name="shippingProductsSetting" value="productsShiprulesCheckAllProductSettings"/>
+        </actionGroup>
+
+        <!--Add configurable product to cart-->
+        <actionGroup ref="AddConfigurableProductToCart" stepKey="AddConfigProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theMenHoodiesTetonPulloverHoodie"/>
+            <argument name="size" value="shiprulesCheckAllProductSettings.sizeMH02"/>
+            <argument name="color" value="shiprulesCheckAllProductSettings.colorMH02"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices With Qty One-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate1">
+            <argument name="shippingPrices" value="shiprulesCheckAllProductSettings.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay1">
+            <argument name="shippingPrices" value="shiprulesCheckAllProductSettings.priceBestWayOne"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!--Change Qty Product In Cart To Two-->
+        <actionGroup ref="ChangeQtyConfigurableProductInCart" stepKey="changeQtyConfigProductInCart1">
+            <argument name="products" value="_theMenHoodiesTetonPulloverHoodie"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+            <argument name="productCustomSKU" value="shiprulesCheckAllProductSettings.customSkuMH02"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices With Qty Two-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate2">
+            <argument name="shippingPrices" value="shiprulesCheckAllProductSettings.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay2">
+            <argument name="shippingPrices" value="shiprulesCheckAllProductSettings.priceBestWayTwo"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!--Add second configurable product to cart-->
+        <actionGroup ref="AddConfigurableProductToCart" stepKey="AddSecondConfigProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theMenHoodiesChazKangerooHoodie"/>
+            <argument name="size" value="shiprulesCheckAllProductSettings.sizeMH01"/>
+            <argument name="color" value="shiprulesCheckAllProductSettings.colorMH01"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices With Qty Three-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate3">
+            <argument name="shippingPrices" value="shiprulesCheckAllProductSettings.priceFlatRateThree"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay3">
+            <argument name="shippingPrices" value="shiprulesCheckAllProductSettings.priceBestWayThree"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!--Change Qty Product In Cart To One-->
+        <actionGroup ref="ChangeQtyConfigurableProductInCart" stepKey="changeQtyConfigProductInCart2">
+            <argument name="products" value="_theMenHoodiesTetonPulloverHoodie"/>
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="productCustomSKU" value="shiprulesCheckAllProductSettings.customSkuMH02"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices With Qty Two-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate4">
+            <argument name="shippingPrices" value="shiprulesCheckAllProductSettings.priceFlatRateFour"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay4">
+            <argument name="shippingPrices" value="shiprulesCheckAllProductSettings.priceBestWayFour"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!--Delete Product From The Cart-->
+        <actionGroup ref="DeleteProductFromTheCart" stepKey="DeleteProductFromTheCart">
+            <argument name="products" value="_theMenHoodiesTetonPulloverHoodie"/>
+        </actionGroup>
+
+        <!--Change Qty Second Product In Cart To Three-->
+        <actionGroup ref="ChangeQtyConfigurableProductInCart" stepKey="changeQtyConfigProductInCart3">
+            <argument name="products" value="_theMenHoodiesChazKangerooHoodie"/>
+            <argument name="addProductQty" value="_enterQty3"/>
+            <argument name="productCustomSKU" value="shiprulesCheckAllProductSettings.customSkuMH01"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices With Qty Two-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate5">
+            <argument name="shippingPrices" value="shiprulesCheckAllProductSettings.priceFlatRateFive"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay5">
+            <argument name="shippingPrices" value="shiprulesCheckAllProductSettings.priceBestWayFive"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+    </test>
+</tests>

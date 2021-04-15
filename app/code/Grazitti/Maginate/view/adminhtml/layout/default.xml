@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 Grazitti. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   <head>
+     <css src="Grazitti_Maginate::css/custom.css"/>
+	 <link src="Grazitti_Maginate::js/custom.js"/>
+   </head>
+   <body>
+        <referenceContainer name="content">
+            <block class="Magento\Backend\Block\Template" name="custom_validation" template="Grazitti_Maginate::system/config/validation.phtml">
+				<arguments>
+					<argument name="view_model" xsi:type="object">Grazitti\Maginate\ViewModel\View</argument>
+				</arguments>
+			</block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @copyright: Copyright © 2020 Vonnda, LLC. All rights reserved.
+ * @author   : Vonnda Digital Agency <hello@vonnda.com>
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_columns">
+        <column name="gift_order" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Vonnda\GiftOrder\Model\Source\GiftOrderSelect"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Gift Order</label>
+            </settings>
+        </column>
+        <column name="gift_recipient_email">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Gift Recipient E-mail</label>
+                <visible>false</visible>
+            </settings>
+        </column>
+    </columns>
+</listing>

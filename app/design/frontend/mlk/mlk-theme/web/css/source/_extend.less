@@ -1,0 +1,60 @@
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .abs-shopping-cart-items-desktop {
+        float: left;
+        position: relative;
+        width: 64%;
+
+        .actions {
+            text-align: right;
+        }
+
+        .action {
+            &.clear,
+            &.update {
+                margin-left: @indent__s;
+            }
+
+            &.continue {
+                float: left;
+            }
+        }
+    }
+}
+
+.u-fw-300 {
+    font-weight: 300 !important;
+}
+
+@media only screen and (max-width: (@screen__l - 1)) {
+    .show-for-desktop,
+    .show-for-desktop-inline {
+        display: none !important;
+    }
+    .show-for-mobile {
+        display: block;
+    }
+    .show-for-mobile-inline {
+        display: inline-block;
+    }
+}
+
+@media only screen and (min-width: (@screen__l)) {
+    .show-for-desktop {
+        display: block;
+    }
+    .show-for-desktop-inline {
+        display: inline-block;
+    }
+    td {
+        &.show-for-desktop {
+            display: table-cell;
+        }
+    }
+    // .show-for-desktop-tr {
+    //     display: table-cell;
+    // }
+    .show-for-mobile,
+    .show-for-mobile-inline {
+        display: none !important;
+    }
+}

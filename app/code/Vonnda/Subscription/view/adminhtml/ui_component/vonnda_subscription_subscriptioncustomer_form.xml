@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /**
+ * @copyright: Copyright © 2019 Vonnda, LLC. All rights reserved.
+ * @author   : Vonnda Digital Agency <hello@vonnda.com>
+ */ -->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">vonnda_subscription_subscriptioncustomer_form.subscriptioncustomer_form_data_source</item>
+            <item name="deps" xsi:type="string">vonnda_subscription_subscriptioncustomer_form.subscriptioncustomer_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Subscription Form</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+        </item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Vonnda\Subscription\Block\Adminhtml\SubscriptionCustomer\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Vonnda\Subscription\Block\Adminhtml\SubscriptionCustomer\Edit\DeleteButton</item>
+            <item name="reset" xsi:type="string">Vonnda\Subscription\Block\Adminhtml\SubscriptionCustomer\Edit\ResetButton</item>
+            <item name="save" xsi:type="string">Vonnda\Subscription\Block\Adminhtml\SubscriptionCustomer\Edit\SaveButton</item>
+        </item>
+    </argument>
+
+    <dataSource name="subscriptioncustomer_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Vonnda\Subscription\Ui\DataProvider\SubscriptionCustomer\Form\SubscriptionCustomerDataProvider</argument>
+            <argument name="name" xsi:type="string">subscriptioncustomer_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <fieldset name="subscriptionCustomer">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Subscription</item>
+                <item name="additionalClasses" xsi:type="string">js-subscription-customer-form</item>
+            </item>
+        </argument>
+
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="customer_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="id" xsi:type="string">subscription-customer-customer-id</item>
+                    <item name="label" xsi:type="string">Customer Id</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">hidden</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="device_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="id" xsi:type="string">subscription-customer-device-id</item>
+                    <item name="label" xsi:type="string">Device Id</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">hidden</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Vonnda\Subscription\Model\Source\SubscriptionCustomer\StatusSelect</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Status</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="subscription_plan_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Vonnda\Subscription\Model\Source\SubscriptionCustomer\SubscriptionPlanSelect</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Tier</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="shipping_address_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Vonnda\Subscription\Model\Source\SubscriptionCustomer\ShippingAddressSelect</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Shipping Address Id</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="additionalClasses" xsi:type="string">subscription-customer-shipping-address-id</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="notice" xsi:type="string" translate="true">
+                        Customer must be set first
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="last_order">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Last Order</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                    <item name="options" xsi:type="array">
+                        <item name="timeFormat" xsi:type="string">HH:mm:ss</item>
+                        <item name="showsTime" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="next_order">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Next Order</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">date</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="subscription_payment_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">hidden</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="payment_code">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Vonnda\Subscription\Model\Source\SubscriptionCustomer\CardSelect</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Card Info</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="additionalClasses" xsi:type="string">subscription-customer-payment-code</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                    <item name="notice" xsi:type="string" translate="true">
+                        Customer must be set first
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="shipping_method_overwrite">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Vonnda\Subscription\Model\Source\SubscriptionCustomer\ShippingMethodOverwriteSelect</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Shipping Method Overwrite</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="additionalClasses" xsi:type="string">subscription-customer-shipping-method-overwrite</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="shipping_cost_overwrite">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Shipping Cost Overwrite</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="validate-digits" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="created_at">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Created At</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="modified_at">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Modified At</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">subscriptionCustomer</item>
+                </item>
+            </argument>
+        </field>
+
+    </fieldset>
+</form>

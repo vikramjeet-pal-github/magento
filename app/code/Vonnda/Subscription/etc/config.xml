@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <vonnda_subscriptions_general>
+            <serial_number>
+                <landing_page_require_valid>1</landing_page_require_valid>
+                <api_require_valid>1</api_require_valid>
+            </serial_number>
+        </vonnda_subscriptions_general>
+        <vonnda_subscriptions_cron>
+            <cron_config>
+                <first_retry_days>2</first_retry_days>
+                <second_retry_days>5</second_retry_days>
+                <third_retry_days>13</third_retry_days>
+            </cron_config>
+        </vonnda_subscriptions_cron>
+    </default>
+</config>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesCheckPriorityRatePercentagePerProduct">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Rule Priority And Rate Percentage Per Product"/>
+            <description value="Check Rule Priority And Rate Percentage Per Product"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-02"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesCheckPriorityRatePercentagePerProduct"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+        </before>
+
+        <after>
+            <!--Delete Rules -->
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteFirstCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesCheckPriorityRatePercentagePerProductFirst"/>
+            </actionGroup>
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteSecondCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesCheckPriorityRatePercentagePerProductSecond"/>
+            </actionGroup>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create first shipping rule with priority 0-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateFirstShippingRule">
+            <argument name="shippingRule" value="shiprulesCheckPriorityRatePercentagePerProductFirst"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesCheckPriorityRatePercentagePerProductFirst"/>
+        </actionGroup>
+        <!--Create second shipping rule with priority 1-->
+        <actionGroup ref="CreateShippingRuleWithFlatRateAndBestWay" stepKey="CreateSecondShippingRule">
+            <argument name="shippingRule" value="shiprulesCheckPriorityRatePercentagePerProductSecond"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesCheckPriorityRatePercentagePerProductSecond"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFirstProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theWatchClamberData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate1">
+            <argument name="shippingPrices" value="shiprulesCheckPriorityRatePercentagePerProductFirst.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay1">
+            <argument name="shippingPrices" value="shiprulesCheckPriorityRatePercentagePerProductSecond.priceBestWay"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddSecondProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagOvernightDuffle"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate2">
+            <argument name="shippingPrices" value="shiprulesCheckPriorityRatePercentagePerProductFirst.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay2">
+            <argument name="shippingPrices" value="shiprulesCheckPriorityRatePercentagePerProductSecond.priceBestWay"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+    </test>
+</tests>

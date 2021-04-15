@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesShippingAreaExcludeCountry">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Shipping Area With Exlude Country"/>
+            <description value="Check Apply Rules From Admin Area"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-31"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesShippingAreaExcludeCountry"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig1"/>
+        </before>
+
+        <!--Delete Shipping And Cart Price Rules -->
+        <after>
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesShippingAreaExcludeCountry"/>
+            </actionGroup>
+            <actionGroup ref="AdminDeleteShippingArea" stepKey="DeleteCreatedShippingArea">
+                <argument name="shippingArea" value="shippingAreaWithExcludeCountry"/>
+            </actionGroup>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig2"/>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!-- Create Shipping Area Rule-->
+        <actionGroup ref="CreateShippingAreaOnlyWithCountry" stepKey="CreateShippingArea">
+            <argument name="shippingArea" value="shippingAreaWithExcludeCountry"/>
+        </actionGroup>
+
+        <!--Create new Shipping Rule-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateCartRule1">
+            <argument name="shippingRule" value="shiprulesShippingAreaExcludeCountry"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesShippingAreaExcludeCountry"/>
+        </actionGroup>
+
+        <!-- Add Condition Shipping Area In Rule-->
+        <actionGroup ref="EditShippingRuleAddConditionsShippingArea" stepKey="addShippingAreaInRule">
+            <argument name="shippingRule" value="shiprulesShippingAreaExcludeCountry"/>
+            <argument name="shippingArea" value="shippingAreaWithExcludeCountry"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check Shipping Price with US -->
+        <actionGroup ref="CheckPriceShippingWithCountry" stepKey="checkShippingWithState">
+            <argument name="shippingPrices" value="shiprulesShippingAreaExcludeCountry.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+            <argument name="country" value="shiprulesShippingAreaExcludeCountry.countryShippingOne"/>
+        </actionGroup>
+
+        <!--Check Shipping Price with Afghanistan -->
+        <actionGroup ref="CheckPriceShippingWithCountry" stepKey="checkShippingWithState2">
+            <argument name="shippingPrices" value="shiprulesShippingAreaExcludeCountry.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+            <argument name="country" value="shiprulesShippingAreaExcludeCountry.countryShippingTwo"/>
+        </actionGroup>
+
+        <!--Check Shipping Price with UK -->
+        <actionGroup ref="CheckPriceShippingWithCountry" stepKey="checkShippingWithState3">
+            <argument name="shippingPrices" value="shiprulesShippingAreaExcludeCountry.priceFlatRateThree"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+            <argument name="country" value="shiprulesShippingAreaExcludeCountry.countryShippingThree"/>
+        </actionGroup>
+
+        <!--Check Shipping Price with US -->
+        <actionGroup ref="CheckPriceShippingWithCountry" stepKey="checkShippingWithState4">
+            <argument name="shippingPrices" value="shiprulesShippingAreaExcludeCountry.priceFlatRateFour"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+            <argument name="country" value="shiprulesShippingAreaExcludeCountry.countryShippingFour"/>
+        </actionGroup>
+
+    </test>
+</tests>

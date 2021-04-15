@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @copyright: Copyright © 2019 Vonnda, LLC. All rights reserved.
+ * @author   : Vonnda Digital Agency <hello@vonnda.com>
+ */ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Vonnda\Subscription\Block\Adminhtml\SubscriptionPlan\InfoBlock" name="subscription_plan_info_block" template="Vonnda_Subscription::subscription_plan_info.phtml" />
+            <block class="Vonnda\Subscription\Block\Adminhtml\SubscriptionPlan\PromoChooser" name="subscription_plan_promo_chooser" template="Vonnda_Subscription::subscription_plan_promo_chooser.phtml" />
+            <block class="Vonnda\Subscription\Block\Adminhtml\SubscriptionPlan\ProductChooser" after="subscription_plan_promo_chooser" name="catalog.product.edit.tab.grouped.container" template="Vonnda_Subscription::subscription_plan_product_chooser_grid.phtml">
+                <block class="Magento\Framework\View\Element\Template" name="catalog.product.edit.tab.super.grid.popup.container" as="catalog.product.group.grid.popup.container"/>
+            </block>
+           <uiComponent name="vonnda_subscription_subscriptionplan_form"/>
+        </referenceContainer>
+    </body>
+    <update handle="vonnda_subscription_subscriptionplan_product_popup_grid"/>
+</page>

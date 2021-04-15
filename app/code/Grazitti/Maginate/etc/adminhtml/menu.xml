@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- /**
+ * Copyright © 2020 Grazitti . All rights reserved.
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Backend/etc/menu.xsd">
+    <menu>
+        <add id="grazitti_maginate::core" parent="Magento_Backend::system" title="Logs" module="Grazitti_Maginate" sortOrder="90" resource="Grazitti_Maginate::sample"/>
+        <add id="grazitti_maginate::mktmenu" title="Marketo Logs" module="Grazitti_Maginate" sortOrder="10" parent="grazitti_maginate::core" action="grazitti_maginate/logs/" resource="Grazitti_Maginate::logs"/>
+    </menu>
+</config>
+

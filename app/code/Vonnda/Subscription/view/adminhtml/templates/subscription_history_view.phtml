@@ -1,0 +1,26 @@
+<?php
+    $subscriptionHistory = $block->getSubscriptionHistory();
+    $beforeSave = unserialize($subscriptionHistory->getBeforeSave());
+    $afterSave = unserialize($subscriptionHistory->getAfterSave());
+
+    $changedBy = '';
+    if($subscriptionHistory->getAdminUserId()){
+        $changedBy = 'Changed by admin, ID: ' . $subscriptionHistory->getAdminUserId();
+    } elseif($subscriptionHistory->getCustomerId()){
+        $changedBy = 'Changed by customer, ID: ' . $subscriptionHistory->getCustomerId();
+    }
+?>
+
+<a href="<?php echo $block->getBackUrl();?>">Back to List</a>
+
+<h3><?php echo $changedBy;?></h3>
+<table>
+    <tr>
+        <th>Before Save</th>
+        <th>After Save</th>
+    </tr>
+    <tr>
+        <td><?php echo $this->formatObject($beforeSave); ?></td>
+        <td><?php echo $this->formatObject($afterSave); ?></td>
+    </tr>
+</table>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesOrderFromAdminArea">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Apply Rules From Admin Area"/>
+            <description value="Check Apply Rules From Admin Area"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-13"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesOrderFromAdminArea"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+        </before>
+
+        <!--Delete Shipping And Cart Price Rules -->
+        <after>
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesAdminArea"/>
+            </actionGroup>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create new Shipping Rule-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateCartRule1">
+            <argument name="shippingRule" value="shiprulesAdminArea"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesAdminArea"/>
+        </actionGroup>
+
+        <!--Create Order-->
+        <actionGroup ref="AdminCreateOrder" stepKey="CreateOrder">
+            <argument name="products" value="_theBagWayfarerMessenger"/>
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="customerEmail" value="shiprulesAdminArea.customerEmail"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+         </actionGroup>
+
+        <actionGroup ref="CheckAdminShippingMethodInLastOrder" stepKey="CheckShippingMethodInCreatedOrder">
+            <argument name="shippingMethodName" value="shiprulesAdminArea.shippingMethodName"/>
+            <argument name="shippingMethodPrice" value="shiprulesAdminArea.shippingMethodPrice"/>
+        </actionGroup>
+
+    </test>
+</tests>

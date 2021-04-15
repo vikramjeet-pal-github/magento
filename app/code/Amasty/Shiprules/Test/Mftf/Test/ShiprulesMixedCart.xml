@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesMixedCart">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Apply Rules With Mixed Cart"/>
+            <description value="Check Apply Rules With Mixed Cart"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-25"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesMixedCart"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+        </before>
+
+        <after>
+            <!--Delete Shipping Rules -->
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteFirstCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesMixedCart1"/>
+            </actionGroup>
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteSecondCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesMixedCart2"/>
+            </actionGroup>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create first shipping rule with conditions-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateShippingRule">
+            <argument name="shippingRule" value="shiprulesMixedCart1"/>
+            <argument name="calculationType" value="calculationSurcharge"/>
+            <argument name="rates" value="rateShiprulesMixedCart1"/>
+        </actionGroup>
+        <actionGroup ref="EditShippingRuleAddProductConditions" stepKey="AddConditionsInRule">
+            <argument name="shippingRule" value="shiprulesMixedCart1"/>
+            <argument name="actionsConditionsOptions" value="_SKU"/>
+            <argument name="conditionsData" value="shiprulesMixedCart1.conditions"/>
+        </actionGroup>
+
+        <!--Create second shipping rule with conditions-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateShippingRule2">
+            <argument name="shippingRule" value="shiprulesMixedCart2"/>
+            <argument name="calculationType" value="calculationSurcharge"/>
+            <argument name="rates" value="rateShiprulesMixedCart2"/>
+        </actionGroup>
+        <actionGroup ref="EditShippingRuleAddProductConditions" stepKey="AddConditionsInRule2">
+            <argument name="shippingRule" value="shiprulesMixedCart2"/>
+            <argument name="actionsConditionsOptions" value="_SKU"/>
+            <argument name="conditionsData" value="shiprulesMixedCart2.conditions"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFirstProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagJoustDuffleBag"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate1">
+            <argument name="shippingPrices" value="shiprulesMixedCart1.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+
+        <!--Delete Product From The Cart-->
+        <actionGroup ref="DeleteProductFromTheCart" stepKey="DeleteProductFromTheCart">
+            <argument name="products" value="_theBagJoustDuffleBag"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddSecondProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate2">
+            <argument name="shippingPrices" value="shiprulesMixedCart1.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddThirdProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagJoustDuffleBag"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate3">
+            <argument name="shippingPrices" value="shiprulesMixedCart1.priceFlatRateThree"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+
+        <!--Change Qty Second Product In Cart To Two-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtySecondProductToTwo">
+            <argument name="products" value="_theBagStriveShoulderPackData"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate4">
+            <argument name="shippingPrices" value="shiprulesMixedCart1.priceFlatRateFor"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddFourProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate5">
+            <argument name="shippingPrices" value="shiprulesMixedCart1.priceFlatRateFive"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+
+    </test>
+</tests>

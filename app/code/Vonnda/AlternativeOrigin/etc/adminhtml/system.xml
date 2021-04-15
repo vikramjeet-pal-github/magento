@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="shipping" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<tab>sales</tab>
+			<resource>Vonnda_AlternativeOrigin::config_vonnda_alternativeorigin</resource>
+			<group id="alternative_origin" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Alternative Origin</label>
+				<field id="enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enabled</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+				</field>
+				<field id="country_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Country</label>
+					<frontend_class>countries</frontend_class>
+					<comment/>
+					<source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="region_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Region/State</label>
+					<comment/>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="postcode" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>ZIP/Postal Code</label>
+					<comment/>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="city" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>City</label>
+					<comment/>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="street_line1" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Street Address</label>
+					<comment/>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="street_line2" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="text">
+					<label>Street Address Line 2</label>
+					<comment/>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="upload" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="Vonnda\AlternativeOrigin\Block\System\Config\Form\Field\File">
+					<label>Upload Alternative Origin</label>
+					<backend_model>Vonnda\AlternativeOrigin\Model\Config\Backend\CSVFile</backend_model>
+					<upload_dir config="system" scope_info="1">upload</upload_dir>
+					<comment/>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

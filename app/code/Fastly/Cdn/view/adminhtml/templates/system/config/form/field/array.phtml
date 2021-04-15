@@ -1,0 +1,102 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Copied from Mage_Config::view/adminhtml/templates/system/config/form/field/array.phtml.
+ * Currently necessary for work around a missing feature in the M2 core.
+ *
+ * @see https://github.com/magento/magento2/pull/3469
+ */
+?>
+
+<?php
+$_htmlId = $block->getHtmlId() ? $block->getHtmlId() : '_' . uniqid();
+$_colspan = $block->isAddAfter() ? 2 : 1;
+$columns = $block->getColumns();
+
+$html = '<tr id="<%- _id %>">';
+foreach ($columns as $columnName => $column) {
+    $render = $block->renderCellTemplate($columnName);
+    $html .= "<td>$render</td>";
+}
+
+if ($block->isAddAfter()) {
+    $html .= '<td><button class="action-add" type="button" id="addAfterBtn<%- _id %>">';
+    $html .= '<span>Add after</span></button></td>';
+}
+
+$html .= '<td class="col-actions">';
+$html .= '<button onclick="window[\'arrayRow'. $_htmlId.'\'].del(\'<%- _id %>\')" class="action-delete" type="button">';
+$html .= '<span>Delete</span></button></td></tr>';
+$html = json_encode($html);
+
+$templateValues = [];
+foreach ($block->getColumns() as $columnName => $column) {
+    $templateValues[] = $columnName;
+}
+$templateValues = json_encode($templateValues, JSON_FORCE_OBJECT);
+$disabled = (int)$block->getElement()->getDisabled();
+$arrayRows = [];
+foreach ($block->getArrayRows() as $_rowId => $_row) {
+    $arrayRows[] = $_row->toArray();
+}
+$arrayRows = json_encode($arrayRows, JSON_FORCE_OBJECT);
+$isAddAfter = (int)$block->isAddAfter();
+?>
+
+<div class="design_theme_ua_regexp" id="grid<?php /* @noEscape */ echo $_htmlId; ?>">
+    <div class="admin__control-table-wrapper">
+        <table class="admin__control-table" id="<?php /* @noEscape */ echo $block->getElement()->getId(); ?>">
+            <thead>
+            <tr>
+                <?php foreach ($block->getColumns() as $columnName => $column) : ?>
+                    <th><?php /* @noEscape */ echo $column['label']; ?></th>
+                <?php endforeach;?>
+                <th class="col-actions" colspan="<?php /* @noEscape */ echo $_colspan; ?>">Action</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <td colspan="<?php /* @noEscape */ echo count($block->getColumns())+$_colspan; ?>"
+                    class="col-actions-add">
+                    <button id="addToEndBtn<?php /* @noEscape */ echo $_htmlId; ?>"
+                            class="action-add"
+                            title="<?php /* @noEscape */ echo __('Add'); ?>"
+                            type="button">
+                        <span>
+                            <?php /* @noEscape */ echo $block->getAddButtonLabel(); ?>
+                            <?php if (empty($block->getAddButtonLabel())) : ?>
+                                <?php /* @noEscape */ echo __('Add'); ?>
+                            <?php endif; ?>
+                        </span>
+                    </button>
+                </td>
+            </tr>
+            </tfoot>
+            <tbody id="addRow<?php /* @noEscape */ echo $_htmlId; ?>"></tbody>
+        </table>
+    </div>
+    <input type="hidden" name="<?php /* @noEscape */ echo $block->getElement()->getName(); ?>[__empty]" value="" />
+    <script type="text/x-magento-init">
+       {
+           "*": {
+               "Magento_Ui/js/core/app": {
+                   "components": {
+                       "array": {
+                           "component": "Fastly_Cdn/js/system/config/form/field/array",
+                           "htmlId": "<?php /* @noEscape */ echo $_htmlId; ?>",
+                           "disabled": "<?php /* @noEscape */ echo $disabled ?>",
+                           "arrayRows": <?php /* @noEscape */ echo $arrayRows ?>,
+                           "templateValues": <?php /* @noEscape */ echo $templateValues; ?>,
+                           "isAddAfter": "<?php /* @noEscape */ echo $isAddAfter; ?>",
+                           "html": <?php /* @noEscape */ echo $html; ?>
+                       }
+                   }
+               }
+           }
+       }
+    </script>
+</div>

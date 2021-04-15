@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Amasty\Shiprules\Api\Data\RuleInterface" type="Amasty\Shiprules\Model\Rule" />
+    <preference for="Amasty\Shiprules\Api\RuleRepositoryInterface" type="Amasty\Shiprules\Model\RuleRepository" />
+    <preference for="Amasty\Shiprules\Api\ShippingRuleApplierInterface" type="Amasty\Shiprules\Model\Rule\Applier" />
+
+    <type name="Amasty\Shiprules\Model\Rule">
+        <arguments>
+            <argument name="conditionCombine" xsi:type="object" shared="false">Amasty\Shiprules\Model\Rule\Condition\Combine</argument>
+            <argument name="conditionProductCombine" xsi:type="object" shared="false">Amasty\CommonRules\Model\Rule\Condition\Product\Combine</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Shipping\Model\Shipping">
+        <plugin name="Amasty_Shiprules::Shipping" sortOrder="10" type="Amasty\Shiprules\Plugin\Shipping\Model\ShippingPlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Config">
+        <plugin name="Amasty_Shiprules::ProductAttributes" type="Amasty\Shiprules\Plugin\ProductAttributes" />
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\Rate">
+        <plugin name="Amasty_Shiprules::ImportShippingRate" type="Amasty\Shiprules\Plugin\Quote\Model\Quote\Address\RatePlugin"/>
+    </type>
+    <type name="\Magento\SalesRule\Setup\UpgradeData">
+        <plugin name="Amasty_Shiprules::SetupUpgradeData" type="Amasty\Shiprules\Plugin\SalesRule\Setup\UpgradeData" />
+    </type>
+    <type name="Amasty\Shiprules\Setup\UpgradeData">
+        <arguments>
+            <argument name="changeMethodsFormat" xsi:type="object">Amasty\Shiprules\Setup\Operation\ChangeMethodsFormat\Proxy</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+
+    <entity name="productsShiprulesCheckWeightAndRatePerUnit" type="shippingProductsSetting">
+        <data key="weightFrom">1</data>
+        <data key="weightTo">3</data>
+        <data key="QtyFrom">0</data>
+        <data key="QtyTo">0</data>
+        <data key="PriceFrom">0</data>
+        <data key="PriceTo">0</data>
+    </entity>
+
+    <entity name="productsShiprulesCheckQtyAndBaseRate" type="shippingProductsSetting">
+        <data key="weightFrom">0</data>
+        <data key="weightTo">0</data>
+        <data key="QtyFrom">1</data>
+        <data key="QtyTo">3</data>
+        <data key="PriceFrom">0</data>
+        <data key="PriceTo">0</data>
+    </entity>
+
+    <entity name="productsShiprulesCheckPriceAndFixedRatePerProduct" type="shippingProductsSetting">
+        <data key="weightFrom">0</data>
+        <data key="weightTo">0</data>
+        <data key="QtyFrom">0</data>
+        <data key="QtyTo">0</data>
+        <data key="PriceFrom">100</data>
+        <data key="PriceTo">250</data>
+    </entity>
+
+    <entity name="productsShiprulesCheckAllProductSettings" type="shippingProductsSetting">
+        <data key="weightFrom">1.5</data>
+        <data key="weightTo">4.5</data>
+        <data key="QtyFrom">0</data>
+        <data key="QtyTo">3</data>
+        <data key="PriceFrom">122</data>
+        <data key="PriceTo">160</data>
+    </entity>
+
+    <entity name="productsShiprulesCheckSettingProductAndConditions" type="shippingProductsSetting">
+        <data key="weightFrom">0</data>
+        <data key="weightTo">0</data>
+        <data key="QtyFrom">3</data>
+        <data key="QtyTo">5</data>
+        <data key="PriceFrom">0</data>
+        <data key="PriceTo">0</data>
+    </entity>
+
+</entities>

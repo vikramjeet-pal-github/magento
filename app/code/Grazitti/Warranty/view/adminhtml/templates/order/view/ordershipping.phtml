@@ -1,0 +1,44 @@
+<?php
+/**
+* @var $block \Grazitti\Warranty\Block\Adminhtml\Order\View\Tab\CustomTab
+*/
+?>
+<?php
+$blockObj= $block->getLayout()->createBlock('Grazitti\Warranty\Block\Adminhtml\Order\View\Tab\CustomTab');
+$orderid=$blockObj->getOrderId();
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+$resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+$connection = $resource->getConnection(); 
+$shipping_status = "SELECT order_shipping_text FROM sales_order WHERE entity_id  ='$orderid'";
+$result = $connection->fetchAll($shipping_status);
+$order_status = [];
+foreach ($result as $row) {
+$order_status= unserialize($row['order_shipping_text']);
+$stats=$order_status['shipment'][0];
+$stat=$order_status['shipment'][1];
+$test=$stats['status'];
+$test2=$stat['status'];
+$number=$stats['itemnumber'];
+$number2=$stat['itemnumber'];
+}
+?>
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= "Shipment Status" ?></span>
+    </div>
+        <table style="width:100%;border: 1px solid black;border-collapse: collapse;">
+      <tr>
+        <th style="border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;">Item fullfillment Number:</th>
+        <th style="border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;"colspan="2">Status:</th>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;"><?php echo $number;?></td>
+        <td style="border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;"><?php echo $test;?></td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;"><?php echo $number2;?></td>
+        <td style="border: 1px solid black;border-collapse: collapse;padding: 5px;text-align: left;"><?php echo $test2;?></td>
+      </tr>
+    </table>   
+</section>
+

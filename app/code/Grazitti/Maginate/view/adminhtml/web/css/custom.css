@@ -1,0 +1,44 @@
+form#config-edit-form .accordion .entry-edit-head a {
+    background: #f8f8f8;
+    padding-left: 10px;
+}
+form#config-edit-form .accordion .section-config .admin__collapsible-block table{width: auto}
+.admin__field:not(.admin__field-option) > .admin__field-label span[data-config-scope]:before, .accordion .config .label span[data-config-scope]:before{
+	left: 0px !important;
+}
+form#config-edit-form .accordion .section-config td.label{
+	text-align: left !important;
+    width: 350px !important;
+    padding-left: 10px !important;
+}
+form#config-edit-form .accordion .section-config td.value{
+	width: 300px !important;
+}
+.grazitti-content{
+	padding: 20px 10px 0px 10px;
+}
+.config-nav .maginate-tab .admin__page-nav-title::before {
+	content: '';
+    background-image: url("../images/Maginate_for_light_bg.png");
+	background-repeat: no-repeat;
+	background-size: 109px;
+	background-position: 0 0;
+	height: 35px;
+	position: absolute;
+	width: 109px;
+	top: 8px;
+	left: 10px;
+}
+
+.config-nav .maginate-tab .admin__page-nav-title strong {
+    margin-left: 55px;
+	visibility:hidden;
+}
+tr#row_grazz_auth_graz_settings_grazz_secret_key label:after {
+    color: red;
+    content: " *";
+}
+#row_grazitti_maginate_email_munchkin_id label:after, #row_grazitti_maginate_email_client_id label:after, #row_grazitti_maginate_email_secret_key label :after {
+    color: red;
+    content: " *";
+}

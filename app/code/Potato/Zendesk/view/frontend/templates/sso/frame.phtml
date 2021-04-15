@@ -1,0 +1,29 @@
+<?php
+/** @var $block \Potato\Zendesk\Block\Sso */
+?>
+<div style="display:none" id="po_zendesk_sso_login"></div>
+<script type="text/javascript">
+    require([
+        "jquery",
+        "jquery/jquery.cookie"
+    ], function($){
+        let ajaxBlockUrl = '<?= $block->getAjaxUrl() ?>';
+        $.ajax({
+            url: ajaxBlockUrl,
+            type: "POST",
+            dataType: 'json',
+            context: this,
+            data: {
+                isAjax: 'true'
+            },
+            success: function(response) {
+                if (response.return_to) {
+                    window.location.href = response.return_to;
+                } else if (response.iframe) {
+                    $("#po_zendesk_sso_login:hidden").html(response.iframe);
+                }
+
+            }
+        })
+    });
+</script>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Success Page</title>
+    </head>
+    <body>
+        <attribute name="class" value="my-css-class"/>
+        <referenceBlock name="page.main.title">
+            <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success.print.button" template="Magento_Checkout::button.phtml"/>
+            <!-- <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Thank you for your purchase!</argument>
+            </action> -->
+            <referenceBlock name="page.main.title" remove="true" />
+        </referenceBlock>
+        <referenceContainer name="after.body.start">
+            <block class="Magento\Checkout\Block\Onepage\Success" name="start.loader" template="Magento_Checkout::success/affirm-flow/loader.phtml" before="-" />
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success" template="Magento_Checkout::success.phtml" cacheable="false">
+
+                <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success.affirm.flow" template="Magento_Checkout::success/affirm-flow.phtml" cacheable="false">
+                    <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success.affirm.flow.product.img" template="Magento_Checkout::success/affirm-flow/product-images.phtml" />
+                    <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success.affirm.flow.form" template="Magento_Checkout::success/affirm-flow/form.phtml" cacheable="false">
+                        <block class="StripeIntegration\Payments\Block\Customer\Cards" name="checkout.success.affirm.flow.add.card" template="Magento_Checkout::success/affirm-flow/subscription_add_card.phtml" cacheable="false">
+                            <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success.affirm.flow.billing.address" template="Magento_Checkout::success/affirm-flow/billing-address.phtml" cacheable="false" />
+                        </block>
+                    </block>
+                </block>
+                <container name="order.success.additional.info" label="Order Success Additional Info">
+                    <block as="success" class="Vonnda\CheckoutSurvey\Block\Success" name="success" template="Vonnda_CheckoutSurvey::success.phtml"/>
+                </container>
+                <block class="Vonnda\Subscription\Block\Customer\SubscriptionAddressManagement" name="subscription_management" template="Vonnda_Subscription::subscription_address_management.phtml" cacheable="false">
+                    <block class="StripeIntegration\Payments\Block\Customer\Cards" name="add_card" template="Vonnda_Subscription::subscription_add_card_address_and_payment.phtml" cacheable="false"/>
+                </block>
+            </block>
+            <referenceBlock name="checkout.registration" remove="true"/>
+            <!-- <block class="Magento\Checkout\Block\Registration" name="checkout.registration" template="Magento_Checkout::registration.phtml" cacheable="false"/> -->
+        </referenceContainer>
+        <referenceContainer name="header-wrapper">
+            <referenceBlock name="mlk.menu" remove="true" />
+            <block class="Magento\Framework\View\Element\Template" name="mlk.value-props" template="Aheadworks_OneStepCheckout::mlk-value-props.phtml" after="logo" />
+        </referenceContainer>
+
+        <referenceContainer name="page.wrapper">
+            <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success.affirm.flow.footer" template="Magento_Checkout::success/affirm-flow/footer.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>

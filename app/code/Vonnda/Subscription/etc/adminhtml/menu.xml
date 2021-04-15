@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add 
+            id="Vonnda_Subscription::main" 
+            title="Vonnda Subscription" 
+            module="Vonnda_Subscription" 
+            sortOrder="21" 
+            resource="Vonnda_Subscription::manage"
+        />
+        <add 
+            id="Vonnda_Subscription::customer_grid" 
+            title="Subscription" 
+            module="Vonnda_Subscription" 
+            sortOrder="10" 
+            action="vonnda_subscription/subscriptioncustomer/index" 
+            resource="Vonnda_Subscription::manage" 
+            parent="Vonnda_Subscription::main"
+        />
+        <add 
+            id="Vonnda_Subscription::plan_grid" 
+            title="Tier" 
+            module="Vonnda_Subscription" 
+            sortOrder="30" 
+            action="vonnda_subscription/subscriptionplan/index" 
+            resource="Vonnda_Subscription::manage_plans" 
+            parent="Vonnda_Subscription::main"
+        />
+        <add 
+            id="Vonnda_Subscription::order_grid" 
+            title="Order History" 
+            module="Vonnda_Subscription" 
+            sortOrder="40" 
+            action="vonnda_subscription/subscriptionorder/index" 
+            resource="Vonnda_Subscription::view_orders" 
+            parent="Vonnda_Subscription::main"
+        />
+        <add 
+            id="Vonnda_Subscription::history_grid" 
+            title="Subscription History" 
+            module="Vonnda_Subscription" 
+            sortOrder="50" 
+            action="vonnda_subscription/subscriptionhistory/index" 
+            resource="Vonnda_Subscription::view_history" 
+            parent="Vonnda_Subscription::main"
+        />
+    </menu>
+</config>

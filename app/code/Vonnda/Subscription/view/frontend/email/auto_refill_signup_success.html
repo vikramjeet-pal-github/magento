@@ -1,0 +1,8 @@
+<!--@subject {{trans "%subject" subject=$subject |raw}}@-->
+<h1>Auto Refill Sign Up Success</h1>
+
+{{trans
+    '<p><strong><span>Subscription Customer ID::</span></strong>%sub_id</p>'
+    sub_id=$subscriptionCustomer.getId() 
+|raw}}
+

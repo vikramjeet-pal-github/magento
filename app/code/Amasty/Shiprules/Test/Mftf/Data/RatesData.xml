@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+
+    <entity name="calculationReplace" type="calculationType">
+        <data key="type">0</data>
+    </entity>
+
+    <entity name="calculationSurcharge" type="calculationType">
+        <data key="type">1</data>
+    </entity>
+
+    <entity name="calculationDiscount" type="calculationType">
+        <data key="type">2</data>
+    </entity>
+
+    <entity name="calculationPartialReplace" type="calculationType">
+        <data key="type">3</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckRuleStatus" type="rates">
+        <data key="baseRate">20</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckPriorityRatePercentagePerProductFirst" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">10</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckPriorityRatePercentagePerProductSecond" type="rates">
+        <data key="baseRate">30</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckWeightAndRatePerUnit" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">3</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckConditions" type="rates">
+        <data key="baseRate">10</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">15</data>
+        <data key="handlingPercentage">5</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesApplyRulesOnlyWithCoupon" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">20</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesDontApplyRulesWithShopping" type="rates">
+        <data key="baseRate">25</data>
+        <data key="fixedRate">5</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesDontIncludeTaxInSubtotal" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">33</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesAdminArea" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">30</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckMultishippingFirst" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">22</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckMultishippingSecond" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">23</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesShippingAreaTwoExclude" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">33</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckQtyAndBaseRate" type="rates">
+        <data key="baseRate">20</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckPriceAndFixedRatePerProduct" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">8</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCalculationDiscountAndHandlingPercentage" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">5</data>
+        <data key="handlingPercentage">5</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesTotalRate" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">20</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">20</data>
+        <data key="totalRateMax">30</data>
+    </entity>
+
+    <entity name="rateShiprulesAllRatesCalculationReplace" type="rates">
+        <data key="baseRate">20</data>
+        <data key="fixedRate">3</data>
+        <data key="ratePerWeight">3</data>
+        <data key="percentagePerProduct">30</data>
+        <data key="handlingPercentage">5</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesAllRatesCalculationSurcharge" type="rates">
+        <data key="baseRate">20</data>
+        <data key="fixedRate">3</data>
+        <data key="ratePerWeight">3</data>
+        <data key="percentagePerProduct">30</data>
+        <data key="handlingPercentage">5</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesAllRatesCalculationDiscount" type="rates">
+        <data key="baseRate">1</data>
+        <data key="fixedRate">1</data>
+        <data key="ratePerWeight">1</data>
+        <data key="percentagePerProduct">3</data>
+        <data key="handlingPercentage">2</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesDontApplyRulesOnlyWithCoupon" type="rates">
+        <data key="baseRate">20</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">10</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesApplyRulesWithShoppingCartRule" type="rates">
+        <data key="baseRate">30</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckOnCheckout" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">30</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckAllProductSettings" type="rates">
+        <data key="baseRate">70</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesIgnoreFreeShippingPromoYes" type="rates">
+        <data key="baseRate">70</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesIgnoreFreeShippingPromoNo" type="rates">
+        <data key="baseRate">70</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckTwoRules1" type="rates">
+        <data key="baseRate">20</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckTwoRules2" type="rates">
+        <data key="baseRate">30</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckShippingMethodInCustomerAccount" type="rates">
+        <data key="baseRate">35</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckMultiCurrency" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">7</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesIncludeTaxInSubtotal" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">33</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesUseSubtotalAfterDiscount" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">33</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesDontUseSubtotalAfterDiscount" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">33</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesShippingAreaExcludeCountry" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">33</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesShippingAreaInclCountryExclRegion" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">33</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesMixedCart1" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">10</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesMixedCart2" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">20</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckCalculationPartialReplace1" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">40</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckCalculationPartialReplace2" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">30</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckPartialReplaceAndSurcharge1" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">0</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">40</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckPartialReplaceAndSurcharge2" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">30</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+    <entity name="rateShiprulesCheckSettingProductAndConditions" type="rates">
+        <data key="baseRate">0</data>
+        <data key="fixedRate">8</data>
+        <data key="ratePerWeight">0</data>
+        <data key="percentagePerProduct">0</data>
+        <data key="handlingPercentage">0</data>
+        <data key="rateChangeMin">0</data>
+        <data key="rateChangeMax">0</data>
+        <data key="totalRateMin">0</data>
+        <data key="totalRateMax">0</data>
+    </entity>
+
+</entities>

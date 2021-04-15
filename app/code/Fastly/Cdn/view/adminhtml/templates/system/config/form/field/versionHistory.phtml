@@ -1,0 +1,74 @@
+<?php
+    $_htmlId = $block->getHtmlId() ? $block->getHtmlId() : '_' . uniqid();
+    $_colspan = $block->isAddAfter() ? 2 : 1;
+?>
+<button type="button"
+        style="margin-bottom: 10px;"
+        class="secondary"
+        id="list-versions-container-button">
+    <?php /* @noEscape */ echo __('List all versions') ?>
+</button>
+<!--
+<div class="design_theme_ua_regexp" id="grid<?php /* @noEscape */ echo $_htmlId; ?>">
+    <div class="admin__control-table-wrapper">
+        <table class="admin__control-table" id="<?php /* @noEscape */ echo $block->getElement()->getId(); ?>">
+            <thead>
+            <tr>
+                <?php foreach ($block->getColumns() as $columnName => $column) : ?>
+                    <th><?php /* @noEscape */ echo $column['label']; ?></th>
+                <?php endforeach;?>
+                <th class="col-actions" colspan="<?php /* @noEscape */ echo $_colspan; ?>">
+                    <?php /* @noEscape */ echo __('Comment') ?>
+                </th>
+                <th class="col-actions" colspan="<?php /* @noEscape */ echo $_colspan; ?>">
+                    <?php /* @noEscape */ echo __('Last Edited') ?>
+                </th>
+                <th class="col-actions" colspan="<?php /* @noEscape */ echo $_colspan; ?>">
+                    <?php /* @noEscape */ echo __('Actions') ?>
+                </th>
+            </tr>
+            </thead>
+            <tbody id="fastly-versions-list"></tbody>
+        </table>
+    </div>
+    <p class="loading-versions list-loading">
+        <img class="processing"
+             alt="Collecting"
+             style="margin:0 5px;"
+             src="<?php /* @noEscape */ echo $block->getViewFileUrl('Fastly_Cdn::images/fastly16.gif') ?>" />
+        <?php /* @noEscape */ echo __('Loading versions...'); ?>
+    </p>
+    <p class="no-versions" style="display: none;">
+        <?php /* @noEscape */ echo __('There are no versions configured yet.'); ?>
+    </p>
+</div>
+-->
+
+
+<div class="message message-error fastly-button-messages"
+     id="fastly-error-versions-button-msg"
+     style="display: none"></div>
+
+<div class="message message-success fastly-button-messages"
+     id="fastly-success-dictionary-button-msg"
+     style="display: none"></div>
+
+<div class="message message-warning fastly-button-messages"
+     id="fastly-warning-dictionary-button-msg"
+     style="display: none"></div>
+
+<style type="text/css">
+    .admin__control-table .fastly-edit-dictionary-icon::before {
+        content: '\e610';
+        font-size: 2rem;
+    }
+
+    .admin__control-table .fastly-delete-dictionary-icon::before {
+        content: '\e630';
+        font-size: 2rem;
+    }
+
+    .no-dictionaries, .loading-dictionaries {
+        text-align: center;
+    }
+</style>

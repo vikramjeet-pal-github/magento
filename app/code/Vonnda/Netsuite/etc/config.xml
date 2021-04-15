@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <vonnda_netsuite_auth>
+            <general>
+                <consumer_key>d3e69cbfe54a130c9a6e9368978ec45a214635e7ed891630840ef728153687e1</consumer_key>
+                <consumer_secret>026db6a0256f602028fd6f42c5baccd62851b0ed017a397ad1d59e9c836e89d0</consumer_secret>
+                <token_id>62819e3eebb305cfd93de432ed1b5f350707c3718de33c5bc11432a30cdba889</token_id>
+                <token_secret>85708d228ee02cfe064875bfe7fbbd950f288834c41dbe68fc829201d4032ebb</token_secret>
+                <comp_id>5137522</comp_id>
+            </general>
+        </vonnda_netsuite_auth>
+
+        <vonnda_netsuite_endpoints>
+            <serial_verification>
+                <url>https://5137522.extforms.netsuite.com/app/site/hosting/scriptlet.nl</url>
+                <deploy_id>1</deploy_id>
+                <script_id>457</script_id>
+                <h_field>66b09c6967df187db971</h_field>
+                <comp_id>5137522</comp_id>
+            </serial_verification>
+
+            <update_customer>
+                <url>https://5137522-sb1.restlets.api.netsuite.com/app/site/hosting/restlet.nl</url>
+                <deploy_id>1</deploy_id>
+                <script_id>546</script_id>
+                <realm>5137522_SB1</realm>
+            </update_customer>
+        </vonnda_netsuite_endpoints>
+
+    </default>
+</config>

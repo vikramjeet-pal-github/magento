@@ -1,0 +1,24 @@
+<?php
+/**
+ * Billing address checkbox
+ * @var $block \Vonnda\Checkout\Block\Onepage\Success
+ */
+
+$address = $block->getOrderShippingAddress();
+?>
+<div class="field choice js-sameasshipping">
+    <input id="sameasshipping" type="checkbox" name="sameasshipping" checked>
+    <label for="sameasshipping" class="label">
+        <span class="checkbox-wrapper">
+            <span class="checkbox-label"><?= __('Billing address same as shipping') ?></span>
+            <span class="address">
+                <?php $data = $address->getData(); ?>
+                <?= $data['street'] ? '<span>' . $data['street'] . ',</span>' : '' ?>
+                <?= $data['region'] ? '<span>' . $data['region'] . ',</span>' : '' ?>
+                <?= $data['city'] ? '<span>' . $data['city'] . ',</span>' : '' ?>
+                <?= $data['postcode'] ? '<span>' . $data['postcode'] . ',</span>' : '' ?>
+                <?= $data['country_id'] ? '<span>' . $data['country_id'] . '</span>' : '' ?>
+            </span>
+        </span>
+    </label>
+</div>

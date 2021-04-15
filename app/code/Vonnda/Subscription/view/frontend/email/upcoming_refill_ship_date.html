@@ -1,0 +1,12 @@
+<!--@subject {{trans "%subject" subject=$subject |raw}}@-->
+<h1>Upcoming Ship Date</h1>
+
+{{trans
+    '<p><strong><span>Subscription Customer ID:</span></strong>%sub_id</p>'
+    sub_id=$subscriptionCustomer.getId() 
+|raw}}
+
+{{trans
+    '<p><strong><span>Number of Days Until Next Shipment: </span></strong>%days</p>'
+    days=$days
+|raw}}

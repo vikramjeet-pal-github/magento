@@ -1,0 +1,268 @@
+<?php $customer = $block->getCustomer() ?>
+<div class="third-party-landing__header-wrap">
+    <div class="third-party-landing__header-text">
+        <h1>Time to register your gift.</h1>
+        <p>Get better customer support, save on filter refills, and receive special offers and updates.</p>
+        <span class="or">or</span>
+        <p>Register with the app by connecting your device.</p>
+        <div class="app-store">
+            <a href="https://itunes.apple.com/us/app/molekule-the-air-you-were-meant-to-breathe/id1219881640"><img src="<?php echo $this->getViewFileUrl('images/app-store.svg'); ?>" alt="App Store"></a>
+            <a href="https://play.google.com/store/apps/details?id=com.molekule.android"><img src="<?php echo $this->getViewFileUrl('images/google-play.svg'); ?>" alt="Google Play Store"></a>
+        </div>
+    </div>
+</div>
+<div class="js-third-party-landing-general-messages-container messages hide msg-error">
+    <div class="js-third-party-landing-general-error-message msg-error__content">
+    </div>
+</div>
+<div class="third-party-landing__form-container js-signin-form-container hide">
+    <form id="signin-form" class="third-party-landing__form third-party-landing__signin-form js-third-party-landing__signin-form" data-mage-init='{"awOscFloatLabel": {}, "validation":{}}'>
+        <div class="subscription-thirdparty-step active">
+            <div class="group-title">
+                <h2>
+                    <span class="mark"></span><span>Sign in</span>
+                    <a class="checkout-edit-step js-create-account" href="javascript:void(0);">Create account</a>
+                </h2>
+                <div class="group-preview hide"></div>
+            </div>
+            <div class="group-content">
+                <div class="js-third-party-landing-signin-messages-container messages hide">
+                    <div class="js-third-party-landing-signin-error-message message error">
+                    </div>
+                </div>
+                <fieldset class="fieldset">
+                    <div class="field">
+                        <div class="control">
+                            <label class="label" for="third-party-landing-signin-email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                            <input class="third-party-landing__landing-form-input js-third-party-landing-input"
+                                   name="username"
+                                   id="third-party-landing-signin-email"
+                                   type="text"
+                                   autocomplete="off"
+                                   data-validate="{required:true, 'validate-email':true}">
+                        </div>
+                    </div>
+                    <div class="field password <?= $block->getIsCustomerLoggedIn() ? 'hide' : "" ?>" >
+                        <div class="control">
+                            <label class="label" for="third-party-landing-signin-password"><span><?= $block->escapeHtml(__('Password')) ?></span></label>
+                            <input class="third-party-landing__landing-form-input js-third-party-landing-input"
+                                   name="password"
+                                   id="third-party-landing-signin-password"
+                                   data-password-min-length="<?= $block->escapeHtmlAttr($block->getMinimumPasswordLength()) ?>"
+                                   data-password-min-character-sets="<?= $block->escapeHtmlAttr($block->getRequiredCharacterClassesNumber()) ?>"
+                                   autocomplete="off"
+                                   type="password"
+                                   data-validate="{required:true}">
+                        </div>
+                    </div>
+                    <?php echo $block->getChildHtml('msp-recaptcha'); ?>
+                </fieldset>
+            </div>
+            <div class="third-party-landing__actions steps text-center">
+                <button class="checkout-next-step  js-third-party-landing-signin-submit inactive" type="submit">Next</button>
+                <a class="forgot-password" href="<?php echo $this->getBaseUrl(); ?>customer/account/forgotpassword/">I forgot my password</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="third-party-landing__form-container js-signined-in <?= !$block->getIsCustomerLoggedIn() ? 'hide' : "" ?>">
+    <div class="third-party-landing__form">
+        <div class="subscription-thirdparty-step done">
+            <div class="group-title">
+                <h2>
+                    <span class="mark"></span><span>Sign in</span>
+                    <a class="checkout-edit-step js-third-party-landing-signout" href="javascript:void(0);">Sign out</a>
+                </h2>
+                <div class="group-preview hide"></div>
+            </div>
+            <div class="third-party-landing__existing-customer-info-container js-third-party-landing__existing-customer-info-container group-preview <?= !$block->getIsCustomerLoggedIn() ? 'hide' : "" ?>">
+                <p class="js-third-party-landing__existing-customer-email"><?= $customer ? $customer->getEmail() : "" ?></p>
+                <p class="js-third-party-landing__existing-customer-password">••••••••</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hide">
+    <button class="third-party-landing__button-light  js-third-party-landing-signin">Sign In</button>
+    <button class="third-party-landing__button-light  js-third-party-landing-signout">Sign Out</button>
+</div>
+<div class="third-party-landing__form-container">
+    <form class="third-party-landing__form js-third-party-landing__form" data-mage-init='{"awOscFloatLabel": {}}'>
+        <div class="subscription-thirdparty-step device-details active">
+            <div class="group-title">
+                <h2>
+                    <span class="mark"></span><span>Device details</span>
+                    <span class="tab-sign-in">
+                        <span class="show-for-desktop-inline u-fw-300">Have an account? </span><span class="js-third-party-landing-signin">Sign in</span>
+                    </span>
+                    <a class="checkout-edit-step js-device-edit" href="javascript:void(0);">Edit</a>
+                </h2>
+                <div class="group-preview hide"></div>
+            </div>
+            <div class="group-content">
+                <fieldset class="fieldset">
+                    <div class="field">
+                        <div class="control">
+                            <label class="label" for="third-party-landing-serial-number"><span><?= $block->escapeHtml(__('Serial number')) ?></span></label>
+                            <input class="third-party-landing__landing-form-input js-third-party-landing-input input-text gift-serial"
+                                   name="serial-number"
+                                   id="third-party-landing-serial-number"
+                                   type="text"
+                                   autocomplete="off"
+                                   data-validate="{required:true}"
+                                   maxlength="19">
+                            <span class="tooltip">
+                                <span class="tooltip-content">
+                                    <strong>Your 19-digit serial number can be found:</strong>
+                                    <ul>
+                                        <li><span>In the app (Settings > Technical info)</span></li>
+                                        <li><span>On the box's shipping label</span></li>
+                                        <li><span>On the bottom of the device</span></li>
+                                        <li><span><a href="https://help.molekule.com/hc/en-us/requests/new" target="_blank">Still need help?</a></span></li>
+                                    </ul>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field hide">
+                        <div class="control">
+                            <label class="label" for="third-party-landing-sales-channel"><span><?= $block->escapeHtml(__('Serial Number')) ?></span></label>
+                            <input class="third-party-landing__landing-form-input js-third-party-landing-input"
+                                   name="sales-channel"
+                                   id="third-party-landing-sales-channel"
+                                   type="text"
+                                   autocomplete="off"
+                                   data-validate="{required:true}">
+                        </div>
+                    </div>
+                    <input class="third-party-landing__landing-form-input js-third-party-landing-input input-text gift-signup-date"
+                           name="purchase-date"
+                           id="third-party-landing-purchase-date"
+                           type="hidden"
+                           value="<?php echo date('m/d/Y'); ?>" />
+                </fieldset>
+                <div class="steps"><a class="checkout-next-step js-device-next gift-next inactive" href="javascript:void(0);">Next</a></div>
+            </div>
+        </div>
+        <div class="subscription-thirdparty-step create-account">
+            <div class="group-title">
+                <h2>
+                    <span class="mark"></span><span>Create account</span>
+                    <a class="checkout-edit-step js-shipping-edit" href="javascript:void(0);">Edit</a>
+                </h2>
+                <div class="js-subscription-flow-shipping-preview hide"></div>
+            </div>
+            <div class="group-content">
+                <p class="user-intro js-user-already-exists hide">You already have an account. <span class="js-third-party-landing-signin">Sign in</span>.</p>
+                <fieldset class="fieldset">
+                    <div class="field <?= $block->getIsCustomerLoggedIn() ? 'hide' : "" ?>" >
+                        <div class="control">
+                            <label class="label" for="third-party-landing-email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+                            <input class="third-party-landing__landing-form-input js-third-party-landing-input js-email-field"
+                                   name="email"
+                                   id="third-party-landing-email"
+                                   type="text"
+                                   autocomplete="off"
+                                   data-validate="{required:true}"
+                                   placeholder=''>
+                        </div>
+                    </div>
+                    <div class="field password <?= $block->getIsCustomerLoggedIn() ? 'hide' : "" ?>" >
+                        <div class="control">
+                            <label class="label" for="third-party-landing-password"><span><?= $block->escapeHtml(__('Password')) ?></span></label>
+                            <input class="third-party-landing__landing-form-input js-third-party-landing-input"
+                                   name="password"
+                                   id="third-party-landing-password"
+                                   data-password-min-length="<?= $block->escapeHtmlAttr($block->getMinimumPasswordLength()) ?>"
+                                   data-password-min-character-sets="<?= $block->escapeHtmlAttr($block->getRequiredCharacterClassesNumber()) ?>"
+                                   autocomplete="off"
+                                   type="password">
+                            <span class="tooltip">
+                                <span class="tooltip-content">
+                                    8 character min.<br />
+                                    1 lowercase letter<br />
+                                    1 uppercase letter<br />
+                                    1 number<br />
+                                    1 special character<br />
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field password <?= $block->getIsCustomerLoggedIn() ? 'hide' : "" ?>" >
+                        <div class="control">
+                            <label class="label" for="third-party-landing-password"><span><?= $block->escapeHtml(__('Confirm password')) ?></span></label>
+                            <input class="third-party-landing__landing-form-input js-third-party-landing-input"
+                                   name="confirm-password"
+                                   id="third-party-landing-confirm-password"
+                                   data-password-min-length="<?= $block->escapeHtmlAttr($block->getMinimumPasswordLength()) ?>"
+                                   data-password-min-character-sets="<?= $block->escapeHtmlAttr($block->getRequiredCharacterClassesNumber()) ?>"
+                                   autocomplete="off"
+                                   type="password">
+                        </div>
+                    </div>
+                    <div class="field <?= $block->getIsCustomerLoggedIn() ? 'hide' : "" ?>" >
+                        <div class="control">
+                            <label class="label" for="third-party-landing-firstname"><span><?= $block->escapeHtml(__('First Name')) ?></span></label>
+                            <input class="third-party-landing__landing-form-input js-third-party-landing-input"
+                                   name="firstname"
+                                   id="third-party-landing-firstname"
+                                   type="text"
+                                   autocomplete="off"
+                                   data-validate="{required:true}" maxlength="32">
+                        </div>
+                    </div>
+                    <div class="field <?= $block->getIsCustomerLoggedIn() ? 'hide' : "" ?>" >
+                        <div class="control">
+                            <label class="label" for="third-party-landing-lastname"><span><?= $block->escapeHtml(__('Last Name')) ?></span></label>
+                            <input class="third-party-landing__landing-form-input js-third-party-landing-input"
+                                   name="lastname"
+                                   id="third-party-landing-lastname"
+                                   type="text"
+                                   autocomplete="off"
+                                   data-validate="{required:true}" maxlength="32">
+                        </div>
+                    </div>
+                    <div class="choice agreement">
+                        <input id="third-party-landing-accept-terms" type="checkbox" name="third-party-landing-accept-terms" data-validate="{required:true}">
+                        <label for="third-party-landing-accept-terms" class="label js-agreement-label">
+                            Accept
+                            <a class="js-terms-and-conditions" data-target="terms-of-service" data-title="Terms of Service" data-bind="mageInit: {'js/newagreement': {}}" href="javascript:void(0);">
+                                <strong>terms of service</strong>
+                            </a>
+                            and
+                            <a class="js-privacy-policy" data-target="privacy-policy" data-title="Privacy Policy" data-bind="mageInit: {'js/newagreement': {}}" href="javascript:void(0);">
+                                <strong>privacy policy</strong></a>.
+                        </label>
+                        <p class="js-agreement-error-box field-error hide">
+                            Required
+                        </p>
+                    </div>
+                </fieldset>
+                <div class="third-party-landing__actions nomargin text-center">
+                    <button class="third-party-landing__button-light  js-third-party-landing-register">Submit</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/x-magento-init">
+    {
+        ".js-third-party-landing__form": {
+            "validation":{}
+        }
+    }
+</script>
+<script>
+    var isLoggedIn = "<?= $block->getIsCustomerLoggedIn() ? true : false ?>";
+    var netsuiteVerificationUrl = "<?= $block->getNetsuiteVerificationUrl(); ?>";
+    if(isLoggedIn){
+        document.querySelector('body').classList.add('signin-visible');
+    }
+</script>
+<script type="text/x-magento-init">
+    {"*": {"Vonnda_Subscription/js/third-party-landing":{}}}
+</script>
+<div class="hide">
+    <div id="privacy-policy"><?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('privacy-policy')->toHtml(); ?></div>
+    <div id="terms-of-service"><?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('terms-of-service')->toHtml(); ?></div>
+</div>

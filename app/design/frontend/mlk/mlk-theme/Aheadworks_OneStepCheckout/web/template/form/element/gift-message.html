@@ -1,0 +1,20 @@
+<label class="label" data-bind="attr: { for: uid }">
+    <!-- ko if: label -->
+    <span data-bind="text: label"></span>
+    <!-- /ko -->
+</label>
+<textarea class="admin__control-textarea" data-bind="
+    textInput: message,
+    autoResize: message,
+    valueUpdate: valueUpdate,
+    hasFocus: focused,
+    attr: {
+        name: inputName,
+        cols: cols,
+        rows: rows,
+        'aria-describedby': noticeId,
+        placeholder: placeholder,
+        id: uid,
+        disabled: disabled
+    }" maxlength="200"></textarea>
+    <span class="rchars">200 char.</span>

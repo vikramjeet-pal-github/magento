@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @copyright: Copyright © 2019 Vonnda, LLC. All rights reserved.
+ * @author   : Vonnda Digital Agency <hello@vonnda.com>
+ */ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Vonnda\Subscription\Block\Adminhtml\SubscriptionCustomer\InfoBlock" name="subscription_customer_info_block" template="Vonnda_Subscription::subscription_customer_info.phtml" cacheable="false">
+                <block class="Magento\Framework\View\Element\Template" name="device.edit.tab.super.grid.popup.container" as="device.group.grid.popup.container"/>
+            </block>
+            
+            <uiComponent name="vonnda_subscription_subscriptioncustomer_form"/>
+        </referenceContainer>
+    </body>
+    <update handle="vonnda_subscription_subscriptioncustomer_device_popup_grid"/>
+</page>

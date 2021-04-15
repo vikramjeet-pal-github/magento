@@ -1,0 +1,284 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Interface Preferences -->
+    <preference for="Vonnda\Subscription\Api\SubscriptionCustomerRepositoryInterface" type="Vonnda\Subscription\Model\SubscriptionCustomerRepository"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionCustomerInterface" type="Vonnda\Subscription\Model\SubscriptionCustomer"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionCustomerSearchResultInterface" type="Vonnda\Subscription\Model\SubscriptionCustomerSearchResult"/>
+
+    <preference for="Vonnda\Subscription\Api\SubscriptionOrderRepositoryInterface" type="Vonnda\Subscription\Model\SubscriptionOrderRepository"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionOrderInterface" type="Vonnda\Subscription\Model\SubscriptionOrder"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionOrderSearchResultInterface" type="Vonnda\Subscription\Model\SubscriptionOrderSearchResult"/>
+
+    <preference for="Vonnda\Subscription\Api\SubscriptionPaymentRepositoryInterface" type="Vonnda\Subscription\Model\SubscriptionPaymentRepository"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionPaymentInterface" type="Vonnda\Subscription\Model\SubscriptionPayment"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionPaymentSearchResultInterface" type="Vonnda\Subscription\Model\SubscriptionPaymentSearchResult"/>
+
+    <preference for="Vonnda\Subscription\Api\SubscriptionPlanRepositoryInterface" type="Vonnda\Subscription\Model\SubscriptionPlanRepository"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionPlanInterface" type="Vonnda\Subscription\Model\SubscriptionPlan"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionPlanSearchResultInterface" type="Vonnda\Subscription\Model\SubscriptionPlanSearchResult"/>
+
+    <preference for="Vonnda\Subscription\Api\SubscriptionProductRepositoryInterface" type="Vonnda\Subscription\Model\SubscriptionProductRepository"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionProductInterface" type="Vonnda\Subscription\Model\SubscriptionProduct"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionProductSearchResultInterface" type="Vonnda\Subscription\Model\SubscriptionProductSearchResult"/>
+
+    <preference for="Vonnda\Subscription\Api\SubscriptionPromoRepositoryInterface" type="Vonnda\Subscription\Model\SubscriptionPromoRepository"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionPromoInterface" type="Vonnda\Subscription\Model\SubscriptionPromo"/>
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionPromoSearchResultInterface" type="Vonnda\Subscription\Model\SubscriptionPromoSearchResult"/>
+
+    <preference for="Vonnda\Subscription\Api\SubscriptionManagerInterface" type="Vonnda\Subscription\Model\SubscriptionManager"/>
+
+    <preference for="Vonnda\Subscription\Api\SubscriptionServiceInterface" type="Vonnda\Subscription\Model\SubscriptionService"/>
+
+    <preference for="Vonnda\Subscription\Api\Data\SubscriptionCustomerEstimateQueryInterface" type="Vonnda\Subscription\Model\SubscriptionCustomerEstimateQuery"/>
+
+    <!-- Class Overrides -->
+    <preference for="Magento\Customer\Observer\AfterAddressSaveObserver" type="Vonnda\Subscription\Observer\AfterAddressSaveObserverOverride" />
+    <preference for="Magento\Customer\Model\Address" type="Vonnda\Subscription\Model\Customer\Address" />
+    <preference for="Magento\Quote\Model\Quote\Address" type="Vonnda\Subscription\Model\Quote\Address" />
+
+    <!-- Backend Ui -->
+    <!-- Subscription Customer -->
+    <virtualType name="SubscriptionCustomerGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Vonnda\Subscription\Model\ResourceModel\SubscriptionForm\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">SubscriptionCustomerGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="SubscriptionCustomerGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="subscriptioncustomer_listing_data_source" xsi:type="string">Vonnda\Subscription\Model\ResourceModel\SubscriptionCustomer\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Vonnda\Subscription\Model\ResourceModel\SubscriptionCustomer\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">vonnda_subscription_customer</argument>
+            <argument name="eventPrefix" xsi:type="string">vonnda_subscription_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">vonnda_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Vonnda\Subscription\Model\ResourceModel\SubscriptionCustomer</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="subscriptionCustomerVirtualType" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">vonnda_subscription_customer</argument>
+            <argument name="resourceModel" xsi:type="string">Vonnda\Subscription\Model\ResourceModel\SubscriptionCustomer</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Subscription Order -->
+    <virtualType name="SubscriptionOrderGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Vonnda\Subscription\Model\ResourceModel\SubscriptionOrder\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">SubscriptionOrderGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="SubscriptionOrderGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="subscriptionorder_listing_data_source" xsi:type="string">subscriptionOrderVirtualType</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="subscriptionOrderVirtualType" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">vonnda_subscription_order</argument>
+            <argument name="resourceModel" xsi:type="string">Vonnda\Subscription\Model\ResourceModel\SubscriptionOrder</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Subscription Plan -->
+    <virtualType name="SubscriptionPlanGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Vonnda\Subscription\Model\ResourceModel\SubscriptionPlan\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">SubscriptionPlanGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="SubscriptionPlanGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="subscriptionplan_listing_data_source" xsi:type="string">subscriptionPlanVirtualType</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="subscriptionPlanVirtualType" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">vonnda_subscription_plan</argument>
+            <argument name="resourceModel" xsi:type="string">Vonnda\Subscription\Model\ResourceModel\SubscriptionPlan</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Subscription History -->
+    <virtualType name="SubscriptionHistoryGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Vonnda\Subscription\Model\ResourceModel\SubscriptionHistory\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">SubscriptionHistoryGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="SubscriptionHistoryGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="subscriptionhistory_listing_data_source" xsi:type="string">subscriptionHistoryVirtualType</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="subscriptionHistoryVirtualType" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">vonnda_subscription_history</argument>
+            <argument name="resourceModel" xsi:type="string">Vonnda\Subscription\Model\ResourceModel\SubscriptionHistory</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Loggers -->
+    <type name="Vonnda\Subscription\Logger\Handler\DebugLogHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Vonnda\Subscription\Logger\DebugLogger">
+        <arguments>
+            <argument name="name" xsi:type="string"></argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Vonnda\Subscription\Logger\Handler\DebugLogHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Vonnda\Subscription\SubscriptionRepairLogger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Vonnda\Subscription\SubscriptionRepairLogger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">SubscriptionRepairLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Vonnda\Subscription\SubscriptionRepairLogger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Vonnda\Subscription\Logger\Handler\CronLogHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Vonnda\Subscription\Logger\CronLogger">
+        <arguments>
+            <argument name="name" xsi:type="string"></argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Vonnda\Subscription\Logger\Handler\CronLogHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Vonnda\Subscription\Logger\Handler\DebugTenDayEmailLogHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Vonnda\Subscription\Logger\DebugTenDayEmailLogger">
+        <arguments>
+            <argument name="name" xsi:type="string"></argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Vonnda\Subscription\Logger\Handler\DebugTenDayEmailLogHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Vonnda\Subscription\Logger\Handler\DebugThirtyDayEmailLogHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Vonnda\Subscription\Logger\DebugThirtyDayEmailLogger">
+        <arguments>
+            <argument name="name" xsi:type="string"></argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Vonnda\Subscription\Logger\Handler\DebugThirtyDayEmailLogHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Vonnda\Subscription\Logger\Handler\SubscriptionManagerLogHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Vonnda\Subscription\Logger\SubscriptionManagerLogger">
+        <arguments>
+            <argument name="name" xsi:type="string"></argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Vonnda\Subscription\Logger\Handler\SubscriptionManagerLogHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Console command -->
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="subscription_repairbackendsubscriptions" xsi:type="object">Vonnda\Subscription\Console\Command\RepairBackendSubscriptions</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="subscription_repairduplicatesubscriptions" xsi:type="object">Vonnda\Subscription\Console\Command\RepairDuplicateSubscriptions</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="subscription_repairsubscriptionstate" xsi:type="object">Vonnda\Subscription\Console\Command\RepairSubscriptionState</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

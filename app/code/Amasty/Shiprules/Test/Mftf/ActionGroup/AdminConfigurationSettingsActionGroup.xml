@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+
+    <actionGroup name="EditGeneralSettingShiprules">
+        <arguments>
+            <argument name="settingIncludeTaxInSubtotal"/>
+            <argument name="settingUseSubtotalAfterDiscount"/>
+        </arguments>
+        <amOnPage url="{{AdminShiprulesConfigurationPage.url}}" stepKey="navigateToShiprulesConfiguration"/>
+        <conditionalClick stepKey="openGeneralTab"
+                          selector="{{AdminConfigurationsShiprulesSection.GeneralTab}}"
+                          dependentSelector="{{AdminConfigurationsShiprulesSection.GeneralTabOpen}}"
+                          visible="false"/>
+        <selectOption selector="{{AdminConfigurationsShiprulesSection.IncludeTaxInSubtotal}}"
+                      userInput="{{settingIncludeTaxInSubtotal}}"
+                      stepKey="selectGeneralSetting1"/>
+        <selectOption selector="{{AdminConfigurationsShiprulesSection.UseSubtotalAfterDiscount}}"
+                      userInput="{{settingUseSubtotalAfterDiscount}}"
+                      stepKey="selectGeneralSetting2"/>
+        <click selector="{{AdminConfigurationsShiprulesSection.Save}}" stepKey="saveChangeInRates"/>
+        <waitForPageLoad time="30" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+
+    <actionGroup name="DefaultSettingShiprules">
+        <amOnPage url="{{AdminShiprulesConfigurationPage.url}}" stepKey="navigateToPromoConfiguration"/>
+        <conditionalClick stepKey="openGeneralTab"
+                          selector="{{AdminConfigurationsShiprulesSection.GeneralTab}}"
+                          dependentSelector="{{AdminConfigurationsShiprulesSection.GeneralTabOpen}}"
+                          visible="false"/>
+        <selectOption selector="{{AdminConfigurationsShiprulesSection.IncludeTaxInSubtotal}}"
+                      userInput="0"
+                      stepKey="selectDefaultGeneralSetting1"/>
+        <selectOption selector="{{AdminConfigurationsShiprulesSection.UseSubtotalAfterDiscount}}"
+                      userInput="0"
+                      stepKey="selectDefaultGeneralSetting2"/>
+        <click selector="{{AdminConfigurationsShiprulesSection.Save}}" stepKey="saveChangeInRates"/>
+        <waitForPageLoad time="30" stepKey="waitForPageLoad1"/>
+    </actionGroup>
+
+</actionGroups>

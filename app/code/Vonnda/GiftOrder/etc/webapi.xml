@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Gift Order -->
+    <!-- Post gift_order for guest-cart -->
+    <route method="POST" url="/V1/guest-carts/:cartId/gift">
+        <service class="Vonnda\GiftOrder\Api\GiftOrderServiceInterface" method="setGiftOrderOnGuestCart"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+
+    <!-- Post gift_order for logged in customer -->
+    <route method="POST" url="/V1/carts/mine/gift">
+        <service class="Vonnda\GiftOrder\Api\GiftOrderServiceInterface" method="setGiftOrderOnCart"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+</routes>

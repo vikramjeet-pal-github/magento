@@ -1,0 +1,143 @@
+<?php
+/**
+ * @copyright: Copyright © 2019 Vonnda, LLC. All rights reserved.
+ * @author   : Vonnda Digital Agency <hello@vonnda.com>
+ */
+$viewModel = $block->getViewModel();
+$shippingOptionsArray = $viewModel->getShippingOptionsArray();
+
+?>
+<style>
+    .hide {
+        display:none !important;
+    }
+</style>
+<div class="page-main-actions">
+    <div class="page-actions">
+        <div class="page-actions-buttons">
+            <div class="page-actions" data-ui-id="page-actions-toolbar-content-header">
+                <div class="page-actions-inner" data-title="Import">
+                    <div class="page-actions-buttons">
+                        <button id="back" title="Back" type="button" class="action-scalable back">
+                            <span><?= /* @noEscape */ __('Back') ?></span>
+                        </button>
+
+                        <button id="bulk-operation" title="<?= $block->escapeHtmlAttr(__($block->getData('button_title'))) ?>" type="button" class="action-default scalable save primary">
+                            <span><?= $block->escapeHtml(__($block->getData('button_title'))) ?></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="entry-edit form-inline">
+    <form action="<?= /* @noEscape */ $block->getUrl($block->getData('submit_url')) ?>" id="bulk-operation-form" method="post" enctype="multipart/form-data">
+        <div>
+            <input name="form_key" type="hidden" value="<?= /* @noEscape */ $block->getFormKey() ?>">
+        </div>
+
+        <?= $block->getChildHtml('notice') ?>
+
+        <fieldset class="fieldset admin__fieldset" id="base_fieldset">
+            <legend class="admin__legend legend">
+                <span><?= /* @noEscape */ __('Bulk Operation') ?></span>
+            </legend>
+
+            <div class="admin__field field field-entity">
+                <div class="admin__field-control control">
+                    <div class="admin__field">
+                        <?= /* @noEscape */ __('You selected <strong>%count</strong> subscriptions for this bulk operation.', [
+                            'count' => $viewModel->getSubscriptionCount()
+                        ]) ?><br />
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin__field field field-entity _required" style="margin-bottom:1rem">
+                <div class="admin__field-label" style="width:inherit">
+                    <label for="shipping-method-overwrite">
+                        <span>Shipping Method</span>
+                    </label>
+                </div>
+                <div class="admin__field-control control">
+                    <select class="admin__control-select" name="shipping-method-overwrite" id="shipping-method-overwrite">
+                        <?php foreach($shippingOptionsArray as $shippingOption){?>
+                            <option 
+                                data-title="<?php echo $shippingOption['label']; ?>"
+                                value="<?php echo $shippingOption['value']; ?>">
+                                <?php echo $shippingOption['label']; ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <p class="js-shipping-method-overwrite-error-message hide js-error-message" style="color:red">*Field is required</p>
+
+            <div class="admin__field field field-entity" style="margin-bottom:1rem">
+                <div class="admin__field-label" style="width:inherit">
+                    <label for="shipping-cost-overwrite">
+                        <span>Price Overwrite</span>
+                    </label>
+                </div>
+                <div class="admin__field-control control" style="width:160px">
+                    <input type="text" class="admin__control-text" id="shipping-cost-overwrite" name="shipping-cost-overwrite" aria-required="true" />
+                </div> 
+            </div>
+            <p class="js-shipping-cost-overwrite-error-message hide js-error-message" style="color:red">*Please enter a valid number</p>
+            <p>Leave blank to use live rates</p>
+        </fieldset>
+    </form>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'underscore'
+    ], function($, _) {
+        $('#back').click(function(){
+            self.location.href = '<?= /* @noEscape */ $block->getUrl('vonnda_subscription/subscriptioncustomer/index') ?>';
+        });
+
+        $('#bulk-operation').click(function(){
+            if(formIsValid()){
+                $('#bulk-operation-form').submit();
+            }
+        });
+
+        function formIsValid(){
+            clearErrors();
+            var hasError = false;
+            var methodOverwrite = document.querySelector('#shipping-method-overwrite');
+            var selectedShippingOption = methodOverwrite.options[methodOverwrite.selectedIndex];
+            if(!selectedShippingOption.value){
+                showErrorMessage('.js-shipping-method-overwrite-error-message');
+                hasError = true;
+            }
+            
+            var costOverwrite = document.querySelector('#shipping-cost-overwrite');
+            var costOverwriteNum = parseFloat(costOverwrite.value);
+            if(costOverwrite.value && isNaN(costOverwriteNum)){
+                showErrorMessage('.js-shipping-cost-overwrite-error-message');
+                hasError = true;
+            }
+
+            return !hasError;
+        }
+
+        function showErrorMessage(query)
+        {
+            var container = document.querySelector(query);
+            container.classList.remove('hide');
+        }
+
+        function clearErrors()
+        {
+            var containers = document.querySelectorAll('.js-error-message');
+            _.each(containers, function(container){
+                container.classList.add("hide");
+            });
+        }
+    })
+</script>

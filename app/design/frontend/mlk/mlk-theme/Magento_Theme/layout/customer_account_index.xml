@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="StripeIntegration_Payments::css/stripe_payments.css" />
+        <css src="StripeIntegration_Payments::css/stripe_payments_elements.css" />
+        <css src="StripeIntegration_Payments::css/paymentfont.min.css" />
+    </head>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">My account</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <container name="container" label="" htmlTag="div" htmlClass="dashboard-promo" after="-">
+                <block class="Magento\Cms\Block\Block" name="dashboard_promo" after="-">
+                    <arguments>
+                        <argument name="block_id" xsi:type="string">dashboard-promo</argument>
+                    </arguments>
+                </block>
+            </container>
+            <block class="Vonnda\Subscription\Block\Customer\SubscriptionManagement" name="subscription_list" template="Magento_Theme::subscription_list.phtml" cacheable="false" before="customer_account_dashboard_top" >
+                <block class="Vonnda\Subscription\Block\Customer\SubscriptionManagement" name="activate_flow" template="Vonnda_Subscription::subscription_activate_flow.phtml" cacheable="false">
+                    <block class="StripeIntegration\Payments\Block\Customer\Cards" name="add_card" template="Vonnda_Subscription::subscription_add_card.phtml" cacheable="false"/>
+                </block>
+            </block>
+        </referenceContainer>
+
+        <referenceBlock name="customer_account_dashboard_info" remove="true" />
+        <referenceBlock name="customer_account_dashboard_address" remove="true" />
+    </body>
+</page>

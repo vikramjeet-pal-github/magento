@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--  API  -->
+    <preference for="Vonnda\AheadworksRma\Api\Data\RequestItemInterface" type="Vonnda\AheadworksRma\Model\Request\Item" />
+    <preference for="Vonnda\AheadworksRma\Api\Data\RequestInterface" type="Aheadworks\Rma\Model\Request" />
+    <preference for="Vonnda\AheadworksRma\Api\RequestRepositoryInterface" type="Aheadworks\Rma\Model\RequestRepository" />
+    <preference for="Vonnda\AheadworksRma\Api\Data\RequestSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <!--  BLOCK  -->
+    <preference for="Aheadworks\Rma\Block\Adminhtml\Request\Edit\Button\PrintLabel" type="Vonnda\AheadworksRma\Block\Adminhtml\Request\Edit\Button\PrintLabel" />
+
+    <!--  CONTROLLER  -->
+    <preference for="Aheadworks\Rma\Controller\Adminhtml\CustomField\PostDataProcessor" type="Vonnda\AheadworksRma\Controller\Adminhtml\CustomField\PostDataProcessor" />
+
+    <!--  MODEL  -->
+    <preference for="Aheadworks\Rma\Model\Request\Item" type="Vonnda\AheadworksRma\Model\Request\Item" />
+
+    <!--  UI  -->
+    <preference for="Aheadworks\Rma\Ui\Component\Form\Request\CustomFields" type="Vonnda\AheadworksRma\Ui\Component\Form\Request\CustomFields" />
+
+    <!--  PLUGINS  -->
+    <type name="Aheadworks\Rma\Model\RequestRepository">
+        <plugin name="rma_package_save" type="Vonnda\AheadworksRma\Plugin\Model\RequestRepositoryPlugin" sortOrder="1" disabled="false" />
+    </type>
+    <type name="Aheadworks\Rma\Ui\DataProvider\Request\FormDataProvider">
+        <plugin name="rma_location_display" type="Vonnda\AheadworksRma\Plugin\Ui\DataProvider\Request\FormDataProviderPlugin" sortOrder="1" disabled="false" />
+    </type>
+</config>

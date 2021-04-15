@@ -1,0 +1,37 @@
+<li id="step-payment-method" class="aw-onestep-groups_item payment-methods">
+    <div class="group-title">
+        <h2>
+            <span class="mark"></span><span data-bind="i18n: 'Payment'"></span>
+            <a class="checkout-edit-step" href="javascript:void(0);" data-bind="mageInit: {'js/editstep': {}}">Edit</a>
+            <a class="checkout-edit-step-cancel" href="javascript:void(0);" data-bind="mageInit: {'js/editstep': {}}">Cancel</a>
+        </h2>
+    </div>
+    <div class="group-content">
+        <form id="co-payment-form" class="form payments" novalidate="novalidate" data-bind="submit: onSubmit">
+            <!-- ko if: errorValidationMessage().length > 0 -->
+            <div class="message notice">
+                <span><!-- ko text: errorValidationMessage()--><!-- /ko --></span>
+            </div>
+            <!-- /ko -->
+            <input data-bind='attr: {value: getFormKey()}' type="hidden" name="form_key"/>
+            <!-- ko foreach: getRegion('billingAddress') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+            <!-- ko foreach: getRegion('methodList') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </form>
+        <div class="aw-onestep-sidebar-block_info show-for-desktop" data-bind="mageInit: {'js/popupcancel': {}}">
+            <!-- ko ifnot: window.checkoutConfig.quoteData.gift_order === '1' -->
+                <span class="payment-cc" data-bind="html: subscriptionCheckoutCCBlock"></span>
+            <!-- /ko -->
+            <span class="payment-finance" data-bind="html: subscriptionCheckoutFinanceBlock"></span>
+        </div>
+        <div class="button-wrapper show-for-desktop">
+            <!-- ko foreach: getRegion('actions-toolbar') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+        </div>
+        <div class="steps show-for-mobile step-payment-mobile"><a class="checkout-next-step inactive" href="javascript:void(0);" data-bind="mageInit: {'js/nextstep': {}}">Next</a></div>
+    </div>
+</li>

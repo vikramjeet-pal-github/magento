@@ -1,0 +1,95 @@
+<!-- Shipping and payment methods -->
+<div class="aw-onestep aw-onestep-main">
+    <div class="aw-mobile-hide">
+        <!-- ko foreach: getRegion('column-top') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    </div>
+    <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+    <ul class="aw-onestep-groups">
+        <!-- ko foreach: getRegion('email') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <!-- ko foreach: getRegion('shippingAddress') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <!-- ko foreach: getRegion('shippingMethod') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+        <!-- ko foreach: getRegion('paymentMethod') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    </ul>
+</div>
+
+<!-- Sidebar -->
+<div class="aw-onestep aw-onestep-sidebar" data-bind="mageInit: {'awOscSidebar':{}}">
+    <div class="aw-onestep-sidebar-wrapper" data-bind="mageInit: {'collapsible':{'openedState': 'active'}}">
+        <div class="aw-mobile-hide">
+            <div class="aw-onestep-sidebar-header">
+                <span data-bind="i18n: 'Order summary'"></span>
+                <a class="show-for-desktop edit-cart-link link-arrow" data-bind="attr: { href: BASE_URL + 'checkout/cart/' }">Edit cart</a>
+                <span class="show-for-mobile toggle-cart-link js-toggle-cart-items" data-role="title">Toggle cart</span>
+            </div>
+        </div>
+        <div class="aw-onestep-sidebar-content">
+            <div class="cart-items aw-mobile-hide" data-role="content">
+                <!-- ko foreach: getRegion('cart-items') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <!--/ko-->
+            </div>
+            <!-- ko foreach: getRegion('totals') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+            <!-- ko foreach: getRegion('payment-options') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+            <!-- ko foreach: getRegion('grand-totals') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+            <!-- ko foreach: getRegion('order-note') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+            <!-- ko foreach: getRegion('existing-user-fields') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+            <div class="aw-onestep-sidebar-block_info" data-bind="mageInit: {'js/popupcancel': {}}">
+                <!-- ko ifnot: window.checkoutConfig.quoteData.gift_order === '1' -->
+                    <span class="payment-cc" data-bind="html: subscriptionCheckoutCCBlock"></span>
+                <!-- /ko -->
+                <span class="payment-finance" data-bind="html: subscriptionCheckoutFinanceBlock"></span>
+            </div>
+            <!-- ko foreach: getRegion('actions-toolbar') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+
+        </div>
+    </div>
+    <!-- ko foreach: getRegion('trustSeals') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+</div>
+
+<div data-bind="afterRender: function() {    
+    console.log('test');
+    window.zESettings = { 
+        webWidget: {  
+            color: { 
+                theme:'#cfe9db'
+            },
+            chat: { 
+                departments: { 
+                    enabled: [] 
+                } 
+            } 
+        } 
+    };
+    const script = document.createElement('script');
+    script.src = 'https://static.zdassets.com/ekr/snippet.js?key=2861e6e4-53dc-4557-a041-482d2d09af67';
+    script.async = true;
+    script.id = 'ze-snippet';
+    document.head.appendChild(script);
+}">
+</div>

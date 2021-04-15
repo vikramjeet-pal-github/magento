@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="vonnda_subscriptions_email_auto_renewal_charge_attempt_template" label="Auto renewal charge attempted" file="auto_renewal_charge_attempt.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+    <template id="vonnda_subscriptions_email_turn_off_auto_renew_template" label="Turn off auto refill" file="turn_off_auto_renew.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+
+    <!-- Activation Confirmation -->
+    <template id="vonnda_subscriptions_email_auto_refill_activation_success_template" label="Autorefill signup success" file="auto_renew_confirmation.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+    <template id="vonnda_subscriptions_email_auto_refill_activation_success_template_free" label="Autorefill signup success - free available" file="auto_renew_confirmation_free.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+
+    <!-- Refill Reminders -->
+    <template id="vonnda_subscriptions_email_refill_reminder_10_day_template" label="Auto Renewal Address Confirmation US" file="auto_renew_address_confirmation_us.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+    <template id="vonnda_subscriptions_email_refill_reminder_10_day_template_ca" label="Auto Renewal Address Confirmation CA" file="auto_renew_address_confirmation_ca.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+    <template id="vonnda_subscriptions_email_refill_reminder_30_day_template" label="Auto Renewal Reminder" file="auto_renewal_reminder.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+
+    <!-- AutoRenew Decline -->
+    <template id="vonnda_subscriptions_email_auto_renew_decline_attempt_1_template" label="Decline Attempt Number One" file="auto_renew_decline_attempt_1.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+    <template id="vonnda_subscriptions_email_auto_renew_decline_attempt_2_template" label="Decline Attempt Number Two" file="auto_renew_decline_attempt_2.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+    <template id="vonnda_subscriptions_email_auto_renew_decline_attempt_3_template" label="Decline Attempt Number Three" file="auto_renew_decline_attempt_3.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+    <template id="vonnda_subscriptions_email_auto_renew_decline_attempt_4_template" label="Decline Attempt Number Four" file="auto_renew_decline_attempt_4.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+
+    <!-- Returned -->
+    <template id="vonnda_subscriptions_email_subscription_returned_template" label="Subscription Returned" file="subscription_returned.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+
+    <!-- Gift Order Confirmation -->
+    <template id="vonnda_subscriptions_email_gift_order_template" label="Gift Order Confirmation" file="gift_order_confirmation.html" type="html" module="Vonnda_Subscription" area="frontend"/>
+</config>

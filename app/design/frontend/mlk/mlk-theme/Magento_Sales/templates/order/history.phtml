@@ -1,0 +1,64 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_orders = $block->getOrders(); ?>
+<?= $block->getChildHtml('info') ?>
+<?php if ($_orders && count($_orders)): ?>
+    <div class="table-wrapper orders-history">
+        <div class="block-title order">
+            <strong><?= /* @escapeNotVerified */ __('Orders') ?></strong>
+        </div>
+        <table class="data table table-order-items history" id="my-orders-table">
+            <caption class="table-caption"><?= /* @escapeNotVerified */ __('Orders') ?></caption>
+            <thead>
+            <tr>
+                <th scope="col" class="col id"><?= /* @escapeNotVerified */ __('Order #') ?></th>
+                <th scope="col" class="col date"><?= /* @escapeNotVerified */ __('Date') ?></th>
+                <?= /* @noEscape */ $block->getChildHtml('extra.column.header') ?>
+                <th scope="col" class="col total"><?= /* @escapeNotVerified */ __('Order total') ?></th>
+                <th scope="col" class="col actions"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($_orders as $_order): ?>
+                <?php $isGiftOrder = $_order->getGiftOrder(); ?>
+                <?php $tracksCollection = $_order->getTracksCollection(); ?>
+                <?php //echo json_encode($tracksCollection); ?>
+                <tr <?php if($tracksCollection->getItems()) {echo 'class="has-shipment"';} ?>>
+                    <td data-th="<?= $block->escapeHtml(__('Order #')) ?>" class="col id"><?= /* @escapeNotVerified */ $_order->getRealOrderId() ?><?= $isGiftOrder ? "<span class='gift-line'>This is a gift</span>" : ""; ?></td>
+                    <td data-th="<?= $block->escapeHtml(__('Date')) ?>" class="col date"><?= /* @escapeNotVerified */ $block->formatDate($_order->getCreatedAt()) ?></td>
+                    <?php $extra = $block->getChildBlock('extra.container'); ?>
+                    <?php if ($extra): ?>
+                        <?php $extra->setOrder($_order); ?>
+                        <?= /* @noEscape */ $extra->getChildHtml() ?>
+                    <?php endif; ?>
+
+                    <td data-th="<?= $block->escapeHtml(__('Order Total')) ?>" class="col total"><?= /* @escapeNotVerified */ $_order->formatPrice($_order->getGrandTotal()) ?><?= $isGiftOrder ? "<span class='mobile-gift-line'>This is a gift</span>" : ""; ?></td>
+
+                    <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                        <?php echo $this->getLayout()
+                            ->createBlock('Vonnda\NarvarShipment\Block\Shipment\Track')
+                            ->setTemplate('Vonnda_NarvarShipment::order/shipment/track.phtml')
+                            ->setOrder($_order)->setIsOrderView(false)
+                            ->toHtml(); ?>
+                        <a href="<?= /* @escapeNotVerified */ $block->getViewUrl($_order) ?>" class="action view">
+                            <span><?= /* @escapeNotVerified */ __('View') ?></span>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty"><span><?= /* @escapeNotVerified */ __('You have placed no orders.') ?></span></div>
+<?php endif ?>

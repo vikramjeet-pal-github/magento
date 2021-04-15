@@ -1,0 +1,10 @@
+<div class="primary">
+    <button class="action primary checkout" type="submit" data-bind="click: placeOrder, attr: {'title': $t('Place Order')}, css: {deactivated: !isPlaceOrderActionAllowed()}, enable: isPlaceOrderActionAllowed()">
+        <span data-bind="i18n: 'Place Order'"></span>
+    </button>
+    <div class="security-icons-wrapper">
+        <span class="icon security-icon security-icon-stripe">
+            <img data-bind="attr: { src: require.toUrl('Aheadworks_OneStepCheckout/images/stripe.jpg')}" alt="">
+        </span>
+    </div>
+</div>

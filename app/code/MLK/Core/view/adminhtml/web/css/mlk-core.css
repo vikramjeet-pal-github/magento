@@ -1,0 +1,16 @@
+/* TODO - this is temporary until .less working in theme */
+
+.refund-offline-button,
+.refund-offline-button:hover {
+    border: none !important;
+    background: none !important;
+    float: left;
+    text-decoration: underline !important;
+    padding: 12px 0px !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    cursor: pointer;
+    text-shadow: none !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+}

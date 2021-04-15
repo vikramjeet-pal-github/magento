@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+NOTICE OF LICENSE
+
+This source file is subject to the NekloEULA that is bundled with this package in the file ICENSE.txt.
+
+It is also available through the world-wide-web at this URL: http://store.neklo.com/LICENSE.txt
+
+Copyright (c)  Neklo (http://store.neklo.com/)
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\OfflineShipping\Model\Carrier\Tablerate"
+                type="Neklo\XTableRate\Model\Carrier\Tablerate"/>
+    <preference for="Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate"
+                type="Neklo\XTableRate\Model\ResourceModel\Carrier\Tablerate"/>
+    <preference for="Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate\Import"
+                type="Neklo\XTableRate\Model\ResourceModel\Carrier\Tablerate\Import"/>
+    <preference for="Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate\DataHashGenerator"
+                type="Neklo\XTableRate\Model\ResourceModel\Carrier\Tablerate\DataHashGenerator"/>
+    <preference for="Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate\CSV\RowParser"
+                type="Neklo\XTableRate\Model\ResourceModel\Carrier\Tablerate\CSV\RowParser"/>
+    <preference for="Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate\CSV\ColumnResolver"
+                type="Neklo\XTableRate\Model\ResourceModel\Carrier\Tablerate\CSV\ColumnResolver"/>
+    <preference for="Magento\OfflineShipping\Block\Adminhtml\Carrier\Tablerate\Grid"
+                type="Neklo\XTableRate\Block\Adminhtml\Shipping\Carrier\Tablerate\Grid"/>
+</config>

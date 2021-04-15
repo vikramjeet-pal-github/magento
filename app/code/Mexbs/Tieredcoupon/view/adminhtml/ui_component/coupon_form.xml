@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">coupon_form.coupon_form_data_source</item>
+            <item name="deps" xsi:type="string">coupon_form.coupon_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Tiered Coupon</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">coupon_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="array">
+                <item name="name" xsi:type="string">back</item>
+                <item name="label" xsi:type="string" translate="true">Back</item>
+                <item name="class" xsi:type="string">back</item>
+                <item name="url" xsi:type="string">tieredcoupon/coupon/grid</item>
+            </item>
+            <item name="save" xsi:type="string">Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\Edit\SaveButton</item>
+            <item name="reset" xsi:type="string">Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\Edit\ResetButton</item>
+            <item name="save_and_continue" xsi:type="string">Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\Edit\SaveAndContinueButton</item>
+            <item name="delete" xsi:type="string">Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\Edit\DeleteButton</item>
+        </item>
+    </argument>
+    <dataSource name="coupon_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Mexbs\Tieredcoupon\Model\Tieredcoupon\DataProvider</argument>
+            <argument name="name" xsi:type="string">coupon_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">tieredcoupon_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="tieredcoupon/coupon/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general" sortOrder="1">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true"/>
+                <item name="sortOrder" xsi:type="number">10</item>
+            </item>
+        </argument>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">coupon</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="code">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Code</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">coupon</item>
+                    <item name="dataScope" xsi:type="string">code</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="description">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">coupon</item>
+                    <item name="dataScope" xsi:type="string">description</item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">coupon</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                    <item name="label" xsi:type="string" translate="true">Active</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="sub_coupons" sortOrder="30">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Manage Sub Coupons</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+            </item>
+        </argument>
+        <container name="assign_products_container" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">160</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\SubCoupons</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+    <fieldset name="manage_coupon_codes" sortOrder="50">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Auto-generate Coupon Codes</label>
+        </settings>
+        <htmlContent name="html_content">
+            <block class="Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\Edit\Tab\Coupons"
+                   name="tieredcoupon_rule_edit_tab_coupons" as="tieredcoupon_rule_edit_tab_coupons" template="Mexbs_Tieredcoupon::tab/coupons.phtml">
+                <block class="Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\Edit\Tab\Coupons\Form" name="tieredcoupon_edit_tab_coupons_form"/>
+                <block class="Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\Edit\Tab\Coupons\Grid" name="tieredcoupon_edit_tab_coupons_grid"/>
+            </block>
+        </htmlContent>
+    </fieldset>
+</form>

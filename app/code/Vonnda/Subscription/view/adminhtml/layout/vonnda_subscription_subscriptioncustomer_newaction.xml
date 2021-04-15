@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @copyright: Copyright © 2019 Vonnda, LLC. All rights reserved.
+ * @author   : Vonnda Digital Agency <hello@vonnda.com>
+ */ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">            
+            <block class="Magento\Framework\View\Element\Template" name="subscription_customer_customer_chooser" template="Vonnda_Subscription::subscription_customer_customer_chooser.phtml" cacheable="false"/>
+            <block class="Vonnda\Subscription\Block\Adminhtml\Backend\Widget\Grid\Container" name="subscription-customer.grid.container" template="Magento_Backend::widget/grid/container/empty.phtml" after="subscription_customer_customer_chooser"/>
+        </referenceContainer>
+    </body>
+    <update handle="vonnda_subscription_subscriptioncustomer_customerchooser"/>
+    <update handle="vonnda_subscription_subscriptioncustomer_edit"/>
+</page>

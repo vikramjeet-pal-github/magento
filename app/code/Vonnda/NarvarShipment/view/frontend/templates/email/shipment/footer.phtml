@@ -1,0 +1,12 @@
+<?php
+/** @var Vonnda\NarvarShipment\Block\Shipment\Track $block */
+
+/** @var Magento\Sales\Model\Order\Shipment $shipment */
+$shipment = $block->getShipment();
+/* @var Magento\Sales\Model\Order $order */
+$order = $block->getOrder();
+if ($shipment && $order) {
+    if($order->getShippingMethod() != 'tablerate_same-day-delivery'){
+        echo "<p style='-moz-hyphens: none!important; -ms-hyphens: none!important; -webkit-hyphens: none!important; margin: 0; margin-bottom: 0; border-collapse: collapse!important; color: #535354; font-family: Helvetica,Arial,sans-serif; font-size: 12px; font-weight: lighter; hyphens: none!important; line-height: 1.45; padding: 0; text-align: left; white-space: no-wrap!important; word-break: keep-all!important; word-wrap: normal!important;'>Once an order has been placed, we are unable to cancel it or make any additional changes as we work hard to ship all orders by the next business day. If you would like to update your address, provide delivery instructions, or hold your package for pickup, we recommend signing up for <a href='https://www.fedex.com/apps/fdmenrollment/?locale=en_US'>FedEx Delivery Manager</a>.</p>";
+    } 
+}

@@ -1,0 +1,26 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="actions">
+    <?php $_order = $block->getOrder();
+    echo $this->getLayout()
+        ->createBlock('Vonnda\NarvarShipment\Block\Shipment\Track')
+        ->setTemplate('Vonnda_NarvarShipment::order/shipment/track.phtml')
+        ->setOrder($_order)->setIsOrderView(true)
+        ->toHtml(); ?>
+    <a class="action button button_white print" href="<?= /* @escapeNotVerified */ $block->getPrintUrl($_order) ?>" onclick="this.target='_blank';">
+        <span><?= /* @escapeNotVerified */ __('Print Order') ?></span>
+    </a>
+    <?php if ($this->helper('Magento\Sales\Helper\Reorder')->canReorder($_order->getEntityId())) { ?>
+        <a href="#" data-post='<?php /* @escapeNotVerified */ echo $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)->getPostData($block->getReorderUrl($_order)) ?>' class="action button button_dark order">
+            <span><?= /* @escapeNotVerified */ __('Reorder') ?></span>
+        </a>
+    <?php } ?>
+    <?= $block->getChildHtml() ?>
+</div>

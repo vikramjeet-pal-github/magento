@@ -1,0 +1,217 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Bundle\Block\Sales\Order\Items\Renderer */ ?>
+<?php /** @var \Magento\Sales\Model\Order\Item $_item */
+$_item = $block->getItem();
+$_order = $block->getOrder();
+$_index = 0;
+$_prevOptionId = '';
+$_imagehelper = $this->helper('Magento\Catalog\Helper\Image');
+$_product = $_item->getProduct();
+$productImage = $_imagehelper->init($_product, 'category_page_list', array('height' => '104' , 'width'=> '104'))->getUrl();
+if ($block->getItemOptions() || $_item->getDescription() || $this->helper('Magento\GiftMessage\Helper\Message')->isMessagesAllowed('order_item', $_item) && $_item->getGiftMessageId()) {
+    $_showlastRow = true;
+} else {
+    $_showlastRow = false;
+}
+if ($_item->getParentItem()) {
+    $attributes = $block->getSelectionAttributes($_item);
+    if ($_prevOptionId != $attributes['option_id']) { ?>
+        <tr class="options-label">
+            <td class="col label" colspan="5"><?= /* @escapeNotVerified */ $attributes['option_label'] ?></td>
+        </tr>
+        <?php $_prevOptionId = $attributes['option_id']; ?>
+    <?php } ?>
+<?php } ?>
+<tr id="order-item-row-<?= /* @escapeNotVerified */ $_item->getId() ?>" class="order-item-row <?php if ($_item->getParentItem()) { ?>item-options-container<?php } else { ?>item-parent<?php } ?>"<?php if ($_item->getParentItem()) { ?> data-th="<?= /* @escapeNotVerified */ $attributes['option_label'] ?>"<?php } ?>>
+    <?php if (!$_item->getParentItem()) { ?>
+        <td class="col name" data-th="<?= $block->escapeHtml(__('Item')) ?>">
+            <div class="item-image-wrapper">
+                <?php if ($productImage) echo '<img src="'. $productImage .'">'; ?>
+            </div>
+            <div class="item-details-wrapper">
+                <strong class="product name product-item-name"><?= $block->escapeHtml($_item->getName()) ?></strong>
+                <?php if ($_product->getData('short_description')) { ?>
+                    <div class="product-item-description-off">
+                        <?php echo $_product->getData('short_description'); ?>
+                    </div>
+                    <div class="show-for-mobile">
+                        <div class="mobile-qty">
+                            <?php $qty = $_item->getQtyOrdered()*1;
+                            if (($_item->getParentItem() && $block->isChildCalculated()) ||
+                                (!$_item->getParentItem() && !$block->isChildCalculated()) || ($_item->getQtyShipped() > 0 && $_item->getParentItem() && $block->isShipmentSeparately())) { ?>
+                                <ul class="items-qty">
+                                    <?php if (($_item->getParentItem() && $block->isChildCalculated()) || (!$_item->getParentItem() && !$block->isChildCalculated())) {
+                                        if ($_item->getQtyOrdered() > 0) {
+                                            $qty = $_item->getQtyOrdered()*1;
+                                        } elseif ($_item->getQtyShipped() > 0 && !$block->isShipmentSeparately()) {
+                                            $qty = $_item->getQtyShipped()*1;
+                                        } elseif ($_item->getQtyCanceled() > 0) {
+                                            $qty = $_item->getQtyCanceled()*1;
+                                        } elseif ($_item->getQtyRefunded() > 0) {
+                                            $qty = $_item->getQtyRefunded()*1;
+                                        } ?>
+                                        <li class="item">
+                                            <span class="content"><?= $qty ?></span>
+                                        </li>
+                                    <?php } elseif ($_item->getQtyShipped() > 0 && $_item->getParentItem() && $block->isShipmentSeparately()) {
+                                        $qty = $_item->getQtyShipped()*1; ?>
+                                        <li class="item">
+                                            <span class="title"><?= /* @escapeNotVerified */ __('Shipped') ?></span>
+                                            <span class="content"><?= $qty ?></span>
+                                        </li>
+                                    <?php } else { ?>
+                                        <li class="item">
+                                            <span class="content"><?= $qty ?></span>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                            <?php } else { ?>
+                                <span class="content">Qty: <?= $qty ?></span>
+                            <?php } ?>
+                        </div>
+                        <div class="mobile-price">
+                            <strong>
+                                <?php if (!$_item->getParentItem()) { ?>
+                                    <?= $block->getItemPriceHtml() ?>
+                                <?php } else { ?>
+                                    &nbsp;
+                                <?php } ?>
+                            </strong>
+                        </div>
+                    </div>
+                <?php } ?>
+
+                <?php if(($_product->getSku() === 'MH1_Device_US' || $_product->getSku() === 'MH1_Device_CA' || $_product->getSku() === 'MinimoB_US' || $_product->getSku() === 'MinimoP_US' || $_product->getSku() === 'MinimoP_CA' || $_product->getSku() === 'airpro-us') && !$_order->getGiftOrder()): ?>
+                    <div class="features-line">
+                        Features auto-refills
+                        <span class="features-tooltip">
+                            <span class="tooltip-content">
+                                <?php if($_product->getSku() === 'MH1_Device_US'): ?>
+                                    <strong>Air: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    & 4 Pre-Filters<br>
+                                    <strong>$130/year</strong>
+                                <?php elseif($_product->getSku() === 'MH1_Device_CA'): ?>
+                                    <strong>Air: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    & 4 Pre-Filters<br>
+                                    <strong>$190/year</strong>
+                                <?php elseif($_product->getSku() === 'MinimoB_US'): ?>
+                                    <strong>Mini: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    <strong>$99/year</strong>
+                                <?php elseif($_product->getSku() === 'MinimoP_US'): ?>
+                                    <strong>Mini+: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    <strong>$99/year</strong>
+                                <?php elseif($_product->getSku() === 'MinimoP_CA'): ?>
+                                    <strong>Mini+: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    <strong>$145/year</strong>
+                                <?php elseif($_product->getSku() === 'airpro-us'): ?>
+                                    <strong>Air Pro: auto-refills</strong><br>
+                                    2 PECO-Filters<br>
+                                    <strong>$198/year</strong>
+                                <?php endif; ?>
+                            </span>
+                        </span>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </td>
+    <?php } else { ?>
+        <td class="col value" data-th="<?= $block->escapeHtml(__('Product Name')) ?>"><?= $block->getValueHtml($_item) ?></td>
+    <?php } ?>
+    <td class="col sku" data-th="<?= $block->escapeHtml(__('SKU')) ?>"><?= /* @escapeNotVerified */ $block->prepareSku($_item->getSku()) ?></td>
+    <td class="col price show-for-desktop" data-th="<?= $block->escapeHtml(__('Price')) ?>">
+        <?php if (!$_item->getParentItem()) { ?>
+            <?= $block->getItemPriceHtml() ?>
+        <?php } else { ?>
+            &nbsp;
+        <?php } ?>
+    </td>
+    <td class="col qty show-for-desktop" data-th="<?= $block->escapeHtml(__('Quantity')) ?>">
+        <?php $qty = $_item->getQtyOrdered()*1;
+        if (($_item->getParentItem() && $block->isChildCalculated()) ||
+            (!$_item->getParentItem() && !$block->isChildCalculated()) || ($_item->getQtyShipped() > 0 && $_item->getParentItem() && $block->isShipmentSeparately())) { ?>
+            <ul class="items-qty">
+                <?php if (($_item->getParentItem() && $block->isChildCalculated()) || (!$_item->getParentItem() && !$block->isChildCalculated())) {
+                    if ($_item->getQtyOrdered() > 0) {
+                        $qty = $_item->getQtyOrdered()*1;
+                    } elseif ($_item->getQtyShipped() > 0 && !$block->isShipmentSeparately()) {
+                        $qty = $_item->getQtyShipped()*1;
+                    } elseif ($_item->getQtyCanceled() > 0) {
+                        $qty = $_item->getQtyCanceled()*1;
+                    } elseif ($_item->getQtyRefunded() > 0) {
+                        $qty = $_item->getQtyRefunded()*1;
+                    } ?>
+                    <li class="item">
+                        <span class="content"><?= $qty ?></span>
+                    </li>
+                <?php } elseif ($_item->getQtyShipped() > 0 && $_item->getParentItem() && $block->isShipmentSeparately()) {
+                    $qty = $_item->getQtyShipped()*1; ?>
+                    <li class="item">
+                        <span class="title"><?= /* @escapeNotVerified */ __('Shipped') ?></span>
+                        <span class="content"><?= $qty ?></span>
+                    </li>
+                <?php } else { ?>
+                    <li class="item">
+                        <span class="content"><?= $qty ?></span>
+                    </li>
+                <?php } ?>
+            </ul>
+        <?php } else { ?>
+            <span class="content"><?= $qty ?></span>
+        <?php } ?>
+    </td>
+    <td class="col subtotal" data-th="<?= $block->escapeHtml(__('Subtotal')) ?>">
+        <?php if (!$_item->getParentItem()) { ?>
+            <?= $block->getItemRowTotalHtml() ?>
+        <?php } else { ?>
+            &nbsp;
+        <?php } ?>
+    </td>
+</tr>
+<?php if ($children = $_item->getChildrenItems()) {
+    $selectionCollection = $_product->getTypeInstance(true)->getSelectionsCollection($_product->getTypeInstance(true)->getOptionsIds($_product), $_product);
+    foreach ($selectionCollection as $proselection) {
+        $productsArray[$proselection->getOptionId()][] = $proselection->getProductId();
+    }
+    $optionsCollection = $_product->getTypeInstance(true)->getOptionsCollection($_product);
+    foreach ($optionsCollection as $options) {
+        if ($options->getDefaultTitle() == 'Subscription' && isset($productsArray[$options->getOptionId()])) {
+            foreach ($children as $child) {
+                if (in_array($child->getProductId(), $productsArray[$options->getOptionId()])) {
+                    $product = $child->getProduct(); ?>
+                    <tr id="order-item-row-<?= /* @escapeNotVerified */ $_item->getId() ?>" class="hide order-item-row item-options-container">
+                        <td class="col name" data-th="<?= $block->escapeHtml(__('Item')) ?>">
+                            <?php $productImage = $this->helper('Magento\Catalog\Helper\Image')->init($product, 'category_page_list', array('height' => '104' , 'width'=> '104'))->getUrl(); ?>
+                            <div class="item-image-wrapper">
+                                <?php if ($productImage) echo '<img src="'. $productImage .'">'; ?>
+                            </div>
+                            <div class="item-details-wrapper">
+                                <strong class="product name product-item-name">Filter Auto-Refills</strong>
+                                <div class="product-item-details">
+                                    Next refill <?php date_default_timezone_set('America/Los_Angeles'); echo date("m/j/Y", strtotime("+6 months", strtotime($child->getCreatedAt()))); ?>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="col sku" data-th="<?= $block->escapeHtml(__('SKU')) ?>"><?= /* @escapeNotVerified */ $block->prepareSku($child->getSku()) ?></td>
+                        <td class="col price" data-th="<?= $block->escapeHtml(__('Price')) ?>">&nbsp;</td>
+                        <td class="col qty" data-th="<?= $block->escapeHtml(__('Quantity')) ?>">
+                            <span class="content"><?= $qty ?></span>
+                        </td>
+                        <td class="col subtotal" data-th="<?= $block->escapeHtml(__('Subtotal')) ?>">&nbsp;</td>
+                    </tr>
+                <?php }
+            }
+        }
+    }
+} ?>

@@ -1,0 +1,258 @@
+<?php // @codingStandardsIgnoreFile
+/** @var $block \Vonnda\Checkout\Block\Onepage\Success */
+if (true || $block->getOrderId()) {
+    $order = $block->getOrder();
+    $hasDevice = false;
+    $isSubActive = $block->isSubActive();
+    $style = '';
+    if ($block->wasPaymentAffirm() && $block->wasDevicePurchased() && $block->isLoggedIn() && !$order->getGiftOrder()) {
+        $style = 'display:none';
+        echo $block->getChildHtml('checkout.success.affirm.flow');
+    } ?>
+    <div id="final-success-page" style="<?= $style ?>">
+        <div class="page-title-wrapper">
+            <h1 class="page-title">
+                <span class="base" data-ui-id="page-title-wrapper">Thanks <?php echo $order->getBillingAddress()->getFirstname(); ?>!</span>
+            </h1>
+        </div>
+        <div class="checkout-success">
+            <div class="column left-column">
+                <div class="success-block">
+                    <?php if($order->getGiftOrder()) { ?>
+                        <h3 class="mark">Your gift order is confirmed.</h3>
+                    <?php } else { ?>
+                        <h3 class="mark">Your order is confirmed.</h3>
+                    <?php } ?>
+                    <p class="order-no-line">
+                        <?= __('Order #<span>%1</span>', $block->escapeHtml($block->getOrderId())) ?>
+                        <?php if($order->getGiftOrder()) { ?>
+                            <span class="gift-line">This is a gift</span>
+                        <?php } ?>
+                    </p>
+                    <?php if($order->getGiftOrder()) { ?>
+                        <p class="order-process-line">We’re getting their order ready. Keep an eye on your inbox&mdash; we'll send you updates on when it ships.</p>
+                    <?php } else { ?>
+                        <p class="order-process-line">We’re getting your order ready. Look out for email updates on your order status and managing your account.</p>
+                    <?php } ?>
+                </div>
+                <div class="order-summary">
+                    <h3>Order summary</h3>
+                    <?php $items = $order->getAllVisibleItems(); ?>
+                    <div class="item-list">
+                        <?php foreach ($items as $i) { ?>
+                            <?php $_product = $this->getProduct($i->getProductId()); ?>
+                            <?php if ($_product->getTypeId() == 'bundle') { ?>
+                                <div class="row">
+                                    <div class="item-image-wrapper">
+                                        <img class="item-image" src="<?= $block->getBaseUrl() ?>media/catalog/product<?php echo $_product->getImage(); ?>" alt="<?php echo $i->getName(); ?>" />
+                                    </div>
+                                    <div class="item-details-wrapper">
+                                        <h4><?php echo $i->getName(); ?></h4>
+                                        <div class="item-details__short-description">
+                                        <?php echo $_product->getShortDescription(); ?>
+                                        <?php if(!$order->getGiftOrder()): ?>
+                                            <?php if ($_product->getSku() === 'MH1_Device_US' || $_product->getSku() === 'MH1_Device_CA' || $_product->getSku() === 'MinimoB_US' || $_product->getSku() === 'MinimoP_US' || $_product->getSku() === 'MinimoP_CA' || $_product->getSku() === 'airpro-us') { ?>
+                                                <?php $hasDevice = true; ?>
+                                                <div class="features-line<?php echo ($isSubActive ? '' : ' affirm-on'); ?>">
+                                                    <?php echo ($isSubActive ? 'Features auto-refills' : '<span class="u-warning-text">Auto-refills inactive</span>'); ?>
+                                                    <span class="features-tooltip">
+                                                        <span class="tooltip-content">
+                                                            <?php if ($_product->getSku() === 'MH1_Device_US') { ?>
+                                                                <strong>Air: auto-refills</strong><br>
+                                                                $130/year<br><br>
+                                                                Every 6 mos. you get:<br>
+                                                                1 PECO-Filter & 2 Pre-Filters<br>
+                                                                Billed $65 every 6 mos.<br>
+                                                                <em>Sales tax may apply.</em>
+                                                                <?php if ($isSubActive) { ?>
+                                                                    <div class="next-refill"> Next refill <?php echo $block->getNextRefillDate();?> </div>
+                                                                <?php } else {
+                                                                    echo '<div class="next-refill"></div>';
+                                                                } ?>
+                                                                <em>Cancel auto-refills anytime.</em>
+                                                            <?php } elseif ($_product->getSku() === 'MH1_Device_CA') { ?>
+                                                                <strong>Air: auto-refills</strong><br>
+                                                                $190/year<br><br>
+                                                                Every 6 mos. you get:<br>
+                                                                1 PECO-Filter & 2 Pre-Filters<br>
+                                                                Billed $95 every 6 mos.<br>
+                                                                <em>Sales tax may apply.</em>
+                                                                <?php if ($isSubActive) { ?>
+                                                                    <div class="next-refill"> Next refill <?php echo $block->getNextRefillDate();?> </div>
+                                                                <?php } else {
+                                                                    echo '<div class="next-refill"></div>';
+                                                                } ?>
+                                                                <em>Cancel auto-refills anytime.</em>
+                                                            <?php } elseif ($_product->getSku() === 'MinimoB_US') { ?>
+                                                                <strong>Mini: auto-refills</strong><br>
+                                                                $99/year<br><br>
+                                                                Once a year you get:<br>
+                                                                2 PECO-Filters<br>
+                                                                Billed $99 annually<br>
+                                                                <em>Sales tax may apply.</em>
+                                                                <?php if ($isSubActive) { ?>
+                                                                    <div class="next-refill"> Next refill <?php echo $block->getNextRefillDate();?> </div>
+                                                                <?php } else {
+                                                                    echo '<div class="next-refill"></div>';
+                                                                } ?>
+                                                                <em>Cancel auto-refills anytime.</em>
+                                                            <?php } elseif ($_product->getSku() === 'MinimoP_US') { ?>
+                                                                <strong>Mini+: auto-refills</strong><br>
+                                                                $99/year<br><br>
+                                                                Once a year you get:<br>
+                                                                2 PECO-Filters<br>
+                                                                Billed $99 annually<br>
+                                                                <em>Sales tax may apply.</em>
+                                                                <?php if ($isSubActive) { ?>
+                                                                    <div class="next-refill"> Next refill <?php echo $block->getNextRefillDate();?> </div>
+                                                                <?php } else {
+                                                                    echo '<div class="next-refill"></div>';
+                                                                } ?>
+                                                                <em>Cancel auto-refills anytime.</em>
+                                                            <?php } elseif ($_product->getSku() === 'MinimoP_CA') { ?>
+                                                                <strong>Mini+: auto-refills</strong><br>
+                                                                $145/year<br><br>
+                                                                Once a year you get:<br>
+                                                                2 PECO-Filters<br>
+                                                                Billed $145 annually<br>
+                                                                <em>Sales tax may apply.</em>
+                                                                <?php if ($isSubActive) { ?>
+                                                                    <div class="next-refill"> Next refill <?php echo $block->getNextRefillDate();?> </div>
+                                                                <?php } else {
+                                                                    echo '<div class="next-refill"></div>';
+                                                                } ?>
+                                                                <em>Cancel auto-refills anytime.</em>
+                                                            <?php } elseif ($_product->getSku() === 'airpro-us') { ?>
+                                                                <strong>Air Pro: auto-refills</strong><br>
+                                                                $198/year<br><br>
+                                                                Every 6 mos. you get:<br>
+                                                                1 PECO-Filter<br>
+                                                                Billed $99 every 6 mos.<br>
+                                                                <em>Sales tax may apply.</em>
+                                                                <?php if ($isSubActive) { ?>
+                                                                    <div class="next-refill"> Next refill <?php date_default_timezone_set('America/Los_Angeles'); echo date("m/j/Y", strtotime("+6 months"));?> </div>
+                                                                <?php } else {
+                                                                    echo '<div class="next-refill"></div>';
+                                                                } ?>
+                                                                <em>Cancel auto-refills anytime.</em>
+                                                            <?php } ?>
+                                                        </span>
+                                                    </div>
+                                                    <?php if (!$isSubActive) { ?>
+                                                        <span class="u-warning-text">Requires sign-up after purchase</span>
+                                                    <?php } ?>
+                                                <?php } ?>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="item-details-wrapper">
+                                            <?php if ($_product->getTypeId() != 'virtual') { ?>
+                                                <div class="item-details__qty">
+                                                    Qty: <?php echo number_format($i->getQtyOrdered(), 0); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <?php if ($order->getPayment()->getMethod() == 'affirm_gateway') { ?>
+                                                <div class="item-price-wrapper">
+                                                    <span class="affirm-message">
+                                                        <img src="https://cdn-assets.affirm.com/images/all_black_logo-transparent_bg.png" alt="Affirm Logo" />
+                                                    </span>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } else { ?>
+                                <div class="row">
+                                    <div class="item-image-wrapper">
+                                        <img class="item-image" src="<?= $block->getBaseUrl() ?>media/catalog/product<?php echo $_product->getImage(); ?>" alt="<?php echo $i->getName(); ?>" />
+                                    </div>
+                                    <div class="item-details-wrapper">
+                                        <h4><?php echo $i->getName(); ?></h4>
+                                        <div class="item-details__short-description">
+                                            <?php echo $_product->getShortDescription(); ?>
+                                        </div>
+                                        <div class="item-details-wrapper">
+                                            <div class="item-details__qty">
+                                                <?php if($order->getPayment()->getMethod() != 'affirm_gateway' || $_product->getTypeId() != 'virtual') { ?>
+                                                    Qty: <?php echo number_format($i->getQtyOrdered(), 0); ?>
+                                                <?php } ?>
+                                            </div>
+                                            <?php if ($order->getPayment()->getMethod() == 'affirm_gateway') { ?>
+                                                <div class="item-price-wrapper">
+                                                    <span class="affirm-message">
+                                                        <img src="https://cdn-assets.affirm.com/images/all_black_logo-transparent_bg.png" alt="Affirm Logo" />
+                                                    </span>
+                                                </div>
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+                        <?php } ?>
+                    </div>
+                    <div class="order-totals">
+                        <div class="row">
+                            <div class="row-label">
+                                Subtotal
+                            </div>
+                            <div class="row-value">
+                                <?php echo $block->currency($order->getSubtotal(), true, false); ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row-label">
+                                Shipping
+                            </div>
+                            <div class="row-value">
+                                <?php echo $block->currency($order->getShippingAmount(), true, false); ?>
+                            </div>
+                        </div>
+                        <?php if($order->getTaxAmount() != '0.00'): ?>
+                            <div class="row">
+                                <div class="row-label">
+                                    Tax
+                                </div>
+                                <div class="row-value">
+                                    <?php echo $block->currency($order->getTaxAmount(), true, false); ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($order->getDiscountAmount() != '0.00'): ?>
+                            <div class="row">
+                                <div class="row-label">
+                                    Discount
+                                </div>
+                                <div class="row-value">
+                                    <?php echo $block->currency($order->getDiscountAmount(), true, false); ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <div class="row order-total">
+                            <div class="row-label">
+                                Order total
+                            </div>
+                            <div class="row-value">
+                                <?php echo $block->currency($order->getGrandtotal(), true, false); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column divider"></div>
+            <div class="column right-column">
+                <?php if ($hasDevice && !$isSubActive) {
+                    if ($this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('success_activate_reminder')->toHtml() != '') {
+                        echo '<div class="block-activation-reminder">' . $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('success_activate_reminder')->toHtml() . '</div>';
+                    }
+                } ?>
+                <div id="talkable-offer"></div>
+                <?php echo $block->getAdditionalInfoHtml(); ?>
+            </div>
+        </div>
+    </div>
+<?php } else { ?>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action primary continue" href="<?= /* @escapeNotVerified */ $block->getContinueUrl() ?>"><span><?= /* @escapeNotVerified */ __('Continue Shopping') ?></span></a>
+        </div>
+    </div>
+<?php } ?>

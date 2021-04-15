@@ -1,0 +1,6 @@
+<h3>Keep fresh filters coming</h3>
+<?php if($block->getDeviceSku() == 'MN1B-US' || $block->getDeviceSku() == 'MN2P-US' || $block->getDeviceSku() == 'MN2P-CA'): ?>
+    <p>Activate auto-refills to get filter replacements delivered every year for <?php echo $block->getPrice()?> per refill pack (<?php echo $block->getMoreInfo()?>). Your next refill is scheduled for <?php echo $block->getExpDate(); ?>.</p>
+<?php else: ?>
+    <p>Activate auto-refills to get filter replacements delivered every <?php echo $block->getFrequency()?> <?php echo $block->getFrequencyUnit()?> for <?php echo $block->getPrice()?> per refill pack (<?php echo $block->getMoreInfo()?>). Your next refill is scheduled for <?php echo $block->getExpDate(); ?>.</p>
+<?php endif; ?>

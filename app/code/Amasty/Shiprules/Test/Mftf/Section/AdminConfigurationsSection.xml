@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
+
+    <section name="AdminConfigurationsShiprulesSection">
+        <element name="IncludeTaxInSubtotal" type="select" selector="//select[@id='amshiprules_general_tax']"/>
+        <element name="UseSubtotalAfterDiscount" type="select" selector="//select[@id='amshiprules_general_discount']"/>
+        <element name="GeneralTab" type="button" selector="//a[@id='amshiprules_general-head']"/>
+        <element name="GeneralTabOpen" type="block" selector="//div[@class='entry-edit-head admin__collapsible-block']/span[@id='amshiprules_general-link']/following-sibling::a[@class='open']"/>
+        <element name="Save" type="button" selector="//div[@class='page-actions-buttons']/button[@id='save']"/>
+    </section>
+
+</sections>

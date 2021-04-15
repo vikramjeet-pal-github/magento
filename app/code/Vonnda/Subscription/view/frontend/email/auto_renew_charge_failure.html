@@ -1,0 +1,22 @@
+<!--@subject {{trans "%subject" subject=$subject |raw}}@-->
+<h1>Auto Renew Charge Failure</h1>
+
+{{trans
+    '<p><strong><span>Subscription Customer ID:</span></strong>%sub_id</p>'
+    sub_id=$subscriptionCustomer.getId() 
+|raw}}
+
+{{trans
+    '<p><strong><span>Quote ID:</span></strong>%quote_id</p>'
+    quote_id=$quote.getId() 
+|raw}}
+
+{{trans
+    '<p><strong><span>Subscription Plan ID:</span></strong>%sub_plan_id</p>'
+    sub_plan_id=$subscriptionPlan.getId() 
+|raw}}
+
+{{trans
+    '<p><strong><span>Attempt Number:</span></strong>%attempt_number</p>'
+    attempt_number=$attemptNumber
+|raw}}

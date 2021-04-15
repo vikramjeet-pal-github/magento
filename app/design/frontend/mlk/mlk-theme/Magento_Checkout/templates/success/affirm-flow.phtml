@@ -1,0 +1,31 @@
+<?php
+/** @var $block \Vonnda\Checkout\Block\Onepage\Success */
+?>
+<?php
+$order = $block->getOrder();
+?>
+
+<div id="affirm-save-cart-step" style="display: none">
+    <div class="main-wrapper">
+        <div class="block item-details<?= ($block->getAffirmDesignFlow() === 1) ? ' single-product' : '' ?>">
+            <div class="inner-wrapper">
+                <?= $block->getChildHtml('checkout.success.affirm.flow.product.img') ?>
+            </div>
+        </div>
+
+        <div class="block payment-details<?= ($block->getAffirmDesignFlow() === 1) ? ' single-product' : '' ?>">
+            <div class="inner-wrapper">
+                <?= $block->getChildHtml('checkout.success.affirm.flow.form') ?>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "successPage": {
+                "currentPaymentMethod": "<?= $order->getPayment()->getMethod() ?>"
+            }
+        }
+    }
+</script>

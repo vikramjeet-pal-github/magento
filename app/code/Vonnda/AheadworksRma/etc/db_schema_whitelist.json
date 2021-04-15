@@ -1,0 +1,19 @@
+{
+    "aw_rma_request_packages": {
+        "column": {
+            "package_id": true,
+            "request_id": true,
+            "order_id": true,
+            "item_id": true,
+            "item_sku": true,
+            "item_name": true,
+            "item_qty": true,
+            "track_number": true,
+            "shipping_label": true,
+            "location": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

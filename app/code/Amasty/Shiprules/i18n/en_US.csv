@@ -1,0 +1,97 @@
+Conditions,Conditions
+"Apply the rule only to cart items matching the following conditions (leave blank for all items).","Apply the rule only to cart items matching the following conditions (leave blank for all items)."
+"Apply the rule only if the following conditions are met (leave blank for all products).","Apply the rule only if the following conditions are met (leave blank for all products)."
+"Please update Amasty Base module. Re-upload it and replace all the files.","Please update Amasty Base module. Re-upload it and replace all the files."
+"Add new Shipping Rule","Add new Shipping Rule"
+"Unable to load Shipping Rule with ID %1. Please review the log and try again.","Unable to load Shipping Rule with ID %1. Please review the log and try again."
+"Shipping Rules","Shipping Rules"
+"Adjustment for %1 already exists","Adjustment for %1 already exists"
+Subtotal,Subtotal
+"Total Items Quantity","Total Items Quantity"
+"Total Weight","Total Weight"
+"Shipping Postcode","Shipping Postcode"
+"Shipping State/Province","Shipping State/Province"
+"Shipping Country","Shipping Country"
+"Shipping City","Shipping City"
+"Shipping Address Line","Shipping Address Line"
+"Unable to save rule with ID %1. Error: %2","Unable to save rule with ID %1. Error: %2"
+"Unable to save new rule. Error: %1","Unable to save new rule. Error: %1"
+"Rule with specified ID ""%1"" not found.","Rule with specified ID ""%1"" not found."
+"Unable to remove rule with ID %1. Error: %2","Unable to remove rule with ID %1. Error: %2"
+"Unable to remove rule. Error: %1","Unable to remove rule. Error: %1"
+"All orders","All orders"
+"Backorders only","Backorders only"
+"Non backorders","Non backorders"
+Inactive,Inactive
+Active,Active
+Information,Information
+General,General
+"Include Tax in Subtotal","Include Tax in Subtotal"
+"Use Subtotal after Discount","Use Subtotal after Discount"
+"Shipping Rule","Shipping Rule"
+Back,Back
+Reset,Reset
+Save,Save
+"Save and Continue Edit","Save and Continue Edit"
+"Shipping Methods","Shipping Methods"
+"Rule Name","Rule Name"
+"Rule Status","Rule Status"
+"Shipping Carriers and Methods","Shipping Carriers and Methods"
+"Rule Priority","Rule Priority"
+Products,Products
+"Ignore Free Shipping Promo","Ignore Free Shipping Promo"
+Yes,Yes
+No,No
+Weight,Weight
+from,from
+to,to
+Qty,Qty
+Price,Price
+Rates,Rates
+Calculation,Calculation
+"Base Rate for the Order","Base Rate for the Order"
+"Fixed Rate per Product","Fixed Rate per Product"
+"Rate per unit of weight","Rate per unit of weight"
+"Percentage per Product","Percentage per Product"
+"Handling Percentage","Handling Percentage"
+"Rate Change","Rate Change"
+min.,min.
+max.,max.
+"Total Rate","Total Rate"
+Backorders,Backorders
+"Apply the rule to","Apply the rule to"
+"Stores & Customer Groups","Stores & Customer Groups"
+"Admin Area","Admin Area"
+On,On
+Off,Off
+Stores,Stores
+"Customer Groups","Customer Groups"
+"Days and Time","Days and Time"
+"Days of the Week","Days of the Week"
+Time,Time
+"Coupons and discounts","Coupons and discounts"
+"Apply Rules Only With","Apply Rules Only With"
+"Coupon Codes","Coupon Codes"
+"Shopping Cart Rule (discount)","Shopping Cart Rule (discount)"
+"Do NOT Apply Rules With","Do NOT Apply Rules With"
+"Add Rule","Add Rule"
+"Delete items","Delete items"
+"Delete selected items?","Delete selected items?"
+Delete,Delete
+"Change Status","Change Status"
+ID,ID
+Priority,Priority
+Status,Status
+Name,Name
+Carriers,Carriers
+Any,Any
+Methods,Methods
+"Base Rate","Base Rate"
+"All Customer Groups","All Customer Groups"
+"Store Views","Store Views"
+"Fixed Rate","Fixed Rate"
+Percentage,Percentage
+Handling,Handling
+"Active in Admin Area","Active in Admin Area"
+Edit,Edit
+Duplicate,Duplicate

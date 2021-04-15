@@ -1,0 +1,605 @@
+Action Required,Next Filter Ship Date,End Date,Name,Email,Financial Status,Paid at,Fulfillment Status,Fulfilled at,Accepts Marketing,Currency,Subtotal,Shipping,Taxes,Total,Discount Code,Discount Amount,Shipping Method,Created at,Lineitem quantity,Lineitem name,Lineitem price,Lineitem compare at price,Lineitem sku,Lineitem requires shipping,Lineitem taxable,Lineitem fulfillment status,Billing Name,Billing Street,Billing Address1,Billing Address2,Billing Company,Billing City,Billing Zip,Billing Province,Billing Country,Billing Phone,Shipping Name,Shipping Street,Shipping Address1,Shipping Address2,Shipping Company,Shipping City,Shipping Zip,Shipping Province,Shipping Country,Shipping Phone,Notes,Note Attributes,Cancelled at,Payment Method,Payment Reference,Refunded Amount,Vendor,Id,Tags,Risk Level,Source,Lineitem discount,Tax 1 Name,Tax 1 Value,Tax 2 Name,Tax 2 Value,Tax 3 Name,Tax 3 Value,Tax 4 Name,Tax 4 Value,Tax 5 Name,Tax 5 Value,Phone,Receipt Number
+add,3/10/20 11:26,9/11/20 11:26,#MO24435,olivia.yuel@shaw.ca,paid,9/12/19 11:26,fulfilled,9/13/19 19:28,no,CAD,1199,27,134.86,1360.86,,0,Ground Shipping,9/12/19 11:26,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Olivia  Yuel,222 Poplar Crescent,222 Poplar Crescent,,,Saskatoon,S7M 0A6,SK,CA,(306) 222-7130,Olivia  Yuel,222 Poplar Crescent,222 Poplar Crescent,,,Saskatoon,S7M 0A6,SK,CA,(306) 222-7130,,"Molekule Air Purifier: MH1M-SHA190422-004290
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9491412189273.1,0,molekule,1.13E+12,,Low,web,0,GST 5%,61.3,PST 6%,73.56,,,,,,,,
+add,3/9/20 19:20,9/10/20 19:20,#MO24432,serenityjudson@yahoo.ca,paid,9/11/19 19:20,fulfilled,9/13/19 10:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/11/19 19:20,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Serenity Judson,3737 Hwy 21 ,3737 Hwy 21 ,,,Tiverton,N0G 2T0,ON,CA,(226) 401-1476,Catherine Judson,"495 Errol Road West, 109",495 Errol Road West,109,,Sarnia,N7V 2B8,ON,CA,15193360188,,"Molekule Air Purifier: MH1M-SHA190422-004296
+MH1 label: 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9486828044377.1,0,molekule,1.13E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/9/20 10:01,9/10/20 10:01,#MO24427,amlcustomfabrication@bellnet.ca,paid,9/11/19 10:01,fulfilled,9/12/19 17:00,no,CAD,1199,27,159.38,1385.38,,0,Ground Shipping,9/11/19 10:01,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Frank De Cosmi,44 Mission Road,44 Mission Road,,,Brantford,N3S 0A3,ON,CA,(519) 717-6964,Frank De Cosmi,44 Mission Road,44 Mission Road,,,Brantford,N3S 0A3,ON,CA,(519) 717-6964,,"Molekule Air Purifier: MH1M-SHA190422-003928
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9483466145881.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,159.38,,,,,,,,,,
+add,3/7/20 18:43,9/8/20 18:43,#MO24420,ashley@modernlifemanagement.com,paid,9/9/19 18:43,fulfilled,9/11/19 20:00,no,CAD,1199,27,147.12,1373.12,,0,Ground Shipping,9/9/19 18:43,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Ashley Van Strein,3130 Travers Avenue,3130 Travers Avenue,,,West Vancouver,V7V 1G3,BC,CA,(604) 649-7017,Leah  O'Neill,2976 Park Lane,2976 Park Lane,,,West Vancouver,V7V 1E9,BC,CA,(604) 649-7017,,"Molekule Air Purifier: MH1M-SHA190416-002907
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9472619741273.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,61.3,PST 7%,85.82,,,,,,,,
+add,3/7/20 18:34,9/8/20 18:34,#MO24419,rudispallacci@live.ca,paid,9/9/19 18:34,fulfilled,9/11/19 20:00,no,CAD,1199,27,159.38,1385.38,,0,Ground Shipping,9/9/19 18:34,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Rudi Spallacci,"118 King Street East, Main Lobby",118 King Street East,Main Lobby,,Hamilton,L8N0A9,ON,CA,9057463859,Rudi Spallacci,"118 King Street East, Main Lobby",118 King Street East,Main Lobby,,Hamilton,L8N0A9,ON,CA,9057463859,,"Molekule Air Purifier: MH1M-SHA190416-002613
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9472577503321.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,159.38,,,,,,,,,,
+add,3/6/20 23:50,9/7/20 23:50,#MO24415,littlemiller@me.com,paid,9/8/19 23:50,fulfilled,9/11/19 20:00,no,CAD,1199,27,147.12,1373.12,,0,Ground Shipping,9/8/19 23:50,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Susan Bailey,870 Walkers Hook Road,870 Walkers Hook Road,,,Salt Spring Island,V8K 1B6,BC,CA,(250) 221-0315,Susan Bailey,870 Walkers Hook Road,870 Walkers Hook Road,,,Salt Spring Island,V8K 1B6,BC,CA,(250) 221-0315,,"Molekule Air Purifier: MH1M-SHA190416-002902
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9467906981977.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,61.3,PST 7%,85.82,,,,,,,,
+add,3/6/20 23:06,9/7/20 23:06,#MO24414,johanna.kalkreuth@gmail.com,paid,9/8/19 23:06,fulfilled,9/12/19 11:00,no,CAD,1049,27,53.8,1129.8,LABOURDAY19,150,Ground Shipping,9/8/19 23:06,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Johanna Kalkreuth,Site 5 Box 9 Rr1,Site 5 Box 9 Rr1,,,Millarville,T0L 1K0,AB,CA,(403) 969-0250,Johanna Kalkreuth,4412 Bulyea Rd Nw,4412 Bulyea Rd Nw,,,Calgary,T2L 2H3,AB,CA,(403) 969-0250,,"Molekule Air Purifier: MH1M-SHA190416-006890
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9467676754009.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,53.8,,,,,,,,,,
+add,3/6/20 22:21,9/7/20 22:21,#MO24413,pierrelo@gmail.com,paid,9/8/19 22:21,fulfilled,9/12/19 11:00,no,CAD,1049,27,129.12,1205.12,LABOURDAY19,150,Ground Shipping,9/8/19 22:21,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Ming-Yu Lo,"788 Richards Street, Apt 2801",788 Richards Street,Apt 2801,,Vancouver,V6B 0C7,BC,CA,(604) 360-6721,Ming-Yu Lo,"788 Richards Street, Apt 2801",788 Richards Street,Apt 2801,,Vancouver,V6B 0C7,BC,CA,(604) 360-6721,,"Molekule Air Purifier: MH1M-SHA190416-006891
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9467421687897.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,53.8,PST 7%,75.32,,,,,,,,
+add,3/6/20 21:49,9/7/20 21:49,#MO24412,kim.smith@outlook.com,paid,9/8/19 21:49,fulfilled,9/12/19 11:00,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/8/19 21:49,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Kimi Smith,8 Runnymede Road,8 Runnymede Road,,,Toronto,M6S 2Y2,ON,CA,(416) 556-7575,Kimi Smith,8 Runnymede Road,8 Runnymede Road,,,Toronto,M6S 2Y2,ON,CA,(416) 556-7575,,"Molekule Air Purifier: MH1M-SHA190416-006809
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9467225473113.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/6/20 21:06,9/7/20 21:06,#MO24411,karolyn_kennedy@yahoo.ca,paid,9/8/19 21:06,fulfilled,9/12/19 11:01,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/8/19 21:06,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Kara Kennedy,505 Hillsdale Avenue East,505 Hillsdale Avenue East,,,Toronto,M4S 1V1,ON,CA,'+1 416-993-9839,Kara Kennedy,505 Hillsdale Avenue East,505 Hillsdale Avenue East,,,Toronto,M4S 1V1,ON,CA,'+1 416-993-9839,,"Molekule Air Purifier: MH1M-SHA190422-004987
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9466944847961.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/6/20 19:29,9/7/20 19:29,#MO24410,melaniegemeinhardt@hotmail.com,paid,9/8/19 19:29,fulfilled,9/12/19 11:01,no,CAD,1049,27,129.12,1205.12,LABOURDAY19,150,Ground Shipping,9/8/19 19:29,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Melanie Gemeinhardt,197 65B Street,197 65B Street,,,Delta,V4L 1M9,BC,CA,(604) 290-8756,Melanie Gemeinhardt,197 65B Street,197 65B Street,,,Delta,V4L 1M9,BC,CA,(604) 290-8756,,"Molekule Air Purifier: MH1M-SHA190416-002647
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9466356269145.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,53.8,PST 7%,75.32,,,,,,,,
+add,3/6/20 19:16,9/7/20 19:16,#MO24409,ivawithaneye@hotmail.com,paid,9/8/19 19:16,fulfilled,9/11/19 17:00,yes,CAD,1049,0,136.37,1185.37,LABOURDAY19,150,Free shipping,9/8/19 19:16,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Iva Reshef ,"128 Pears Ave, Unit 703",128 Pears Ave,Unit 703,,Toronto,M5R1T2,ON,CA,'+1 416-617-7350,Iva Reshef ,"128 Pears Ave, Unit 703",128 Pears Ave,Unit 703,,Toronto,M5R1T2,ON,CA,'+1 416-617-7350,,"Molekule Air Purifier: MH1M-SHA190416-002904
+MH1 label: 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9466131316825.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,136.37,,,,,,,,,,
+add,3/6/20 18:45,9/7/20 18:45,#MO24408,tahir@snsca.com,paid,9/8/19 18:45,fulfilled,9/12/19 11:01,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/8/19 18:45,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Tahir Saeed,346 Forman Ave.,346 Forman Ave.,,,Toronto,M4S2S7,ON,CA,(416) 544-5200,Tahir Saeed,346 Forman Ave.,346 Forman Ave.,,,Toronto,M4S2S7,ON,CA,(416) 544-5200,,"Molekule Air Purifier: MH1M-SHA190416-006856
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9466129973337.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/6/20 13:08,9/7/20 13:08,#MO24407,mary@marypatterson.ca,paid,9/8/19 13:08,fulfilled,9/12/19 11:01,no,CAD,1049,27,161.4,1237.4,LABOURDAY19,150,Ground Shipping,9/8/19 13:08,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Mary Patterson,"21 Parkland Drive, 701",21 Parkland Drive,701,,Halifax,B3S 1R8,NS,CA,(902) 830-6308,Mary Patterson,"21 Parkland Drive, 701",21 Parkland Drive,701,,Halifax,B3S 1R8,NS,CA,(902) 830-6308,,"Molekule Air Purifier: MH1M-SHA190422-003951
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9464028299353.1,0,molekule,1.12E+12,,Low,web,0,HST 15%,161.4,,,,,,,,,,
+add,3/6/20 11:22,9/7/20 11:22,#MO24405,landconstruction.nd@gmail.com,paid,9/8/19 11:22,fulfilled,9/12/19 11:01,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/8/19 11:22,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Norman Dekryger,36 Johnson Rd.,36 Johnson Rd.,,,Brantford,N3T 5M1,ON,CA,1 (905) 961-7968,Norman Dekryger,36 Johnson Rd.,36 Johnson Rd.,,,Brantford,N3T 5M1,ON,CA,1 (905) 961-7968,,"Molekule Air Purifier: MH1M-SHA190416-006888
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9463389552729.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/6/20 9:07,9/7/20 9:07,#MO24404,simplynailogical@gmail.com,paid,9/8/19 9:07,fulfilled,9/12/19 11:01,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/8/19 9:07,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Cristine Rotenberg,"1554 Carling Ave., Suite #275","1554 Carling Ave., Suite #275",,,Ottawa,K1Z 7M4,ON,CA,1 (613) 808-9827,Cristine Rotenberg,"1554 Carling Ave., Suite #275","1554 Carling Ave., Suite #275",,,Ottawa,K1Z 7M4,ON,CA,1 (613) 808-9827,,"Molekule Air Purifier: MH1M-SHA190422-004297
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9462711550041.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/6/20 7:53,9/7/20 7:53,#MO24402,laura_saunders@ymail.com,paid,9/8/19 7:53,fulfilled,9/12/19 11:01,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/8/19 7:53,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Laura Saunders ,17121 Nestleton Road,17121 Nestleton Road,,,Nestleton Station,L0B 1L0,ON,CA,(905) 809-8955,Laura Saunders ,992 Dillingham Road,992 Dillingham Road,,,Pickering,L1W 1Z6,ON,CA,(905) 809-8955,,"Molekule Air Purifier: MH1M-SHA190422-003701
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9462409232473.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/5/20 17:14,9/6/20 17:14,#MO24401,mukkavilligandhi@hotmail.com,paid,9/7/19 17:14,fulfilled,9/9/19 9:28,no,CAD,1049,27,129.12,1205.12,LABOURDAY19,150,Ground Shipping,9/7/19 17:14,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Gandhi  Mukkavilli ,8512 109B Street,8512 109B Street,,,Delta,V4C 4H3,BC,CA,(604) 619-3462,Gandhi  Mukkavilli ,8512 109B Street,8512 109B Street,,,Delta,V4C 4H3,BC,CA,(604) 619-3462,,"Molekule Air Purifier: MH1M-SHA190416-002912
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9458683904089.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,53.8,PST 7%,75.32,,,,,,,,
+add,3/5/20 13:47,9/6/20 13:47,#MO24400,dangravelle89@gmail.com,paid,9/7/19 13:47,fulfilled,9/9/19 12:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/7/19 13:47,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Dan Gravelle,6400 Lundy'S Lane,6400 Lundy'S Lane,,,Niagara Falls,L2G 1K4,ON,CA,(905) 246-6025,Dan Gravelle,6400 Lundy'S Lane,6400 Lundy'S Lane,,,Niagara Falls,L2G 1K4,ON,CA,(905) 246-6025,,"Molekule Air Purifier: MH1M-SHA190422-004631
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9457343856729.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/5/20 11:20,9/6/20 11:20,#MO24398,markone.ragan@gmail.com,paid,9/7/19 11:20,fulfilled,9/9/19 9:28,no,CAD,1049,27,129.12,1205.12,LABOURDAY19,150,Ground Shipping,9/7/19 11:20,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Mark  Ragan ,"19953 55 A Avenue, 215",19953 55 A Avenue,215,,Langley,V3A 3X5,BC,CA,'+1 778-878-6275,Mark  Ragan ,"19953 55 A Avenue, 215",19953 55 A Avenue,215,,Langley,V3A 3X5,BC,CA,'+1 778-878-6275,,"Molekule Air Purifier: MH1M-SHA190422-003957
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9342155522137.5,0,molekule,1.12E+12,,Low,web,0,GST 5%,53.8,PST 7%,75.32,,,,,,,,
+add,3/5/20 11:19,9/6/20 11:19,#MO24397,virgilisaacs@gmail.com,paid,9/7/19 11:19,fulfilled,9/9/19 9:28,no,CAD,1049,27,129.12,1205.12,LABOURDAY19,150,Ground Shipping,9/7/19 11:19,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Virgil Isaacs,2578 East 25Th Avenue,2578 East 25Th Avenue,,,Vancouver,V5R 1H3,BC,CA,7789952341,Virgil Isaacs,2578 East 25Th Avenue,2578 East 25Th Avenue,,,Vancouver,V5R 1H3,BC,CA,7789952341,,"Molekule Air Purifier: MH1M-SHA190416-002634
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9456386080857.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,53.8,PST 7%,75.32,,,,,,,,
+add,3/5/20 10:36,9/6/20 10:36,#MO24396,tvaneck.consulting@gmail.com,paid,9/7/19 10:36,fulfilled,9/9/19 9:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/7/19 10:36,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Tammy Van Eck ,771 Windermere Avenue,771 Windermere Avenue,,,Toronto,M6S 3M5,ON,CA,(416) 766-3790,Tammy Van Eck ,771 Windermere Avenue,771 Windermere Avenue,,,Toronto,M6S 3M5,ON,CA,(416) 766-3790,,"Molekule Air Purifier: MH1M-SHA190422-004626
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9456085434457.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/5/20 9:51,9/6/20 9:51,#MO24395,jlacarbone@gmail.com,paid,9/7/19 9:51,fulfilled,9/9/19 9:28,no,CAD,1049,27,161.13,1237.13,LABOURDAY19,150,Ground Shipping,9/7/19 9:51,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Jehan Lalani Carbone,4039 Ave Grey,4039 Ave Grey,,,Montreal,H4A 3N9,QC,CA,(514) 704-8341,Jehan Lalani Carbone,177 Rue Argyle,177 Rue Argyle,,,Kirkland,H9H 5A6,QC,CA,(514) 704-8341,,"Molekule Air Purifier: MH1M-SHA190416-002601
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9455869395033.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,53.8,QST 9.975%,107.33,,,,,,,,
+add,3/5/20 9:04,9/6/20 9:04,#MO24394,johnny.vo@sympatico.ca,paid,9/7/19 9:04,fulfilled,9/9/19 9:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/7/19 9:04,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Jean Viau.,Conc 7    20823,Conc 7    20823,,,Green Valley,K0C1L0,ON,CA,(613) 525-4127,Jean Viau.,Conc 7    20823,Conc 7    20823,,,Green Valley,K0C1L0,ON,CA,(613) 525-4127,,"Molekule Air Purifier: MH1M-SHA190422-004279
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9455620161625.2,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/5/20 8:47,9/6/20 8:47,#MO24393,sarah@socialstepmom.com,paid,9/7/19 8:47,fulfilled,9/12/19 11:01,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/7/19 8:47,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Sarah Paterson,66 Rowanwood Ave,66 Rowanwood Ave,,,Toronto,M4W 1Y9,ON,CA,,Sarah Paterson,89 Forest Hill Road,89 Forest Hill Road,,,Toronto,M4V 2L6,ON,CA,647.262.6334,,"Molekule Air Purifier: MH1M-SHA190422-004305
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9455600730201.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/5/20 8:46,9/6/20 8:46,#MO24392,sarah@socialstepmom.com,paid,9/7/19 8:46,fulfilled,9/11/19 17:00,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/7/19 8:46,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Sarah Paterson,66 Rowanwood Ave,66 Rowanwood Ave,,,Toronto,M4W 1Y9,ON,CA,,Sarah Paterson,89 Forest Hill Road,89 Forest Hill Road,,,Toronto,M4V 2L6,ON,CA,647.262.6334,,"Molekule Air Purifier: MH1M-SHA190416-002911
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9455596306521.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/5/20 8:41,9/6/20 8:41,#MO24391,brad.bolton@nbpcd.com,paid,9/7/19 8:41,fulfilled,9/12/19 11:01,no,CAD,1049,27,53.8,1129.8,LABOURDAY19,150,Ground Shipping,9/7/19 8:41,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Brad Bolton,"Bmo Nesbitt Burns, Eight Avenue Place, 11Th Floor, 525 8Th Avenue Sw","Bmo Nesbitt Burns, Eight Avenue Place, 11Th Floor",525 8th Avenue SW,,Calgary,T2P5C5,AB,CA,(403) 261-9573,Brad Bolton,"Bmo Nesbitt Burns, Eight Avenue Place, 11Th Floor, 525 8Th Avenue Sw","Bmo Nesbitt Burns, Eight Avenue Place, 11Th Floor",525 8th Avenue SW,,Calgary,T2P5C5,AB,CA,(403) 261-9573,,"Molekule Air Purifier: MH1M-SHA190422-004293
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9455553216601.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,53.8,,,,,,,,,,
+add,3/4/20 21:38,9/5/20 21:38,#MO24390,arunas.ta@gmail.com,paid,9/6/19 21:38,fulfilled,9/12/19 11:01,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/6/19 21:38,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Arunas Tamkevicius,65 Monte Carlo Drive,65 Monte Carlo Drive,,,Vaughan,L4H 1T3,ON,CA,(647) 830-3370,Arunas Tamkevicius,65 Monte Carlo Drive,65 Monte Carlo Drive,,,Vaughan,L4H 1T3,ON,CA,(647) 830-3370,,"Molekule Air Purifier: MH1M-SHA190422-004312
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9453085032537.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/4/20 16:28,9/5/20 16:28,#MO24387,esatokwolman@yahoo.ca,paid,9/6/19 16:28,fulfilled,9/12/19 11:01,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/6/19 16:28,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Ezra Satok-Wolman,5321 Ontario 9,5321 Ontario 9,,,Caledon,L7K 0H1,ON,CA,(519) 938-5437,Ezra Satok-Wolman,46 Thelma Avenue,46 Thelma Avenue,,,Toronto,M4V1X9,ON,CA,(647) 408-8709,,"Molekule Air Purifier: MH1M-SHA190422-004261
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9451223023705.2,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/4/20 14:56,9/5/20 14:56,#MO24386,jonathan.xi.chen@gmail.com,paid,9/6/19 14:56,fulfilled,9/12/19 11:01,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/6/19 14:56,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Xi Chen,797 Snowberry Court,797 Snowberry Court,,,Waterloo,N2J 3Z4,ON,CA,(519) 722-9493,Xi Chen,797 Snowberry Court,797 Snowberry Court,,,Waterloo,N2J 3Z4,ON,CA,(519) 722-9493,,"Molekule Air Purifier: MH1M-SHA190422-004274
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9450688610393.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/4/20 12:54,9/5/20 12:54,#MO24385,jkitchen@jccf.ca,paid,9/6/19 12:54,fulfilled,9/12/19 11:01,no,CAD,1049,27,53.8,1129.8,LABOURDAY19,150,Ground Shipping,9/6/19 12:54,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,James Kitchen,253-7620 Elbow Drive Sw,253-7620 Elbow Drive Sw,,,Calgary,T2V 1K2,AB,CA,(403) 475-3622,James Kitchen,253-7620 Elbow Drive Sw,253-7620 Elbow Drive Sw,,,Calgary,T2V 1K2,AB,CA,(403) 475-3622,,"Molekule Air Purifier: MH1M-SHA190422-004545
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9449945301081.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,53.8,,,,,,,,,,
+add,3/3/20 22:28,9/4/20 22:28,#MO24384,cathy@cvcg.ca,paid,9/5/19 22:28,fulfilled,9/12/19 11:01,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/5/19 22:28,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Cathy Cleary,354 Elmwood Street,354 Elmwood Street,,,Kingston,K7M 2Z1,ON,CA,(613) 876-0330,Cathy Cleary,354 Elmwood Street,354 Elmwood Street,,,Kingston,K7M 2Z1,ON,CA,(613) 876-0330,,"Molekule Air Purifier: MH1M-SHA190422-004663
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 20190824
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9445756272729.1,0,molekule,1.12E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/3/20 10:09,9/4/20 10:09,#MO24380,edussen@hotmail.com,paid,9/5/19 10:09,fulfilled,9/6/19 17:19,no,CAD,1049,27,53.8,1129.8,LABOURDAY19,150,Ground Shipping,9/5/19 10:09,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Evelyn Arnoldussen ,83 Stonecrest Point,83 Stonecrest Point,,,Lethbridge,T1K 6T3,AB,CA,(403) 315-5849,Evelyn Arnoldussen ,83 Stonecrest Point,83 Stonecrest Point,,,Lethbridge,T1K 6T3,AB,CA,(403) 315-5849,,"Molekule Air Purifier: MH1M-SHA190416-002610
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9441630224473.1,0,molekule,1.12E+12,,Low,web,0,GST 5%,53.8,,,,,,,,,,
+add,3/2/20 14:56,9/3/20 14:56,#MO24378,chelliahassoc@hotmail.com,paid,9/4/19 14:56,fulfilled,9/6/19 17:19,no,CAD,1199,27,159.38,1385.38,,0,Ground Shipping,9/4/19 14:56,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Shivanth Chelliah,"1600 Rosecrans Avenue, Building 7, 4Th Floor",1600 Rosecrans Avenue,"Building 7, 4th Floor",,Manhattan Beach,90266,CA,US,(310) 463-3896,Yoga Chelliah,10 Sachems Place,10 Sachems Place,,,Toronto,M1B 1E6,ON,CA,(416) 298-4016,,"Molekule Air Purifier: MH1M-SHA190416-002909
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9436470116441.2,0,molekule,1.11E+12,,Low,web,0,HST 13%,159.38,,,,,,,,,,
+add,3/2/20 10:53,9/3/20 10:53,#MO24373,heidi.lo225@hotmail.com,paid,9/4/19 10:53,fulfilled,9/5/19 17:19,no,CAD,1049,27,129.12,1205.12,LABOURDAY19,150,Ground Shipping,9/4/19 10:53,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Heidi  Lo ,"667 Howe Street, 3602",667 Howe Street,3602,,Vancouver,V6C 0B5,BC,CA,(778) 288-9933,Heidi  Lo ,"667 Howe Street, 3602",667 Howe Street,3602,,Vancouver,V6C 0B5,BC,CA,(778) 288-9933,,"Molekule Air Purifier: MH1M-SHA190422-003033
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9435030749273.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,PST 7%,75.32,,,,,,,,
+add,3/2/20 8:36,9/3/20 8:36,#MO24372,alysitaforman@gmail.com,paid,9/4/19 8:36,fulfilled,9/5/19 17:19,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/4/19 8:36,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Alyssa Forman,149 Brentcliffe Rd,149 Brentcliffe Rd,,,Toronto,M4G 3Y7,ON,CA,(415) 517-5970,Alyssa Forman,"231 Sorauren Avenue, Apartment #2 ",231 Sorauren Avenue,Apartment #2 ,,Toronto,M6R 2G3,ON,CA,(415) 517-5970,,"Molekule Air Purifier: MH1M-SHA190422-003039
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9434296189017.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/1/20 19:52,9/2/20 19:52,#MO24366,janet.horses@rogers.com,paid,9/3/19 19:52,fulfilled,9/5/19 17:20,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/3/19 19:52,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Janet Bone,19 Apple Orchard Path,19 Apple Orchard Path,,,Thornhill,L3T 3B5,ON,CA,(905) 709-0795,Janet Bone,19 Apple Orchard Path,19 Apple Orchard Path,,,Thornhill,L3T 3B5,ON,CA,(905) 709-0795,,"Molekule Air Purifier: MH1M-SHA190416-002913
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9430943367257.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/1/20 17:08,9/2/20 17:08,#MO24364,mikhayla007@gmail.com,paid,9/3/19 17:08,fulfilled,9/5/19 17:20,no,CAD,1049,27,53.8,1129.8,LABOURDAY19,150,Ground Shipping,9/3/19 17:08,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Mikhayla Smith,10416 70 Street Nw,10416 70 Street Nw,,,Edmonton,T6A2T6,AB,CA,5879384835,Mikhayla Smith,10416 70 Street Nw,10416 70 Street Nw,,,Edmonton,T6A2T6,AB,CA,5879384835,,"Molekule Air Purifier: MH1M-SHA190422-003021
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9430000959577.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,,,,,,,,,,
+add,3/1/20 13:41,9/2/20 13:41,#MO24362,phippsterryemail@aol.com,paid,9/3/19 13:41,fulfilled,9/4/19 20:58,no,CAD,2398,0,287.76,2685.76,,0,,9/3/19 13:41,2,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Howard Alan Phipps,"1917 West 4Th Avenue, Suite 198",1917 West 4Th Avenue,Suite 198,,Vancouver,V6J 1M7,BC,CA,1 778-229-1646,Howard Alan Phipps,"1917 West 4Th Avenue, Suite 198",1917 West 4Th Avenue,Suite 198,,Vancouver,V6J 1M7,BC,CA,1 778-229-1646,,"Molekule Air Purifier-A: MH1M-SHA190422-001279
+MH1 label-A: 
+Molekule Air Purifier-B: MH1M-SHA190422-004462
+MH1 label-B: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 pre filter v3-C: 20190514
+MH1 pre filter v3-D: 20190514
+MH1 nano-filter-A: 1089B
+MH1 nano-filter-B: 1089B
+MH1-QSGv5.5-A: 
+MH1-QSGv5.5-B: 
+MH1 QSG sleeve-A: 
+MH1 QSG sleeve-B: ",,Stripe,c9428862632025.1,0,molekule,1.11E+12,,Low,shopify_draft_order,0,GST 5%,119.9,PST 7%,167.86,,,,,,,,
+add,3/1/20 11:36,9/2/20 11:36,#MO24361,michellemaureen@rogers.com,paid,9/3/19 11:36,fulfilled,9/4/19 20:58,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/3/19 11:36,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Michelle Gauvreau,41 Ashland Avenue,41 Ashland Avenue,,,Toronto,M4L 1J9,ON,CA,(416) 904-3095,Michelle Gauvreau,41 Ashland Avenue,41 Ashland Avenue,,,Toronto,M4L 1J9,ON,CA,(416) 904-3095,,"Molekule Air Purifier: MH1M-SHA190416-006018
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9428174667865.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/1/20 11:14,9/2/20 11:14,#MO24360,armyclan@bell.net,paid,9/3/19 11:14,fulfilled,9/4/19 17:58,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/3/19 11:14,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Doug Armstrong,45 Hanson Crescent,45 Hanson Crescent,,,Whitby,L1M 2K9,ON,CA,(905) 243-7462,Doug Armstrong,45 Hanson Crescent,45 Hanson Crescent,,,Whitby,L1M 2K9,ON,CA,(905) 243-7462,,"Molekule Air Purifier: MH1M-SHA190422-003712
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9428077936729.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,3/1/20 3:33,9/2/20 3:33,#MO24359,amy.wm.cheng@gmail.com,paid,9/3/19 3:33,fulfilled,9/4/19 20:58,no,CAD,1049,27,129.12,1205.12,LABOURDAY19,150,Ground Shipping,9/3/19 3:33,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Amy Cheng,"571 45Th Ave E, Laneway House",571 45Th Ave E,Laneway House,,Vancouver,V5W 1X6,BC,CA,(604) 715-1812,Amy Cheng,"571 45Th Ave E, Laneway House",571 45Th Ave E,Laneway House,,Vancouver,V5W 1X6,BC,CA,(604) 715-1812,,"Molekule Air Purifier: MH1M-SHA190416-006049
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9426324357209.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,PST 7%,75.32,,,,,,,,
+add,3/1/20 2:01,9/2/20 2:01,#MO24358,dylankelleyusa@gmail.com,paid,9/3/19 2:01,fulfilled,9/4/19 20:58,no,CAD,1199,27,61.3,1287.3,,0,Ground Shipping,9/3/19 2:01,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Dylan Kelley,"C/O Remax Central, 10805-120 St.","C/O Remax Central, 10805-120 St.",,,Edmonton,T5H 3P9,AB,CA,(780) 488-4000,Dylan Kelley,"C/O Remax Central, 10805-120 St.","C/O Remax Central, 10805-120 St.",,,Edmonton,T5H 3P9,AB,CA,(780) 488-4000,,"Molekule Air Purifier: MH1M-SHA190422-003041
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9426231066713.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,61.3,,,,,,,,,,
+add,2/29/20 21:40,9/1/20 21:40,#MO24357,justin@shoplostfound.com,paid,9/2/19 21:40,fulfilled,9/4/19 20:58,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/2/19 21:40,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Justin Veiga,"44 Ossington Avenue, Main Floor",44 Ossington Avenue,Main Floor,,Toronto,M6J 2Y7,ON,CA,(416) 357-5720,Justin Veiga,"44 Ossington Avenue, Main Floor",44 Ossington Avenue,Main Floor,,Toronto,M6J 2Y7,ON,CA,(416) 357-5720,,"Molekule Air Purifier: MH1M-SHA190422-003939
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9424740974681.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/29/20 21:27,9/1/20 21:27,#MO24356,catharinea3@gmail.com,paid,9/2/19 21:27,fulfilled,9/4/19 20:58,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/2/19 21:27,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Catharine Bone,1463 Bough Beeches Blvd,1463 Bough Beeches Blvd,,,Mississauga,L4W 4G4,ON,CA,4164557276,Catharine Bone,1463 Bough Beeches Blvd,1463 Bough Beeches Blvd,,,Mississauga,L4W 4G4,ON,CA,4164557276,,"Molekule Air Purifier: MH1M-SHA190422-004638
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 2019404
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9424675274841.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/29/20 21:12,9/1/20 21:12,#MO24355,daun558mad@gmail.com,paid,9/2/19 21:12,fulfilled,9/4/19 20:58,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/2/19 21:12,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Melissa Dauncey,56 Aero Drive,56 Aero Drive,,,Ottawa,K2H 5E4,ON,CA,'+1 613-558-5898,Melissa Dauncey,56 Aero Drive,56 Aero Drive,,,Ottawa,K2H 5E4,ON,CA,'+1 613-558-5898,,"Molekule Air Purifier: MH1M-SHA190422-001271
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 2019404
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9424500588633.2,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/29/20 21:05,9/1/20 21:05,#MO24354,audrabaran@hotmail.com,paid,9/2/19 21:05,fulfilled,9/4/19 20:58,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/2/19 21:05,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Jeannette Baran,347 Sunset Blvd.,347 Sunset Blvd.,,,Thornbury,N0H 2P0,ON,CA,(705) 888-7870,Audra Baran,"173 West Ridge Drive, Rr #1",173 West Ridge Drive,RR #1,,Thornbury,N0H 2P0,ON,CA,(647) 338-9912,,"Molekule Air Purifier: MH1M-SHA190422-003049
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9424490758233.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/29/20 20:51,9/1/20 20:51,#MO24353,jdmbaran@gmail.com,paid,9/2/19 20:51,fulfilled,9/4/19 20:58,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/2/19 20:51,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Jeannette Baran,"347 Sunset Boulevard, Rr #1",347 Sunset Boulevard,RR #1,,Thornbury,N0H 2P0,ON,CA,(705) 888-7870,Jeannette Baran,"347 Sunset Boulevard, Rr #1",347 Sunset Boulevard,RR #1,,Thornbury,N0H 2P0,ON,CA,(705) 888-7870,,"Molekule Air Purifier: MH1M-SHA190422-003035
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9424418799705.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/29/20 20:21,9/1/20 20:21,#MO24352,shanti.gidwani@gmail.com,paid,9/2/19 20:21,fulfilled,9/4/19 20:58,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/2/19 20:21,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Shanti Gidwani,75 De Vere Gardens,75 De Vere Gardens,,,Toronto,M5M 3E8,ON,CA,(416) 209-6069,Shanti Gidwani,75 De Vere Gardens,75 De Vere Gardens,,,Toronto,M5M 3E8,ON,CA,(416) 209-6069,,"Molekule Air Purifier: MH1M-SHA190422-004920
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 2019404
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9424225468505.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/29/20 19:33,9/1/20 19:33,#MO24351,pfo@pfoac.com,paid,9/2/19 19:33,fulfilled,9/4/19 20:58,no,CAD,1049,27,161.13,1237.13,LABOURDAY19,150,Ground Shipping,9/2/19 19:33,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Pierre-François Ouellette,963 Rue Rachel Est,963 Rue Rachel Est,,,Montreal,H2J 2J4,QC,CA,'+1 514-395-6032,Pierre-François Ouellette,963 Rue Rachel Est,963 Rue Rachel Est,,,Montreal,H2J 2J4,QC,CA,'+1 514-395-6032,,"Molekule Air Purifier: MH1M-SHA190422-004532
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 2019404
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9423933341785.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,QST 9.975%,107.33,,,,,,,,
+add,2/29/20 19:28,9/1/20 19:28,#MO24350,stuart@swdla.com,paid,9/2/19 19:28,fulfilled,9/4/19 20:58,no,CAD,1049,27,161.13,1237.13,LABOURDAY19,150,Ground Shipping,9/2/19 19:28,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Stuart Webster,"2301 Saint Patrick, Suite 602",2301 Saint Patrick,Suite 602,,Montreal,H3K 1B3,QC,CA,(514) 829-4742,Stuart Webster,"5010 Saint Patrick, Suite 200",5010 Saint Patrick,Suite 200,,Montreal,H4E 1A5,QC,CA,5148294742,,"Molekule Air Purifier: MH1M-SHA190422-003936
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 2019404
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9422809694297.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,QST 9.975%,107.33,,,,,,,,
+add,2/29/20 15:23,9/1/20 15:23,#MO24349,bradja75@gmail.com,paid,9/2/19 15:23,fulfilled,9/4/19 20:58,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/2/19 15:23,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Brad Anderson,"15 Maitland Place, Unit 1012",15 Maitland Place,Unit 1012,,Toronto,M4Y2X3,ON,CA,4169703248,Brad Anderson,"15 Maitland Place, Unit 1012",15 Maitland Place,Unit 1012,,Toronto,M4Y2X3,ON,CA,4169703248,,"Molekule Air Purifier: MH1M-SHA190422-003028
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 2019404
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9422317453401.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/29/20 15:21,9/1/20 15:21,#MO24348,davidwalawrence@gmail.com,paid,9/2/19 15:21,fulfilled,9/4/19 20:58,no,CAD,1049,27,161.13,1237.13,LABOURDAY19,150,Ground Shipping,9/2/19 15:21,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,David Lawrence,72 Rue Hazelwood,72 Rue Hazelwood,,,Hudson,J0P 1H0,QC,CA,(514) 926-7706,David Lawrence,72 Rue Hazelwood,72 Rue Hazelwood,,,Hudson,J0P 1H0,QC,CA,(514) 926-7706,,"Molekule Air Purifier: MH1M-SHA190416-006051
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 2019404
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9422301724761.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,QST 9.975%,107.33,,,,,,,,
+add,2/29/20 8:56,9/1/20 8:56,#MO24346,manpreet_dhot@outlook.com,paid,9/2/19 8:56,fulfilled,9/3/19 18:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/2/19 8:56,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Manpreet Dhot,26 Belleville Drive,26 Belleville Drive,,,Brampton,L6P 1Y5,ON,CA,(716) 536-8893,Manpreet Dhot,26 Belleville Drive,26 Belleville Drive,,,Brampton,L6P 1Y5,ON,CA,(716) 536-8893,,"Molekule Air Purifier: MH1M-SHA190416-006889
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9419987779673.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/29/20 7:11,9/1/20 7:11,#MO24345,mfarb@coldstreamcapital.com,paid,9/2/19 7:11,fulfilled,9/3/19 15:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/2/19 7:11,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Matthew Farb,172 Coldstream Avenue,172 Coldstream Avenue,,,Toronto,M5N 1X9,ON,CA,(416) 399-4331,Matthew Farb,172 Coldstream Avenue,172 Coldstream Avenue,,,Toronto,M5N 1X9,ON,CA,(416) 399-4331,,"Molekule Air Purifier: MH1M-SHA190422-004881
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9419676975193.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/28/20 22:24,8/31/20 22:24,#MO24344,jen_hong76@yahoo.ca,paid,9/1/19 22:24,fulfilled,9/3/19 12:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/1/19 22:24,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Jennifer Hong,"27 Walmer Road, Apt 202",27 Walmer Road,Apt 202,,Toronto,M5R 2W7,ON,CA,(647) 214-1403,Jennifer Hong,"27 Walmer Road, Apt 202",27 Walmer Road,Apt 202,,Toronto,M5R 2W7,ON,CA,(647) 214-1403,,"Molekule Air Purifier: MH1M-SHA190422-004886
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9417774202969.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/28/20 12:34,8/31/20 12:34,#MO24341,cindy.ferencz@utoronto.ca,paid,9/1/19 12:34,fulfilled,9/3/19 12:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/1/19 12:34,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Cindy Ferencz,2245 Adirondak Trail,2245 Adirondak Trail,,,Oakville,L6M 4W4,ON,CA,,Cindy Ferencz,2245 Adirondak Trail,2245 Adirondak Trail,,,Oakville,L6M 4W4,ON,CA,(905) 301-5412,,"Molekule Air Purifier: MH1M-SHA190416-006876
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9414001557593.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/28/20 11:41,8/31/20 11:41,#MO24340,dave.sealey@gmail.com,paid,9/1/19 11:41,fulfilled,9/3/19 12:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/1/19 11:41,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,David Sealey,"60 Colborne Street, 2305",60 Colborne Street,2305,,Toronto,M5E 0B7,ON,CA,(416) 918-3067,David Sealey,"60 Colborne Street, 2305",60 Colborne Street,2305,,Toronto,M5E 0B7,ON,CA,(416) 918-3067,,"Molekule Air Purifier: MH1M-SHA190422-003926
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9413694586969.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/28/20 10:45,8/31/20 10:45,#MO24339,info@mgbconstruction.ca,paid,9/1/19 10:45,fulfilled,9/3/19 12:28,no,CAD,1199,27,159.38,1385.38,,0,Ground Shipping,9/1/19 10:45,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Michael Bean,"60 Bathurst Street, 910",60 Bathurst Street,910,,Toronto,M5V 2P4,ON,CA,4164733409,Michael Bean,"60 Bathurst Street, 910",60 Bathurst Street,910,,Toronto,M5V 2P4,ON,CA,4164733409,,"Molekule Air Purifier: MH1M-SHA190422-004443
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9413388304473.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,159.38,,,,,,,,,,
+add,2/28/20 9:47,8/31/20 9:47,#MO24338,katarina.french@gmail.com,paid,9/1/19 9:47,fulfilled,9/3/19 12:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/1/19 9:47,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Katarina French ,209-152 Annette Street,209-152 Annette Street,,,Toronto,M6P 1P4,ON,CA,'+1 416-876-7753,Katarina French ,209-152 Annette Street,209-152 Annette Street,,,Toronto,M6P 1P4,ON,CA,'+1 416-876-7753,,"Molekule Air Purifier: MH1M-SHA190422-004269
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9413091885145.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/28/20 8:48,8/31/20 8:48,#MO24337,sebastian@fab-con.ca,paid,9/1/19 8:48,fulfilled,9/3/19 18:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,9/1/19 8:48,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Sebastian Palaszewski ,1043 Welwyn Drive,1043 Welwyn Drive,,,Mississauga,L5J 3J2,ON,CA,1 (416) 717-8932,Sebastian Palaszewski,"3045 Southcreek Road, Unit 3",3045 Southcreek Road,Unit 3,,Mississauga,L4X 1M3,ON,CA,1 (416) 717-8932,,"Molekule Air Purifier: MH1M-SHA190416-006848
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9412815355993.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/28/20 0:44,8/31/20 0:44,#MO24336,bergenmarg@gmail.com,paid,9/1/19 0:44,fulfilled,9/3/19 12:28,no,CAD,1049,27,53.8,1129.8,LABOURDAY19,150,Ground Shipping,9/1/19 0:44,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Margaret Bergen,P.O. Box 7517,P.O. Box 7517,,,Peace River ,T8S 1T1,AB,CA,7802192235,Margaret Bergen,P.O. Box 7517,P.O. Box 7517,,,Peace River ,T8S 1T1,AB,CA,7802192235,,"Molekule Air Purifier: MH1M-SHA190603-000047
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9411357966425.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,,,,,,,,,,
+add,2/28/20 0:35,8/31/20 0:35,#MO24335,cardehn@gmail.com,paid,9/1/19 0:35,fulfilled,9/3/19 18:28,no,CAD,1049,27,129.12,1205.12,LABOURDAY19,150,Ground Shipping,9/1/19 0:35,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Caroline Dehner,30 Lambert Place,30 Lambert Place,,,Coldstream,V1B 2P4,BC,CA,(250) 215-7533,Caroline Dehner,30 Lambert Place,30 Lambert Place,,,Coldstream,V1B 2P4,BC,CA,(250) 215-7533,,"Molekule Air Purifier: MH1M-SHA190603-000034
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9411275063385.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,PST 7%,75.32,,,,,,,,
+add,2/27/20 9:29,8/30/20 9:29,#MO24333,david@cmtextiles.com,paid,8/31/19 9:29,fulfilled,9/3/19 12:28,no,CAD,1049,27,161.13,1237.13,LABOURDAY19,150,Ground Shipping,8/31/19 9:29,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,David  Auger ,280 Melbourne Street,280 Melbourne Street,,,Mount Royal,H3P1G6,QC,CA,(514) 944-8998,David Auger,7500 Rue Saint-Hubert,7500 Rue Saint-Hubert,,,Montreal,H2R 2N6,QC,CA,(514) 944-8998,,"Molekule Air Purifier: MH1M-SHA190422-003927
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9406090379353.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,QST 9.975%,107.33,,,,,,,,
+add,2/26/20 23:23,8/29/20 23:23,#MO24332,eddiewong24@gmail.com,paid,8/30/19 23:23,fulfilled,9/3/19 12:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,8/30/19 23:23,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Eddie  Wong,615 Dufferin Street,615 Dufferin Street,,,Toronto,M6K 2B1,ON,CA,(647) 781-5688,Eddie  Wong,615 Dufferin Street,615 Dufferin Street,,,Toronto,M6K 2B1,ON,CA,(647) 781-5688,,"Molekule Air Purifier: MH1M-SHA190422-004196
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9403739897945.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/26/20 21:15,8/29/20 21:15,#MO24331,cksnping@gmail.com,paid,8/30/19 21:15,fulfilled,9/3/19 18:28,no,CAD,1199,27,183.59,1409.59,,0,Ground Shipping,8/30/19 21:15,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Jeanne Irene Chambers,322 Rue Kirouac,322 Rue Kirouac,,,Quebec,G1K 2A6,QC,CA,(418) 801-7772,Jeanne Irene Chambers,12682 49E Av,12682 49E Av,,,Montreal,H1E 2G8,QC,CA,(418) 801-7772,,"Molekule Air Purifier: MH1M-SHA190422-004447
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9402756956249.1,0,molekule,1.11E+12,,High,web,0,GST 5%,61.3,QST 9.975%,122.29,,,,,,,,
+add,2/26/20 18:31,8/29/20 18:31,#MO24329,rawberth@yahoo.com,paid,8/30/19 18:31,fulfilled,9/3/19 18:28,no,CAD,1049,27,161.13,1237.13,LABOURDAY19,150,Ground Shipping,8/30/19 18:31,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Robert Harrison,556 Avenue Stanstead,556 Avenue Stanstead,,,Mont-Royal,H3R 1X7,QC,CA,514,Robert Harrison,556 Avenue Stanstead,556 Avenue Stanstead,,,Mont-Royal,H3R 1X7,QC,CA,514,,"Molekule Air Purifier: MH1M-SHA190422-004880
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9401637273689.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,QST 9.975%,107.33,,,,,,,,
+add,2/26/20 17:00,8/29/20 17:00,#MO24328,aaronteit@gmail.com,paid,8/30/19 17:00,fulfilled,9/3/19 12:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,8/30/19 17:00,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Aaron Teitelbaum,1608-75 North Park Road,1608-75 North Park Road,,,Thornhill,L4J 0H8,ON,CA,4163587032,Aaron Teitelbaum,1608-75 North Park Road,1608-75 North Park Road,,,Thornhill,L4J 0H8,ON,CA,4163587032,,"Molekule Air Purifier: MH1M-SHA190603-000051
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9400973656153.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/26/20 14:21,8/29/20 14:21,#MO24327,cleia.physiotherapy@gmail.com,paid,8/30/19 14:21,fulfilled,9/3/19 12:28,no,CAD,1049,27,129.12,1205.12,LABOURDAY19,150,Ground Shipping,8/30/19 14:21,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Cheryl Leia,"353 West 26Th St, Na",353 West 26Th St,na,,North Vancouver,V7N 2G7,BC,CA,7789186229,Cheryl Leia,"353 West 26Th St, Na",353 West 26Th St,na,,North Vancouver,V7N 2G7,BC,CA,7789186229,,"Molekule Air Purifier: MH1M-SHA190422-004480
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9399971938393.1,0,molekule,1.11E+12,,Low,web,0,GST 5%,53.8,PST 7%,75.32,,,,,,,,
+add,2/26/20 12:37,8/29/20 12:37,#MO24324,hilborn5572@rogers.com,paid,8/30/19 12:37,fulfilled,9/3/19 12:28,no,CAD,1049,27,139.88,1215.88,,150,Ground Shipping,8/30/19 12:37,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Holly Hilborn ,73 Chudleigh Avenue,73 Chudleigh Avenue,,,Toronto,M4R 1T4,ON,CA,(416) 587-1599,Holly Hilborn ,73 Chudleigh Avenue,73 Chudleigh Avenue,,,Toronto,M4R 1T4,ON,CA,(416) 587-1599,,"Molekule Air Purifier: MH1M-SHA190422-004882
+MH1 label: 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9399306747993.1,0,molekule,1.11E+12,,Low,shopify_draft_order,150,HST 13%,139.88,,,,,,,,,,
+add,2/26/20 7:57,8/29/20 7:57,#MO24323,luigi.benedicenti@unb.ca,paid,8/30/19 7:57,fulfilled,9/3/19 15:28,no,CAD,1049,27,161.4,1237.4,LABOURDAY19,150,Ground Shipping,8/30/19 7:57,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Luigi Benedicenti,80 River Front Way,80 River Front Way,,,Fredericton,E3C 2R5,NB,CA,(506) 471-1372,Luigi Benedicenti,80 River Front Way,80 River Front Way,,,Fredericton,E3C 2R5,NB,CA,(506) 471-1372,,"Molekule Air Purifier: MH1M-SHA190416-006879
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9397713043545.1,0,molekule,1.11E+12,,Low,web,0,HST 15%,161.4,,,,,,,,,,
+add,2/25/20 19:39,8/28/20 19:39,#MO24321,janellehanagan@outlook.com,paid,8/29/19 19:39,fulfilled,9/3/19 15:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,8/29/19 19:39,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Geoff  Van Slyke,160 Martin Drive,160 Martin Drive,,,Ilderton,N0M2A0,ON,CA,(519) 666-0332,Geoff  Van Slyke,160 Martin Drive,160 Martin Drive,,,Ilderton,N0M2A0,ON,CA,(519) 666-0332,,"Molekule Air Purifier: MH1M-SHA190603-000040
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9393421910105.4,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/25/20 19:06,8/28/20 19:06,#MO24320,ashleymaclellan@gmail.com,paid,8/29/19 19:06,fulfilled,9/3/19 18:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,8/29/19 19:06,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Ashley Maclellan,"77 Keewatin Ave, 203",77 Keewatin Ave,203,,Toronto,M4P0C4,ON,CA,(416) 797-6795,Ashley Maclellan,"77 Keewatin Ave, 203",77 Keewatin Ave,203,,Toronto,M4P0C4,ON,CA,(416) 797-6795,,"Molekule Air Purifier: MH1M-SHA190422-004888
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9393282842713.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/25/20 17:30,8/28/20 17:30,#MO24318,jorell@rogers.com,paid,8/29/19 17:30,fulfilled,9/3/19 15:28,no,CAD,1049,27,139.88,1215.88,LABOURDAY19,150,Ground Shipping,8/29/19 17:30,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Lynne  Griffin,78 Lytton Boulevard,78 Lytton Boulevard,,,Toronto,M4R 1L3,ON,CA,(416) 277-5310,Lynne  Griffin,78 Lytton Boulevard,78 Lytton Boulevard,,,Toronto,M4R 1L3,ON,CA,(416) 277-5310,,"Molekule Air Purifier: MH1M-SHA190422-004894
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9392730341465.1,0,molekule,1.11E+12,,Low,web,0,HST 13%,139.88,,,,,,,,,,
+add,2/25/20 15:07,8/28/20 15:07,#MO24315,vsaini@airpartners.ca,paid,8/29/19 15:07,fulfilled,9/3/19 15:28,no,CAD,1049,27,53.8,1129.8,LABOURDAY19,150,Ground Shipping,8/29/19 15:07,1,Molekule Air Purifier,1199,,MH1-BBB-1CA,TRUE,TRUE,fulfilled,Vishal Saini,1125 Remington Road Northeast,1125 Remington Road Northeast,,,Calgary,T2E 2T6,AB,CA,(403) 277-8468,Vik Saini,263 Aero Way Northeast,263 Aero Way Northeast,,,Calgary,T2E 6K2,AB,CA,4036153491,,"Molekule Air Purifier: MH1M-SHA190603-000021
+MH1 label: 
+Filter Subscription ($189 value): 
+MH1 pre filter v3-A: 20190514
+MH1 pre filter v3-B: 20190514
+MH1 nano-filter: 1089B
+MH1-QSGv5.5: 
+MH1 QSG sleeve: ",,Stripe,c9391711518809.2,0,molekule,1.10E+12,,Low,web,0,GST 5%,53.8,,,,,,,,,,

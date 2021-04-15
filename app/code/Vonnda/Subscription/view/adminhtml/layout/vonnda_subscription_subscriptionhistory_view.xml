@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- /**
+ * @copyright: Copyright © 2019 Vonnda, LLC. All rights reserved.
+ * @author   : Vonnda Digital Agency <hello@vonnda.com>
+ */ -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="styles"/>
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Vonnda\Subscription\Block\Adminhtml\SubscriptionHistory\View" name="subscription_history_view" template="Vonnda_Subscription::subscription_history_view.phtml" />
+        </referenceContainer>
+    </body>
+</page>

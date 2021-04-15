@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /**
+ * Copyright © 2020 Grazitti . All rights reserved.
+ */ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+   <system>
+      <tab id="maginate" translate="label" sortOrder="11" class="maginate-tab">
+         <label>Maginate</label>
+      </tab>
+      <section id="grazz_auth" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+         <label>Authentication</label>
+         <tab>maginate</tab>
+         <resource>Grazitti_Maginate::grazitti_maginate</resource>
+         <group id="graz_settings" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Grazitti Authentication</label>
+            <field id="grazz_secret_key" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Grazitti Secret Key</label>
+               <backend_model>Grazitti\Maginate\Model\SecretKey</backend_model>
+            </field>
+            <field id="expiry_date" translate="label" type="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Expires On</label>
+            </field>
+			<field id="expired_date" translate="label" type="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Expired On</label>
+            </field>
+		</group>
+      </section>
+      <section id="grazitti_maginate" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+         <class>grazitti_settings</class>
+         <label>Settings</label>
+         <tab>maginate</tab>
+         <resource>Grazitti_Maginate::grazitti_maginate</resource>
+         <group id="email" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Marketo Rest API Authentication</label>
+            <field id="munchkin_id" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Munchkin Id</label>
+               <comment>Add Marketo Munchkin ID (eg: XXX-XXX-XXX)</comment>
+			   <backend_model>Grazitti\Maginate\Model\Apikey</backend_model>
+            </field>
+			<field id="client_id" translate="label" type="password" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Client Id</label>
+			   <backend_model>Grazitti\Maginate\Model\Apikey</backend_model>
+            </field>
+            <field id="secret_key" translate="label" type="password" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Secret Key</label>
+			   <backend_model>Grazitti\Maginate\Model\Apikey</backend_model>
+            </field>
+         </group>
+         <group id="general" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Customer Sync in Marketo</label>
+            <field id="maginate_lead_integration" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <label>Enable Customer Sync on Signup</label>
+               <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				<depends>
+					<field id="customer/create_account/confirm">1</field>
+				</depends>
+            </field>
+            <field id="maginate_lead_sync_on_login" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <label>Enable Customer Sync on Login</label>
+               <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+         </group>
+         <group id="autofill" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Prefill Configuration</label>
+			<field id="prefillinstruction" translate="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <frontend_model>Grazitti\Maginate\Block\Prefillfield</frontend_model>
+			   
+            </field>
+            <field id="maginate_autofill_configuration" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <label>Enable Prefill</label>
+               <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="maginate_autofill_restrict" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <label>Restrict Prefill</label>
+               <comment>Restrict fields from prefill. Write comma separated API field names, eg. firstname, lastname, email, phone etc.</comment>
+            </field>
+         </group>
+         <group id="dos_prevention" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>DDoS Attack Prevention</label>
+			<field id="productinstruction" translate="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <frontend_model>Grazitti\Maginate\Block\DosAttackfield</frontend_model>
+            </field>
+            <field id="enable_dos" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <label>Enable DDoS Attack Prevention</label>
+               <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="allowed_hits" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Allowed Hits</label>
+               <comment>No. of hits allowed before DDoS prevention</comment>
+			   <validate>validate-number</validate>
+            </field>
+            <field id="time_unit" translate="label comment" sortOrder="6" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+               <label>Number of Units</label>
+               <!-- source model which we created for drop down options -->
+               <source_model>Grazitti\Maginate\Model\Config\Source\Dostimeunit</source_model>
+            </field>
+            <field id="time" translate="label comment" sortOrder="6" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Time Unit</label>
+               <!-- source model which we created for drop down options -->
+               <source_model>Grazitti\Maginate\Model\Config\Source\Dostime</source_model>
+            </field>
+			
+            <field id="ban_time_unit" translate="label comment" sortOrder="6" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+               <label>Ban Elapse Time in Hours</label>
+               <!-- source model which we created for drop down options -->
+               <source_model>Grazitti\Maginate\Model\Config\Source\Dostimeunithour</source_model>
+            </field>
+         </group>
+         <group id="orderconfig" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Order Configurations</label>
+			<field id="maginate_order_integration" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <label>Enable Order Integration</label>
+               <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+			   <comment>Note: Enabling this feature will result in creation/association of orders with a new/old lead in Marketo.</comment>
+            </field>
+            <field id="productinstruction" translate="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <frontend_model>Grazitti\Maginate\Block\Productfield</frontend_model>
+            </field>
+            <field id="productcustomobject" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <label>Product Custom Object API Name:</label>
+               <backend_model>Grazitti\Maginate\Model\Callback</backend_model>
+            </field>
+            <field id="ordercustomobject" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <!-- add a new field with id scope -->
+               <label>Order Custom Object API Name:</label>
+               <backend_model>Grazitti\Maginate\Model\Callback</backend_model>
+			  
+            </field>
+          </group>
+         <group id="graz_logs" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Logs</label>
+            <field id="show_logs" translate="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <frontend_model>Grazitti\Maginate\Block\Adminhtml\System\Config\Form\Field\Link</frontend_model>
+            </field>
+         </group>
+         <group id="graz_about" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>About Grazitti</label>
+            <field id="orderinstruction" translate="label" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+               <frontend_model>Grazitti\Maginate\Block\Orderfield</frontend_model>
+            </field>
+         </group>
+      </section>
+	  <section id="grazitti_abandon" translate="label" type="text" sortOrder="23" showInDefault="1" showInWebsite="1" showInStore="1">
+		<class>abandon_cart_settings</class>
+		 <label>Abandoned Cart Settings</label>
+		 <tab>maginate</tab>
+		 <resource>Grazitti_Maginate::grazitti_maginate</resource>
+		 <group id="abandon_cart" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+		   <label>Abandoned Cart Configuration</label>
+		    <field id="abandon_enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">   
+                <label>Enable abandoned cart integration</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+			</field>
+			<field id="abandon_cart_custom_object_api_name" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Abandoned cart custom object API name</label>
+					<backend_model>Grazitti\Maginate\Model\AbandonCallback</backend_model>					
+			</field>
+			<field id="abandon_cart_media_path" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Catalog media files path</label>
+                    <comment>Examples: /pub/media/ OR /media/</comment>          
+			</field>
+		 </group>
+	</section>
+   </system>
+</config>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * di.xml
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Aheadworks\OneStepCheckout\Model\Layout\Processor\AddressAttributes">
+        <plugin name="addCompanyToOneStepCheckout"
+                type="Vonnda\Residential\Plugin\AddCompanyField"
+                sortOrder="5"/>
+        <plugin name="addIsResidentialToOneStepCheckout"
+                type="Vonnda\Residential\Plugin\AddResidential"
+                sortOrder="10"/>
+    </type>
+    <type name="Magento\Checkout\Model\GuestShippingInformationManagement">
+        <plugin name="captureIsResidential"
+                type="Vonnda\Residential\Plugin\OneStepCheckout\GuestShippingInformationManagement"
+                sortOrder="10"/>
+    </type>
+</config>

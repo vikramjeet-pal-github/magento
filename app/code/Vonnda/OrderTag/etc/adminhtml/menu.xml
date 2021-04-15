@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Vonnda_OrderTag::order_tag" title="Order Tags" translate="title" module="Vonnda_OrderTag" sortOrder="20" parent="Magento_Sales::sales_creditmemo" resource="Magento_Sales::create" action="ordertag/index" />
+    </menu>
+</config>

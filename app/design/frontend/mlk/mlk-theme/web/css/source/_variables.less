@@ -1,0 +1,214 @@
+//
+//  MLK theme variables
+//  _____________________________________________
+
+//
+//  Typography
+//  ---------------------------------------------
+
+//  Fonts
+@font-face {
+    font-family: 'Akkurat';
+    src: url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-regular.eot'); /* IE9 & compatibility modes */
+    src: url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-regular.eot?#iefix') format('eot'), /* IE6-8 */
+    url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-regular.woff') format('woff'); /* Firefox, Opera */
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Akkurat';
+    src: url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-light.eot'); /* IE9 & compatibility modes */
+    src: url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-light.eot?#iefix') format('eot'), /* IE6-8 */
+    url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-light.woff') format('woff'); /* Firefox, Opera */
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Akkurat';
+    src: url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-bold.eot'); /* IE9 & compatibility modes */
+    src: url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-bold.eot?#iefix') format('eot'), /* IE6-8 */
+    url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-bold.woff') format('woff'); /* Firefox, Opera */
+    font-weight: 700;
+    font-style: normal;
+ }
+@font-face {
+    font-family: 'Akkurat';
+    src: url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-italic.eot'); /* IE9 & compatibility modes */
+    src: url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-italic.eot?#iefix') format('eot'), /* IE6-8 */
+    url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-italic.woff') format('woff'); /* Firefox, Opera */
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Akkurat';
+    src: url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-lightitalic.eot'); /* IE9 & compatibility modes */
+    src: url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-lightitalic.eot?#iefix') format('eot'), /* IE6-8 */
+    url('@{baseDir}fonts/akkurat/lineto-akkurat-pro-lightitalic.woff') format('woff'); /* Firefox, Opera */
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Plantin';
+    src: url('@{baseDir}fonts/plantin/30BBC3_0_0.ttf') format('ttf');
+    src: url('@{baseDir}fonts/plantin/30BBC3_0_0.eot'); /* IE9 & compatibility modes */
+    src: url('@{baseDir}fonts/plantin/30BBC3_0_0.eot?#iefix') format('eot'), /* IE6-8 */
+    url('@{baseDir}fonts/plantin/30BBC3_0_0.woff') format('woff'), /* Firefox, Opera */
+    url('@{baseDir}fonts/plantin/30BBC3_0_0.ttf') format('opentype'); /* Chrome */
+    font-weight: normal;
+    font-style: normal;
+ }
+@font-face {
+    font-family: 'Plantin';
+    src: url('@{baseDir}fonts/plantin/30BBD6_0_0.ttf') format('ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+//
+//  Colors
+//  ---------------------------------------------
+
+@color-white: #FFFFFF;
+@color-black: #000000;
+@color-bright-mint: #7BEFB2;
+@color-mint: #CFE9DB;
+@color-light-gray: #F4F2F2;
+@color-mid-gray: #D7D5D4;
+@color-red: #FB0007;
+@color-error: #ed5d71;
+
+@color-strong: @color-mint;
+@color-good: #fdfad1;
+@color-fair: #fad0c1;
+@color-weak: #eeb1c1;
+//
+//  Fonts
+//  ---------------------------------------------
+
+//  Font Families
+@font-family-name__base: 'Akkurat';
+@font-family-name__serif: 'Plantin',serif;
+@font-family__base: @font-family-name__base, @font-family__sans-serif;
+
+//  Sizes
+@font-size-ratio__base: 1.6;
+
+//  Colors
+@heading__color__base: @color-black;
+
+//
+//  Headings
+//  ---------------------------------------------
+
+@h1__font-size: 48px;
+@h1__font-family: @font-family-name__serif;
+@h1__line-height: 48px;
+@heading__margin-bottom__base: 68px;
+
+@h2__font-size: 28px;
+@h2__font-weight: @font-weight__bold;
+@h2__line-height: 38px;
+
+@h3__font-size: 24px;
+@h3__font-weight: @font-weight__bold;
+@h3__line-height: 32px;
+
+@h4__font-size: 20px;
+@h4__font-weight: 300;
+@h4__line-height: 28px;
+
+//
+//  Form variables
+//  _____________________________________________
+
+@form-field-type-control-inline__width: 100%;
+
+// Validation
+@error__color: @color-error;
+
+//  Base state
+@form-element-input__background: @color-white;
+@form-element-input__border-color: @color-mid-gray;
+@form-element-input__border-radius: 4px;
+@form-element-input__padding: 14px 16px;
+@form-element-input__height: 48px;
+@form-element-input__font-weight: @font-weight__bold;
+
+//  Placeholder
+@form-element-input-placeholder__color: @color-gray76;
+@form-element-input-placeholder__font-style: @form-element-input__font-style;
+@form-element-input-placeholder__font-weight: @font-weight__light;
+
+//  Focus state
+@form-element-input__focus__border-color: @color-black;
+@form-element-input__focus__color: @form-element-input__color;
+@form-element-input__focus__font-style: @form-element-input__font-style;
+@form-element-input__focus__font-weight: @font-weight__bold;
+@form-element-input__focus__padding: 20px 16px 8px 16px;
+
+//
+//  Buttons
+//  ---------------------------------------------
+
+@button__padding: 16px 16px;
+@button__border-radius: 33px;
+@button__font-weight: @font-weight__regular;
+
+//  Primary button
+@button-primary__font-family: @button__font-family;
+@button-primary__font-size: 20px;
+@button-primary__width: fixed;
+
+@button-primary__background: @color-black;
+@button-primary__border: 1px solid @color-black;
+@button-primary__color: @color-white;
+
+@button-primary__hover__background: @color-black;
+@button-primary__hover__border: 1px solid @color-black;
+@button-primary__hover__color: @button-primary__color;
+
+//
+//  Table variables
+//  _____________________________________________
+
+@table-cell__padding-horizontal: @indent__s;
+@table-cell__padding-vertical: 12px;
+
+//
+//  Tabs
+//  ---------------------------------------------
+
+@tab-content__border-top-status: true;
+
+//
+//  Sidebar
+//  ---------------------------------------------
+
+@sidebar__background-color: @color-white; // Used in cart sidebar, Checkout sidebar, Tier Prices, My account navigation, Rating block background
+
+//
+//  Layout
+//  ---------------------------------------------
+
+@layout__max-width: 1240px;
+
+
+
+@border-color__base: @color-mid-gray;
+
+// //
+// //  AW OSC
+// //  ---------------------------------------------
+
+// @aw-osc-font-family__base: @font-family__base;
+
+//
+//  Messages variables
+//  _____________________________________________
+
+//  Success message
+@message-success__color: @color-black;
+@message-success__background: @color-mint;
+@message-success__border-color: @color-mint;

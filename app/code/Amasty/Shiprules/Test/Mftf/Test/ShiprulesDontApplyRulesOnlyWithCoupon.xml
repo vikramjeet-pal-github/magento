@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesDontApplyRulesOnlyWithCoupon">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Dont Apply Rules Only With Coupon Code"/>
+            <description value="Check Dont Apply Rules Only With Coupon Code"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-11"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesDontApplyRulesOnlyWithCoupon"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+        </before>
+
+        <after>
+            <!--Delete Shipping And Cart Price Rules -->
+            <actionGroup ref="DeleteCartPriceRuleByName" stepKey="deleteCreatedCartPriceRule">
+                <argument name="ruleName" value="{{shiprulesDefaultCartPriceRule.name}}"/>
+            </actionGroup>
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesDontApplyRulesOnlyWithCoupon"/>
+            </actionGroup>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create Default Cart Price Rule-->
+        <actionGroup ref="AdminCreateCartPriceRuleActionGroup" stepKey="CreateCartPriceRule">
+            <argument name="ruleName" value="shiprulesDefaultCartPriceRule"/>
+        </actionGroup>
+        <actionGroup ref="EditCartPriceRuleAddCouponCode" stepKey="AddCouponCodeForCartPriceRule">
+            <argument name="cartRuleName" value="shiprulesDefaultCartPriceRule.name"/>
+            <argument name="couponCode" value="shiprulesCouponCode.code"/>
+        </actionGroup>
+
+        <!--Create shipping rule with coupon code-->
+        <actionGroup ref="CreateShippingRuleWithBestWay" stepKey="CreateShippingRule">
+            <argument name="shippingRule" value="shiprulesDontApplyRulesOnlyWithCoupon"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesDontApplyRulesOnlyWithCoupon"/>
+        </actionGroup>
+        <actionGroup ref="EditShippingRuleDontAddApplyRulesCouponCode" stepKey="AddCouponCodeForShippingRule">
+            <argument name="couponCode" value="shiprulesCouponCode.code"/>
+            <argument name="shippingRule" value="shiprulesDontApplyRulesOnlyWithCoupon"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate1">
+            <argument name="shippingPrices" value="shiprulesDontApplyRulesOnlyWithCoupon.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay1">
+            <argument name="shippingPrices" value="shiprulesDontApplyRulesOnlyWithCoupon.priceBestWayOne"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!-- Change Qty Product-->
+        <actionGroup ref="ChangeQtyProductInCart" stepKey="ChangeQtyProductToTwo">
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+            <argument name="addProductQty" value="_enterQty2"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate2">
+            <argument name="shippingPrices" value="shiprulesDontApplyRulesOnlyWithCoupon.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay2">
+            <argument name="shippingPrices" value="shiprulesDontApplyRulesOnlyWithCoupon.priceBestWayTwo"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!--Coupon -->
+        <actionGroup ref="StorefrontApplyCouponActionGroup" stepKey="AddCoupon">
+            <argument name="coupon" value="shiprulesCouponCode"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate3">
+            <argument name="shippingPrices" value="shiprulesDontApplyRulesOnlyWithCoupon.priceFlatRateThree"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay3">
+            <argument name="shippingPrices" value="shiprulesDontApplyRulesOnlyWithCoupon.priceBestWayThree"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+
+        <!--Cancel Apply Code-->
+        <actionGroup ref="StorefrontCancelCouponActionGroup" stepKey="CancelCoupon"/>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate4">
+            <argument name="shippingPrices" value="shiprulesDontApplyRulesOnlyWithCoupon.priceFlatRateFour"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay4">
+            <argument name="shippingPrices" value="shiprulesDontApplyRulesOnlyWithCoupon.priceBestWayFour"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+    </test>
+</tests>

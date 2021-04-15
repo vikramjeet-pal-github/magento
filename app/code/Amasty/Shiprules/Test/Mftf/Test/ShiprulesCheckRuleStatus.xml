@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesCheckRuleStatus">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Rule Status Inactive"/>
+            <description value="Check Rule Status Inactive"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-01"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesCheckRuleStatus"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+        </before>
+
+        <after>
+            <!--Delete Shipping Rules -->
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesCheckRuleStatus"/>
+            </actionGroup>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create new Shipping Rule-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateCartRule1">
+            <argument name="shippingRule" value="shiprulesCheckRuleStatus"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesCheckRuleStatus"/>
+        </actionGroup>
+
+        <!--Add product to cart-->
+        <actionGroup ref="AddProductToCart" stepKey="AddProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagWayfarerMessenger"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices With Active Rule-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRateWithActiveRule">
+                <argument name="shippingPrices" value="shiprulesCheckRuleStatus.priceFlatRateOne"/>
+                <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWayWithActiveRule">
+            <argument name="shippingPrices" value="shiprulesCheckRuleStatus.priceBestWay"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <!--Disable Shipping Rule-->
+        <actionGroup ref="EditShippingRuleDisableRule" stepKey="DisableRule">
+            <argument name="shippingRule" value="shiprulesCheckRuleStatus"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices With Inactive Rule-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRateWithInactiveRule">
+            <argument name="shippingPrices" value="shiprulesCheckRuleStatus.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWayWithInactiveRule">
+            <argument name="shippingPrices" value="shiprulesCheckRuleStatus.priceBestWay"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+    </test>
+</tests>

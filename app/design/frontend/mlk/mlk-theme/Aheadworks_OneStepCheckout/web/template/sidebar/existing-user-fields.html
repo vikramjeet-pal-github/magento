@@ -1,0 +1,10 @@
+<!-- ko if: isLoggedIn -->
+    <!-- ko if: window.checkoutConfig.deviceInCart -->
+        <!-- ko foreach: getRegion('agreements') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    <!--/ko-->
+    <!-- ko foreach: getRegion('before-place-order') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+<!--/ko-->

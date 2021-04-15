@@ -1,0 +1,203 @@
+<?php
+
+    $_gridPopupBlock = $block->getChildBlock('device.group.grid.popup.container')->getChildBlock('grid');
+    $_gridPopupBlock->setRowClickCallback('function(){}');
+
+    //TODO - remove inline styles and add classes
+    $subscriptionCustomer = $block->getSubscriptionCustomer();
+    $subscriptionPayment = $block->getSubscriptionPayment();
+    $subscriptionDevice = $subscriptionCustomer ? $block->getDevice($subscriptionCustomer) : false;
+    if($subscriptionCustomer){
+        $address = $block->getAssociatedAddress($subscriptionCustomer->getShippingAddressId());
+        $customer = $block->getCustomer($subscriptionCustomer->getCustomerId());
+        if($customer){
+            $customerFullName = $customer->getFirstname() . " " . $customer->getLastname();
+        }
+        ?><h1>Subscription</h1><?php
+        ?>
+        <div class="fieldset-wrapper">
+        <div class="fieldset-wrapper-title"><span class="title">Subscription Info</span></div>
+            <table class="admin__table-secondary">
+                <tbody>
+                    <tr>
+                        <th>Status:</th>
+                        <td><?php
+                            if($subscriptionCustomer->getStatus() == 'error'){
+                                echo "<span style='color:red'>" . $subscriptionCustomer->getStatus() . "</span>";
+                            } else {
+                                echo $subscriptionCustomer->getStatus();
+                            };?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Plan:</th>
+                        <td><?php echo $block->getSubscriptionPlanInfo($subscriptionCustomer);?></td>
+                    </tr>
+                    <tr>
+                        <th>Created:</th>
+                        <td><?php echo $subscriptionCustomer->getCreatedAt();?></td>
+                    </tr>
+                    <tr>
+                        <th>Last Modified:</th>
+                        <td><?php echo $subscriptionCustomer->getUpdatedAt();?></td>
+                    </tr>
+                    <tr>
+                        <th>Last Order:</th>
+                        <td><?php echo $subscriptionCustomer->getLastOrder();?></td>
+                    </tr>
+                    <tr>
+                        <th>Error Message:</th>
+                        <td><span style='color:red'><?php echo $subscriptionCustomer->getErrorMessage();?></span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        <div class="fieldset-wrapper-title"><span class="title">Customer Info</span></div>
+            <input
+                type="button" class="button primary"
+                value="Go to Customer Account"
+                onclick="window.open('<?php echo $this->getCustomerEditUrl($customer->getId());?>')"/>
+            <p>* Customer fields should be modified directly in account</p>
+            <table class="admin__table-secondary">
+                <tbody>
+                    <tr>
+                        <th>Customer Name:</th>
+                        <td><?php echo $customerFullName;?></td>
+                    </tr>
+                    <tr>
+                        <th>Customer Email:</th>
+                        <td><?php echo $customer->getEmail();?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Shipping Address</strong></p>
+            <address>
+            <?php 
+                $addressFields = $block->getAddressFieldsByAddressId($subscriptionCustomer->getShippingAddressId());
+                $isDefaultShipping = $subscriptionCustomer->getShippingAddressId() === $customer->getDefaultShipping();
+            if($addressFields){?>
+                <p><?php echo $addressFields['firstname'] . " " . $addressFields['lastname'];?></p>
+                <p><?php echo $addressFields['streetOne'] .", " . $addressFields['streetTwo'];?></p>
+                <p><?php echo $addressFields['city'] . ", " . $addressFields['state'] . " " . $addressFields['postcode'] . ", " . $addressFields['country'];?></p>
+                <p><?php echo $addressFields['telephone'];?></p>
+                <p><?php echo $isDefaultShipping ? "<p>(Default Shipping)</p>" : "";?></p>
+            <?php } else { ?>
+                <h4 style="color:red">No shipping information found for this subscription</h4>
+            <?php } ?>
+           </address>
+
+
+        <div class="fieldset-wrapper-title"><span class="title">Device Info</span></div>
+            <div id="grouped-product-container" data-mage-init='{"Vonnda_Subscription/js/subscription-customer-device-chooser":{"devicePopup":"[data-grid-id=<?= /* @escapeNotVerified */ $_gridPopupBlock->getId() ?>]"}}'>
+                <div data-role="add-product-dialog" class="no-display">
+                    <?= $block->getChildBlock('device.group.grid.popup.container')->getChildHtml('grid') ?>
+                </div>
+                <button type="button" data-role="configure-device">Configure Device</button>
+            </div>
+
+            <div class="js-device-chooser__info-box" style="margin-top:20px">
+            </div>
+
+            <div class="subscription-customer-info-block__promo-container" style="margin-top:20px">
+                <div class="fieldset-wrapper-title"><span class="title">Customer Promos</span></div>
+                <p class="subscription-customer-info-block__promo-empty-list"></p>
+                <div class="admin__data-grid-wrap admin__data-grid-wrap-static">
+                    <table class="subscription-customer-info-block__promo-list data-grid" style="width:100%">
+                        <tr class="subscription-customer-info-block__heading-row">
+                        </tr>
+                    </table>
+                </div>
+                <div class="subscription-customer-info-block__add-promo-container">
+                    <select class="subscription-customer-info-block__add-promo-input admin__control-select" name="add-promo">
+                        <option value=''>Please Choose A Promo Code</option>
+                        <?php $salesRules = $block->getAvailablePromoCodes();
+                              foreach($salesRules as $salesRule){ ?>
+                                <option value="<?php echo $salesRule['id'];?>">
+                                    <?php echo $salesRule['name'];?>
+                                </option>
+                        <?php } ?>
+                    </select>
+                    <button 
+                        data-subscriptioncustomerid="<?php echo $subscriptionCustomer->getId();?>"
+                        class="subscription-customer-info-block__add-promo-button">
+                            Add Promo
+                    </button>
+                    <input class="subscription-customer-info-block__add-coupon-input admin__control-text" name="add-coupon" type="text">
+                    <button 
+                        data-subscriptioncustomerid="<?php echo $subscriptionCustomer->getId();?>"
+                        class="subscription-customer-info-block__add-coupon-button">
+                            Add Coupon Code
+                    </button>
+                    <span class="subscription-customer-info-block__add-promo-message"></span>
+                </div>
+            </div>
+        </div>
+
+            <script>
+                window.subscriptionDevice = <?php echo ($block->getCurrentDeviceInfo()) ? $block->getCurrentDeviceInfo() : "{}"; ?>;
+                window.backEndPromoUrl = "<?php echo $block->getBackendAddPromoUrl();?>";
+                window.backEndDeletePromoUrl = "<?php echo $block->getBackendDeletePromoUrl();?>";
+                window.subscriptionCustomerId = "<?php echo $subscriptionCustomer->getId();?>";
+                window.customerId = "<?php echo $subscriptionCustomer->getCustomerId();?>";
+                window.backEndGetCustomerInfoUrl = "<?php echo $block->getBackendGetCustomerInfoUrl();?>";
+                window.shippingAddressId = "<?php echo $subscriptionCustomer->getShippingAddressId();?>";
+                <?php if($subscriptionPayment){?> 
+                    window.paymentCode = "<?php echo $subscriptionPayment->getPaymentCode();?>";
+                <?php } ?>
+                window.subscriptionPromos = <?php echo $block->getSubscriptionPromosJSON();?>;
+            </script>
+
+            <script type="text/x-magento-init">
+                {"*": {"Vonnda_Subscription/js/subscription-customer-info": {}}}
+            </script>
+
+            <style>
+                .product-chooser__item:nth-child(odd) {
+                    background-color: #f8f8f8;
+                }
+                .product-chooser__heading-row {
+                    background-color: #41362f;
+                }
+                .product-chooser__heading-row th {
+                    color: white;
+                }
+                .button.primary, #grouped-product-container > button {
+                    background: #e3e3e3;
+                    border-color: #adadad;
+                    box-shadow: none;
+                    color: #514943;
+                    border-radius: 0;
+                    display: inline-block;
+                    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    line-height: 1.36;
+                    padding: 0.6rem 1em 0.6rem;
+                    text-align: center;
+                    vertical-align: baseline;
+                    margin-bottom: 10px;
+                }
+                .fieldset-wrapper-title {
+                    margin-bottom: 18px;
+                }
+                .subscription-customer-info-block__heading-row > th {
+                    background-clip: padding-box;
+                    color: #ffffff;
+                    padding: 1rem 1rem;
+                    position: relative;
+                    vertical-align: middle;
+                }
+                .admin__table-secondary {
+                    width: 45%;
+                    margin-bottom: 18px;
+                }
+            </style>
+
+        <?php
+    } else {?>
+        <script>
+            window.backEndGetCustomerInfoUrl = "<?php echo $block->getBackendGetCustomerInfoUrl();?>";
+        </script>
+    <?php }
+?>

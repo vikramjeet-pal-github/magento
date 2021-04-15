@@ -1,0 +1,123 @@
+<?php
+/**
+ * @var $block \Vonnda\CheckoutSurvey\Block\Success
+ */
+$helper = $block->getExtensionHelper()
+?>
+<?php if ($helper->isEnabled() && !$block->isCustomerAlreadyAnswer()) : ?>
+    <div class="block hide js-submit-success" id="survey-answer-success">
+        <div class="block-title">
+            <h3>Thanks again.</h3>
+            <h3 class="mark"></h3>
+            <p>Your answer has been submitted. </p>
+        </div>
+    </div>
+    <div class="block" id="answer-content">
+        <div class="block-title">
+            <strong><?php /* @escapeNotVerified */ echo $block->getQuestion(); ?></strong>
+        </div>
+        <div class="block-content">
+            <?php foreach ($block->getAnswerOptions() as $key => $answerOption): ?>
+                <div class="field choice">
+                    <input type="radio" class="radio" id="answer_<?php echo $key; ?>" name="answer" value="<?php echo str_replace(" ", "_", strtolower($answerOption)); ?>"/>
+                    <label class="label" for="answer_<?php echo $key; ?>"><?php echo $answerOption; ?></label>
+                </div>
+            <?php endforeach; ?>
+            <div class="field choice choice-other">
+                <input type="radio" class="radio" id="other" name="answer" value="other"/>
+                <label class="label" for="other"><?php echo __('Other'); ?></label>
+                <div id="answer_details_content">
+                    <textarea id="answer_details" placeholder="Please enter your answer" name="answer_details" maxlength="200"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="block-footer">
+            <button class="action primary js-submit-survey" id="submitAnswer" disabled="true"><?php echo __('Submit answer'); ?></button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        require([
+            "jquery",
+            'mage/url',
+            'Magento_Customer/js/customer-data'
+        ], function ($, urlBuilder, customerData) {
+            "use strict";
+            $('document').ready(function () {
+                $("#answer_details_content").hide();
+            });
+
+            var div = $("#answer_details_content");
+            $('input[name="answer"]:radio').change(function(){
+
+                var radioVal = this.value;
+                if(radioVal === "other"){
+                    div.show();
+                }
+                else {
+                    div.hide();
+                }
+            });
+
+
+            $('input:radio').on('change', function() {
+                $(this)
+                    .parent().addClass('checked')
+                    .siblings().removeClass('checked');
+                if($(this).attr('id') == 'other'){
+                    $('button.js-submit-survey').attr("disabled", true);
+                    $('#answer_details').bind('input propertychange', function() {
+                        if(this.value.length){
+                            $('button.js-submit-survey').attr("disabled", false);
+                        } else {
+                            $('button.js-submit-survey').attr("disabled", true);
+                        }
+                    });
+                } else {
+                    $('button.js-submit-survey').attr("disabled", false);
+                }
+
+            });
+
+            $("#submitAnswer").click(function () {
+                var answer = $("input[name=\"answer\"]:checked").val();
+                var answerDetails = $("#answer_details").val();
+                var customerId = "<?php echo $block->getCustomerId();?>";
+                var customerEmail = "<?php echo $block->getCustomerEmail();?>";
+                submitSurveyChoose(answer, answerDetails, customerId, customerEmail);
+            });
+
+            function submitSurveyChoose(answer, answerDetails, customerId, customerEmail)
+            {
+                var serviceUrl = urlBuilder.build('checkoutsurvey/index/register');
+
+                $.ajax({
+                    type:'POST',
+                    url: serviceUrl,
+                    showLoader: true,
+                    data:{
+                        "answer": answer,
+                        "answerDetails": answerDetails,
+                        "customerId": customerId,
+                        "customerEmail": customerEmail
+                    }})
+                    .success(function(data) {
+                        $('.js-submit-success').removeClass('hide');
+                        $("#answer-content").hide();
+
+                        if (window.utag !== undefined) {
+                            var tealiumTag = window.utag;
+                            var dataObject = data.tealiumData;
+                            tealiumTag.link(dataObject);
+                        }
+
+                    })
+                    .error(function(err) {
+                        console.log(err);
+                    })
+                    .complete(function() {
+
+                    });
+            }
+        });
+    </script>
+<?php endif; ?>

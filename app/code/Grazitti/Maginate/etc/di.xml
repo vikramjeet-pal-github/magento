@@ -1,0 +1,29 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+	<virtualType name="GrazittiMaginateGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+		<arguments>
+			<argument name="appliers" xsi:type="array">
+				<item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+				<item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+			</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="GrazittiMaginateGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+		<arguments>
+			<argument name="collection" xsi:type="object" shared="false">Grazitti\Maginate\Model\ResourceModel\Logs\Collection</argument>
+			<argument name="filterPool" xsi:type="object" shared="false">GrazittiMaginateGridFilterPool</argument>
+		</arguments>
+	</virtualType>
+	<virtualType name="Grazitti\Maginate\Model\ResourceModel\Logs\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">grazitti_error_logs</argument>
+			<argument name="resourceModel" xsi:type="string">Grazitti\Maginate\Model\ResourceModel\Logs</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="grazitti_maginate_index_listing_data_source" xsi:type="string">Grazitti\Maginate\Model\ResourceModel\Logs\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

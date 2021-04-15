@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link rel="icon" type="image/png" src="icons/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/png" src="icons/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" src="icons/favicon-16x16.png" sizes="16x16" />
+        <link rel="manifest" src="icons/manifest.json" />
+        <script src="https://www.google.com/recaptcha/api.js" src_type="url"/>
+        <link rel="apple-touch-icon-precomposed" sizes="57x57" src="icons/apple-icon-57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" src="icons/apple-icon-114x114.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" src="icons/apple-icon-72x72.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" src="icons/apple-icon-144x144.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="60x60" src="icons/apple-icon-60x60.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" src="icons/apple-icon-120x120.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="76x76" src="icons/apple-icon-76x76.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" src="icons/apple-icon-152x152.png" />
+        <meta name="msapplication-TileColor" content="#FFFFFF" />
+        <meta name="msapplication-TileImage" content="icons/mstile-144x144.png" />
+        <meta name="msapplication-square70x70logo" content="icons/mstile-70x70.png" />
+        <meta name="msapplication-square150x150logo" content="icons/mstile-150x150.png" />
+        <meta name="msapplication-wide310x150logo" content="icons/mstile-310x150.png" />
+        <meta name="msapplication-square310x310logo" content="icons/mstile-310x310.png" />
+    </head>
+
+
+    <body>
+        <referenceContainer name="after.body.start">
+     <block class="Magento\Framework\View\Element\Template" name="menu" template="Magento_Theme::html/productscript.phtml" />
+</referenceContainer>
+        <!-- Remove Unused Containers -->
+        <referenceContainer name="footer" remove="true" />
+        <!-- <referenceContainer name="header.panel" remove="true" /> -->
+        <referenceContainer name="sidebar.additional" remove="true" />
+        
+        <!-- Remove Unused Blocks -->
+        <referenceBlock name="minicart" remove="true"/>
+        <referenceBlock name="top.search" remove="true"/>
+        <referenceBlock name="copyright" remove="true"/>
+        <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+      
+         
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_img_width" xsi:type="number">148</argument>
+                <argument name="logo_img_height" xsi:type="number">43</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceContainer name="header-wrapper">
+            <block class="Magento\Framework\View\Element\Template" name="mlk.menu" template="Magento_Theme::mlk-menu.phtml" after="logo" />
+            
+        </referenceContainer>
+        
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="header.links" remove="true" />
+    </body>
+</page>

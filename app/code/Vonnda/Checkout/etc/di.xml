@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Checkout\Block\Cart\Item\Renderer" type="Vonnda\Checkout\Block\Cart\Item\Renderer" />
+    <preference for="Magento\Bundle\Block\Checkout\Cart\Item\Renderer" type="Vonnda\Checkout\Block\Cart\Item\BundleRenderer" />
+    <preference for="Magento\Bundle\Block\Sales\Order\Items\Renderer" type="Vonnda\Checkout\Block\Bundle\Sales\Order\Item\Renderer" />
+    <type name="Vonnda\Checkout\Block\Onepage\Success">
+        <plugin name="vonnda-checkout-after-success" type="Vonnda\Checkout\Plugin\Block\Onepage\Success" />
+    </type>
+    <type name="Vonnda\Checkout\Model\GuestPaymentInformationManagement">
+        <plugin name="vonnda-checkout-guest-newsletter" type="Vonnda\Checkout\Plugin\Model\NewsletterSubscriber" />
+    </type>
+    <type name="Magento\Checkout\Model\DefaultConfigProvider">
+        <plugin name="vonnda-checkout-additional-data" type="Vonnda\Checkout\Plugin\Checkout\Model\DefaultConfigProvider" />
+    </type>
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <plugin name="vonnda-checkout-quote-data" type="Vonnda\Checkout\Plugin\Checkout\Model\CompositeConfigProvider" />
+    </type>
+    <preference for="Magento\Quote\Api\ChangeQuoteControlInterface" type="Vonnda\Checkout\Model\Quote\ChangeQuoteControl" />
+    <preference for="Astound\Affirm\Controller\Payment\Confirm" type="Vonnda\Checkout\Controller\Affirm\Payment\Confirm" />
+    <preference for="Aheadworks\OneStepCheckout\Model\Plugin\GuestNewsletterSubscriber" type="Vonnda\Checkout\Model\OneStepCheckout\Plugin\GuestNewsletterSubscriber" />
+    <preference for="Magento\Quote\Observer\SubmitObserver" type="Vonnda\Checkout\Observer\Quote\SubmitObserver" />
+    <preference for="Magento\Quote\Model\QuoteManagement" type="Vonnda\Checkout\Model\Quote\QuoteManagement" />
+    <preference for="Magento\Quote\Model\Webapi\ParamOverriderCartId" type="Vonnda\Checkout\Model\Quote\Webapi\ParamOverriderCartId" />
+    <preference for="Magento\CheckoutAgreements\Model\Checkout\Plugin\Validation" type="Vonnda\Checkout\Plugin\CheckoutAgreements\Model\Checkout\Plugin\Validation" />
+    <preference for="Aheadworks\OneStepCheckout\Block\Checkout" type="Vonnda\Checkout\Block\Checkout" />
+    <preference for="Aheadworks\OneStepCheckout\Model\CheckoutSectionsManagement" type="Vonnda\Checkout\Model\OneStepCheckout\CheckoutSectionsManagement" />
+    <preference for="Magento\Checkout\Controller\Onepage\Success" type="Vonnda\Checkout\Controller\Onepage\Success" />
+</config>

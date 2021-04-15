@@ -1,0 +1,823 @@
+<?php
+$subscriptionList = $block->getCustomerSubscriptions();
+$customerId = $block->getCurrentCustomerId();
+$countryBlock = $block->getLayout()->createBlock('Vonnda\ShippingRestrictions\Block\RestrictedData');
+$websiteCode = $block->getWebsiteCode();
+$debug = false;
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); 
+$resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+$connection = $resource->getConnection(); 
+$tableName = $resource->getTableName('vonnda_subscription_history');
+
+$status = [];
+// foreach ($result as $row)
+// {
+//  $status = unserialize($row['after_save']);
+//  echo'<pre>';
+//  print_r($status);
+//  die();
+// }
+?>
+<div class="subscription-list__list-container">
+    <div class="device-registered-banner js-registered-banner hide">
+        <h2>Your Molekule is registered.</h2>
+        <p>Please take a moment to activate auto-refills, so your device never runs out of fresh filters.</p>
+        <a class="device-registered-banner__button js-device-registered-banner-button" href="javascript:void(0);">
+            Activate auto-refills
+        </a>
+    </div>
+<?php foreach($block->sortSubscriptionCustomers($subscriptionList) as $subscription){ 
+        $subscriptionPlan = $block->getSubscriptionPlanById($subscription->getSubscriptionPlanId());
+        $subscription_customer_id=$subscription->getId();
+        $payment_status = "SELECT after_save FROM vonnda_subscription_history WHERE subscription_customer_id=$subscription_customer_id";
+        $result = $connection->fetchAll($payment_status);
+        $status = [];
+        foreach ($result as $row)
+            {
+             $status= unserialize($row['after_save']);
+            }
+        $stripe_status=$status['payment']['status'];
+        $device = $subscription->getDevice();
+        $deviceName = $block->getAssociatedDevice($subscription);
+        $shouldShowExpirationDate = $block->shouldShowExpirationDate($subscription);
+        $shouldShowRenewalDate = !($shouldShowExpirationDate);
+        $hasMessage= false;
+    ?>
+    <div class="subscription-list__subscription-container" data-id="<?php echo $subscription->getId();?>">
+        <?php if($stripe_status=='invalid'){
+                $hasMessage = true;?>
+            <div class="subscription-list__message warning" 
+                 data-subscriptionid="<?php echo $subscription->getId();?>">
+                <strong>We coundn't process your payment due to incorrect billing address.</strong> Please update the payment info.
+            </div>
+        <?php } ?>
+        <?php if($block->shouldShowProcessingErrorMessage($subscription)){
+                $hasMessage = true;?>
+            <div class="subscription-list__message warning" 
+                 data-subscriptionid="<?php echo $subscription->getId();?>">
+                <strong>There was an issue processing your payment.</strong> Please update payment info.
+            </div>
+        <?php } ?>
+
+        <?php if($block->shouldShowCardExpiredMessage($subscription)){
+                $hasMessage = true;?>
+            <div class="subscription-list__message warning" 
+                 data-subscriptionid="<?php echo $subscription->getId();?>">
+                <strong>Your card is expired.</strong> Please update payment info.
+            </div>
+        <?php } ?>
+
+        <?php if($block->cardWillExpireSoon($subscription) && !$hasMessage){
+                $hasMessage = true;?>
+            <div class="subscription-list__message subscription-list__expire-soon-message info"
+                 data-subscriptionid="<?php echo $subscription->getId();?>">
+                <strong>Heads up.</strong> Your card expires soon.
+            </div>
+        <?php } ?>
+
+        <?php if($block->shouldShowActivateMessage($subscription)  && !$hasMessage){
+                $hasMessage = true;?>
+            <div class="subscription-list__message subscription-list__message" 
+                 data-subscriptionid="<?php echo $subscription->getId();?>">
+                <strong>Don’t miss out on free filters.</strong> Activate auto-refills.
+            </div>
+        <?php } ?>
+
+        <?php if($block->shouldShowExpiredMessage($subscription)  && !$hasMessage){
+                $hasMessage = true;?>
+            <div class="subscription-list__message subscription-list__expired-message warning"
+                 data-subscriptionid="<?php echo $subscription->getId();?>">
+                <strong>Expired.</strong> Activate auto-refills now to get fresh replacement filters.
+            </div>
+        <?php } ?>
+
+        <?php if($block->shouldShowAlmostExpiredMessage($subscription)  && !$hasMessage){ 
+                $hasMessage = true;?>
+            <div class="subscription-list__message subscription-list__expire-soon-message info"
+                 data-subscriptionid="<?php echo $subscription->getId();?>">
+                <strong>It’s almost time to get new filters.</strong> Activate auto-refills.
+            </div>
+        <?php } ?>
+
+        <?php if($block->shouldShowTurnedOffMessage($subscription)  && !$hasMessage){
+                $hasMessage = true;?>
+            <div class="subscription-list__message warning" 
+                 data-subscriptionid="<?php echo $subscription->getId();?>">
+                Auto-refills are turned off.
+            </div>
+        <?php } ?>
+        
+        <div class="subscription-list__message subscription-list__thank-you-message hide"
+             data-subscriptionid="<?php echo $subscription->getId();?>">
+             Auto-refills activated. Your filters will ship in a few days.
+        </div>
+        <h3><span class="name"><?php echo $block->getSerialOrDeviceName($subscription);?></span></h3>
+        <h4><span class="device-type"><?php echo $deviceName;?></span></h4>
+        <?php if($debug){?>
+            <p><?php echo $subscription->getId() . " - " . $subscription->getStatus();?></p>
+            <p><?php echo $block->subscriptionWillExpireSoon($subscription, $subscription->getSubscriptionPlan()) ? "Will Expire" : "";?></p>
+            <p><?php echo $block->isSubscriptionExpired($subscription, $subscription->getSubscriptionPlan()) ? "Expired" : "";?></p>
+        <?php } ?>
+
+        <div class="subscription-list__content">
+            <div class="subscription-list__image">
+                <?php echo $block->getAssociatedDeviceImage($subscription);?>
+            </div>
+
+            <div class="subscription-list__info">
+                <h4><span class="label">Plan details</span><?php echo $subscriptionPlan->getMoreInfo();?>.<span class="value-details"><?php echo $this->helper('Magento\Framework\Pricing\Helper\Data')->currency(number_format($subscriptionPlan->getPlanPrice(),2),true,false); ?><?php echo ($subscriptionPlan->getDeviceSku() == 'MH1-BBB-1' || $subscriptionPlan->getDeviceSku() == 'MH1-BBB-1CA' || $subscriptionPlan->getDeviceSku() == 'SQ2P-US' ? ' every 6 mos.' : ' every year.'); ?></span></h4>
+                <h4>
+                    <span class="label">Next shipment</span> 
+                    <span class="value js-next-shipment-date">
+                        <?php echo $subscription->getWeekOfString(); ?>
+                    </span>
+                </h4>
+                
+                <h4 class="js-renewal-date-container <?php echo ($shouldShowRenewalDate) ? "" : "hide";?>"><span class="label">Renewal date</span> 
+                    <span class="value js-renewal-date">
+                        <?php echo $subscription->getRenewalDate();?>
+                    </span>
+                </h4>
+
+                <h4 class="js-expiration-date-container <?php echo ($shouldShowExpirationDate) ? "" : "hide";?>"><span class="label">Expiration date</span> 
+                    <span class="value js-expiration-date">
+                        <?php echo $subscription->getRenewalDate();?>
+                    </span>
+                </h4>
+
+                <h4><span class="label">Serial #</span><?php echo $device ? $device->getSerialNumber() : "N/A";?></h4>
+                
+                <button class="subscription-list__button-mint js-activate-subscription"
+                        data-subscriptionid="<?php echo $subscription->getId();?>"
+                        style="<?php echo ($block->shouldShowActivationButton($subscription)) ? '' : 'display:none';?>">
+                        Activate auto-refills</button>
+                
+                <div class="subscription-list__addresses">
+                    <div class="subscription-list__address" data-subscriptionid="<?php echo $subscription->getId();?>">
+                        <h3>Shipping address</h3>
+                        <?php
+                            $shippingAddress = $block->getAssociatedAddress($subscription->getShippingAddressId());
+                            if($shippingAddress){    
+                                $shippingStreet = $shippingAddress->getStreet();
+                                $addressText = $shippingStreet[0];
+                            } else {
+                                //TODO - what would this text be
+                                $addressText = 'No shipping address';
+                            }
+                        ?>
+                        <p><?php echo $addressText;?> <button
+                                    class="subscription-list__shipping-address-edit-button subscription-list__button-edit"
+                                    data-addressid="<?php echo $subscription->getShippingAddressId();?>"
+                                    data-devicename="<?php echo $deviceName;?>"
+                                    data-id="<?php echo $subscription->getId();?>"></button>
+                        </p>
+                    </div>
+
+             <?php if($block->shouldShowPaymentOnTile($subscription)){ 
+                    $paymentErrorMessage = $block->getPaymentErrorMessage($subscription); ?>
+                        <div class="subscription-list__address js-subscription-list-payment-info-container" data-subscriptionid="<?php echo $subscription->getId();?>">
+                            <h3>Payment</h3>
+                            <p>
+                            <?php if($stripe_status=='invalid'){?>
+                              <span style="color: red"><?php echo 'Payment Declined';?></span></p>
+                            <p class="js-subscription-list-payment-error-message 
+                                      <?php echo $paymentErrorMessage ? "" : "hide";?>" >
+                                <?php echo $paymentErrorMessage;?>
+                            </p>
+                            <p class="js-subscription-list-payment-info"
+                            data-subscriptionid="<?php echo $subscription->getId();?>">
+                                <?php echo ($block->getCardInfoString($subscription));?>
+                                
+                                <button
+                                class="js-payment-edit-existing js-payment-edit-existing-update" data-devicename="<?php echo $deviceName;?>"
+                                data-subscriptionid="<?php echo $subscription->getId();?>">Update</button>
+                                <?php
+                            }elseif($stripe_status=='valid'){?>
+                                <?php echo $stripe_status;?></p>
+                            <p class="js-subscription-list-payment-error-message 
+                                      <?php echo $paymentErrorMessage ? "" : "hide";?>" >
+                                <?php echo $paymentErrorMessage;?>
+                            </p>
+                            <p class="js-subscription-list-payment-info"
+                            data-subscriptionid="<?php echo $subscription->getId();?>">
+                                <?php echo ($block->getCardInfoString($subscription));?>
+                                <button
+                                    class="js-payment-edit-existing 
+                                            subscription-list__billing-address-edit-button
+                                            <?php echo (!$paymentErrorMessage) ? "" : "hide";?>
+                                            subscription-list__button-edit"
+                                    data-devicename="<?php echo $deviceName;?>"
+                                    data-subscriptionid="<?php echo $subscription->getId();?>"></button>
+                           <?php }
+                            
+                            ?>
+                    </p>
+                <button
+                                class="js-payment-edit-existing
+                                       js-payment-edit-existing-update
+                                        <?php echo ($paymentErrorMessage) ? "" : "hide";?>"
+                                data-devicename="<?php echo $deviceName;?>"
+                                data-subscriptionid="<?php echo $subscription->getId();?>">Update</button>
+            </div>
+                    <?php } else {?>
+                        <div class="subscription-list__address js-subscription-list-payment-info-container hide"
+                             data-subscriptionid="<?php echo $subscription->getId();?>">
+                            <h3>Payment</h3>
+                            <p class="js-subscription-list-payment-error-message hide";?></p>
+                            <p class="js-subscription-list-payment-info"
+                            data-subscriptionid="<?php echo $subscription->getId();?>">
+                                <button
+                                    class="js-payment-edit-existing 
+                                            subscription-list__billing-address-edit-button
+                                            subscription-list__button-edit"
+                                    data-devicename="<?php echo $deviceName;?>"
+                                    data-subscriptionid="<?php echo $subscription->getId();?>"></button>
+                            </p>
+                            <button
+                                class="js-payment-edit-existing
+                                       js-payment-edit-existing-update
+                                       hide"
+                                data-devicename="<?php echo $deviceName;?>"
+                                data-subscriptionid="<?php echo $subscription->getId();?>">Update</button>
+                        </div>
+                    <?php } ?>
+                    
+                    <div class="subscription-list__options">
+                        <span class="tooltip-content">
+                            <?php 
+                                $shouldShowTurnOn = $block->shouldShowActivationButton($subscription);?>
+                                <span class="js-activate-subscription-option <?php echo $shouldShowTurnOn ? "" : "hide"; ?>"
+                                      data-subscriptionid="<?php echo $subscription->getId();?>">Turn on auto-refills</span>
+                                <span class="js-open-cancel <?php echo !$shouldShowTurnOn ? "" : "hide"; ?>" 
+                                      data-subscriptionid="<?php echo $subscription->getId();?>">Turn off auto-refills</span>
+                        </span>
+                        <h3>Options</h3>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+<?php } //End foreach?>   
+</div>
+
+<!-- Auto-Refill Cancel Survey -->
+<?php 
+    $cancelSurveyIsEnabled = $block->isAutoRefillCancelSurveyEnabled();
+    $cancelQuestion = $block->getAutoRefillCancelQuestion();
+    $cancelAnswers = $block->getCancelAutoRefillAnswers();
+    $cancelCounter = 1;
+?>
+<div class="subscription-list__cancel-form hide">
+    <div class="block" id="answer-content">
+        <?php if($cancelSurveyIsEnabled){ ?>
+            <div class="block-title">
+                <strong><?php echo $cancelQuestion;?></strong>
+            </div>
+            <div class="block-content">
+                <?php foreach($cancelAnswers as $cancelAnswer){?>
+                    <div class="field choice">
+                        <input type="radio" class="radio" id="cancel_reason_<?php echo $cancelCounter;?>" name="answer" value="<?php echo $cancelAnswer;?>"/>
+                        <label class="label" for="cancel_reason_<?php echo $cancelCounter;?>"><?php echo $cancelAnswer;?></label>
+                    </div>
+                    <?php $cancelCounter++;?> 
+                <?php } ?>
+                <div class="field choice choice-other">
+                    <input type="radio" class="radio" id="other" name="answer" value="other"/>
+                    <label class="label" for="other"><?php echo __('Other'); ?></label>
+                    <div id="answer_details_content">
+                        <textarea id="answer_details" placeholder="Please enter your answer" name="answer_details"></textarea>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+        <div class="block-footer">
+            <button class="action primary js-submit-survey" id="submitAnswer" <?php echo $cancelSurveyIsEnabled ? 'disabled="true"' : '';?>><?php echo __('Turn off auto-refills'); ?></button>
+            <button class="action secondary js-close-cancel"><?php echo __('Cancel'); ?></button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    require([
+        "jquery",
+        'mage/url',
+        'Magento_Customer/js/customer-data'
+    ], function ($, urlBuilder, customerData) {
+        "use strict";
+
+        window.googleAutocompleteApiKey = "<?php echo $block->getAutoCompleteApiKey();?>";
+        window.cancelSubscriptionId = null;
+
+        $('document').ready(function () {
+            $("#answer_details_content").hide();
+        });
+
+        $('.js-open-cancel').on('click', function(event){
+            window.cancelSubscriptionId = $(this).data('subscriptionid');
+            $('.subscription-list__list-container').addClass('hide');
+            $('.subscription-list__cancel-form').removeClass('hide');
+        })
+
+        $('.js-close-cancel').on('click', function(event){
+            window.cancelSubscriptionId = null;
+            $('.subscription-list__list-container').removeClass('hide');
+            $('.subscription-list__cancel-form').addClass('hide');
+        })
+
+        var div = $("#answer_details_content");
+        $('input[name="answer"]:radio').change(function(){
+
+            var radioVal = this.value;
+            if(radioVal === "other"){
+                div.show();
+            }
+            else {
+                div.hide();
+            }
+        });
+
+
+        $('input:radio').on('change', function() {
+            $(this)
+                .parent().addClass('checked')
+                .siblings().removeClass('checked');
+            if($(this).attr('id') == 'other'){
+                $('button.js-submit-survey').attr("disabled", true);
+                $('#answer_details').bind('input propertychange', function() {
+                    if(this.value.length){
+                        $('button.js-submit-survey').attr("disabled", false);
+                    } else {
+                        $('button.js-submit-survey').attr("disabled", true);
+                    }
+                });
+            } else {
+                $('button.js-submit-survey').attr("disabled", false);
+            }
+        });
+
+        $("#submitAnswer").on('click', function () {
+            var answer = $("input[name=\"answer\"]:checked").val();
+            var answerDetails = $("#answer_details").val();
+            $("#submitAnswer").attr('disabled', true);
+            submitCancelRequest(answer, answerDetails, window.cancelSubscriptionId);
+        });
+
+        function submitCancelRequest(answer, answerDetails, subscriptionId)
+        {
+            if(!subscriptionId){return;}
+
+            var getUrl = window.BASE_URL + "rest/V1/vonnda/subscription/me/customer";
+            var request = $.ajax({
+                showLoader:true,
+                type: 'GET',
+                url: getUrl,
+            })
+            .success(function(subscriptions) {
+                $.each(subscriptions, function(i, subscription){
+                    if(subscription['id'] === subscriptionId){
+                        subscription['status'] = 'autorenew_off';
+                        if(answer){
+                            subscription['cancel_reason'] = answer !== 'other' ?  answer : answerDetails;
+                        }
+                        //Magento's API demands a corresponding setter for every field sent
+                        delete subscription.renewal_date;
+
+                        var url = window.BASE_URL + "rest/V1/vonnda/subscription/me/customer";
+                        var request = $.ajax( {
+                            showLoader:true,
+                            type: 'PUT',
+                            url: url,
+                            headers: {
+                                "Content-Type":"application/json"
+                            },
+                            data: JSON.stringify({ subscriptionCustomer: subscription })
+                        })
+                        .complete(function(data) {
+                            $(document).trigger("tealiumAutoRenewOff", [subscription, data.responseJSON]);
+                            window.location.reload();
+                        })
+                    } 
+                });
+
+            })
+            .error(function(err) {
+                window.location.reload();
+             });
+        }
+    });
+</script>
+
+<!-- Shipping Address Edit Tab -->
+<div class="subscription-list__shipping-address" style="display:none;">
+    <h2>Select address</h2>
+
+    <h3 class="subscription-list__shipping-address-devicename"></h3>
+
+    <a class="subscription-list__shipping-address-add" href="javascript:void(0);">Add new address</a>
+
+    <div class="subscription-list__new-address hide">
+        <div>
+            <form class="subscription-list__shipping-address-form js-existing-subscription-new-address-form"  data-mage-init='{"awOscFloatLabel": {}}'>
+                <div class="field">
+                    <label class="label" for="shipping-firstname"><span><?= $block->escapeHtml(__('First name')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="firstname" id="shipping-firstname" type="text" data-validate="{required:true}" maxlength="32">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="shipping-lastname"><span><?= $block->escapeHtml(__('Last name')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="lastname" id="shipping-lastname" type="text" data-validate="{required:true}" maxlength="32">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="shipping-streetOne"><span><?= $block->escapeHtml(__('Address 1')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input js-address-field" name="streetOne" id="shipping-streetOne" type="text" data-validate="{required:true}" placeholder="">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="shipping-streetTwo"><span><?= $block->escapeHtml(__('Address 2 (optional)')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="streetTwo" id="shipping-streetTwo" type="text">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="shipping-city"><span><?= $block->escapeHtml(__('City')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="city" id="shipping-city" type="text" data-validate="{required:true}">
+                </div>
+
+                <div class="field selected half">
+                    <?php if ($websiteCode == 'mlk_ca'): ?>
+                        <label class="label" for="shipping-region_id"><span><?= $block->escapeHtml(__('Province')) ?></span></label>
+                        <?= $countryBlock->getRegionHtmlSelect($defValue = null, $name = 'region_id', $id = 'shipping-region_id', $title = 'Province');?>
+                    <?php else: ?>
+                        <label class="label" for="shipping-region_id"><span><?= $block->escapeHtml(__('State')) ?></span></label>
+                        <?= $countryBlock->getRegionHtmlSelect($defValue = null, $name = 'region_id', $id = 'shipping-region_id', $title = 'State');?>
+                    <?php endif; ?>
+                </div>
+
+                <div class="field half">
+                    <label class="label" for="shipping-postcode"><span><?= $block->escapeHtml(__('Postal code')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="postcode" id="shipping-postcode" type="text" data-validate="{required:true}">
+                </div>
+
+                <div class="field selected">
+                    <label class="label" for="shipping-country_id"><span><?= $block->escapeHtml(__('Country')) ?></span></label>
+                    <?= $countryBlock->getRestrictedCountryHtmlSelect($defValue = null, $name = 'country_id', $id = 'shipping-country_id', $title = 'Country');?>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="shipping-telephone"><span><?= $block->escapeHtml(__('Phone number')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="telephone" id="shipping-telephone" type="text" data-validate="{required:true}">
+                </div>
+            </form>
+        </div>
+        <div class="subscription-list__new-address-buttons">
+            <button class="subscription-list__shipping-address-save-button subscription-list__button-light"
+                    data-id=""
+                    data-addressId=""
+                    disabled
+                    data-customerId="<?php echo $customerId;?>">
+                        Save address
+            </button>
+            <!-- This is a redirect -->
+            <button class="subscription-list__shipping-address-edit-redirect-button subscription-list__button-light hide"
+                    data-id=""
+                    data-addressId=""
+                    data-customerId="<?php echo $customerId;?>">
+                        Edit address
+            </button>
+        </div>
+        </div>
+    <script type="text/x-magento-init">
+            {
+                "form.subscription-list__shipping-address-form": {
+                   "validation":{}
+                }
+            }
+    </script>
+    <div class="subscription-list__address-edit-list">
+        <?php 
+            $shippingAddresses = $block->getCustomerAddresses($block->getCurrentCustomerId());
+            foreach($shippingAddresses as $shippingAddress){?>
+                <div class="subscription-list__shipping-address-edit-list-item" data-addressId="<?php echo $shippingAddress->getId();?>">
+                    <?php $shippingStreet = $shippingAddress->getStreet(); ?>
+                    <p><?php echo ($shippingAddress->getFirstname() . " " . $shippingAddress->getLastname());?></p>
+                    <p><?php echo $shippingStreet[0];?></p>
+                    <?php if(sizeof($shippingStreet) > 1) : ?>
+                        <p><?php echo $shippingStreet[1]; ?></p>
+                    <?php endif; ?>
+                    <p><?php echo $shippingAddress->getCity() . ", " . $shippingAddress->getRegion()->getRegionCode() . " " . $shippingAddress->getPostcode();?></p>
+                    <p><?php echo $shippingAddress->getTelephone()?></p>
+                </div>
+            <?php } ?>
+    </div>
+    <div class="subscription-list__actions">
+        <button class="subscription-list__shipping-address-choose-button subscription-list__button-light" 
+                data-id="" 
+                data-addressId = ""
+                disabled>Save</button>
+        <a class="cancel-address" href="javascript:void(0);">Cancel</a>
+    </div>
+</div>
+
+<!-- TODO - refactor to use the activate-flow template -->
+<script>
+    var addresses = <?php echo $block->getCustomerAddressesJSON($block->getCurrentCustomerId());?>;
+    window.customerId = <?php echo $block->getCurrentCustomerId();?>;
+    window.customerEmail = "<?php echo $block->getCurrentCustomerEmail();?>";
+    window.customerSessionId = "<?php echo $block->getCustomerSessionId();?>";
+    window.customerUid = "<?php echo $block->getCustomerUid();?>";
+    window.addressBookUrl = "<?php echo $block->getUrl() . "customer/address/";?>";
+    window.baseUrl = "<?php echo $block->getUrl();?>";
+    window.cardsUrl = "<?php echo $block->getUrl() . "stripe-payments/customer/cards/";?>";
+    //window.storeCountryCode = "<?php //echo $block->getStoreCountryCode();?>//";
+    window.allSubscriptions = <?php echo $block->getAllSubscriptionsJSON($block->getCurrentCustomerId());?>;
+    window.tealiumCartInfo = <?php echo $block->getTealiumCartInfoJSON();?>;
+
+    require([
+        "jquery"
+    ], function($) {
+        $('.subscription-list__shipping-address-add').on('click', function() {
+            $(this).toggleClass('active');
+            $(this).closest('div').find('.subscription-list__new-address').toggleClass('hide');
+            $(this).closest('div').find(".subscription-list__address-edit-list").toggleClass('hide');
+            $(this).closest('div').find(".subscription-list__shipping-address-choose-button").toggleClass('hide');
+        });
+
+        $('.subscription-list__billing-address-add').on('click', function() {
+            $(this).toggleClass('active');
+            $(this).closest('div').find('.subscription-list__new-address').toggleClass('hide');
+        });
+
+        $('.cancel-address').on('click', function(){
+            $('.subscription-list__shipping-address, .subscription-list__billing-address').hide();
+            $(".subscription-list__shipping-address-choose-button").removeClass('hide');
+            $('.subscription-list__address-edit-list').removeClass('hide');
+            $('.subscription-list__new-address').addClass('hide');
+            $('.subscription-list__shipping-address-add').removeClass('active');
+            $('.subscription-list__list-container').show();
+            $(document).trigger('cancelAddAddressToExistingSubscription');
+        });
+
+        $('#bill-address').on('change', function(){
+            $('.different-than-shipping').toggleClass('hide');
+        });
+    });
+
+</script>
+
+<script type="text/x-magento-init">
+    {"*": {"Vonnda_Subscription/js/customer-account-refill": {},
+           "Vonnda_TealiumTags/js/accountPortal":{}}}
+</script>
+
+<div class="subscription-flow activate-no-card-shipping hide" data-bind="mageInit: {'js/activaterefills': {}}">
+
+    <div class="subscription-flow-intro hide">
+    </div>
+
+    <div class="subscription-flow-steps">
+
+        <div class="js-subscription-flow-shipping subscription-flow-step shipping active">
+
+            <div class="group-title">
+                <h2>
+                    <span class="mark"></span><span>Shipping</span>
+                    <a class="checkout-edit-step js-shipping-edit" href="javascript:void(0);">Edit</a>
+                </h2>
+                <div class="js-subscription-flow-shipping-preview hide"></div>
+            </div>
+
+            <div class="group-content">
+
+                <p>Where would you like your next filter pack shipped?</p>
+                <a class="subscription-flow-address-add" href="javascript:void(0);">Add new address</a>
+                <div class="subscription-flow-new-address" style="display:none;">
+                    <form class="subscription-list__shipping-address-form js-subscription-flow-add-address-form"  data-mage-init='{"awOscFloatLabel": {}}'>
+                        <div class="field">
+                            <label class="label" for="flow-shipping-firstname"><span><?= $block->escapeHtml(__('First name')) ?></span></label>
+                            <input class="subscription-list__shipping-address-form-input js-activate-shipping-address-input" name="flow-firstname" id="flow-shipping-firstname" type="text" data-validate="{required:true}"  maxlength="32">
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="flow-shipping-lastname"><span><?= $block->escapeHtml(__('Last name')) ?></span></label>
+                            <input class="subscription-list__shipping-address-form-input js-activate-shipping-address-input" name="flow-lastname" id="flow-shipping-lastname" type="text" data-validate="{required:true}"  maxlength="32">
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="flow-shipping-streetOne"><span><?= $block->escapeHtml(__('Address 1')) ?></span></label>
+                            <input class="subscription-list__shipping-address-form-input js-activate-shipping-address-input js-address-field" name="flow-streetOne" id="flow-shipping-streetOne" type="text" data-validate="{required:true}" placeholder="">
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="flow-shipping-streetTwo"><span><?= $block->escapeHtml(__('Address 2 (optional)')) ?></span></label>
+                            <input class="subscription-list__shipping-address-form-input js-activate-shipping-address-input" name="flow-streetTwo" id="flow-shipping-streetTwo" type="text">
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="flow-shipping-city"><span><?= $block->escapeHtml(__('City')) ?></span></label>
+                            <input class="subscription-list__shipping-address-form-input js-activate-shipping-address-input" name="flow-city" id="flow-shipping-city" type="text" data-validate="{required:true}">
+                        </div>
+
+                        <div class="field selected half">
+                            <?php if ($websiteCode == 'mlk_ca'): ?>
+                                <label class="label" for="flow-shipping-region_id"><span><?= $block->escapeHtml(__('Province')) ?></span></label>
+                                <?= $countryBlock->getRegionHtmlSelect($defValue = null, $name = 'flow-region_id', $id = 'flow-region', $title = 'Province');?>
+                            <?php else: ?>
+                                <label class="label" for="flow-shipping-region_id"><span><?= $block->escapeHtml(__('State')) ?></span></label>
+                                <?= $countryBlock->getRegionHtmlSelect($defValue = null, $name = 'flow-region_id', $id = 'flow-region', $title = 'State');?>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="field half">
+                            <label class="label" for="flow-shipping-postcode"><span><?= $block->escapeHtml(__('Postal code')) ?></span></label>
+                            <input class="subscription-list__shipping-address-form-input js-activate-shipping-address-input" name="flow-postcode" id="flow-shipping-postcode" type="text" data-validate="{required:true}">
+                        </div>
+
+                        <div class="field selected">
+                            <label class="label" for="flow-shipping-country_id"><span><?= $block->escapeHtml(__('Country')) ?></span></label>
+                            <?= $countryBlock->getRestrictedCountryHtmlSelect($defValue = null, $name = 'flow-country_id', $id = 'flow-country', $title = 'Country');?>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="flow-shipping-telephone"><span><?= $block->escapeHtml(__('Phone number')) ?></span></label>
+                            <input class="subscription-list__shipping-address-form-input js-activate-shipping-address-input" name="flow-telephone" id="flow-shipping-telephone" type="text" data-validate="{required:true}">
+                        </div>
+
+                        <div class="subscription-list__actions nomargin">
+                            <button class="subscription-list__button-light  js-flow-add-shipping-address" data-id="" data-addressId = "" disabled>Save address</button>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="subscription-list__address-edit-list js-activate-shipping-address-list">
+                    <?php
+                    $shippingAddresses = $block->getCustomerAddresses($block->getCurrentCustomerId());
+                    foreach($shippingAddresses as $shippingAddress){?>
+                        <div class="subscription-list__shipping-address-edit-list-item js-activate-shipping-address-list-item" data-addressId="<?php echo $shippingAddress->getId();?>">
+                            <?php $shippingStreet = $shippingAddress->getStreet(); ?>
+                            <p><?php echo ($shippingAddress->getFirstname() . " " . $shippingAddress->getLastname());?></p>
+                            <p><?php echo $shippingStreet[0];?></p>
+                            <?php if(sizeof($shippingStreet) > 1) : ?>
+                                <p><?php echo $shippingStreet[1]; ?></p>
+                            <?php endif; ?>
+                            <p><?php echo $shippingAddress->getCity() . "," . $shippingAddress->getRegion()->getRegionCode() . " " . $shippingAddress->getPostcode();?></p>
+                            <p><?php echo $shippingAddress->getTelephone()?></p>
+                        </div>
+                    <?php } ?>
+                </div>
+
+                <div class="steps"><a class="checkout-next-step js-shipping-next" href="javascript:void(0);">Next</a></div>
+            </div>
+        </div>
+     
+        <div class="js-subscription-flow-payment subscription-flow-step payment">
+            <div class="group-title js-payment-title">
+                <h2>
+                    <span class="mark"></span><span>Payment</span>
+                    <a class="checkout-edit-step js-payment-edit" href="javascript:void(0);">Edit</a>
+                </h2>
+                <div class="js-subscription-flow-payment-preview hide"></div>
+            </div>
+
+            <div class="group-content js-payment-group-content">
+                <h3 class="js-edit-payment-header" style="display:none;">Select payment</h3>
+                <p class="js-edit-device-name" style="display:none;">[Device Name]</p>
+                <p class="js-payment-header">Select a card so your refills ship when it’s time to get fresh filters.</p>
+                <a class="subscription-flow-new-card-add" href="javascript:void(0);">Add new card</a>
+
+                <div class="subscription-flow-new-card-add-content" style="display:none;">
+                    <?php echo $block->getChildHtml("add_card"); ?>          
+                </div>
+                <div class="subscription-list__address-edit-list billing js-activate-payment-list">
+                    <?php 
+                        $cards = $block->getAllCardsWithPaymentCode($block->getCurrentCustomerId());
+                        foreach($cards as $card){
+                            if($card['cardInfoFull']){?>
+                                    <div class="subscription-list__billing-address-edit-list-item js-activate-payment-list-item" 
+                                        data-stripecustomerid="<?php echo $card['stripeCustomerId'];?>"
+                                        data-expirationdate="<?php echo $card['cardExpiration'];?>"
+                                        data-paymentCode="<?php echo $card['paymentCode'];?>">
+                                        <p class="subscription-list__billing-address-edit-list-card" >
+                                            <!-- TODO - FE fix formatting on this -->
+                                            <span class="cc-last4">
+
+                                                <?php echo $card['cardBrandAndLast4'];?>
+                                            </span>
+                                            <span class="cc-exp">
+                                                <?php echo " exp. " . $card['cardExpiration'];?>
+                                            </span>
+                                        </p>
+
+                                    </div>
+                            <?php } ?>
+                        <?php } ?>
+                </div>
+
+                <div class="subscription-list__actions nomargin js-edit-payment-existing-button-container" style="display:none;">
+                    <button class="subscription-list__button-light js-edit-payment-existing-button">Save</button>
+                    <a class="js-cancel-edit-payment cancel-link" href="javascript:void(0);">Cancel</a>
+                </div>
+
+                <div class="steps"><a class="checkout-next-step js-payment-next" href="javascript:void(0);">Next</a></div>
+            </div>
+        </div>
+
+        <div class="js-subscription-flow-order subscription-flow-step order">
+            <div class="order-top">
+                <h3>Order summary</h3>
+                <table class="order-summary">
+                    <tr>
+                        <td>Subtotal</td>
+                        <td class="js-order-summary-subtotal">$000.00</td>
+                    </tr>
+                    <tr>
+                        <td>Shipping</td>
+                        <td class="js-order-summary-shipping">$000.00</td>
+                    </tr>
+                    <tr>
+                        <td>Tax</td>
+                        <td class="js-order-summary-tax">$000.00</td>
+                    </tr>
+                    <tr class="discount-row hide">
+                        <td>Discount</td>
+                        <td class="js-order-discount">$000.00</td>
+                    </tr>
+                    <tr class="bold flow-promo">
+                        <td colspan="2">
+                            <span class="promo-code js-promo-code">Promo code</span>
+                            <div class="promo-holder hide" data-bind="mageInit: {'awOscFloatLabel': {}}">
+                                <div class="field">
+                                    <label class="label" for="promo"><span>Enter promo code - 1 per order</span></label>
+                                    <div class="control">
+                                        <input id="promo-input" type="text" name="promo" class="input-text">
+                                        <div class="promo-msg hide"></div>
+                                    </div>
+                                </div>
+                                <div class="promo-btns">
+                                    <button class='js-add-promo subscription-list__button-light'>Apply</button>
+                                    <button class='js-remove-promo subscription-list__button-light hide'>Remove</button>
+                                </div>
+
+                                <div class="js-promo-container"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="bold">
+                        <td>Order total</td>
+                        <td class="js-order-summary-total">$000.00</td>
+                    </tr>
+                </table>
+
+                <div class="field choice agreement">
+                    <input id="agreement" type="checkbox" name="agreement">
+                    <label for="agreement" class="label js-agreement-label">
+                        Accept 
+                        <a class="js-terms-and-conditions" href="javascript:void(0);">
+                            <strong>auto-refill terms.</strong>
+                        </a>
+                    </label>
+                    <p class="js-agreement-error-box field-error hide">
+                        Required
+                    </p>
+                </div>
+
+                <div class="info-block" data-bind="mageInit: {'js/popupcancel': {}}">
+                    <div class="subscription-flow-fine-print hide">
+                        <p>Filter auto-refills: Filters automatically renew and ship at the end of each refill period. At renewal, you will be charged the same amount and for the same duration. You can <a class="cancel-anytime-link" href="javascript:void(0);">cancel</a> at any time in your account.</p>
+                    </div>
+                </div>
+
+                <button class="action activate-subscription" disabled>
+                    Activate now
+                </button>
+                <a class="js-cancel-activate-subscription cancel-link" href="javascript:void(0);">Cancel</a>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        ".js-subscription-flow-shipping form.subscription-list__shipping-address-form": {
+            "validation":{}
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        "#maincontent": {
+         "js/phonemask": {}
+         }
+    }
+</script>
+
+<div class="js-terms-and-conditions-content" style="display: none;">
+    <?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('autorefill-terms')->toHtml(); ?>
+</div>
+<?php
+echo '<div class="hide"><div id="cancel-popup-content">' .$this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('cancel-popup-content')->toHtml() . '</div></div>';
+?>
+

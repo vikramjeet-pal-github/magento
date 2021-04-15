@@ -1,0 +1,110 @@
+<?php
+$cards  = $this->getCards();
+$ccType = $block->getInfoData('cc_type');
+$ccExpMonth = $block->getInfoData('cc_exp_month');
+$ccExpYear = $block->getInfoData('cc_exp_year');
+$address =$this->getBillingAddress();
+$countryBlock = $block->getLayout()->createBlock('Magento\Directory\Block\Data');
+?>
+<script src="https://js.stripe.com/v3/"></script>
+<form class="form new-saved-card-edit" action="" method="post" id="payment_form_stripe_payments_edit_cards" data-bind="mageInit: {'js/updatestripecard': {}}">
+    <input class="js-add-card-formkey_edit" type="hidden" name="form_key" value="<?php echo $block->getFormKey() ?>" />
+    <fieldset class="fieldset payment-method stripe-new stripe-payments">
+        <legend class="legend"><span><?php echo $block->escapeHtml(__('Credit card')); ?></span></legend>
+        <br />
+        <?php echo $block->getLayout()->createBlock('StripeIntegration\Payments\Block\StripeElementsEdit')->toHtml(); ?>
+        <div id="stripe-payments-card-errors-edit"></div>
+    </fieldset>
+    <script type="text/javascript">
+        require(['jquery', 'jquery/ui'], function($) {
+            $(document).ready(function() {
+
+                var stripeJsPublishableKey = '<?php echo $block->config->getPublishableKey(); ?>';
+                var stripeJsLocale = '<?php echo $block->config->getStripeJsLocale(); ?>';
+                stripe.avsFields = <?php echo $this->getBillingAddress(); ?>;
+                initStripe({
+                    apiKey: stripeJsPublishableKey,
+                    locale: stripeJsLocale
+                });
+            });
+        });
+    </script>
+    <!-- <script type="text/javascript">
+        require(['jquery', 'jquery/ui'], function($){
+            $(document).ready(function() {
+                var stripeJsPublishableKey = '<?php echo $block->config->getPublishableKey(); ?>';
+                var stripeJsLocale = '<?php echo $block->config->getStripeJsLocale(); ?>';
+                stripe.avsFields = <?php echo $this->getBillingAddress(); ?>;
+                initStripe({ apiKey: stripeJsPublishableKey, locale: stripeJsLocale });
+            });
+        });
+    </script> -->
+</form>
+
+<div class="subscription-new-billing-address-edit">
+    <form  id="payment_form_stripe_payments_edit" class="subscription-list__shipping-address-form js-subscription-flow-new-billing-address-edit-form" data-mage-init='{"awOscFloatLabel": {}}'>
+        <input id="customer-email" type="hidden" value="<?php echo $block->getCustomerEmail(); ?>" />
+        <label class="add-billing-address-label"><?= __('Billing address'); ?></label>
+        <div class="field">
+            <label class="label" for="billing-firstname"><span><?= $block->escapeHtml(__('First name Narwal')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="billing-firstname" id="billing-firstname" type="text" data-validate="{required:true}" maxlength="32">
+        </div>
+
+        <div class="field">
+            <label class="label" for="billing-lastname"><span><?= $block->escapeHtml(__('Last name')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="billing-lastname" id="billing-lastname" type="text" data-validate="{required:true}" maxlength="32">
+        </div>
+
+        <div class="field">
+            <label class="label" for="billing-streetOne"><span><?= $block->escapeHtml(__('Address 1')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input js-address-field" name="billing-streetOne" id="billing-streetOne" type="text" data-validate="{required:true}" placeholder=''>
+        </div>
+
+        <div class="field">
+            <label class="label" for="billing-streetTwo"><span><?= $block->escapeHtml(__('Address 2 (optional)')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="billing-streetTwo" id="billing-streetTwo" type="text">
+        </div>
+
+        <div class="field">
+            <label class="label" for="billing-city"><span><?= $block->escapeHtml(__('City')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="billing-city" id="billing-city" type="text" data-validate="{required:true}">
+        </div>
+
+        <div class="field selected half">
+            <label class="label" for="billing-region_id"><span><?= $block->escapeHtml(__('State')) ?></span></label>
+            <?= $countryBlock->getRegionHtmlSelect($defValue = null, $name = 'billing-region_id', $id = 'billing-region', $title = 'State'); ?>
+        </div>
+
+        <div class="field half">
+            <label class="label" for="billing-postcode"><span><?= $block->escapeHtml(__('Postal code')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="billing-postcode" id="billing-postcode" type="text" data-validate="{required:true}">
+        </div>
+
+        <div class="field selected">
+            <label class="label" for="billing-country_id"><span><?= $block->escapeHtml(__('Country')) ?></span></label>
+            <?= $countryBlock->getCountryHtmlSelect($defValue = null, $name = 'billing-country_id', $id = 'billing-country', $title = 'Country'); ?>
+        </div>
+
+        <div class="field">
+            <label class="label" for="billing-telephone"><span><?= $block->escapeHtml(__('Phone number')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="billing-telephone" id="billing-telephone" type="text" data-validate="{required:true}">
+        </div>
+    </form>
+</div>
+
+<div class="subscription-list__new-address-buttons">
+    <button class="subscription-list__billing-address-save-button subscription-list__button-light action save primary js-stripe-payments-edit-card" data-id="" data-addressId="" data-customerId="" disabled>
+        Save
+    </button>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        ".subscription-new-billing-address-edit form.subscription-list__shipping-address-form": {
+            "validation":{}
+        }
+    }
+</script>
+<div class="hide">
+    <span id="stripe-payments-brand-icon"></span>
+</div>

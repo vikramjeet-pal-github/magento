@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+
+    <actionGroup name="CheckPriceShippingWithCountry">
+        <arguments>
+            <argument name="shippingPrices"/>
+            <argument name="shippingMethods"/>
+            <argument name="country"/>
+        </arguments>
+        <amOnPage url="{{FrontCartPage.url}}" stepKey="navigateToShoppingCart2"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <click selector="{{FrontCartSection.EstimateShippingAndTax}}" stepKey="OpenTabWithShippingInCart2"/>
+        <waitForPageLoad time="50" stepKey="waitForPageLoad2"/>
+        <selectOption selector="{{FrontCartSection.SelectCountryShipping}}"
+                      userInput="{{country}}"
+                      stepKey="selectShippingCountry2"/>
+        <waitForElementNotVisible selector="{{FrontCartSection.CartTotalLoader}}" stepKey="waitWhenNotVisibleLoaderTotals"/>
+        <waitForAjaxLoad stepKey="waitForAjaxLoad2"/>
+        <wait time="1" stepKey="waitForLoadShipping"/>
+        <see selector="//label[@for='{{shippingMethods.shippingMethodsName}}']//span" userInput="{{shippingPrices}}" stepKey="checkFreeShipping"/>
+        <waitForPageLoad time="30" stepKey="waitForPageLoad3"/>
+        <click selector="{{FrontCartSection.EstimateShippingAndTax}}" stepKey="CloseTabWithShippingInCart"/>
+        <waitForPageLoad time="30" stepKey="waitForPageLoad4"/>
+    </actionGroup>
+
+
+    <actionGroup name="CheckPriceShippingOnCheckoutShippingPage">
+        <arguments>
+            <argument name="shippingPrices"/>
+            <argument name="shippingMethods"/>
+            <argument name="country"/>
+            <argument name="state"/>
+            <argument name="zip"/>
+            <argument name="city"/>
+        </arguments>
+        <amOnPage url="{{CheckoutShippingPage.url}}" stepKey="navigateToCheckoutShippingPage"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <selectOption selector="{{CheckoutShippingAddressSection.SelectForCountry}}"
+                      userInput="{{country}}"
+                      stepKey="selectShippingCountry"/>
+        <selectOption selector="{{CheckoutShippingAddressSection.SelectForRegion}}"
+                      userInput="{{state}}"
+                      stepKey="selectShippingState"/>
+        <fillField selector="{{CheckoutShippingAddressSection.City}}" userInput="{{city}}" stepKey="enterCity"/>
+        <waitForAjaxLoad stepKey="waitForAjaxLoad1"/>
+        <fillField selector="{{CheckoutShippingAddressSection.Postcode}}" userInput="{{zip}}" stepKey="enterZip"/>
+        <waitForAjaxLoad stepKey="waitForAjaxLoad2"/>
+        <waitForElementNotVisible selector="{{FrontCartSection.CartTotalLoader}}" stepKey="waitWhenNotVisibleLoaderTotals"/>
+        <waitForAjaxLoad stepKey="waitForAjaxLoad3"/>
+        <wait time="3" stepKey="waitForLoadShipping"/>
+        <scrollTo selector="{{CheckoutShippingAddressSection.Next}}" stepKey="ScrollToDownPage"/>
+        <see selector="//input[@value='{{shippingMethods}}']/parent::td/following-sibling::td/span/span[@class='price']"
+             userInput="{{shippingPrices}}" stepKey="checkFreeShipping"/>
+        <waitForPageLoad time="30" stepKey="waitForPageLoad3"/>
+    </actionGroup>
+
+
+    <actionGroup name="CheckPriceShippingOnCheckoutPaymentPage">
+        <arguments>
+            <argument name="shippingPriceOnCheckoutPaymentPage"/>
+            <argument name="shippingMethodsOnCheckout"/>
+        </arguments>
+        <amOnPage url="{{CheckoutPaymentsPage.url}}" stepKey="navigateToStorefrontCheckoutPaymentsPage"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad1"/>
+        <seeElement selector="//th[@class='mark']//span[text()='{{shippingMethodsOnCheckout.shippingMethodsNameOnCheckoutPaymentPage}}']" stepKey="CheckBestWayMethod"/>
+        <waitForPageLoad time="100" stepKey="waitForPageLoad2"/>
+        <seeElement selector="//td[@class='amount']//span[text()='{{shippingPriceOnCheckoutPaymentPage}}']" stepKey="CheckShippingPrice"/>
+        <waitForPageLoad time="30" stepKey="waitForPageLoad3"/>
+    </actionGroup>
+
+</actionGroups>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="ShiprulesCheckOnMultishipping">
+        <annotations>
+            <features value="Rule Creation"/>
+            <stories value="Create a Rule via the Admin"/>
+            <title value="Check Multishipping"/>
+            <description value="Check Multishipping"/>
+            <severity value="CRITICAL"/>
+            <testCaseId value="SRL-MFTF-14"/>
+            <group value="Amasty"/>
+            <group value="Shiprules"/>
+            <group value="Rule"/>
+            <group value="Shipping"/>
+            <group value="ShiprulesCheckOnMultishipping"/>
+        </annotations>
+
+        <before>
+            <actionGroup ref="LoginAsAdmin" stepKey="loginAsAdmin1"/>
+            <actionGroup ref="DefaultSettingShiprules" stepKey="chooseDefaultConfig"/>
+        </before>
+
+        <!--Delete Shipping And Cart Price Rules -->
+        <after>
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteFirstCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesCheckMultishippingFirst"/>
+            </actionGroup>
+            <actionGroup ref="AdminDeleteShippingRule" stepKey="DeleteSecondCreatedShippingRule">
+                <argument name="shippingRule" value="shiprulesCheckMultishippingSecond"/>
+            </actionGroup>
+            <actionGroup ref="DeleteProductFromTheCartIfTestWithLoginFailed" stepKey="DeleteProductIfTestFailed1">
+                <argument name="products" value="_theBagImpulseDuffleData"/>
+            </actionGroup>
+            <actionGroup ref="DeleteProductFromTheCartIfTestWithLoginFailed" stepKey="DeleteProductIfTestFailed2">
+                <argument name="products" value="_theWatchClamberData"/>
+            </actionGroup>
+            <amOnPage url="admin/admin/auth/logout/" stepKey="amOnLogoutPage"/>
+        </after>
+
+        <!--Create first Shipping Rule-->
+        <actionGroup ref="CreateShippingRuleWithFlatRate" stepKey="CreateCartRule1">
+            <argument name="shippingRule" value="shiprulesCheckMultishippingFirst"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesCheckMultishippingFirst"/>
+        </actionGroup>
+
+        <!--Create second Shipping Rule-->
+        <actionGroup ref="CreateShippingRuleWithBestWay" stepKey="CreateCartRule2">
+            <argument name="shippingRule" value="shiprulesCheckMultishippingSecond"/>
+            <argument name="calculationType" value="calculationReplace"/>
+            <argument name="rates" value="rateShiprulesCheckMultishippingSecond"/>
+        </actionGroup>
+
+        <!--Login -->
+        <actionGroup ref="LoginToStorefrontActionGroup" stepKey="LogIn">
+            <argument name="Customer" value="CustomerLogIn"/>
+        </actionGroup>
+
+        <actionGroup ref="AddProductToCart" stepKey="AddFirstProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theBagImpulseDuffleData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate1">
+            <argument name="shippingPrices" value="shiprulesCheckMultishippingFirst.priceFlatRateOne"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay1">
+            <argument name="shippingPrices" value="shiprulesCheckMultishippingSecond.priceBestWayOne"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <actionGroup ref="AddProductToCart" stepKey="AddSecondProductToCart">
+            <argument name="addProductQty" value="_enterQty1"/>
+            <argument name="products" value="_theWatchClamberData"/>
+        </actionGroup>
+
+        <!--Check Shipping Prices-->
+        <actionGroup ref="CheckPriceShipping" stepKey="checkFlatRate2">
+            <argument name="shippingPrices" value="shiprulesCheckMultishippingFirst.priceFlatRateTwo"/>
+            <argument name="shippingMethods" value="_FlatRateMethod"/>
+        </actionGroup>
+        <actionGroup ref="CheckPriceShipping" stepKey="checkBestWay2">
+            <argument name="shippingPrices" value="shiprulesCheckMultishippingSecond.priceBestWayTwo"/>
+            <argument name="shippingMethods" value="_BestWayMethod"/>
+        </actionGroup>
+
+        <actionGroup ref="StorefrontAddNewCustomerAddress" stepKey="AddNewAddress">
+            <argument name="customer" value="newCustomerAddress"/>
+        </actionGroup>
+
+        <actionGroup ref="AmastyCreateMultishippingOrderWithTwoAddressAndCheckSuccessful" stepKey="CreateMultiShippingOrder">
+            <argument name="products" value="_theWatchClamberData"/>
+            <argument name="address" value="shiprulesCheckMultishippingFirst.address"/>
+            <argument name="shippingMethodOne" value="shiprulesCheckMultishippingFirst.shippingMethodOne"/>
+            <argument name="shippingMethodTwo" value="shiprulesCheckMultishippingFirst.shippingMethodTwo"/>
+            <argument name="billingMethod" value="shiprulesCheckMultishippingFirst.billingMethod"/>
+        </actionGroup>
+
+        <actionGroup ref="CheckAdminShippingMethodInLastOrder" stepKey="CheckShippingMethodInCreatedOrder1">
+            <argument name="shippingMethodName" value="shiprulesCheckMultishippingFirst.shippingMethodName"/>
+            <argument name="shippingMethodPrice" value="shiprulesCheckMultishippingFirst.shippingMethodPrice"/>
+        </actionGroup>
+
+        <actionGroup ref="CheckAdminShippingMethodInPenultimateOrder" stepKey="CheckShippingMethodInCreatedOrder2">
+            <argument name="shippingMethodName" value="shiprulesCheckMultishippingSecond.shippingMethodName"/>
+            <argument name="shippingMethodPrice" value="shiprulesCheckMultishippingSecond.shippingMethodPrice"/>
+        </actionGroup>
+
+    </test>
+</tests>

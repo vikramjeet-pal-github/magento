@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Register your Molekule</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Vonnda\Subscription\Block\Customer\GiftLanding" name="subscription_gift_landing" template="Vonnda_Subscription::subscription_gift_landing.phtml" cacheable="false">
+                <block class="MSP\ReCaptcha\Block\Frontend\ReCaptcha" name="msp-recaptcha" after="-" template="MSP_ReCaptcha::msp_recaptcha.phtml" ifconfig="msp_securitysuite_recaptcha/frontend/enabled" cacheable="false">
+                    <arguments>
+                        <argument name="jsLayout" xsi:type="array">
+                            <item name="components" xsi:type="array">
+                                <item name="msp-recaptcha" xsi:type="array">
+                                    <item name="component" xsi:type="string">MSP_ReCaptcha/js/reCaptcha</item>
+                                    <item name="zone" xsi:type="string">login</item>
+                                </item>
+                            </item>
+                        </argument>
+                    </arguments>
+                </block>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="sidebar.additional" remove="true" />
+        <referenceBlock name="page.main.title" remove="true" />
+    </body>
+</page>

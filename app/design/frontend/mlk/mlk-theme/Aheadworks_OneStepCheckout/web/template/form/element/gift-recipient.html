@@ -1,0 +1,13 @@
+<input class="input-text" type="text" data-bind="
+    value: window.checkoutConfig.quoteData.gift_recipient_email ? window.checkoutConfig.quoteData.gift_recipient_email : value,
+    valueUpdate: 'keyup',
+    hasFocus: focused,
+    attr: {
+        name: 'gift_recipient_email',
+        placeholder: placeholder,
+        'aria-describedby': getDescriptionId(),
+        'aria-required': required,
+        'aria-invalid': error() ? true : 'false',
+        id: 'gift_recipient_email',
+        disabled: disabled
+    }" data-validate="{required:true, 'validate-email':true}" />

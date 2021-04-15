@@ -1,0 +1,63 @@
+<script>
+    /**
+     * Created by:  Milan Simek
+     * Company:     Plugin Company
+     *
+     * LICENSE: http://plugin.company/docs/magento-extensions/magento-extension-license-agreement
+     *
+     * YOU WILL ALSO FIND A PDF COPY OF THE LICENSE IN THE DOWNLOADED ZIP FILE
+     *
+     * FOR QUESTIONS AND SUPPORT
+     * PLEASE DON'T HESITATE TO CONTACT US AT:
+     *
+     * SUPPORT@PLUGIN.COMPANY
+     */
+    require([
+        'jquery',
+        "uiRegistry",
+        'Magento_Ui/js/modal/alert',
+        'PluginCompany_CouponImport/js/couponimporter',
+        'prototype'
+    ], function($, registry, alert, couponImporter) {
+
+        window.importCoupons = function(idPrefix, fieldSetId, importUrl, grid) {
+            couponImporter
+                .setWrapperEmId(idPrefix + fieldSetId)
+                .setImportUrl(importUrl)
+                .setGridJsObject(grid)
+                .setFileEmId(idPrefix + 'coupon_upload')
+                .setCouponTextAreaEmId(idPrefix + 'pasted_coupons')
+            ;
+            couponImporter.import();
+            return;
+        }
+
+        function showHidePcCouponImportFieldsets(show)
+        {
+            if(show) {
+                $('.pc-couponimport').addClass('pc-show-fieldset');
+                $('.pc-coupon-import-message').hide();
+            }else{
+                $('.pc-couponimport').removeClass('pc-show-fieldset');
+                $('.pc-coupon-import-message').show();
+            }
+        }
+
+        registry.get('sales_rule_form.sales_rule_form.rule_information.use_auto_generation', function(autoGenerationField) {
+            autoGenerationField.checked.subscribe(function(value){
+                showHidePcCouponImportFieldsets(value);
+            })
+        });
+        registry.get('sales_rule_form.sales_rule_form.manage_coupon_codes', function(couponFieldset) {
+            couponFieldset.opened.subscribe(function(value) {
+                setTimeout(function() {
+                    showHidePcCouponImportFieldsets(
+                        registry.get('sales_rule_form.sales_rule_form.rule_information.use_auto_generation').checked()
+                    );
+                }, 100)
+            })
+        })
+
+    });
+</script>
+

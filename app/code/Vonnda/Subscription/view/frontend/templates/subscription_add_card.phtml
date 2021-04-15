@@ -1,0 +1,108 @@
+<?php
+$cards = $this->getCards();
+$ccType = $block->getInfoData('cc_type');
+$ccExpMonth = $block->getInfoData('cc_exp_month');
+$ccExpYear = $block->getInfoData('cc_exp_year');
+$countryBlock = $block->getLayout()->createBlock('Magento\Directory\Block\Data');
+?>
+
+<div class="field choice js-sameasshipping">
+    <input id="sameasshipping" type="checkbox" name="sameasshipping" checked>
+    <label for="sameasshipping" class="label">
+        Billing address same as shipping
+    </label>
+</div>
+
+<form class="form new-saved-card" action="save/" method="post" id="payment_form_stripe_payments_payment">
+  <input class="js-add-card-formkey" type="hidden" name="form_key" value="<?php echo $block->getFormKey() ?>" />
+  <fieldset class="fieldset payment-method stripe-new stripe-payments">
+
+    <?php echo $block->getLayout()->createBlock('StripeIntegration\Payments\Block\StripeElements')->toHtml(); ?>
+    <div id="stripe-payments-card-errors"></div>
+
+  </fieldset>
+
+  <script type="text/javascript">
+    require(['jquery', 'jquery/ui'], function($){
+      $(document).ready(function()
+      {
+        var stripeJsPublishableKey = '<?php echo $block->config->getPublishableKey(); ?>';
+        var stripeJsLocale = '<?php echo $block->config->getStripeJsLocale(); ?>';
+        stripe.avsFields = <?php echo $this->getBillingAddress(); ?>;
+        initStripe({ apiKey: stripeJsPublishableKey, locale: stripeJsLocale });
+      });
+    });
+  </script>
+
+</form>
+
+<div class="subscription-flow-new-billing-address" style="display:none;">
+    <form class="subscription-list__shipping-address-form js-subscription-flow-new-billing-address-form"  data-mage-init='{"awOscFloatLabel": {}}'>
+        <input id="customer-email" type="hidden" value="<?php echo $block->getCustomerEmail(); ?>" />
+        <div class="field">
+            <label class="label" for="flow-billing-firstname"><span><?= $block->escapeHtml(__('First name')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="flow-billing-firstname" id="flow-billing-firstname" type="text" data-validate="{required:true}" maxlength="32">
+        </div>
+
+        <div class="field">
+            <label class="label" for="flow-billing-lastname"><span><?= $block->escapeHtml(__('Last name')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="flow-billing-lastname" id="flow-billing-lastname" type="text" data-validate="{required:true}" maxlength="32">
+        </div>
+
+        <div class="field">
+            <label class="label" for="flow-billing-streetOne"><span><?= $block->escapeHtml(__('Address 1')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input js-address-field" name="flow-billing-streetOne" id="flow-billing-streetOne" type="text" data-validate="{required:true}" placeholder="">
+        </div>
+
+        <div class="field">
+            <label class="label" for="flow-billing-streetTwo"><span><?= $block->escapeHtml(__('Address 2 (optional)')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="flow-billing-streetTwo" id="flow-billing-streetTwo" type="text">
+        </div>
+
+        <div class="field">
+            <label class="label" for="flow-billing-city"><span><?= $block->escapeHtml(__('City')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="flow-billing-city" id="flow-billing-city" type="text" data-validate="{required:true}">
+        </div>
+
+        <div class="field selected half">
+            <label class="label" for="flow-billing-region_id"><span><?= $block->escapeHtml(__('State')) ?></span></label>
+            <?= $countryBlock->getRegionHtmlSelect($defValue = null, $name = 'flow-billing-region_id', $id = 'flow-billing-region', $title = 'State');?>
+        </div>
+
+        <div class="field half">
+            <label class="label" for="flow-billing-postcode"><span><?= $block->escapeHtml(__('Postal code')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="flow-billing-postcode" id="flow-billing-postcode" type="text" data-validate="{required:true}">
+        </div>
+
+        <div class="field selected">
+            <label class="label" for="flow-billing-country_id"><span><?= $block->escapeHtml(__('Country')) ?></span></label>
+            <?= $countryBlock->getCountryHtmlSelect($defValue = null, $name = 'flow-billing-country_id', $id = 'flow-billing-country', $title = 'Country');?>
+        </div>
+
+        <div class="field">
+            <label class="label" for="flow-billing-telephone"><span><?= $block->escapeHtml(__('Phone number')) ?></span></label>
+            <input class="subscription-list__billing-address-form-input" name="flow-billing-telephone" id="flow-billing-telephone" type="text" data-validate="{required:true}">
+        </div>
+    </form>
+</div>
+
+<div class="actions-toolbar">
+  <div class="primary">
+    <button type="submit" title="Save" class="action save primary js-stripe-payments-save-card" disabled>
+      <span>
+        <?php echo $block->escapeHtml(__('Save')); ?>
+      </span>
+    </button>
+  </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        ".subscription-flow-new-billing-address form.subscription-list__shipping-address-form": {
+            "validation":{}
+        }
+    }
+</script>
+<div class="hide">
+  <span id="stripe-payments-stripe-brand-icon"></span>
+</div>

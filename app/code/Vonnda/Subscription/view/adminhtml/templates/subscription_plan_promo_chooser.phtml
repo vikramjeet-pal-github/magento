@@ -1,0 +1,41 @@
+<br>
+<div class="fieldset-wrapper-title"><span class="title">Tier Promo Chooser</span></div>
+<div class="subscription-plan-promo-chooser__promo-container" style="margin-top:20px">
+
+    <p class="subscription-plan-promo-chooser__promo-empty-list"></p>
+    <table class="subscription-plan-promo-chooser__promo-list" style="width:100%">
+        <tr class="subscription-plan-promo-chooser__heading-row">
+        </tr>
+    </table>
+    <div class="subscription-plan-promo-chooser__add-promo-container">
+        <select class="subscription-plan-promo-chooser__add-promo-input admin__control-select" name="add-promo">
+            <option value=''>Please Choose A Promo Code</option>
+            <?php $salesRules = $block->getAvailablePromoCodes();
+                    foreach($salesRules as $salesRule){ ?>
+                    <option 
+                        data-rulename="<?php echo $salesRule['name'];?>"
+                        data-ruledescription="<?php echo $salesRule['description'];?>"
+                        value="<?php echo $salesRule['id'];?>">
+                        <?php echo $salesRule['name'];?>
+                    </option>
+            <?php } ?>
+        </select>
+        <button 
+            class="subscription-plan-promo-chooser__add-promo-button">
+                Add Promo
+        </button>
+        <button 
+            class="subscription-plan-promo-chooser__reset-button">
+                Reset
+        </button>
+        <span class="subscription-plan-promo-chooser__add-promo-message"></span>
+    </div>
+</div>
+
+<script>
+    window.subscriptionPlanPromos = <?php echo $block->getSubscriptionPlanPromosJSON();?>;
+</script>
+
+<script type="text/x-magento-init">
+    {"*": {"Vonnda_Subscription/js/subscription-plan-promo-chooser": {}}}
+</script>

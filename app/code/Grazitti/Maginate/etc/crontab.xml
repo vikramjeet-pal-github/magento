@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 Grazitti. All rights reserved.
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default"> 
+        <job name="maginate_cron_run" instance="Grazitti\Maginate\Cron\Run" method="execute">
+            <schedule>30 0 * * *</schedule> 
+        </job>
+    </group>
+	<group id="default"> 
+        <job name="abandon_cron_run" instance="Grazitti\Maginate\Cron\Abandon" method="execute">
+            <schedule>0 */12 * * *</schedule> 
+        </job>
+    </group>
+</config>

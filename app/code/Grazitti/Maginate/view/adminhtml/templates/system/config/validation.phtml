@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright © 2020 Grazitti. All rights reserved.
+ */
+
+$viewModel = $block->getViewModel();
+
+$expiry_date  = $viewModel->getConfigValue('grazz_auth/graz_settings/expiry_date');
+$secret_key  = $viewModel->getConfigValue('grazz_auth/graz_settings/grazz_secret_key');
+$expired_date  = $viewModel->getConfigValue('grazz_auth/graz_settings/expiry_date');
+$expiry = $viewModel->getHelper()->checkExpiry();
+if ($expired_date == "failure" || $expiry_date =="invalid" || !$expiry) { ?>
+<style>
+    li.admin__page-nav-item.abandon_cart_settings.item._last{ display: none; }
+    .admin__page-nav.maginate-tab ._collapsible+.admin__page-nav-items .grazitti_settings { display: none; }
+</style>
+<?php }
+if ($secret_key == "" || $expired_date == "failure" || $expiry_date =="invalid") { ?>
+    <style>
+    #row_grazz_auth_graz_settings_expiry_date {
+      display: none;
+    }
+    #row_grazz_auth_graz_settings_expired_date {
+      display: none;
+    }
+    </style>
+<?php } elseif (!$expiry) { ?>
+<style>
+    #row_grazz_auth_graz_settings_expiry_date {
+      display: none;
+    }
+    #row_grazz_auth_graz_settings_expired_date {
+      display: table-row;
+    }
+</style>
+<?php } else { ?>
+<style>
+    #row_grazz_auth_graz_settings_expiry_date {
+      display: table-row;
+    }
+    #row_grazz_auth_graz_settings_expired_date {
+      display: none;
+    } 
+</style>
+<?php } ?>

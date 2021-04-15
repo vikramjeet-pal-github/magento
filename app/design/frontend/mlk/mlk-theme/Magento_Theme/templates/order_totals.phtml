@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * @var $block \Magento\Sales\Block\Order\Totals
+ * @see \Magento\Sales\Block\Order\Totals
+ */
+?>
+<?php foreach ($block->getTotals() as $_code => $_total): ?>
+    <?php if ($_total->getBlockName()): ?>
+        <?= $block->getChildHtml($_total->getBlockName(), false) ?>
+    <?php else:?>
+        <tr class="<?= /* @escapeNotVerified */ $_code ?>">
+            <th colspan="2"></th>
+            <th colspan="2" class="mark" scope="row">
+                <?php if(strip_tags($_total->getLabel()) == 'Order total'): ?>
+                    <strong><?= $block->escapeHtml($_total->getLabel()) ?></strong>
+                <?php else:?>
+                    <?= $block->escapeHtml($_total->getLabel()) ?>
+                <?php endif?>
+            </th>
+            <td <?= /* @escapeNotVerified */ $block->getValueProperties() ?> data-th="<?= $block->escapeHtml($_total->getLabel()) ?>">
+                <?php if($_total->getLabel() == 'Order total'): ?>
+                    <strong><?= /* @escapeNotVerified */ $block->formatValue($_total) ?></strong>
+                <?php else:?>
+                    <?= /* @escapeNotVerified */ $block->formatValue($_total) ?>
+                <?php endif?>
+            </td>
+        </tr>
+    
+    <?php endif?>
+<?php endforeach?>

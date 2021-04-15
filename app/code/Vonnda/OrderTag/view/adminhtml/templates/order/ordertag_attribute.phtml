@@ -1,0 +1,36 @@
+<?php
+/**
+ * @var Vonnda\OrderTag\Block\Adminhtml\Order\Create\OrderTagAttribute $block
+ *
+ */
+?>
+
+<?php if (!empty($block->hasOrderTags())) : ?>
+<div class="admin__page-section-title <?= /* @escapeNotVerified */ $block->getHeaderCssClass() ?>">
+    <span class="title"><?= /* @escapeNotVerified */ $block->getHeaderText() ?></span>
+    <div class="actions"></div>
+</div>
+<div class="admin__page-section-content">
+
+    <fieldset class="fieldset admin__fieldset">
+        <div class="admin__field field field-order_tag_id required _required">
+            <label class="label admin__field-label" for="order_tag_id">
+                <span>Tags</span>
+            </label>
+
+            <div class="admin__field-control control">
+                <select id="order_tag_id" name="order[order_tag_id]" class="required-entry required-entry _required select admin__control-select" aria-required="true">
+                    <option value=""><?php echo __('Choose a tag');?></option>
+                    <?php $orderTags = $block->getOrderTags(); ?>
+                    <?php foreach ($orderTags as $key => $value) : ?>
+                        <option value="<?php echo $key;?>"><?php echo $value;?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+    </fieldset>
+
+</div>
+<?php else : ?>
+    <div class="admin__message-empty"><?= $block->escapeHtml(__('No Order Tags Available')); ?></div>
+<?php endif; ?>

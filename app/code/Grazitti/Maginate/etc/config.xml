@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2020 Grazitti. All rights reserved.
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <carriers>
+            <!-- carrier-config -->
+        </carriers>
+        <payment>
+            <!-- payment-config -->
+        </payment>
+		<greeting>
+            <general>
+                <enable>1</enable>
+                <display_text>Grazitti Connector</display_text>
+            </general>
+        </greeting>
+		<grazitti_abandon>
+            <abandon_cart>
+                <abandon_cart_media_path>/media/</abandon_cart_media_path>
+            </abandon_cart>
+        </grazitti_abandon>
+    </default>
+	
+</config>
+

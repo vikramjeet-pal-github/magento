@@ -1,0 +1,255 @@
+<?php
+$customerId = $block->getCurrentCustomerId();
+$countryBlock = $block->getLayout()->createBlock('Vonnda\ShippingRestrictions\Block\RestrictedData');
+$websiteCode = $block->getWebsiteCode();
+
+?>
+<div class="block subscription-address-block">
+    <div class="block-title">
+        <strong>Address</strong> <a class="button subscription-add-address" href="javascript:void(0);">Add new address</a>
+    </div>
+
+    <div class="content-block">
+        <?php
+        $shippingAddresses = $block->getCustomerAddresses($block->getCurrentCustomerId());
+        foreach($shippingAddresses as $shippingAddress):?>
+            <div class="subscription-address-item" data-addressId="<?php echo $shippingAddress->getId();?>">
+                <?php $shippingStreet = $shippingAddress->getStreet(); ?>
+                <p><?php echo ($shippingAddress->getFirstname() . " " . $shippingAddress->getLastname());?></p>
+                <p><?php echo $shippingStreet[0];?></p>
+                <?php if(sizeof($shippingStreet) > 1) : ?>
+                   <p><?php echo $shippingStreet[1]; ?></p>
+                <?php endif; ?>
+                <p><?php echo $shippingAddress->getCity() . ", " . $shippingAddress->getRegion()->getRegionCode() . " " . $shippingAddress->getPostcode();?></p>
+                <p><?php echo $shippingAddress->getTelephone()?></p>
+                <a class="action delete" href="#" role="delete-address" data-addressid="<?= $shippingAddress->getId() ?>"><span><?= $block->escapeHtml(__('Delete Address')) ?></span></a>
+                 
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+
+<div class="block subscription-payment-block">
+    <div class="block-title">
+        <strong>Payment</strong> <a class="button subscription-add-payment" href="javascript:void(0);">Add new card</a>
+        <div class="subscription-payment-help">
+            <span class="subscription-payment-help-line">
+        Need help? <span class="payment-tooltip">
+                    <span class="tooltip-content">
+                        <strong>To update your card's information: </strong>
+                        <ol>
+                            <li>Turn off auto-refills for the device that's associated with your card</li>
+                            <li>Delete your card</li>
+                            <li>Activate auto-refills again, entering the updated card details</li>
+                        </ol>
+                    </span>
+                </span>
+            </span>
+        </div>
+    </div>
+    <div class="content-block">
+        <div class="js-payment-container" data-bind="mageInit: {'js/deletestripecard': {}}">
+            <?php 
+            //$cards = $block->getAllCardsWithPaymentCode($block->getCurrentCustomerId());
+            $carddetails= $block->getLayout()->createBlock('StripeIntegration\Payments\Block\Customer\Cards');
+            $cards=$carddetails->getCardsDetail();
+            $data = json_decode(json_encode($cards), True);
+            foreach($data as $datas){?>
+                        <div class="subscription-list__billing-address-edit-list-item js-payment-list-item" 
+                            data-stripecustomerid="<?php echo $datas['customer']; ?>"
+                            data-paymentcode="<?php echo $datas['id']; ?>"> 
+                            <p class="subscription-list__billing-address-edit-list-card" >
+                                <!-- TODO - FE fix formatting on this -->
+                        <span class="cc-last4">   
+                          <span class="cc-last4" style="font-weight: 800"><?php   echo $datas['card']['brand'].' '.$datas['card']['last4'].'<br>';?></span>
+                            <?php   echo $datas['billing_details']['name'].'<br>';?>
+                            <?php   echo $datas['billing_details']['address']['line1'].'<br>';?>
+                            <?php   echo $datas['billing_details']['address']['line2'].'<br>';?>
+                            <?php   echo $datas['billing_details']['address']['city'].','.$datas['billing_details']['address']['state'].','.$datas['billing_details']['address']['postal_code'].'<br>';?>
+                            <?php   echo $datas['billing_details']['phone'];?>
+                        </span>
+                                
+                </p>
+                    <a class="action delete js-card-delete" href="#" role="delete-card" data-paymentcode="<?php echo $datas['id']; ?>"><span><?= $block->escapeHtml(__('Delete Card')) ?></span></a>
+                    <a class="action edit" href="#"  data-paymentcode="<?php echo $datas['id']; ?>"></a>
+                </div>
+            <?php } ?>
+        </div>
+        
+    </div> 
+</div>
+
+<script>
+    window.googleAutocompleteApiKey = "<?php echo $block->getAutoCompleteApiKey();?>";
+    //window.storeCountryCode = "<?php //echo $block->getStoreCountryCode();?>//";
+</script>
+
+<div class="subscription-address">
+    <div class="subscription-list__new-address hide">
+        <h2>Add new address</h2>
+
+        <div data-bind="mageInit: {'js/addaddress': {'domain': '<?= $block->getUrl(); ?>', 'customerid': <?= $customerId?>}}">
+            <form class="subscription-list__shipping-address-form"  data-mage-init='{"awOscFloatLabel": {}}'>
+                <div class="field">
+                    <label class="label" for="shipping-firstname"><span><?= $block->escapeHtml(__('First name')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="firstname" id="shipping-firstname" type="text" data-validate="{required:true}" maxlength="32">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="shipping-lastname"><span><?= $block->escapeHtml(__('Last name')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="lastname" id="shipping-lastname" type="text" data-validate="{required:true}"  maxlength="32">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="shipping-streetOne"><span><?= $block->escapeHtml(__('Address 1')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input js-address-field" name="streetOne" id="shipping-streetOne" type="text" data-validate="{required:true}" placeholder="">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="shipping-streetTwo"><span><?= $block->escapeHtml(__('Address 2 (optional)')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="streetTwo" id="shipping-streetTwo" type="text">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="shipping-city"><span><?= $block->escapeHtml(__('City')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="city" id="shipping-city" type="text" data-validate="{required:true}">
+                </div>
+
+                <div class="field selected half">
+                    <?php if ($websiteCode == 'mlk_ca'): ?>
+                        <label class="label" for="shipping-region_id"><span><?= $block->escapeHtml(__('Province')) ?></span></label>
+                        <?= $countryBlock->getRegionHtmlSelect($defValue = null, $name = 'region_id', $id = 'region', $title = 'Province');?>
+                    <?php else: ?>
+                        <label class="label" for="shipping-region_id"><span><?= $block->escapeHtml(__('State')) ?></span></label>
+                        <?= $countryBlock->getRegionHtmlSelect($defValue = null, $name = 'region_id', $id = 'region', $title = 'State');?>
+                    <?php endif; ?>
+                    <input class="subscription-list__shipping-address-form-input hide" name="region_id" id="shipping-region_id" type="text">
+                </div>
+
+                <div class="field half">
+                    <label class="label" for="shipping-postcode"><span><?= $block->escapeHtml(__('Postal code')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="postcode" id="shipping-postcode" type="text" data-validate="{required:true}">
+                </div>
+
+                <div class="field selected">
+                    <label class="label" for="shipping-country_id"><span><?= $block->escapeHtml(__('Country')) ?></span></label>
+                    <?= $countryBlock->getRestrictedCountryHtmlSelect($defValue = null, $name = 'country_id', $id = 'country', $title = 'Country');?>
+                    <input class="hide subscription-list__shipping-address-form-input" name="shipping_country_id" id="shipping-country_id" type="text">
+                </div>
+
+                <div class="field">
+                    <label class="label" for="shipping-telephone"><span><?= $block->escapeHtml(__('Phone number')) ?></span></label>
+                    <input class="subscription-list__shipping-address-form-input" name="telephone" id="shipping-telephone" type="text" data-validate="{required:true}">
+                </div>
+
+            </form>
+            <div class="subscription-list__actions nomargin">
+                    <button class="subscription-list__shipping-address-choose-button subscription-list__button-light" data-customerid="<?php echo $customerId;?>">Save</button>
+                    <a class="cancel-address" href="javascript:void(0);">Cancel</a>
+                </div>
+
+            <script type="text/x-magento-init">
+            {
+                "form.subscription-list__shipping-address-form": {
+                   "validation":{}
+                }
+            }
+            </script>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="subscription-address">
+    <div class="subscription-list__new-addressedit hide">
+        <h2>Edit Payment</h2>
+        <?php echo $block->getChildHtml("edit_card"); ?>
+        <div class="subscription-list__actions">
+            <a class="cancel-address-edit" href="javascript:void(0);">Cancel</a>
+        </div>
+    </div>
+</div>
+<div class="subscription-billing">
+    <div class="subscription-list__new-address hide">
+        <h2>Add new card</h2>
+        <?php echo $block->getChildHtml("add_card"); ?>
+        <div class="subscription-list__actions">
+            <a class="cancel-address" href="javascript:void(0);">Cancel</a>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        ".page-main": {
+            "address": {
+                "deleteAddress": ".subscription-address-item a[role='delete-address']",
+                "deleteUrlPrefix": "<?= $block->escapeJs($block->escapeUrl($this->getUrl('customer/address/delete'))) ?>id/",
+                "baseUrl": "<?= $block->escapeJs($block->escapeUrl($this->getBaseUrl())) ?>",
+                "addAddress": "button[role='add-address']",
+                "addAddressLocation": "<?= $block->escapeJs($block->escapeUrl($block->getAddAddressUrl())) ?>"
+            }
+        }
+    }
+</script>
+
+<script type="text/x-magento-init">
+    {
+        ".subscription-list__shipping-address-form": {
+            "validation":{}
+        }
+    }
+</script>
+<script type="text/x-magento-init">
+    {
+        ".subscription-list__shipping-addressedit-form": {
+            "validation":{}
+        }
+    }
+</script>
+
+<script>
+    require([
+        "jquery"
+    ], function($) {
+        $('.subscription-add-address').on('click', function() {
+            $(document).trigger( "openAddressAndPaymentNewAddress");
+            $('.subscription-address-block, .subscription-payment-block, .subscription-address .subscription-list__new-address').toggleClass('hide');
+        });
+        $('.edit').on('click', function() {
+            $(document).trigger( "openAddressAndPaymentNewAddressedit");
+            $('.subscription-address-block, .subscription-payment-block, .subscription-address .subscription-list__new-addressedit').toggleClass('hide');
+        });
+
+
+        $('.subscription-add-payment').on('click', function() {
+            $(document).trigger( "openAddressAndPaymentNewPayment");
+            $('.subscription-address-block, .subscription-payment-block, .subscription-billing .subscription-list__new-address').toggleClass('hide');
+        });
+
+        $('.subscription-address .cancel-address').on('click', function(){
+            $('.subscription-address-block, .subscription-payment-block, .subscription-address .subscription-list__new-address').toggleClass('hide');
+        });
+        $('.subscription-address .cancel-address-edit').on('click', function(){
+            $('.subscription-address-block, .subscription-payment-block, .subscription-address .subscription-list__new-addressedit').toggleClass('hide');
+        });
+
+        $('.subscription-billing .cancel-address').on('click', function(){
+            $('.subscription-address-block, .subscription-payment-block, .subscription-billing .subscription-list__new-address').toggleClass('hide');
+        });
+    });
+</script>
+
+<script type="text/x-magento-init">
+    {
+        "#maincontent": {
+         "js/phonemask": {}
+         }
+    }
+</script>
+
+<script type="text/x-magento-init">
+    {"*": {"Vonnda_TealiumTags/js/accountPortal":{}}}
+</script>

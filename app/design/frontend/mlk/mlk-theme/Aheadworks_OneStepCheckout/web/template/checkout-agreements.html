@@ -1,0 +1,52 @@
+<form class="form form-checkout-agreements"
+      data-role="checkout-agreements-form"
+      method="post">
+    <div data-role="checkout-agreements">
+        <div class="checkout-agreements" data-bind="visible: isVisible">
+            <!-- ko foreach: agreements -->
+            <!-- ko if: ($parent.isAgreementRequired($data)) -->
+            <div class="checkout-agreement">
+                <input type="checkbox"
+                       data-role="checkout-agreements-input"
+                       data-bind="attr: {
+                                    'id': 'agreement_' + agreementId,
+                                    'name': 'agreement[' + agreementId + ']',
+                                    'value': agreementId
+                                    }"
+                       data-validate="{required:true}" />
+                <!-- ko if: window.checkoutConfig.deviceInCart -->
+                    <!-- ko ifnot: window.checkoutConfig.quoteData.gift_order === '1' -->
+                    <label data-bind="attr: {'for': 'agreement_' + agreementId}">
+                    Accept our <strong data-target="terms-of-service" data-title="Terms of Service" data-bind="mageInit: {'js/newagreement': {}}">terms of service</strong>, <strong data-target="privacy-policy" data-title="Privacy Policy" data-bind="mageInit: {'js/newagreement': {}}">privacy policy</strong> and <strong data-target="autorefill-terms" data-title="Molekule Filters, Automatic Refills and Account Portal" data-bind="mageInit: {'js/newagreement': {}}">auto-refill terms</strong>.
+                    </label>
+                    <!--/ko-->
+                    <!-- ko if: window.checkoutConfig.quoteData.gift_order === '1' -->
+                    <label data-bind="attr: {'for': 'agreement_' + agreementId}">
+                        Accept our <strong data-target="terms-of-service" data-title="Terms of Service" data-bind="mageInit: {'js/newagreement': {}}">terms of service</strong> and <strong data-target="privacy-policy" data-title="Privacy Policy" data-bind="mageInit: {'js/newagreement': {}}">privacy policy</strong>.
+                    </label>
+                    <!--/ko-->
+                <!--/ko-->
+                <!-- ko ifnot: window.checkoutConfig.deviceInCart -->
+                <label data-bind="attr: {'for': 'agreement_' + agreementId}">
+                    Accept our <strong data-target="terms-of-service" data-title="Terms of Service" data-bind="mageInit: {'js/newagreement': {}}">terms of service</strong> and <strong data-target="privacy-policy" data-title="Privacy Policy" data-bind="mageInit: {'js/newagreement': {}}">privacy policy</strong>.
+                </label>
+                <!--/ko-->
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: ($parent.isAgreementRequired($data)) -->
+            <div class="checkout-agreement">
+                <button type="button" class="action action-show"
+                        data-bind="click: function(data, event) { return $parent.showContent(data, event) }">
+                    <span data-bind="html: checkboxText"></span>
+                </button>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <div id="checkout-agreements-modal" data-bind="afterRender: initModal" style="display: none">
+                <div class="checkout-agreements-item-content" data-bind="html: modalContent"></div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

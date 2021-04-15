@@ -1,0 +1,23 @@
+<?php
+/** @var \Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\SubCoupons $block */
+
+/** @var \Mexbs\Tieredcoupon\Block\Adminhtml\Coupon\SubCoupons\Grid $blockGrid */
+$blockGrid = $block->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+?>
+<?php  echo $block->getGridHtml(); ?>
+<input type="hidden" name="sub_coupon_ids" id="sub_coupon_ids" data-form-part="coupon_form" value="" />
+<script type="text/x-magento-init">
+    {
+    "*": {
+    "Mexbs_Tieredcoupon/coupon/sub-coupons": {
+    "selectedCoupons": <?php /* @escapeNotVerified */ echo $block->getSubCouponsJson(); ?>,
+    "gridJsObjectName": <?php /* @escapeNotVerified */ echo '"' . $gridJsObjectName . '"' ?: '{}'; ?>
+    }
+    }
+    }
+</script>
+<!-- @todo remove when "UI components" will support such initialization -->
+<script>
+    require('mage/apply/main').apply();
+</script>

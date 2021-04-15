@@ -1,0 +1,11 @@
+<?php
+/** @var Vonnda\OrderTag\Block\Adminhtml\Order\View\OrderTag $block */
+
+$order = $block->getOrder()
+?>
+<?php if($block->getOrderTag()):?>
+<tr>
+    <th>Order Tag</th>
+    <td><?php echo $this->escapeHtml($block->getOrderTag()); ?></td>
+</tr>
+<?php endif; ?>

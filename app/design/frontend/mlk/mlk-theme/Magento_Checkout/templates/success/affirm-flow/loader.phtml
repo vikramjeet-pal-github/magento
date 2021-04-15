@@ -1,0 +1,9 @@
+<?php $order = $block->getOrder(); ?>
+
+<?php if ($block->wasPaymentAffirm() && $block->wasDevicePurchased() && $block->isLoggedIn() && !$order->getGiftOrder()): ?>
+    <div class="loading-mask initial-loader" data-role="loader" style="display: block;">
+        <div class="loader"><img alt="Loading..." src="<?= $this->getViewFileUrl('images/loader-2.gif') ?>">
+            <p><?= __('Please wait...') ?></p>
+        </div>
+    </div>
+<?php endif; ?>

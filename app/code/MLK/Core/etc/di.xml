@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- API -->
+    <preference for="MLK\Core\Api\Sales\OrderRepositoryInterface" type="MLK\Core\Model\Sales\OrderRepository" />
+    <preference for="MLK\Core\Api\Sales\ShipOrderInterface" type="MLK\Core\Model\Sales\ShipOrder" />
+    <preference for="MLK\Core\Api\Sales\Data\OrderInterface" type="MLK\Core\Model\Sales\Order" />
+    <preference for="MLK\Core\Api\Sales\Data\ShipmentItemCreationInterface" type="MLK\Core\Model\Sales\Order\Shipment\ItemCreation" />
+    <preference for="MLK\Core\Api\Catalog\ProductRenderListInterface" type="MLK\Core\Model\Catalog\ProductRenderList" />
+    <preference for="MLK\Core\Api\Catalog\Data\ProductRenderInterface" type="MLK\Core\Model\Catalog\ProductRender" />
+    <preference for="MLK\Core\Api\Catalog\Data\ProductRenderSearchResultsInterface" type="Magento\Catalog\Model\ProductRenderSearchResults" />
+
+    <!-- Block -->
+    <preference for="Magento\Customer\Block\Address\Renderer\DefaultRenderer" type="MLK\Core\Block\Customer\Address\Renderer\DefaultRenderer" />
+    <preference for="Magento\Sales\Block\Order\Items" type="MLK\Core\Block\Sales\Order\Items" />
+    <preference for="Magento\Sales\Block\Adminhtml\Order\View" type="MLK\Core\Block\Sales\Adminhtml\Order\View" />
+    <preference for="Magento\Paypal\Block\Adminhtml\Order\View" type="MLK\Core\Block\Paypal\Adminhtml\Order\View" />
+    <preference for="Magento\Sales\Block\Adminhtml\Order\Creditmemo\Create\Items" type="MLK\Core\Block\Sales\Adminhtml\Order\Creditmemo\Create\Items" />
+
+    <!-- View Model -->
+    <preference for="Magento\Sales\ViewModel\CreditMemo\Create\UpdateTotalsButton" type="MLK\Core\Sales\ViewModel\CreditMemo\Create\UpdateTotalsButton" />
+
+
+    <!-- Model -->
+    <preference for="Magento\Quote\Model\CouponManagement" type="MLK\Core\Model\Quote\CouponManagement" />
+    <preference for="Magento\Sales\Model\Order" type="MLK\Core\Model\Sales\Order" />
+    <preference for="Magento\Sales\Model\Order\Shipment\ItemCreation" type="MLK\Core\Model\Sales\Order\Shipment\ItemCreation" />
+    <preference for="Magento\Sales\Model\Order\CreditmemoFactory" type="MLK\Core\Model\Sales\Order\CreditmemoFactory" />
+    <preference for="Magento\Sales\Model\Order\RefundAdapter" type="MLK\Core\Model\Sales\Order\RefundAdapter" />
+    <!-- <preference for="Mageplaza\Smtp\Mail\Rse\Mail" type="MLK\Core\Model\Smtp\Mail\Rse\Mail" /> -->
+    <preference for="Magento\Newsletter\Model\Subscriber" type="MLK\Core\Model\Newsletter\Subscriber" />
+
+    <!-- Controller -->
+    <preference for="Magento\Customer\Controller\Account\LoginPost" type="MLK\Core\Controller\Customer\Account\LoginPost" />
+    <preference for="Magento\Customer\Controller\Account\ForgotPasswordPost" type="MLK\Core\Controller\Customer\Account\ForgotPasswordPost" />
+    <preference for="Magento\Ui\Controller\Adminhtml\Export\GridToCsv" type="MLK\Core\Controller\Ui\Adminhtml\Export\GridToCsv" />
+
+    <!-- Plugin -->
+    <type name="Magento\Customer\Model\EmailNotification">
+        <plugin name="around_new_account" type="MLK\Core\Plugin\Customer\Model\EmailNotification" sortOrder="1"/>
+    </type>
+    <type name="\Magento\Customer\Controller\Account\Login">
+        <plugin name="mlk_core_loginplugin" type="\MLK\Core\Plugin\Customer\Controller\Account\LoginPlugin" sortOrder="1" />
+    </type>
+    <type name="\Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="mlk_core_shippinginformationmanagementplugin" type="\MLK\Core\Plugin\Checkout\Model\ShippingInformationManagementPlugin" sortOrder="1" />
+    </type>
+    <type name="MLK\Core\Model\Catalog\ProductRenderList">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Magento\Catalog\Model\Api\SearchCriteria\ProductCollectionProcessor</argument>
+            <argument name="productAttributes" xsi:type="array">
+                <item name="msrp" xsi:type="string">msrp</item>
+                <item name="msrp_display_price_type" xsi:type="string">msrp_display_actual_price_type</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mlk_core_update_payment_method" xsi:type="object">MLK\Core\Console\Command\UpdatePaymentMethod</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

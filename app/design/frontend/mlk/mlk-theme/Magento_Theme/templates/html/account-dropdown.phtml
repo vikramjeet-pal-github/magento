@@ -1,0 +1,20 @@
+<ul class="header links">
+    <li class="greet welcome" data-mage-init='{"dropdown":{}}'>
+        <span class="action toggle" data-toggle="dropdown" aria-haspopup="true">
+            <span><?= $block->escapeHtml(__('Welcome')) ?></span>
+        </span>
+    </li>
+    <div data-target="dropdown">
+        <ul class="dropdown">
+            <li>
+                <a class="item" href="<?= $this->getUrl('customer/account/edit/') ?>">Profile</a>
+            </li>
+            <li>
+                <a class="item" href="https://help.molekule.com/hc/en-us">Help</a>
+            </li>
+            <li>
+                <a class="item" href="<?= $this->getUrl('customer/account/logout') ?>">Log out</a>
+            </li>
+        </ul>
+    </div>
+</ul>

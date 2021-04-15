@@ -1,0 +1,68 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<div class="block block-dashboard-orders">
+    <?php
+    $_orders = $block->getOrders();
+    $count = count($_orders);
+    ?>
+    <div class="block-title order">
+        <strong><?= /* @escapeNotVerified */ __('Recent orders') ?></strong>
+        <?php if ($count > 0): ?>
+            <a class="action view" href="<?= /* @escapeNotVerified */ $block->getUrl('sales/order/history') ?>">
+                <span><?= /* @escapeNotVerified */ __('View All') ?></span>
+            </a>
+        <?php endif; ?>
+    </div>
+    <div class="block-content">
+        <?= $block->getChildHtml() ?>
+        <?php if ($count > 0): ?>
+            <div class="table-wrapper orders-recent">
+                <table class="data table table-order-items recent" id="my-orders-table">
+                    <caption class="table-caption"><?= /* @escapeNotVerified */ __('Recent orders') ?></caption>
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col id"><?= /* @escapeNotVerified */ __('Order #') ?></th>
+                        <th scope="col" class="col date"><?= /* @escapeNotVerified */ __('Date') ?></th>
+                        <th scope="col" class="col total"><?= /* @escapeNotVerified */ __('Order Total') ?></th>
+                        <th scope="col" class="col actions"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                        $limit = 3;
+                        $_orders = array_slice($_orders->getItems(), 0, $limit);
+                        foreach ($_orders as $_order): ?>
+                        <?php $isGiftOrder = $_order->getGiftOrder(); ?>
+                        <?php $tracksCollection = $_order->getTracksCollection(); ?>
+                        <tr <?php if($tracksCollection->getItems()) {echo 'class="has-shipment"';} ?>>
+                            <td data-th="<?= $block->escapeHtml(__('Order #')) ?>" class="col id"><span class="value-holder"><?= /* @escapeNotVerified */ $_order->getRealOrderId() ?></span><?= $isGiftOrder ? "<span class='gift-line'>This is a gift</span>" : ""; ?></td>
+                            <td data-th="<?= $block->escapeHtml(__('Date')) ?>" class="col date"><span class="value-holder"><?php echo  date("m/d/Y", strtotime($block->formatDate($_order->getCreatedAt()))); ?></span></td>
+                            <td data-th="<?= $block->escapeHtml(__('Order Total')) ?>" class="col total"><span class="value-holder"><?= /* @escapeNotVerified */ $_order->formatPrice($_order->getGrandTotal()) ?></span><?= $isGiftOrder ? "<span class='mobile-gift-line'>This is a gift</span>" : ""; ?></td>
+
+                            <td data-th="<?= $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                                <?php echo $this->getLayout()
+                                    ->createBlock('Vonnda\NarvarShipment\Block\Shipment\Track')
+                                    ->setTemplate('Vonnda_NarvarShipment::order/shipment/track.phtml')
+                                    ->setOrder($_order)->setIsOrderView(false)
+                                    ->toHtml(); ?>
+                                <a href="<?= /* @escapeNotVerified */ $block->getViewUrl($_order) ?>" class="action view">
+                                    <span><?= /* @escapeNotVerified */ __('View') ?></span>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <div class="message info empty"><span><?= /* @escapeNotVerified */ __('You have placed no orders.') ?></span></div>
+        <?php endif; ?>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--  API  -->
+    <preference for="Vonnda\StripePayments\Api\Data\StripeCustomerInterface" type="Vonnda\StripePayments\Model\StripeCustomer" />
+    <preference for="Vonnda\StripePayments\Api\ServiceInterface" type="Vonnda\StripePayments\Api\Service" />
+    <preference for="StripeIntegration\Payments\Api\Service" type="Vonnda\StripePayments\Api\Service" />
+
+    <!--  Block Overrides  -->
+    <preference for="StripeIntegration\Payments\Block\Customer\Cards" type="Vonnda\StripePayments\Block\Customer\Cards" />
+    <preference for="StripeIntegration\Payments\Block\Form" type="Vonnda\StripePayments\Block\Form" />
+
+    <!--  Helper Overrides  -->
+    <preference for="StripeIntegration\Payments\Helper\Api" type="Vonnda\StripePayments\Helper\Api" />
+    <preference for="StripeIntegration\Payments\Helper\Generic" type="Vonnda\StripePayments\Helper\Generic" />
+
+    <!--  Model Overrides  -->
+    <preference for="StripeIntegration\Payments\Model\PaymentIntent" type="Vonnda\StripePayments\Model\PaymentIntent" />
+    <preference for="StripeIntegration\Payments\Model\StripeCustomer" type="Vonnda\StripePayments\Model\StripeCustomer" />
+
+    <!-- Override Stripe Plugins -->
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="stripe_payments_paymentinformation" disabled="true" />
+        <plugin name="vonnda_stripe_payments_paymentinformation" type="Vonnda\StripePayments\Plugin\PaymentInformationManagement" sortOrder="30" />
+    </type>
+    <type name="Magento\Checkout\Model\GuestPaymentInformationManagement">
+        <plugin name="stripe_payments_paymentinformationguest" disabled="true" />
+        <plugin name="vonnda_stripe_payments_paymentinformationguest" type="Vonnda\StripePayments\Plugin\GuestPaymentInformationManagement" sortOrder="30" />
+    </type>
+</config>

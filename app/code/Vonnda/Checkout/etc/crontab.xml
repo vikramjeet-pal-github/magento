@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="vonnda_checkout">
+        <job name="process_orders" instance="Vonnda\Checkout\Cron\ProcessOrders" method="execute">
+            <schedule>*/2 * * * *</schedule>
+        </job>
+        <job name="process_affirmflow_refills" instance="Vonnda\Checkout\Cron\AffirmFlow\ProcessRefills" method="execute">
+            <schedule>*/2 * * * *</schedule>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,26 @@
+<?php
+$carddetails= $block->getLayout()->createBlock('StripeIntegration\Payments\Block\Customer\Cards');
+$cards=$carddetails->getCardsDetail();
+$data = json_decode(json_encode($cards), True);
+
+// echo'<pre>';
+// print_r($data);
+// die();
+foreach($data as $datas){
+}?>
+<div class="card-details">
+    <div id="card-wrapper" class="stripe-new stripe-payments-elements no-wrap">
+        <div class="card-field field-cc">
+            <label for="stripe-payments-card-number">Card number</label>
+            <input class="subscription-list__billing-address-form-input" value="<?php echo 'XXXXXXXXXXXX'.$datas['card']['last4'];?>" name="card-number" id="card-number" type="text" maxlength="32">
+        </div>
+        <div class="card-field field-exp">
+            <label for="stripe-payments-card-expiry">MM/YY</label>
+            <input class="subscription-list__billing-address-form-input" value="<?php echo $datas['card']['exp_month'].'/'.$datas['card']['exp_year'];?>" name="card-month" id="card-month" type="text" maxlength="32">
+        </div>
+        <div class="card-field field-cvc">
+            <label for="stripe-payments-card-cvc" class="label">CVV</label>
+        </div>
+
+    </div>
+</div>

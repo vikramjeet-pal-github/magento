@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * system.xml
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mlk" translate="label" sortOrder="10">
+            <label>MLK Core</label>
+        </tab>
+        <section id="mlkcore" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Allowed Pages</label>
+            <tab>mlk</tab>
+            <resource>MLK_Core::core_config</resource>
+            <group id="redirect" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="redirect_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled Redirect from Unallowed Pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allowed_patterns" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allowed Patterns</label>
+                    <comment>A comma-separated list of keywords to match against, (e.g. 'checkout', 'account')</comment>
+                    <depends>
+                        <field id="redirect_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="redirect_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Redirect URL</label>
+                    <comment>The URL (internal or extenal) where the user will be redirected.</comment>
+                    <depends>
+                        <field id="redirect_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+        <section id="newsletter">
+            <group id="subscription">
+                <field id="confirm" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Send Success Confirmation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

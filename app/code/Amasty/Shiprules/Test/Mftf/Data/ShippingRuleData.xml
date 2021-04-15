@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2020 Amasty (https://www.amasty.com)
+ * @package Amasty_Shiprules
+ */
+-->
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+
+    <entity name="shiprulesCheckRuleStatus" type="shippingRule">
+        <data key="name">Check Rule Status Inactive</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$20.00</data>
+        <data key="priceFlatRateTwo">$5.00</data>
+        <data key="priceBestWay">$15.00</data>
+    </entity>
+
+    <entity name="shiprulesCheckPriorityRatePercentagePerProductFirst" type="shippingRule">
+        <data key="name">Check Rule Priority And Rate Percentage Per Product First</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$5.40</data>
+        <data key="priceFlatRateTwo">$9.90</data>
+    </entity>
+
+    <entity name="shiprulesCheckPriorityRatePercentagePerProductSecond" type="shippingRule">
+        <data key="name">Check Rule Priority And Rate Percentage Per Product Second</data>
+        <data key="priority">1</data>
+        <data key="priceBestWay">$30.00</data>
+    </entity>
+
+    <entity name="shiprulesCheckWeightAndRatePerUnit" type="shippingRule">
+        <data key="name">Check Products Weight And Rate Per Unit Of Weight</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$8.00</data>
+        <data key="priceFlatRateTwo">$24.00</data>
+        <data key="priceFlatRateThree">$25.00</data>
+        <data key="priceBestWayOne">$18.00</data>
+        <data key="priceBestWayTwo">$19.00</data>
+        <data key="priceBestWayThree">$5.00</data>
+        <data key="sizeMT07">XS</data>
+        <data key="colorMT07">Gray</data>
+        <data key="customSkuMT07">MT07-XS-Gray</data>
+    </entity>
+
+    <entity name="shiprulesCheckConditions" type="shippingRule">
+        <data key="name">Check Rule Conditions</data>
+        <data key="priority">0</data>
+        <data key="conditions">100</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$28.35</data>
+        <data key="priceFlatRateThree">$39.70</data>
+        <data key="priceFlatRateFor">$46.70</data>
+        <data key="priceBestWayOne">$10.00</data>
+        <data key="priceBestWayTwo">$28.10</data>
+        <data key="priceBestWayThree">$39.20</data>
+        <data key="priceBestWayFor">$45.95</data>
+    </entity>
+
+    <entity name="shiprulesDefaultCartPriceRule" type="shippingRule">
+        <data key="name">Default Rule</data>
+        <data key="websites">Main Website</data>
+        <data key="customerGroups">'NOT LOGGED IN', 'General', 'Wholesale', 'Retailer'</data>
+        <data key="apply">Fixed amount discount for whole cart</data>
+        <data key="discountAmount">10</data>
+    </entity>
+
+    <entity name="shiprulesApplyRulesOnlyWithCouponCartPriceRule" type="shippingRule">
+        <data key="name">Apply Rules Only With Coupon Code Cart Price Rule</data>
+        <data key="websites">Main Website</data>
+        <data key="customerGroups">'NOT LOGGED IN', 'General', 'Wholesale', 'Retailer'</data>
+        <data key="apply">Fixed amount discount for whole cart</data>
+        <data key="discountAmount">10</data>
+    </entity>
+
+    <entity name="shiprulesApplyRulesOnlyWithCoupon" type="shippingRule">
+        <data key="name">Check Apply Rules Only With Coupon Code</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$14.00</data>
+        <data key="priceFlatRateThree">$28.00</data>
+        <data key="priceFlatRateFor">$10.00</data>
+        <data key="priceBestWayOne">$15.00</data>
+        <data key="priceBestWayTwo">$24.00</data>
+        <data key="priceBestWayThree">$28.00</data>
+        <data key="priceBestWayFor">$10.00</data>
+    </entity>
+
+    <entity name="shiprulesCouponCode" type="shippingRule">
+        <data key="code">test</data>
+    </entity>
+
+    <entity name="shiprulesDontApplyRulesWithShoppingCartPriceRule" type="shippingRule">
+        <data key="name">Dont Apply Rules With Shopping Cart Rule Cart Price Rule</data>
+        <data key="websites">Main Website</data>
+        <data key="customerGroups">'NOT LOGGED IN', 'General', 'Wholesale', 'Retailer'</data>
+        <data key="apply">Fixed amount discount for whole cart</data>
+        <data key="discountAmount">20</data>
+    </entity>
+
+    <entity name="shiprulesDontApplyRulesWithShopping" type="shippingRule">
+        <data key="name">Check Dont Apply Rules With Shopping Cart Rule</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$10.00</data>
+        <data key="priceFlatRateThree">$20.00</data>
+        <data key="priceBestWayOne">$15.00</data>
+        <data key="priceBestWayTwo">$10.00</data>
+        <data key="priceBestWayThree">$5.00</data>
+    </entity>
+
+    <entity name="shiprulesDontIncludeTaxInSubtotal" type="shippingRule">
+        <data key="name">Check Rule Setting Dont Include Tax In Subtotal</data>
+        <data key="priority">0</data>
+        <data key="conditions">95</data>
+        <data key="countryShipping">United States</data>
+        <data key="stateShipping">Michigan</data>
+        <data key="zipShipping">12345</data>
+        <data key="priceFlatRateOne">$10.00</data>
+        <data key="priceFlatRateTwo">$10.00</data>
+        <data key="priceFlatRateThree">$99.00</data>
+    </entity>
+
+    <entity name="shiprulesAdminArea" type="shippingRule">
+        <data key="name">Check Rule From Admin Area</data>
+        <data key="priority">0</data>
+        <data key="shippingMethodName">Flat Rate - Fixed</data>
+        <data key="shippingMethodPrice">$13.50</data>
+        <data key="customerEmail">roni_cost@example.com</data>
+    </entity>
+
+    <entity name="shiprulesCheckMultishippingFirst" type="shippingRule">
+        <data key="name">Check Rules With Multishipping First</data>
+        <data key="priority">0</data>
+        <data key="shippingMethodOne">flatrate_flatrate</data>
+        <data key="shippingMethodTwo">tablerate_bestway</data>
+        <data key="billingMethod">p_method_checkmo</data>
+        <data key="address">Veronica Costello, My street, London, Alabama 12345, United States</data>
+        <data key="priceFlatRateOne">$22.00</data>
+        <data key="priceFlatRateTwo">$44.00</data>
+        <data key="shippingMethodName">Flat Rate - Fixed</data>
+        <data key="shippingMethodPrice">$22.00</data>
+    </entity>
+
+    <entity name="shiprulesCheckMultishippingSecond" type="shippingRule">
+        <data key="name">Check Rules With Multishipping Second</data>
+        <data key="priority">0</data>
+        <data key="priceBestWayOne">$23.00</data>
+        <data key="priceBestWayTwo">$46.00</data>
+        <data key="shippingMethodName">Best Way - Table Rate</data>
+        <data key="shippingMethodPrice">$23.00</data>
+    </entity>
+
+    <entity name="shiprulesShippingAreaTwoExclude" type="shippingRule">
+        <data key="name">Check Shipping Rules with Two Exclude Shipping Area</data>
+        <data key="priority">0</data>
+        <data key="countryShipping">United States</data>
+        <data key="stateShipping">Alabama</data>
+        <data key="cityShipping">London</data>
+        <data key="zipShippingOne">24999</data>
+        <data key="zipShippingTwo">25000</data>
+        <data key="zipShippingThree">25050</data>
+        <data key="zipShippingFor">25051</data>
+        <data key="zipShippingFive">25025</data>
+        <data key="shippingMethod">flatrate_flatrate</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$33.00</data>
+        <data key="priceFlatRateThree">$33.00</data>
+        <data key="priceFlatRateFor">$5.00</data>
+        <data key="priceFlatRateFive">$33.00</data>
+    </entity>
+
+    <entity name="shiprulesCheckQtyAndBaseRate" type="shippingRule">
+        <data key="name">Check Products Qty And Base Rate</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$25.00</data>
+        <data key="priceFlatRateTwo">$30.00</data>
+        <data key="priceFlatRateThree">$20.00</data>
+        <data key="priceBestWayOne">$35.00</data>
+        <data key="priceBestWayTwo">$30.00</data>
+        <data key="priceBestWayThree">$5.00</data>
+    </entity>
+
+    <entity name="shiprulesCheckPriceAndFixedRatePerProduct" type="shippingRule">
+        <data key="name">Check Products Price And Fixed Rate Per Product</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$26.00</data>
+        <data key="priceFlatRateThree">$39.00</data>
+        <data key="priceFlatRateFour">$20.00</data>
+        <data key="priceBestWayOne">$10.00</data>
+        <data key="priceBestWayTwo">$21.00</data>
+        <data key="priceBestWayThree">$29.00</data>
+        <data key="priceBestWayFour">$5.00</data>
+    </entity>
+
+    <entity name="shiprulesCalculationDiscountAndHandlingPercentage" type="shippingRule">
+        <data key="name">Check Products Calculation Discount And Handling Percentage</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$10.00</data>
+        <data key="priceFlatRateThree">$15.00</data>
+        <data key="priceBestWayOne">$12.65</data>
+        <data key="priceBestWayTwo">$5.65</data>
+        <data key="priceBestWayThree">$0.00</data>
+    </entity>
+
+    <entity name="shiprulesTotalRate" type="shippingRule">
+        <data key="name">Check Total Rate</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$20.00</data>
+        <data key="priceFlatRateTwo">$21.20</data>
+        <data key="priceFlatRateThree">$30.00</data>
+        <data key="priceBestWayOne">$20</data>
+        <data key="priceBestWayTwo">$21.20</data>
+        <data key="priceBestWayThree">$30.00</data>
+    </entity>
+
+    <entity name="shiprulesAllRatesCalculationReplace" type="shippingRule">
+        <data key="name">Check All Rates With Calculation Replace</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$32.85</data>
+        <data key="priceFlatRateTwo">$45.70</data>
+        <data key="priceFlatRateThree">$65.15</data>
+        <data key="priceBestWayOne">$33.35</data>
+        <data key="priceBestWayTwo">$45.95</data>
+        <data key="priceBestWayThree">$64.90</data>
+        <data key="sizeMT07">XS</data>
+        <data key="colorMT07">Gray</data>
+        <data key="customSkuMT07">MT07-XS-Gray</data>
+    </entity>
+
+    <entity name="shiprulesAllRatesCalculationSurcharge" type="shippingRule">
+        <data key="name">Check All Rates With Calculation Surcharge</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$37.85</data>
+        <data key="priceFlatRateTwo">$55.70</data>
+        <data key="priceFlatRateThree">$80.15</data>
+        <data key="priceBestWayOne">$48.35</data>
+        <data key="priceBestWayTwo">$60.95</data>
+        <data key="priceBestWayThree">$74.90</data>
+        <data key="sizeMT07">XS</data>
+        <data key="colorMT07">Gray</data>
+        <data key="customSkuMT07">MT07-XS-Gray</data>
+    </entity>
+
+    <entity name="shiprulesAllRatesCalculationDiscount" type="shippingRule">
+        <data key="name">Check All Rates With Calculation Discount</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$1.24</data>
+        <data key="priceFlatRateTwo">$3.48</data>
+        <data key="priceFlatRateThree">$5.76</data>
+        <data key="priceBestWayOne">$11.04</data>
+        <data key="priceBestWayTwo">$8.38</data>
+        <data key="priceBestWayThree">$0.86</data>
+        <data key="sizeMT07">XS</data>
+        <data key="colorMT07">Gray</data>
+        <data key="customSkuMT07">MT07-XS-Gray</data>
+    </entity>
+
+    <entity name="shiprulesDontApplyRulesOnlyWithCoupon" type="shippingRule">
+        <data key="name">Check Dont Apply Rules Only With Coupon Code</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$10.00</data>
+        <data key="priceFlatRateThree">$10.00</data>
+        <data key="priceFlatRateFour">$10.00</data>
+        <data key="priceBestWayOne">$27.40</data>
+        <data key="priceBestWayTwo">$34.80</data>
+        <data key="priceBestWayThree">$5.00</data>
+        <data key="priceBestWayFour">$34.80</data>
+    </entity>
+
+    <entity name="shiprulesApplyRulesWithShoppingCartPriceRule" type="shippingRule">
+        <data key="name">Apply Rules With Shopping Cart Rule Cart Price Rule</data>
+        <data key="websites">Main Website</data>
+        <data key="customerGroups">'NOT LOGGED IN', 'General', 'Wholesale', 'Retailer'</data>
+        <data key="apply">Fixed amount discount for whole cart</data>
+        <data key="discountAmount">30</data>
+        <data key="conditions">24-WG03</data>
+    </entity>
+
+    <entity name="shiprulesApplyRulesWithShopping" type="shippingRule">
+        <data key="name">Check Apply Rules With Shopping Cart Rule</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$30.00</data>
+        <data key="priceFlatRateThree">$5.00</data>
+        <data key="priceBestWayOne">$15.00</data>
+        <data key="priceBestWayTwo">$30.00</data>
+        <data key="priceBestWayThree">$15.00</data>
+    </entity>
+
+    <entity name="shiprulesCheckOnCheckout" type="shippingRule">
+        <data key="name">Check Rules On Checkout</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceBestWayOne">$28.50</data>
+        <data key="priceBestWayCheckout">$28.50</data>
+    </entity>
+
+    <entity name="shiprulesCheckAllProductSettings" type="shippingRule">
+        <data key="name">Check All Product Settings</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$80.00</data>
+        <data key="priceFlatRateThree">$15.00</data>
+        <data key="priceFlatRateFour">$80.00</data>
+        <data key="priceFlatRateFive">$85.00</data>
+        <data key="priceBestWayOne">$10.00</data>
+        <data key="priceBestWayTwo">$5.00</data>
+        <data key="priceBestWayThree">$5.00</data>
+        <data key="priceBestWayFour">$5.00</data>
+        <data key="priceBestWayFive">$5.00</data>
+        <data key="sizeMH01">XS</data>
+        <data key="colorMH01">Orange</data>
+        <data key="customSkuMH01">MH01-XS-Orange</data>
+        <data key="sizeMH02">XS</data>
+        <data key="colorMH02">Black</data>
+        <data key="customSkuMH02">MH02-XS-Black</data>
+    </entity>
+
+    <entity name="shiprulesIgnoreFreeShippingPromoYes" type="shippingRule">
+        <data key="name">Check Ignore Free Shipping Promo</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$70.00</data>
+        <data key="priceFlatRateTwo">$70.00</data>
+        <data key="priceBestWayOne">$0.00</data>
+        <data key="priceBestWayTwo">$0.00</data>
+    </entity>
+
+    <entity name="shiprulesIgnoreFreeShippingPromoNo" type="shippingRule">
+        <data key="name">Check Ignore Free Shipping Promo</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$0.00</data>
+        <data key="priceFlatRateTwo">$0.00</data>
+        <data key="priceBestWayOne">$0.00</data>
+        <data key="priceBestWayTwo">$0.00</data>
+    </entity>
+
+    <entity name="shiprulesCheckTwoRules1" type="shippingRule">
+        <data key="name">Check the operation of the two rules</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$30.00</data>
+        <data key="priceFlatRateTwo">$30.00</data>
+        <data key="priceBestWayOne">$20.00</data>
+        <data key="priceBestWayTwo">$20.00</data>
+    </entity>
+
+    <entity name="shiprulesCheckTwoRules2" type="shippingRule">
+        <data key="name">Check the operation of the two rules</data>
+        <data key="priority">0</data>
+    </entity>
+
+    <entity name="shiprulesCheckShippingMethodInCustomerAccount" type="shippingRule">
+        <data key="name">Check Shipping Method In Customer Account</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$35.00</data>
+        <data key="priceFlatRateInCustomerAccount">$35.00</data>
+        <data key="priceFlatRateThree">$35.00</data>
+        <data key="priceBestWayOne">$15.00</data>
+    </entity>
+
+    <entity name="shiprulesCheckMultiCurrency" type="shippingRule">
+        <data key="name">Check MultiCurrency</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">€5.60</data>
+        <data key="priceFlatRateTwo">€11.20</data>
+        <data key="priceFlatRateThree">€22.40</data>
+        <data key="priceBestWayOne">€12.00</data>
+        <data key="priceBestWayTwo">€4.00</data>
+        <data key="priceBestWayThree">€4.00</data>
+        <data key="rateUSDAndEUR">0.8</data>
+    </entity>
+
+    <entity name="shiprulesMixedCart1" type="shippingRule">
+        <data key="name">Check Shipping rule Mixed Cart1</data>
+        <data key="priority">0</data>
+        <data key="priceFlatRateOne">$15.00</data>
+        <data key="priceFlatRateTwo">$25.00</data>
+        <data key="priceFlatRateThree">$40.00</data>
+        <data key="priceFlatRateFor">$65.00</data>
+        <data key="priceFlatRateFive">$70.00</data>
+        <data key="conditions">24-MB01</data>
+    </entity>
+
+    <entity name="shiprulesMixedCart2" type="shippingRule">
+        <data key="name">Check Shipping rule Mixed Cart2</data>
+        <data key="priority">0</data>
+        <data key="conditions">24-MB04</data>
+    </entity>
+
+    <entity name="shiprulesIncludeTaxInSubtotal" type="shippingRule">
+        <data key="name">Check Rule Setting Include Tax In Subtotal</data>
+        <data key="priority">0</data>
+        <data key="conditions">92</data>
+        <data key="countryShipping">United States</data>
+        <data key="stateShipping">Michigan</data>
+        <data key="zipShipping">12345</data>
+        <data key="priceFlatRateOne">$10.00</data>
+        <data key="priceFlatRateTwo">$66.00</data>
+    </entity>
+
+    <entity name="shiprulesUseSubtotalAfterDiscount" type="shippingRule">
+        <data key="name">Check Rule Setting Use Subtotal After Discount</data>
+        <data key="priority">0</data>
+        <data key="conditions">90</data>
+        <data key="priceFlatRateOne">$10.00</data>
+        <data key="priceFlatRateTwo">$99.00</data>
+    </entity>
+
+    <entity name="shiprulesDontUseSubtotalAfterDiscount" type="shippingRule">
+        <data key="name">Check Rule Setting Dont Use Subtotal After Discount</data>
+        <data key="priority">0</data>
+        <data key="conditions">90</data>
+        <data key="priceFlatRateOne">$66.00</data>
+        <data key="priceFlatRateTwo">$5.00</data>
+    </entity>
+
+    <entity name="shiprulesShippingAreaExcludeCountry" type="shippingRule">
+        <data key="name">Check Shipping Area With Exlude Country</data>
+        <data key="priority">0</data>
+        <data key="countryShippingOne">United States</data>
+        <data key="countryShippingTwo">Afghanistan</data>
+        <data key="countryShippingThree">United Kingdom</data>
+        <data key="countryShippingFour">United States</data>
+        <data key="stateShipping">Arizona</data>
+        <data key="zipShipping">25000</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$33.00</data>
+        <data key="priceFlatRateThree">$33.00</data>
+        <data key="priceFlatRateFour">$5.00</data>
+    </entity>
+
+    <entity name="shiprulesShippingAreaInclCountryExclRegion" type="shippingRule">
+        <data key="name">Check Shipping Area Include Country And Exclude Region</data>
+        <data key="priority">0</data>
+        <data key="countryShipping">United States</data>
+        <data key="stateShippingOne">Alabama</data>
+        <data key="stateShippingTwo">California</data>
+        <data key="stateShippingThree">Arizona</data>
+        <data key="zipShipping">25000</data>
+        <data key="priceFlatRateOne">$33.00</data>
+        <data key="priceFlatRateTwo">$5.00</data>
+        <data key="priceFlatRateThree">$33.00</data>
+        <data key="priceFlatRateFour">$5.00</data>
+        <data key="priceBestWayOne">$15.00</data>
+    </entity>
+
+    <entity name="shiprulesCheckCalculationPartialReplace1" type="shippingRule">
+        <data key="name">Check Calculation Partial Replace 1</data>
+        <data key="priority">0</data>
+        <data key="conditions">24-MB04</data>
+        <data key="priceFlatRateOne">$30.00</data>
+        <data key="priceFlatRateTwo">$17.80</data>
+        <data key="priceFlatRateThree">$30.60</data>
+        <data key="priceFlatRateFour">35.60</data>
+    </entity>
+
+    <entity name="shiprulesCheckCalculationPartialReplace2" type="shippingRule">
+        <data key="name">Check Calculation Partial Replace 2</data>
+        <data key="priority">1</data>
+        <data key="conditions">24-WG03</data>
+    </entity>
+
+    <entity name="shiprulesCheckPartialReplaceAndSurcharge1" type="shippingRule">
+        <data key="name">Check Calculation Partial Replace and Surcharge 1</data>
+        <data key="priority">0</data>
+        <data key="conditions">24-MB04</data>
+        <data key="priceFlatRateOne">$5.00</data>
+        <data key="priceFlatRateTwo">$47.80</data>
+        <data key="priceFlatRateThree">$52.80</data>
+        <data key="priceFlatRateFour">$95.60</data>
+    </entity>
+
+    <entity name="shiprulesCheckPartialReplaceAndSurcharge2" type="shippingRule">
+        <data key="name">Check Calculation Partial Replace and Surcharge 2</data>
+        <data key="priority">0</data>
+        <data key="conditions">24-MB04</data>
+    </entity>
+
+    <entity name="shiprulesCheckSettingProductAndConditions" type="shippingRule">
+        <data key="name">Check Setting Product And Conditions</data>
+        <data key="priority">0</data>
+        <data key="productConditions">24-UB02</data>
+        <data key="globalConditions">100</data>
+        <data key="priceFlatRateOne">$10.00</data>
+        <data key="priceFlatRateTwo">$24.00</data>
+        <data key="priceFlatRateThree">$29.00</data>
+        <data key="priceFlatRateFour">$35.00</data>
+    </entity>
+
+</entities>

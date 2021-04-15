@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Mexbs_Tieredcoupon::tieredcoupon" title="Tiered Coupons" translate="title" module="Mexbs_Tieredcoupon" parent="Magento_CatalogRule::promo" sortOrder="50" action="tieredcoupon/coupon/grid" dependsOnModule="Magento_SalesRule" resource="Mexbs_Tieredcoupon::tieredcoupon"/>
+    </menu>
+</config>

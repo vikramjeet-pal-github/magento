@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!-- TODO - this is temporary until .less working in theme -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   <head>
+     <css src="MLK_Core::css/mlk-core.css"/>
+   </head>
+</page>

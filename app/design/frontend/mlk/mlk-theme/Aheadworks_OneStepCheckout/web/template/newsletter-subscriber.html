@@ -1,0 +1,18 @@
+<!-- ko ifnot: window.checkoutConfig.storeCode === "mlk_us_sv" -->
+<div data-role="newsletter-subscriber">
+    <input type="checkbox"
+           data-bind="attr: {
+                'id': 'is_subscribe_for_newsletter',
+                'name': 'is_subscribe_for_newsletter',
+                'value': 1,
+           }, checked: isSubscribe"/>
+    <label data-bind="attr: {'for': 'is_subscribe_for_newsletter'}">
+        <!-- ko if: (deviceInCart) -->
+        <span>Send me announcements, offers and info on enjoying my Molekule. You can unsubscribe at any time. <a target="_blank" href="https://help.molekule.com/hc/en-us/requests/new">Contact us</a>.</span>
+        <!-- /ko -->
+        <!-- ko ifnot: (deviceInCart) -->
+        <span>Send me Molekule offers and announcements. You can unsubscribe at any time. <a target="_blank" href="https://help.molekule.com/hc/en-us/requests/new">Contact us</a>.</span>
+        <!-- /ko -->
+    </label>
+</div>
+<!--/ko-->

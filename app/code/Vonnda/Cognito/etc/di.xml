@@ -1,0 +1,13 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- API -->
+    <preference for="Vonnda\Cognito\Api\CustomerTokenServiceInterface" type="Vonnda\Cognito\Model\CustomerTokenService" />
+    <!-- Block Overrides -->
+    <preference for="Magento\Customer\Block\Form\Login" type="Vonnda\Cognito\Block\Customer\Form\Login" />
+    <!-- Controller Overrides -->
+    <preference for="Magento\Customer\Controller\Account\CreatePassword" type="Vonnda\Cognito\Controller\Customer\Account\CreatePassword" />
+    <preference for="Magento\Customer\Controller\Account\EditPost" type="Vonnda\Cognito\Controller\Customer\Account\EditPost" />
+    <preference for="Magento\Customer\Controller\Adminhtml\Index\Save" type="Vonnda\Cognito\Controller\Customer\Adminhtml\Index\Save" />
+    <preference for="Magento\Customer\Controller\Account\ResetPasswordPost" type="Vonnda\Cognito\Controller\Customer\Account\ResetPasswordPost" />
+    <!-- Model Overrides -->
+    <preference for="Magento\Customer\Model\AccountManagement" type="Vonnda\Cognito\Model\Customer\AccountManagement" />
+</config>

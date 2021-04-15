@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright: Copyright © 2020 Vonnda, LLC. All rights reserved.
+ * @author   : Vonnda Digital Agency <hello@vonnda.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="cart.summary">
+            <block class="Vonnda\GiftOrder\Block\GiftOrder" name="checkout.cart.gift-order" as="gift-order" after="coupon" template="Vonnda_GiftOrder::cart/gift-order.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

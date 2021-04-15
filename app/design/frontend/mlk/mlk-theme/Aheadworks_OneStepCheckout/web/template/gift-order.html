@@ -1,0 +1,16 @@
+<div class="main-gift-order" data-role="gift-order">
+    <input type="checkbox"
+           data-bind="attr: {
+                'id': 'is_gift_order',
+                'name': 'is_gift_order',
+                'value': 1,
+           }, checked: isGiftOrder(), event: {click: handleGiftOrderClick}"/>
+    <label data-bind="attr: {'for': 'is_gift_order'}">
+        <!-- ko if: (deviceInCart) -->
+        <span class="gift-line" data-bind="i18n: 'This is a gift'"></span>
+        <!-- /ko -->
+        <!-- ko ifnot: (deviceInCart) -->
+        <span class="gift-line" data-bind="i18n: 'This is a gift'"></span>
+        <!-- /ko -->
+    </label>
+</div>

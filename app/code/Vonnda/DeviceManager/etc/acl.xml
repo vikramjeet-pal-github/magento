@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Vonnda_DeviceManager::DeviceManager" sortOrder="52" title="Device Manager">
+					<resource id="Vonnda_DeviceManager::manage_devices" sortOrder="10" title="Manage Devices"/>
+					<resource id="Vonnda_DeviceManager::admin_api" sortOrder="20" title="Admin API"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

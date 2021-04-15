@@ -1,0 +1,79 @@
+<?php
+/* @var $block \Aheadworks\OneStepCheckout\Block\Checkout */
+// @codingStandardsIgnoreFile
+
+$subscriptionCheckoutFinanceBlock = $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('subscription_checkout_finance_message')->toHtml();
+$shippingWarningBlock = $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('shipping_warning_message')->toHtml();
+$tealiumDataBlock = $block->getLayout()->createBlock('Vonnda\TealiumTags\Block\TealiumCheckoutEvents'); ?>
+<script type="text/javascript">
+    <?php if ($block->getIsDeviceInCart()) {
+        $subscriptionCheckoutCCBlock = $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('subscription_checkout_cc_message')->toHtml(); ?>
+        window.subscriptionCheckoutCCBlock = '<?php echo str_replace(array("'", "\r", "\n"), array("\'"), $subscriptionCheckoutCCBlock) ?>';
+    <?php } else { ?>
+        window.subscriptionCheckoutCCBlock = '';
+    <?php } ?>
+    window.subscriptionCheckoutFinanceBlock = '<?php echo str_replace(array("'", "\r", "\n"), array("\'"), $subscriptionCheckoutFinanceBlock) ?>';
+    <?php if ($shippingWarningBlock) { ?>
+        window.shippingWarningBlock = '<div class="onestep-shipping-method_warning"><?php echo str_replace(array("'", "\r", "\n"), array("\'"), $shippingWarningBlock) ?></div>';
+    <?php } else { ?>
+        window.shippingWarningBlock = '';
+    <?php } ?>
+    window.tealiumCheckoutData = '<?php echo $tealiumDataBlock->getCheckoutData();?>';
+    window.nextRefillDate = '<?php echo $block->getNextRefillDate();?>';
+</script>
+<div id="checkout" data-bind="scope:'checkout'" class="checkout-container">
+    <div id="checkout-loader" data-role="checkout-loader" class="loading-mask" data-mage-init='{"checkoutLoader": {}}'>
+        <div class="loader">
+            <img src="<?= /* @noEscape */ $block->getViewFileUrl('images/loader-black.svg') ?>" alt="<?= /* @noEscape */ __('Loading...') ?>" style="position: absolute;">
+        </div>
+    </div>
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#checkout": {
+                "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+            }
+        }
+    </script>
+    <script type="text/x-magento-init">
+        {
+            "#checkout": {
+             "js/phonemask": {}
+             }
+        }
+    </script>
+    <script>
+        window.checkoutConfig = <?= /* @noEscape */ \Zend_Json::encode($block->getCheckoutConfig()) ?>;
+        // Create aliases for customer.js model from customer module
+        window.isCustomerLoggedIn = window.checkoutConfig.isCustomerLoggedIn;
+        window.customerData = window.checkoutConfig.customerData;
+    </script>
+    <script>
+        require([
+            'mage/url',
+            'Magento_Ui/js/block-loader'
+        ], function(url, blockLoader) {
+            blockLoader("<?= /* @noEscape */ $block->getViewFileUrl('images/loader-black.svg') ?>");
+            return url.setBaseUrl('<?= /* @noEscape */ $block->getBaseUrl() ?>');
+        })
+        // ToDo set default shipping method and add active based on selection.
+        // require(['jquery'],function($){
+        //    $(document).on("click", '.shipping-method-title .radio', function() {
+        //         $(this).parents('.shipping-method-card').addClass('active');
+        //     });
+        // });
+    </script>
+    <script type="text/x-magento-init">
+        {
+            "#checkout": {
+                "Vonnda_TealiumTags/js/tealiumCheckoutEvents": {}
+            }
+        }
+    </script>
+    <div class="hide">
+        <div id="privacy-policy"><?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('privacy-policy')->toHtml(); ?></div>
+        <div id="terms-of-service"><?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('terms-of-service')->toHtml(); ?></div>
+        <div id="autorefill-terms"><?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('autorefill-terms')->toHtml(); ?></div>
+        <div id="cancel-popup-content"><?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('cancel-popup-content')->toHtml(); ?></div>
+    </div>
+</div>

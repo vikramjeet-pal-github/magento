@@ -1,0 +1,54 @@
+{
+    "description": "URL rewrite path to another path on the backend",
+    "id": "magento_cloud_sitemap_rewrite",
+    "name": "URL rewrites",
+    "properties": [
+        {
+            "entryTemplate": "{{source}} => {{dest}}",
+            "label": "Rules",
+            "name": "rules",
+            "properties": [
+                {
+                    "default": "/sitemap.xml",
+                    "description": "Incoming URL path only (no host) exact match e.g. /sitemap.xml",
+                    "label": "Source path",
+                    "name": "source",
+                    "required": true,
+                    "type": "path"
+                },
+                {
+                    "default": "/media/sitemap.xml",
+                    "description": "Destination path on origin (no host)",
+                    "label": "Destination path",
+                    "name": "dest",
+                    "required": true,
+                    "type": "string"
+                },
+        { "description": "Only apply rewrite to a host matching regular expression. If blank it applies to all", "label": "Regex matching hostnames",
+            "name": "hostname_regex",
+            "required": false,
+            "type": "string"
+        }
+
+            ],
+            "type": "group"
+        }
+    ],
+    "test": {
+        "origins": [
+            "https://httpbin.org"
+        ],
+        "reqUrl": "/sourcePath"
+    },
+    "vcl": [
+        {
+            "template": "{{#each rules}}\nif (req.backend.is_origin && req.url.path == \"{{source}}\" {{#ifEq hostname_regex \"\"}} {{else}}&& req.http.host ~ \"{{hostname_regex}}\"{{/ifEq}}) {\n  set bereq.url = \"{{dest}}\";\n}\n{{/each}}",
+            "type": "miss"
+        },
+        {
+            "template": "{{#each rules}}\nif (req.backend.is_origin && req.url.path == \"{{source}}\" {{#ifEq hostname_regex \"\"}} {{else}}&& req.http.host ~ \"{{hostname_regex}}\"{{/ifEq}}) {\n  set bereq.url = \"{{dest}}\";\n}\n{{/each}}",
+            "type": "pass"
+        }
+    ],
+    "version": 1
+}

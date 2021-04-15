@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Tealium\Tags\CustomerData\JsLoginAccount" type="Vonnda\TealiumTags\CustomerData\JsLoginAccount" />
+    <preference for="Tealium\Tags\CustomerData\JsCreateAccount" type="Vonnda\TealiumTags\CustomerData\JsCreateAccount" />
+    <preference for="Tealium\Tags\CustomerData\JsSaveOrder" type="Vonnda\TealiumTags\CustomerData\JsSaveOrder" />
+    <preference for="Tealium\Tags\Helper\TealiumData" type="Vonnda\TealiumTags\Helper\TealiumData" />
+    <preference for="Tealium\Tags\Helper\Product" type="Vonnda\TealiumTags\Helper\Product" />
+    <preference for="Tealium\Tags\Block\Tealium" type="Vonnda\TealiumTags\Block\Tealium" />
+
+    <preference for="Magento\Shipping\Controller\Adminhtml\Order\Shipment\Save"
+                type="Vonnda\TealiumTags\Controller\Adminhtml\Order\Shipment\Save"/>
+
+    <!-- Disabled Until RMA Ready -->
+    <!-- <type name="Magento\Sales\Model\RefundOrder">
+        <plugin name="vonnda-tealium-around-refund-order" type="Vonnda\TealiumTags\Plugin\Sales\Model\AroundRefundOrder" />
+    </type> -->
+
+    <!-- Logger -->
+    <type name="Vonnda\TealiumTags\Logger\Handler\DebugLogHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Vonnda\TealiumTags\Logger\DebugLogger">
+        <arguments>
+            <argument name="name" xsi:type="string"></argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Vonnda\TealiumTags\Logger\Handler\DebugLogHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Vonnda\Subscription\Controller\Adminhtml\Subscriptioncustomer\Edit">
+        <plugin name="vonnda-tealium-subscription-refund" type="Vonnda\TealiumTags\Plugin\Subscription\Controller\Adminhtml\Subscriptioncustomer\Edit" />
+    </type>
+</config>

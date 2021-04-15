@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <aw_osc>
+            <general>
+                <require_password>1</require_password>
+                <require_login>1</require_login>
+                <auto_logout>1</auto_logout>
+            </general>
+        </aw_osc>
+    </default>
+</config>

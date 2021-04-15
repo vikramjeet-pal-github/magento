@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * config.xml
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mlkcore>
+            <redirect>
+                <redirect_enabled>0</redirect_enabled>
+                <allowed_patterns>checkout,account</allowed_patterns>
+                <redirect_url>/customer/account</redirect_url>
+            </redirect>
+        </mlkcore>
+        <newsletter>
+            <subscription>
+                <confirm>0</confirm>
+            </subscription>
+        </newsletter>
+    </default>
+</config>
