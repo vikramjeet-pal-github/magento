@@ -48,7 +48,6 @@ define([
                     $('input[name="company"]').attr('maxlength', '83');
                     $('input[name="company"]').closest('div.field').show();
                 } else{
-					console.log();
                     $('input[name="company"]').closest('div.field').hide();
                 }
             });
